@@ -1,0 +1,3232 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="C言語を通してプログラミングの基礎を学ぶ講義・演習資料">
+      
+      
+      
+      
+        <link rel="prev" href="lec13.html">
+      
+      
+        <link rel="next" href="lec14.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>第13回 演習：メモリ管理 - プログラミング言語I・ソフトウェア演習I</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="css/custom.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-header__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            プログラミング言語I・ソフトウェア演習I
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第13回 演習：メモリ管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec01.html" class="md-tabs__link">
+          
+  
+  
+  第1回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec02.html" class="md-tabs__link">
+          
+  
+  
+  第2回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec03.html" class="md-tabs__link">
+          
+  
+  
+  第3回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec04.html" class="md-tabs__link">
+          
+  
+  
+  第4回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec05.html" class="md-tabs__link">
+          
+  
+  
+  第5回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec06.html" class="md-tabs__link">
+          
+  
+  
+  第6回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec07.html" class="md-tabs__link">
+          
+  
+  
+  第7回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec08.html" class="md-tabs__link">
+          
+  
+  
+  第8回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec09.html" class="md-tabs__link">
+          
+  
+  
+  第9回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec10.html" class="md-tabs__link">
+          
+  
+  
+  第10回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec11.html" class="md-tabs__link">
+          
+  
+  
+  第11回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec12.html" class="md-tabs__link">
+          
+  
+  
+  第12回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="lec13.html" class="md-tabs__link">
+          
+  
+  
+  第13回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec14.html" class="md-tabs__link">
+          
+  
+  
+  第14回
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-nav__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    プログラミング言語I・ソフトウェア演習I
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第1回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第1回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第2回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第2回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第3回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            第3回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第4回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            第4回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第5回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            第5回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第6回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            第6回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第7回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            第7回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第8回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            第8回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第9回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            第9回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第10回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            第10回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第11回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            第11回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第12回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            第12回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    第13回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            第13回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    演習：メモリ管理
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="ex13.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：メモリ管理
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      準備と進め方
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題1 動的配列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題1 動的配列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      準備と予測
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      検証表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      確保量を説明する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      追跡表を作る
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題2 配列を逆順にする
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題2 配列を逆順にする">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      変更する場所
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      考察
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      追加：独立したコピー
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題3 構造体を確保する関数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題3 構造体を確保する関数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      関数の契約を書く
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      複合リテラルで初期化する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      失敗を模擬する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      戻り方を比較する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題4 コードレビュー
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題4 コードレビュー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      追加のレビュー
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      所有者を図にする
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-callocrealloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展1 callocとreallocで配列を拡張する
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展1 callocとreallocで配列を拡張する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      仕様
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      境界を調べる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      reallocの失敗を模擬する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-static" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展2 static変数の寿命を確かめる
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展2 static変数の寿命を確かめる">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3種類を比較する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      第12回との接続：共有変数の宣言
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展3 不透明なVectorの生成と解放
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展3 不透明なVectorの生成と解放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      正常時の流れ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      途中で失敗した場合
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      添字と保存先の検査
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      二重ポインタの意味
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      さらに考える：動的なメンバ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      チェックリスト
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第14回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            第14回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      準備と進め方
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題1 動的配列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題1 動的配列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      準備と予測
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      検証表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      確保量を説明する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      追跡表を作る
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題2 配列を逆順にする
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題2 配列を逆順にする">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      変更する場所
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      考察
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      追加：独立したコピー
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題3 構造体を確保する関数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題3 構造体を確保する関数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      関数の契約を書く
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      複合リテラルで初期化する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      失敗を模擬する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      戻り方を比較する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      課題4 コードレビュー
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="課題4 コードレビュー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      追加のレビュー
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      所有者を図にする
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-callocrealloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展1 callocとreallocで配列を拡張する
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展1 callocとreallocで配列を拡張する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      仕様
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      境界を調べる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#realloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      reallocの失敗を模擬する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-static" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展2 static変数の寿命を確かめる
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展2 static変数の寿命を確かめる">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      3種類を比較する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      第12回との接続：共有変数の宣言
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展3 不透明なVectorの生成と解放
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展3 不透明なVectorの生成と解放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      正常時の流れ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      途中で失敗した場合
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      添字と保存先の検査
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      二重ポインタの意味
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      さらに考える：動的なメンバ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      チェックリスト
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="13">第13回　演習：メモリ管理<a class="headerlink" href="#13" title="Permanent link">&para;</a></h1>
+<p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
+<p><a href="lec13.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
+<h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>作業場所は PL1\week13 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
+<p>基本課題1〜4では，確保・初期化・利用・解放を追跡します．発展課題ではcallocとrealloc，静的記憶期間，第12回から続く不透明な構造体を扱います．</p>
+<table>
+<thead>
+<tr>
+<th>プロジェクト</th>
+<th>使用するソース</th>
+<th>主な確認</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dynamic</td>
+<td>講義のdynamic.c</td>
+<td>入力検査，必要量の確保，逆順</td>
+</tr>
+<tr>
+<td>NewPoint</td>
+<td>課題3の1ファイル</td>
+<td>所有権の移動，複合リテラル，失敗時の分岐</td>
+</tr>
+<tr>
+<td>GrowArray</td>
+<td>発展1の1ファイル</td>
+<td>callocとrealloc，保持部分と追加部分</td>
+</tr>
+<tr>
+<td>StorageCount</td>
+<td>発展2の1ファイル</td>
+<td>自動変数とstatic変数</td>
+</tr>
+<tr>
+<td>DynamicVector</td>
+<td>講義のvector_main.c，vector.c，vector.h</td>
+<td>分割，途中失敗，解放API</td>
+</tr>
+</tbody>
+</table>
+<p>課題4の誤ったコードは実行しません．課題3以降の失敗試験も，巨大な領域を要求するのではなく，確保関数の戻り値を試験用に変えて行います．</p>
+<h2 id="1">課題1　動的配列<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p><code>Dynamic</code> プロジェクトでdynamic.cを実行します．起動引数1，5，1000で確認し，0，-1，1001，abc，引数なしを拒否することを確かめます．</p>
+<h3 id="_2">準備と予測<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Visual Studioの「プロパティ → 構成プロパティ → デバッグ → コマンド引数」で個数を設定します．引数には実行ファイル名を含めず，まず<code>5</code>だけを入力します．設定対象の構成が，実行するDebug/x64等の構成と一致していることを確かめてください．</p>
+<p>実行前に，ソース内へ次の6つの役割を示すコメントを付けます．コメントによって処理の順番が読み取れるようにしてください．</p>
+<ol>
+<li>引数の個数と数値を調べる．</li>
+<li>有効な要素数へ変換する．</li>
+<li>必要バイト数を表せるかを調べる．</li>
+<li>領域を確保し，失敗なら要素を使わず終了する．</li>
+<li>値を書き込んでから合計を計算する．</li>
+<li>使い終わった領域を解放する．</li>
+</ol>
+<h3 id="_3">検証表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>引数</th>
+<th>結果の予測</th>
+<th>確認する点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>記入してください</td>
+<td>最小個数</td>
+</tr>
+<tr>
+<td>5</td>
+<td>記入してください</td>
+<td>通常値</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>記入してください</td>
+<td>上限</td>
+</tr>
+<tr>
+<td>0，-1，1001</td>
+<td>記入してください</td>
+<td>確保前に終了</td>
+</tr>
+<tr>
+<td>abc，3x，空引数<code>""</code></td>
+<td>記入してください</td>
+<td>未変換・余計な文字</td>
+</tr>
+<tr>
+<td>999999999999999999999999</td>
+<td>記入してください</td>
+<td>strtolのERANGE</td>
+</tr>
+<tr>
+<td>指定なし，5 6</td>
+<td>記入してください</td>
+<td>引数の不足・過剰</td>
+</tr>
+</tbody>
+</table>
+<p>エラー時には正常時の合計が表示されないことも確認します．「何も表示されずに落ちた」と「診断を出して意図的に終了した」は別です．</p>
+<h3 id="_4">確保量を説明する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>n=5のとき，sizeof <em>valuesが4であると仮定すると必要量は20バイトです．実際のsizeof </em>valuesを%zuで表示して確認してもかまいません．sizeof valuesが同じ値になるとは限らないことを説明してください．</p>
+<details class="tip">
+<summary>ポインタと配列を混同しない</summary>
+<p><code>values</code>の型はint *です．ポインタ自身のsizeofを何で割っても，mallocへ渡した個数は復元できません．nを保持すること自体が配列を安全に使うための情報管理です．診断の追加ではアドレスは<code>%p</code>と<code>(void *)values</code>，サイズは<code>%zu</code>を使い，環境依存の数値を固定の正解にしません．</p>
+</details>
+<h3 id="_5">追跡表を作る<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>n=3で，各反復のi，代入後のvalues[i]，加算後のsumを書き出します．最後の要素の添字は3ではなく2です．なぜ<code>i &lt;= n</code>ではなく<code>i &lt; n</code>なのかを，確保した領域の図で説明してください．</p>
+<h2 id="2">課題2　配列を逆順にする<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>課題1の配列の初期化後，freeより前に逆順に並べ替える処理を追加します．n=5なら5 4 3 2 1です．1，2，5で確認してください．</p>
+<details class="tip">
+<summary>ヒント</summary>
+<p>先頭と末尾から組にし，半分まで交換します．</p>
+</details>
+<p>sumやmeanは順序を変えても変わりません．奇数個の中央要素を交換しなくてよい理由を説明します．</p>
+<h3 id="_6">変更する場所<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>初期化と集計のループを終え，sumとmeanを表示した後，free(values)より前に自分で作成した逆順処理を追加します．mallocする回数は増やさず，確保した同じ領域を使って並べ替えます．</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>交換する添字の組</th>
+<th>表示される逆順</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>記入してください</td>
+<td>記入してください</td>
+</tr>
+<tr>
+<td>2</td>
+<td>記入してください</td>
+<td>記入してください</td>
+</tr>
+<tr>
+<td>5</td>
+<td>記入してください</td>
+<td>記入してください</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_7">考察<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>n/2が整数の除算であることは，反復回数にどう影響するか．</li>
+<li>全要素について交換すると，なぜ元の順序へ戻るか．</li>
+<li>作業用のtempにfreeが不要なのはなぜか．</li>
+<li>逆順後もvaluesが確保領域の先頭を指していることは，解放にどう役立つか．</li>
+</ul>
+<h3 id="_8">追加：独立したコピー<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>元の配列を残したい場合は，別の領域を確保してコピーする必要があります．<code>int *copy = values;</code>ではポインタをコピーするだけなので，copyを通して逆順にすると元の配列も変わります．</p>
+<p>初期化後に別のint配列copyを動的確保し，要素をコピーする処理を自分で作成してください．copyだけを逆順にし，両方を表示します．確保失敗時には先に確保していたvaluesを解放して終了し，成功時は最後に両方の領域を解放します．この課題ではnのサイズ検査はすでに済んでいます．</p>
+<h2 id="3">課題3　構造体を確保する関数<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p><code>NewPoint</code> プロジェクトでPointを動的確保して返す関数を作ります．成功時の所有者は呼び出し元です．</p>
+<p>Pointはdouble型のxとyを持つ構造体とします．<code>Point *new_point(double x, double y)</code>を実装し，mainで(3.0, 4.0)を生成してください．確保失敗を検査し，成功時だけ両メンバを表示して解放します．stdio.hとstdlib.hを取り込みます．</p>
+<p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
+<h3 id="_9">関数の契約を書く<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>new_pointの前へ，「成功なら初期化済みのPointを返し，呼び出し元がfreeする．失敗ならNULLを返す」というコメントを追加してください．関数名だけから解放責任を推測させないことが大切です．</p>
+<table>
+<thead>
+<tr>
+<th>場面</th>
+<th>new_point内のp</th>
+<th>動的なPoint本体</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>確保成功直後</td>
+<td>本体を指す</td>
+<td>初期化前</td>
+</tr>
+<tr>
+<td>メンバへの代入後</td>
+<td>本体を指す</td>
+<td>x，yが有効</td>
+</tr>
+<tr>
+<td>return後</td>
+<td>局所変数としての寿命は終了</td>
+<td>呼び出し元のpから使える</td>
+</tr>
+<tr>
+<td>mainのfree後</td>
+<td>関数はすでに終了</td>
+<td>寿命が終了し，再参照しない</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">複合リテラルで初期化する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><code>p-&gt;x = x; p-&gt;y = y;</code>の2文を，<code>*p = (Point){.x = x, .y = y};</code>へ置き換えても同じ出力になることを確認してください．NULL判定は削除しません．左辺をpにしてしまうと，ポインタに構造体を代入する型の誤りになります．</p>
+<p>値を(0,0)，(−2,5)へ変更して，すべてのメンバが初期化されることを確認します．この例では構造体内にさらに動的なメンバがないため，Point本体へのfreeだけで後始末が終わります．</p>
+<h3 id="_11">失敗を模擬する<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>実際のメモリ不足を起こす代わりに，試験用の小さな関数をnew_pointより前へ追加します．正常版を残した別プロジェクトかコピーで行い，完了したら試験設定を戻してください．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">point_allocate</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> bytes)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> simulate_failure </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (simulate_failure) {</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> malloc(bytes);</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>new_pointのmalloc呼び出しだけを<code>point_allocate(sizeof *p)</code>へ変更します．simulate_failure=0なら正常出力，1なら<code>allocation failed</code>という診断で終了するはずです．エラーを出した後でp-&gt;xへアクセスしないことを，ソースとステップ実行の両方で確認します．</p>
+<p>この関数はerrnoを設定しません．NULLを見て失敗を判定できることが重要です．本物のmallocの資源管理やOSの診断まで模擬したわけではありません．</p>
+<h3 id="_12">戻り方を比較する<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>Pointを値として返す，呼び出し元のPoint <em>へ書き込む，mallocしたPoint </em>を返す，という3つの方法を比較してください．1個の小さなPointを作るだけなら動的確保が必須ではありません．必要な寿命，失敗の可能性，解放責任が違います．</p>
+<h2 id="4">課題4　コードレビュー<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>次は実行せず，問題を指摘してください．aはmallocで確保に成功したポインタとします．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> a;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">free(a);</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, b[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]);</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span style="color: #F8F8F2">free(b);</span>
+</code></pre></div>
+<h3 id="_13">追加のレビュー<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>以下も実行せずに，「問題が起きる理由」と「安全な順序」を説明してください．各例は独立しており，必要な宣言はあるものとします．</p>
+<table>
+<thead>
+<tr>
+<th>断片</th>
+<th>調べる観点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int *p; free(p);</code></td>
+<td>pにどの値が入っているか</td>
+</tr>
+<tr>
+<td><code>int a[3]; free(a);</code></td>
+<td>誰が確保した領域か</td>
+</tr>
+<tr>
+<td><code>free(values + 1);</code></td>
+<td>確保した領域の先頭か</td>
+</tr>
+<tr>
+<td><code>p = malloc(3 * sizeof *p); p = NULL;</code></td>
+<td>確保成功後の解放手段が残るか</td>
+</tr>
+<tr>
+<td><code>p = realloc(p, bytes);</code></td>
+<td>失敗時に元の領域を指せるか</td>
+</tr>
+<tr>
+<td><code>free(buffer); free(buffer-&gt;data);</code></td>
+<td>後のメンバ参照は有効か</td>
+</tr>
+<tr>
+<td><code>malloc(n * sizeof p)</code></td>
+<td>p自身と要素のどちらの大きさか</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_14">所有者を図にする<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>「mainが配列を確保し，表示関数が借りて表示し，mainが解放する」場合を矢印で描きます．次に「生成関数が確保し，mainへ所有権を渡す」場合を描きます．関数に渡しただけで自動的に解放責任が移るわけではないことを説明してください．</p>
+<details class="tip">
+<summary>レビューで確認する順序</summary>
+<p>まず各malloc/calloc/reallocの成功で生きている領域を数えます．次にすべてのreturnや失敗分岐をたどり，誰が解放するかを確認します．最後に別名ポインタが残る場所と，解放・再確保後の参照を探します．正常入力で1回動いただけでは，これらの不具合をすべて見つけることはできません．</p>
+</details>
+<h2 id="1-callocrealloc">発展1　callocとreallocで配列を拡張する<a class="headerlink" href="#1-callocrealloc" title="Permanent link">&para;</a></h2>
+<p>GrowArrayプロジェクトを作ります．最初の3要素をcallocし，0であることを確認してから1，2，3を代入します．その後5要素へ拡張し，増えた要素を4，5で初期化します．</p>
+<h3 id="_15">仕様<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li>calloc・reallocの両方で失敗を検査する．</li>
+<li>reallocの前に新しい個数とバイト数を検査する．</li>
+<li>失敗時は元の領域を解放して終了する．</li>
+<li>成功時は返されたポインタだけを以後使用する．</li>
+<li>新しい部分は読む前に代入する．</li>
+<li>今回の個数は1〜1000に制限する．</li>
+</ul>
+<details class="tip">
+<summary>実装前に考える</summary>
+<p>old_nは元の個数，new_nは変更後の個数です．reallocが成功するまでは，元の領域を管理しているpを上書きしません．初期化が必要なのはold_nからnew_n−1までです．縮小した場合には増分がないので，そのループは実行されません．</p>
+</details>
+<h3 id="_16">境界を調べる<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>old_n</th>
+<th>new_n</th>
+<th>確認すること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>5</td>
+<td>先頭3要素を保持し，2要素を初期化</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>同じ個数でも成功後は返されたポインタを使用</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>先頭の1だけが有効</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4</td>
+<td>1を保持し，2，3，4を追加</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>確保済み領域を解放してエラー終了</td>
+</tr>
+<tr>
+<td>0</td>
+<td>5</td>
+<td>最初の確保前にエラー終了</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1001</td>
+<td>上限違反で，元の領域を解放して終了</td>
+</tr>
+</tbody>
+</table>
+<p>realloc後のp[3]が，拡張時と縮小時でどう違うかを説明してください．new_n=1でp[3]を読んで確かめてはいけません．</p>
+<h3 id="realloc">reallocの失敗を模擬する<a class="headerlink" href="#realloc" title="Permanent link">&para;</a></h3>
+<p>次の関数をmainより前へ追加し，reallocの呼び出しをtry_resizeへ置き換えます．課題3の失敗模擬と同じ考え方ですが，<strong>失敗したとき元の領域が残る</strong>点が違います．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">try_resize</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">old, </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> bytes)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> simulate_failure </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (simulate_failure) {</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> realloc(old, bytes);</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>NULL分岐でfreeする直前に，p[0]を表示すれば1のままであることを確認できます．この参照は再確保が<strong>失敗した経路だけ</strong>で行います．試験後は元の関数呼び出しへ戻してください．</p>
+<h2 id="2-static">発展2　static変数の寿命を確かめる<a class="headerlink" href="#2-static" title="Permanent link">&para;</a></h2>
+<p>次のコードをStorageCountで実行します．ヒープを使わずに値が保持される仕組みを確認し，mallocとの違いを説明します．</p>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">count.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-16">16</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">next_count</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">count;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> count;</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span style="color: #F8F8F2">        printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, next_count());</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="3_1">3種類を比較する<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>next_count内の書き方</th>
+<th>予測する出力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>static int count = 0;</code></td>
+<td>記入してください</td>
+</tr>
+<tr>
+<td><code>int count = 0;</code></td>
+<td>記入してください</td>
+</tr>
+<tr>
+<td><code>static int count;</code>の後に文として<code>count = 0;</code></td>
+<td>記入してください</td>
+</tr>
+</tbody>
+</table>
+<p>関数の前のstaticは内部リンケージを表し，関数内のcountのstaticは局所的な名前のまま静的記憶期間を与えています．役割を分けて説明してください．countへfreeを使わない理由も述べましょう．</p>
+<h3 id="12">第12回との接続：共有変数の宣言<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>以下の3ファイルを別のSharedCountプロジェクトに作る場合を考えます．実装側と利用側が同じヘッダを読みます．</p>
+<div class="highlight" style="background: #272822"><span class="filename">counter.h（断片）</span><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #959077">#ifndef PL1_COUNTER_H</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #959077">#define PL1_COUNTER_H</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #66D9EF">extern</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">add_count</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span style="color: #959077">#endif</span>
+</code></pre></div>
+<div class="highlight" style="background: #272822"><span class="filename">counter.c</span><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;counter.h&quot;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">add_count</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">total;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>main側ではcounter.hとstdio.hを取り込み，add_countを2回呼んだ後にtotalを表示します．期待する値は2です．次の変更は1つずつ試し，必ず正常な状態へ戻してください．</p>
+<ol>
+<li>counter.cの<code>int total = 0;</code>だけを外す．</li>
+<li>定義を元に戻し，さらにmain側にも同じ定義を書く．</li>
+</ol>
+<h2 id="3-vector">発展3　不透明なVectorの生成と解放<a class="headerlink" href="#3-vector" title="Permanent link">&para;</a></h2>
+<p>講義8の3ファイルをDynamicVectorへ保存します．この課題ではvector_main.cとvector.cの両方を同じプロジェクトへ追加します．第12回の同名ファイルとは内容が異なるため，コピー先のフォルダを分けてください．</p>
+<h3 id="_17">正常時の流れ<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ol>
+<li>headerには構造体のメンバがないことを確認する．</li>
+<li>2x+yを手計算し，出力<code>result=5.0 8.0</code>を予測する．</li>
+<li>x，y，resultについて，生成した関数と解放した場所を対応させる．</li>
+<li>vector_destroyに渡すのがxではなく&amp;xである理由を説明する．</li>
+<li>解放後のx，y，resultがNULLになることを，変数ウォッチで確認する．メンバの参照はしない．</li>
+</ol>
+<h3 id="_18">途中で失敗した場合<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>vector.cのvector_createで使用するmallocを，次の試験用関数へ置き換えます．関数はvector_createより前に追加します．番号を0，1，2，3に変え，それぞれ新しく実行します．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">vector_allocate</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> bytes)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> calls </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> fail_on_call </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">calls;</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (calls </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> fail_on_call) {</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> malloc(bytes);</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>fail_on_call</th>
+<th>確保できる領域</th>
+<th>後始末の予測</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>記入してください</td>
+<td>記入してください</td>
+</tr>
+<tr>
+<td>1</td>
+<td>記入してください</td>
+<td>記入してください</td>
+</tr>
+<tr>
+<td>2</td>
+<td>記入してください</td>
+<td>記入してください</td>
+</tr>
+<tr>
+<td>3</td>
+<td>記入してください</td>
+<td>記入してください</td>
+</tr>
+</tbody>
+</table>
+<p>fail_on_call=0はこの3回の呼び出しで失敗させない設定です．OSの空きメモリが十分な通常の実行を前提とします．試験関数のstatic変数は実行中の呼び出し回数を保持しますが，プログラムを起動し直せば初期状態から始まります．</p>
+<details class="tip">
+<summary>デバッガで見る場所</summary>
+<p>cleanupの行とvector_destroyにブレークポイントを置きます．Vector *<em>pを受けた関数の</em>pがNULLか，有効な所有対象かを確認します．解放した本体へウォッチからアクセスし続けないでください．最後まで進んだ後，正常版の呼び出しへ戻してビルドします．</p>
+</details>
+<h3 id="_19">添字と保存先の検査<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>正常版で，resultが有効な間に次の断片を追加します．0と1は有効な添字，2は範囲外です．outの初期値99が失敗時に保たれることを確認します．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> out </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">99.0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> ok </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> vector_get(result, </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">, </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">out);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;ok=%d out=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, ok, out);</span>
+</code></pre></div>
+<p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
+<h3 id="_20">二重ポインタの意味<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>すべての後始末の後，さらに<code>vector_destroy(&amp;x);</code>を呼んでも，xはNULLなので何もしません．ただし，解放前に別のポインタへxをコピーしていた場合，そのコピーは自動ではNULLになりません．このAPIは<strong>すべての二重解放を防ぐ魔法ではない</strong>ことを説明してください．</p>
+<h3 id="_21">さらに考える：動的なメンバ<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>Vectorの配列メンバは本体に含まれるので，この例は本体へのfreeで完了します．もし<code>double *v;</code>へ変え，vの配列も別に確保したなら，生成の途中失敗と解放順に何を追加する必要があるでしょうか．</p>
+<h2 id="_22">確認問題<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
+<ol>
+<li>ポインタ変数が局所変数なら，指す領域も必ずスタックにあるか．</li>
+<li>callocした整数配列とmallocした整数配列を，代入前に同じように表示してよいか．</li>
+<li>freeの後にp=NULLとしたら，q=pで以前に作った別名もNULLになるか．</li>
+<li>realloc失敗後の元の配列と，成功後の古い要素ポインタは同じ扱いか．</li>
+<li>動的な配列を含む構造体の本体だけをfreeすれば，配列も自動で解放されるか．</li>
+<li>エラー処理があることを確認するのに，実際にメモリを使い切る必要があるか．</li>
+</ol>
+<h2 id="_23">チェックリスト<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<ul>
+<li>正常な値だけでなく，課題に示された境界の値でも確認した．</li>
+<li>警告を確認し，原因を説明・修正した．</li>
+<li>自分の言葉で，処理の流れと使った型を説明できる．</li>
+<li>確保した各領域の所有者を1つに決め，途中失敗の経路でも解放した．</li>
+<li>ポインタのsizeofと要素のsizeofを区別し，積を計算する前に検査した．</li>
+<li>realloc成功後には古い参照を使わず，追加部分を初期化した．</li>
+<li>未初期化領域の読み取り，解放後の使用，巨大な確保実験を行っていない．</li>
+<li>試験用の失敗設定を戻し，最後に正常版のビルド・実行を確認した．</li>
+</ul>
+<p><a href="lec13.html">講義に戻る</a> ／ <a href="index.html">全体の目次</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="lec13.html" class="md-footer__link md-footer__link--prev" aria-label="前: 講義：メモリ管理">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                講義：メモリ管理
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="lec14.html" class="md-footer__link md-footer__link--next" aria-label="次: 講義：再帰">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                講義：再帰
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "search.highlight", "search.suggest"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

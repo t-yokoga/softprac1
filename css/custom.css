@@ -1,0 +1,50 @@
+/* Materialの緑基調と暗色コードを組み合わせる． */
+:root {
+  --md-text-font: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  --md-code-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.md-typeset { line-height: 1.9; }
+.md-typeset h1 { color: #254b35; font-weight: 650; }
+.md-typeset h2 { margin-top: 2.2em; padding-bottom: .3em; border-bottom: 1px solid #dce8df; font-weight: 600; }
+.md-typeset h3 { font-weight: 600; }
+.md-typeset :not(pre) > code { border: 1px solid #dce2e9; border-radius: 3px; padding: .08em .3em; }
+.md-typeset pre { color: #f8f8f2; }
+.md-typeset pre > code { border: 0; line-height: 1.65; }
+.md-typeset .highlight { --md-code-bg-color: #272822; --md-code-fg-color: #f8f8f2; }
+.md-typeset .highlighttable { margin-left: 0; margin-right: 0; border-radius: 4px; }
+.md-typeset .highlighttable .linenos { background-color: #272822; }
+.md-typeset .highlighttable .linenos .linenodiv pre span { background-color: #272822; color: #aaa; line-height: 1.65; }
+.md-typeset .highlight .filename { background: #35362e; color: #e3e3da; border-bottom: 1px solid #494b40; }
+.md-typeset .highlight .md-code__button { color: #d5d6cc; }
+.md-typeset .admonition, .md-typeset details { font-size: .75rem; line-height: 1.85; }
+.md-typeset table:not([class]) th { background: #eef5ef; }
+.md-typeset table:not([class]) { font-size: .73rem; }
+.md-typeset .course-schedule th:nth-child(1),
+.md-typeset .course-schedule td:nth-child(1),
+.md-typeset .course-schedule th:nth-child(5),
+.md-typeset .course-schedule td:nth-child(5) { white-space: nowrap; }
+.md-typeset .course-intro { margin: 1.2em 0 1.8em; padding: 1.2em 1.5em; border-left: 4px solid #388e3c; background: #f0f7f1; border-radius: 0 5px 5px 0; }
+.md-typeset .course-intro p { margin: .25em 0; }
+.md-typeset .course-meta { color: #586781; font-size: .72rem; letter-spacing: .04em; }
+.md-typeset .course-status { color: #707c90; font-size: .68rem; white-space: nowrap; }
+.md-typeset .lesson-links { display: flex; gap: .6rem; flex-wrap: wrap; margin: 1.5em 0; }
+.md-typeset .lesson-links .md-button { font-size: .73rem; padding: .6em 1.25em; }
+.md-typeset .build-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: .7rem; align-items: center; margin: 1.5em 0; }
+.md-typeset .build-flow .stage { border: 1px solid #cbded0; border-top: 3px solid #388e3c; padding: .9rem .5rem; text-align: center; background: #f5f9f6; border-radius: 4px; }
+.md-typeset .build-flow .stage strong { display: block; color: #315c40; }
+.md-typeset .build-flow .stage span { font-size: .68rem; color: #56627a; }
+.md-typeset .build-flow .arrow { font-size: .65rem; text-align: center; color: #5c6c89; }
+.md-typeset .build-flow .arrow b { display: block; font-size: 1.2rem; }
+.md-typeset .source-note { margin-top: 2.5rem; font-size: .68rem; color: #64718a; }
+@media(max-width: 600px) {
+  .md-typeset .build-flow { grid-template-columns: 1fr; gap: .3rem; }
+  .md-typeset .build-flow .arrow b { transform: rotate(90deg); }
+  .md-typeset .build-flow .stage { padding: .6rem; }
+}
+@media print {
+  .md-typeset details { display: block; }
+  .md-typeset details > * { display: block !important; }
+  .md-typeset .lesson-links { display: none; }
+  .md-typeset pre, .md-typeset .admonition { break-inside: avoid; }
+}

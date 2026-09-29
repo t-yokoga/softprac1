@@ -1,0 +1,2781 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="C言語を通してプログラミングの基礎を学ぶ講義・演習資料">
+      
+      
+      
+      
+        <link rel="prev" href="ex11.html">
+      
+      
+        <link rel="next" href="ex12.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>第12回 講義：コンパイル - プログラミング言語I・ソフトウェア演習I</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="css/custom.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#12" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-header__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            プログラミング言語I・ソフトウェア演習I
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第12回 講義：コンパイル
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec01.html" class="md-tabs__link">
+          
+  
+  
+  第1回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec02.html" class="md-tabs__link">
+          
+  
+  
+  第2回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec03.html" class="md-tabs__link">
+          
+  
+  
+  第3回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec04.html" class="md-tabs__link">
+          
+  
+  
+  第4回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec05.html" class="md-tabs__link">
+          
+  
+  
+  第5回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec06.html" class="md-tabs__link">
+          
+  
+  
+  第6回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec07.html" class="md-tabs__link">
+          
+  
+  
+  第7回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec08.html" class="md-tabs__link">
+          
+  
+  
+  第8回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec09.html" class="md-tabs__link">
+          
+  
+  
+  第9回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec10.html" class="md-tabs__link">
+          
+  
+  
+  第10回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec11.html" class="md-tabs__link">
+          
+  
+  
+  第11回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="lec12.html" class="md-tabs__link">
+          
+  
+  
+  第12回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec13.html" class="md-tabs__link">
+          
+  
+  
+  第13回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec14.html" class="md-tabs__link">
+          
+  
+  
+  第14回
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-nav__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    プログラミング言語I・ソフトウェア演習I
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第1回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第1回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第2回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第2回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第3回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            第3回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第4回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            第4回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第5回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            第5回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第6回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            第6回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第7回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            第7回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第8回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            第8回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第9回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            第9回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第10回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            第10回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第11回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            第11回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    第12回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            第12回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    講義：コンパイル
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="lec12.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：コンパイル
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      今回の見通し
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 ビルドを分解する
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 ビルドを分解する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 各段階で何が分かるか
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 翻訳単位とビルドの単位
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 宣言と定義
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 宣言と定義">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 関数の使い方を先に知らせる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 ヘッダに何を書くか
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 3ファイルの例
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第13回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            第13回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第14回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            第14回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      今回の見通し
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 ビルドを分解する
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 ビルドを分解する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 各段階で何が分かるか
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 翻訳単位とビルドの単位
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 宣言と定義
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 宣言と定義">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 関数の使い方を先に知らせる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 ヘッダに何を書くか
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 3ファイルの例
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="12">第12回　コンパイル<a class="headerlink" href="#12" title="Permanent link">&para;</a></h1>
+<h2 id="_1">到達目標<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>ソース・ヘッダ・オブジェクト・実行ファイルの役割を説明できる．</li>
+<li>複数のCファイルを1つの実行ファイルにまとめられる．</li>
+<li>宣言と定義，静的ライブラリと動的ライブラリを区別できる．</li>
+<li>ヘッダの依存関係を整理し，構造体を使うプログラムも分割できる．</li>
+<li>ビルド失敗を前処理・コンパイル・リンクのどの段階かに分けて調べられる．</li>
+</ul>
+<h2 id="_2">今回の見通し<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>第11回では，関連するデータを構造体にまとめました．今回は，関連する<strong>型と関数をファイルにまとめる</strong>方法を学びます．1つのファイルが長くなると，「どこに何があるか」が分かりにくくなり，同じ処理を別のプログラムで再利用するのも大変です．計算の仕組みと，その使い方を分けることから始めます．</p>
+<p>最初は計算関数を3ファイルに分け，次にベクトルと行列を5ファイルに分けます．最後に，複数のプログラムから使えるライブラリへつなげます．ファイルを増やすこと自体が目的ではありません．「利用者が知る必要のある情報」と「実装の都合」を区別することが目的です．</p>
+<p>今回も操作はVisual Studio内で行います．第1回の空プロジェクト，C17，Cとしてコンパイル，警告レベル4の設定を使います．これまでと異なり，<strong>1つのプロジェクトに複数の.cを入れる</strong>課題があります．ただし，実行ファイルを作るプロジェクトのmainは1つです．</p>
+<h2 id="1">1　ビルドを分解する<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>第1回ではビルドを1回の操作として実行しました．内部では，インクルードなどを処理する<strong>前処理</strong>，Cのコードを機械語のオブジェクトへ変換する<strong>コンパイル</strong>，各部分を結び付ける<strong>リンク</strong>が行われます．コンパイラ内部でアセンブリ生成・アセンブルが別段階になることもあります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>main.c + calc.h → 前処理・コンパイル → main.obj ┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                               ├→ リンク → アプリ.exe
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>calc.c + calc.h → 前処理・コンパイル → calc.obj ┘
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                                    標準ライブラリも利用
+</code></pre></div>
+<p>main.objにはaddを呼びたいという情報があり，calc.objにはaddの実装があります．リンカが結び付けます．関数名の綴りが違ったり，実装のファイルがビルドされなかったりすると，リンク時に解決できません．</p>
+<h3 id="11">1.1　各段階で何が分かるか<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>段階</th>
+<th>入力と主な仕事</th>
+<th>典型的な問題</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前処理</td>
+<td><code>#include</code>で取り込み，<code>#define</code>で置換し，条件付き部分を選ぶ</td>
+<td>ヘッダが見つからない，条件の閉じ忘れ</td>
+</tr>
+<tr>
+<td>コンパイル</td>
+<td>前処理後のコードを解析し，型を検査してオブジェクトを作る</td>
+<td>セミコロン不足，未宣言の名前，型の不一致</td>
+</tr>
+<tr>
+<td>リンク</td>
+<td>オブジェクトやライブラリ中の定義を結び付ける</td>
+<td>必要な定義がない，同じ定義が複数ある</td>
+</tr>
+<tr>
+<td>読み込み・実行</td>
+<td>実行ファイルを読み込み，プログラムを動かす</td>
+<td>必要なDLLがない，入力に対する処理が誤っている</td>
+</tr>
+</tbody>
+</table>
+<p>オブジェクトには機械語だけでなく，関数や変数の名前，後で確定する参照先などの情報も入ります．main.objができたことは，calc.objが見つかったことや，全体を実行できることを意味しません．</p>
+<p>別の環境の資料ではオブジェクトが<code>.o</code>，Windows/MSVCでは通常<code>.obj</code>です．役割は対応しますが，ファイル形式や呼び出し規約が異なることもあるため，拡張子を変更して使い回せるわけではありません．</p>
+<h3 id="12_1">1.2　翻訳単位とビルドの単位<a class="headerlink" href="#12_1" title="Permanent link">&para;</a></h3>
+<p>1つの.cにヘッダを取り込み，前処理を終えたものを<strong>翻訳単位</strong>と呼びます．main.cとcalc.cは別々の翻訳単位です．main.cを処理するとき，コンパイラが自動的に隣のcalc.cまで探して読んでくれるわけではありません．</p>
+<p>通常のビルドは，変更されたファイルやその影響を受けるファイルだけを再処理します．calc.cの本体だけを変更した場合，主にcalc.cの再コンパイルとリンクが必要です．calc.hを変更した場合は，それを取り込むmain.cとcalc.cの両方が影響を受けます．リビルドは対象の生成物を作り直す操作です．</p>
+<div class="admonition warning">
+<p class="admonition-title">実行できたかではなく，今回のビルドに成功したかを確認する</p>
+<p>前回成功した.exeが残っていることがあります．ビルドに失敗した後で古い.exeを動かしても，修正を確認したことにはなりません．出力ウィンドウで成功・失敗を確認し，失敗時に以前の実行ファイルを起動する案内が出たら実行しません．</p>
+</div>
+<h2 id="2">2　宣言と定義<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p><strong>宣言</strong>は名前と型を知らせ，<strong>定義</strong>は関数本体や変数の領域を与えます．関数の宣言はヘッダへ，定義は原則1つの.cへ置きます．同じ関数を複数の.cで定義すると重複の原因になります．</p>
+<p><code>#include "calc.h"</code> は前処理でヘッダの内容を取り込みます．ライブラリの実装をリンクする操作ではありません．<code>#include "calc.c"</code> で実装ファイルを取り込む方式にもせず，各.cを別々にコンパイルします．</p>
+<h3 id="21">2.1　関数の使い方を先に知らせる<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">add</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> b);  </span><span style="color: #959077">/* 宣言：末尾は ; */</span>
+</code></pre></div>
+<p>この宣言から，addはdoubleを2つ受け取り，doubleを返すと分かります．呼び出し側は，足し算の実装を見なくても引数と戻り値を扱えます．宣言の引数名は説明用であり，定義と同じ名前でなくてもかまいませんが，型は一致させます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">add</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> b)  </span><span style="color: #959077">/* 定義：関数本体がある */</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> b;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>引数のない関数はC17では<code>void show(void);</code>のように書きます．<code>void show();</code>は「引数がない」という厳密な指定ではありません．プロトタイプを共有して，誤った呼び出しをコンパイル時に発見できる形にしましょう．</p>
+<h3 id="22">2.2　ヘッダに何を書くか<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ヘッダに置くもの</th>
+<th>実装の.cに置くもの</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>外部から使う関数の宣言</td>
+<td>関数の本体</td>
+</tr>
+<tr>
+<td>外部から使う構造体の定義・型の別名</td>
+<td>内部だけで使う型や補助関数</td>
+</tr>
+<tr>
+<td>必要な定数マクロ</td>
+<td>計算手順や作業用の変数</td>
+</tr>
+<tr>
+<td>必要なら共有変数のextern宣言</td>
+<td>共有変数の定義を1か所だけ</td>
+</tr>
+</tbody>
+</table>
+<p>これは今回扱う通常の外部関数の分け方です．ヘッダに関数本体を書き，複数の.cから取り込むと，同じ外部関数の定義を複数のオブジェクトに作ってしまいます．また，呼び出し側と実装側に宣言を手書きで複製すると，変更時に片方だけ直す事故が起きます．<strong>共通のヘッダを両方から読む</strong>形にします．</p>
+<p><code>#include &lt;stdio.h&gt;</code>は処理系が提供するヘッダ，<code>#include "calc.h"</code>は自作ヘッダに用いる表記です．具体的な検索順序は処理系と設定に依存します．どちらの記法も「宣言を読む」ためのものであり，.cをビルド対象に追加する操作とは別です．</p>
+<h2 id="3-3">3　3ファイルの例<a class="headerlink" href="#3-3" title="Permanent link">&para;</a></h2>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calc.h</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-1">1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-2">2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-3">3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-4">4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-5">5</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span style="color: #959077">#ifndef PL1_CALC_H</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span style="color: #959077">#define PL1_CALC_H</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">add</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> b);</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">multiply</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> b);</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span style="color: #959077">#endif</span>
+</code></pre></div></td></tr></table></div>
+<h1 id="ifndefendif1c">ifndefから#endifは<strong>インクルードガード</strong>です．同じ翻訳単位（前処理後の1つのソース）でヘッダの内容を重ねて取り込むのを防ぎます．別々の.cに同じ関数定義を入れたときの重複を防ぐ仕組みではありません．<a class="headerlink" href="#ifndefendif1c" title="Permanent link">&para;</a></h1>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calc.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-1">1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-2">2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-3">3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-4">4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-5">5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-6">6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-7">7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-8">8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-9">9</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;calc.h&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">add</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> b)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> b;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">multiply</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> b)</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> b;</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p>実装側も自分のヘッダを読み，宣言と定義の型の不一致を検出しやすくします．</p>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">main.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-1">1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-2">2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-3">3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-4">4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-5">5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-6">6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-7">7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-8">8</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;calc.h&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;add=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, add(</span><span style="color: #AE81FF">1.5</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">));</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;multiply=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, multiply(</span><span style="color: #AE81FF">1.5</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">));</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/12/calc.h">calc.h</a> ／ <a download="download" href="sample/12/calc.c">calc.c</a> ／ <a download="download" href="sample/12/main.c">main.c</a></p>
+<p>結果は <code>add=3.5</code> と <code>multiply=3.0</code> です．</p>
+<h3 id="31-1">3.1　1つの呼び出しを追跡する<a class="headerlink" href="#31-1" title="Permanent link">&para;</a></h3>
+<p><code>add(1.5, 2.0)</code>を例にします．main.cはcalc.hから宣言を読み，2つのdoubleを渡してdoubleを受け取るコードになります．calc.cは同じ宣言を読み，addの本体をコンパイルします．リンクによって呼び出しと定義が結び付き，実行時に3.5が返ります．</p>
+<p>calc.cの先頭でもcalc.hを読むのは，利用者のためだけではありません．実装をうっかり<code>int add(int a, int b)</code>に変えると，ヘッダとの不一致を同じ翻訳単位で検出できます．別ファイル同士の型の不一致を，リンカが必ず発見してくれると考えてはいけません．</p>
+<h3 id="32">3.2　インクルードガードの読み方<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<ol>
+<li><code>#ifndef PL1_CALC_H</code>で，まだこのマクロが定義されていないかを調べる．</li>
+<li>初回は<code>#define PL1_CALC_H</code>で印を付け，宣言を取り込む．</li>
+<li>同じ翻訳単位で再び読まれたら，印があるので<code>#endif</code>までを飛ばす．</li>
+</ol>
+<p>同じ関数プロトタイプを複数回宣言するだけなら問題にならない場合もあります．しかし，同じ構造体の定義が重ねて現れるとエラーになります．内容が今は関数宣言だけでも，ヘッダには最初からガードを付けておきます．</p>
+<p>ガード名はヘッダごとに異なる名前にします．すべてを<code>HEADER_H</code>にすると，別のヘッダまで読み飛ばす原因になります．先頭がアンダースコアと大文字の名前など，処理系のために予約された名前を避け，ここでは<code>PL1_</code>で始めます．</p>
+<p>MSVCでは<code>#pragma once</code>も使えますが，これはISO C17の標準機能ではありません．本資料では標準的な条件付き前処理を用いたガードを使います．ガードの効果は<strong>その翻訳単位の中だけ</strong>であり，異なる.cへ同じ関数本体を書く問題を解決しません．</p>
+<h2 id="split">4　Visual Studioで分割する<a class="headerlink" href="#split" title="Permanent link">&para;</a></h2>
+<ol>
+<li>空のC++プロジェクトSplitCalcを作り，C17・Cとしてコンパイルを設定する．</li>
+<li>同じプロジェクトフォルダに上の3ファイルを保存する．</li>
+<li>main.cとcalc.cを「ソース ファイル」に，calc.hを「ヘッダー ファイル」に追加する．</li>
+<li>Ctrl+Shift+Bでビルドし，Ctrl+F5で実行する．</li>
+</ol>
+<p>この回は<strong>1つのmainと複数の.c</strong>を同じプロジェクトに入れます．拡張子は.cppではなく.cです．ソリューションエクスプローラーの「ソース ファイル」等は分類用フィルターなので，実際のフォルダと同一とは限りません．</p>
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>調べること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ヘッダが見つからない</td>
+<td>ファイルの保存場所とインクルード検索パス</td>
+</tr>
+<tr>
+<td>宣言がない・型が違う</td>
+<td>ヘッダの宣言とインクルード</td>
+</tr>
+<tr>
+<td>外部シンボルが未解決</td>
+<td>実装の.cがプロジェクトに含まれ，ビルド対象か</td>
+</tr>
+<tr>
+<td>シンボルが重複</td>
+<td>関数本体やmainを2か所で定義していないか</td>
+</tr>
+</tbody>
+</table>
+<h3 id="41">4.1　プロジェクトと実ファイル<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>フォルダへファイルをコピーしただけでは，プロジェクトのビルド対象に入らない場合があります．「追加 → 既存の項目」で.cを登録し，「ビルドから除外」が「いいえ」になっていることを確かめます．ヘッダはそれ自体を通常の.cのようにコンパイルするものではありません．ソリューションエクスプローラーへの登録は管理上便利ですが，取り込みには実際のファイルの場所が重要です．</p>
+<p>ファイルが増えたときの配置例です．学習用の小さなプロジェクトでは，同じフォルダに置いてもかまいません．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>SplitCalc/
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  include/  calc.h             公開する宣言
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  src/      main.c, calc.c     自分で編集する実装
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  lib/      配布された.lib    リンク用の入力
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  bin/      .exeや必要な.dll   実行時に使うもの
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  build/    .objなど           作り直せる中間生成物
+</code></pre></div>
+<p>これは役割を表す例で，Visual Studioが必ずこの配置で出力するという意味ではありません．実際の中間ディレクトリと出力ディレクトリはプロジェクト設定で確認します．.cや.hを消しても.objから元のコメントや変数名をすべて復元できるわけではないので，ソースを必ず保存します．</p>
+<h3 id="42">4.2　発展：前処理後の内容を見る<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>Visual Studioのファイルのプロパティで「C/C++ → プリプロセッサ → プリプロセス済みファイルの生成」を有効にすると，<code>/P</code>によって.iを生成できます．.cを選んで「コンパイル」すると，ヘッダを取り込んだ内容や，元の行位置を表す<code>#line</code>を確認できます．表示名はバージョンや言語設定で多少異なります．</p>
+<p><strong>確認後は必ず設定を元に戻し，リビルドしてください．</strong> <code>/P</code>は前処理だけを行い，.objを作りません．設定したままでは通常のコンパイルが進みません．<a href="https://learn.microsoft.com/en-us/cpp/build/reference/p-preprocess-to-a-file?view=msvc-170">Microsoft：/Pの説明</a>も参照してください．</p>
+<h2 id="5">5　ライブラリ<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>よく使う関数群をまとめて再利用するものがライブラリです．Windowsでは静的ライブラリに.lib，動的ライブラリに.dllが使われます．ただし.libはDLL用のインポートライブラリの場合もあります．拡張子だけで実装をすべて含むとは判断できません．</p>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>主に結び付ける時期</th>
+<th>利用時の注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静的ライブラリ</td>
+<td>ビルド時</td>
+<td>必要なコードが実行ファイルに組み込まれる．更新後は再リンク</td>
+</tr>
+<tr>
+<td>動的ライブラリ</td>
+<td>読み込み時・実行時</td>
+<td>対応するDLLの配置と互換性が必要</td>
+</tr>
+</tbody>
+</table>
+<p>ヘッダがあるだけでは実装は使えません．逆にライブラリがあっても，呼び出し側は正しい宣言を知る必要があります．標準ライブラリにはstdio.h，string.h，math.hなどのヘッダがあります．Windows/MSVCではUnix向けの-lmを入力する手順は用いません．</p>
+<h3 id="_3">発展：静的ライブラリに分ける<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Visual Studioでは，空のプロジェクトの構成の種類を「スタティック ライブラリ（.lib）」にしてcalc.cをビルドし，別のアプリから参照できます．アプリとライブラリでx64等のプラットフォームと構成をそろえます．演習に手順を示します．<a href="https://learn.microsoft.com/en-us/cpp/build/walkthrough-creating-and-using-a-static-library-cpp?view=msvc-170">Microsoftの静的ライブラリの説明</a>も参考になります（掲載例はC++ですが，本演習のソースはCです）．</p>
+<h2 id="6">6　公開するものを限定する<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>.cのファイルスコープで <code>static</code> を付けた関数は，その翻訳単位内で使う内部の関数にできます．共有変数を使うならヘッダには <code>extern int count;</code> と宣言し，定義 <code>int count = 0;</code> は1つの.cだけに置きます．ただし，できるだけ引数と戻り値で情報を渡し，共有状態を減らします．</p>
+<h3 id="61-staticextern">6.1　staticとextern<a class="headerlink" href="#61-staticextern" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #959077">/* counter.hに書く宣言の例 */</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">extern</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">increment</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">);</span>
+</code></pre></div>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #959077">/* counter.cに書く定義の例 */</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">increment</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">count;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>実際のcounter.cもcounter.hを取り込みます．<code>extern int count;</code>は「他に定義がある」ことを知らせる宣言で，初期化子のないこの形では変数の領域を定義しません．一方，ヘッダに<code>int count = 0;</code>を書くと，各.cが同じ変数を定義してしまいます．</p>
+<p>外に公開しない状態なら，.cのファイルスコープに<code>static int count = 0;</code>と置き，読み書きする関数だけを公開する設計もできます．ここでのstaticは名前を他の翻訳単位から直接参照させない指定です．関数内のstatic変数が呼び出しをまたいで値を保持する話と，区別して整理してください．</p>
+<p>内部の比較関数なども，<code>static int compare_int(...)</code>のようにして公開する名前を減らせます．ヘッダには利用者が必要とする操作だけを並べます．内部の関数を変更しても，公開する使い方が変わらなければ利用者側の修正を減らせます．</p>
+<h2 id="7">7　構造体を含むモジュール：ベクトルと行列<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>2成分のVectorと2行2列のMatrixを考えます．第11回と同じく構造体の値を受け渡しますが，計算をvector.cとmatrix.cへ分けます．この例はCalcとは<strong>別のプロジェクト</strong>です．</p>
+<h3 id="71">7.1　型の依存関係<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>vector_main.c ──→ matrix.h ──→ vector.h
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>       └────────────────────→ vector.h
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>matrix.c      ──→ matrix.h ──→ vector.h
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>vector.c      ──→ vector.h
+</code></pre></div>
+<p>matrix.hに宣言する関数はVectorを引数と戻り値に使うので，matrix.h自身がvector.hを取り込みます．利用者に「先に必ずvector.hを読んでください」と要求するより，<strong>ヘッダが自分で必要な宣言を読み込む</strong>方が安全です．vector_main.cからはvector.hへ2通りの経路がありますが，ガードによって重複を防げます．</p>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector.h</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-11">11</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span style="color: #959077">#ifndef PL1_VECTOR_H</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span style="color: #959077">#define PL1_VECTOR_H</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span style="color: #66D9EF">typedef</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> v[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span style="color: #F8F8F2">} Vector;</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span style="color: #F8F8F2">Vector </span><span style="color: #A6E22E">axpy</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> alpha, Vector a, Vector b);</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">print_vector</span><span style="color: #F8F8F2">(Vector a);</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span style="color: #959077">#endif</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">matrix.h</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-11-13">13</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span style="color: #959077">#ifndef PL1_MATRIX_H</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span style="color: #959077">#define PL1_MATRIX_H</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;vector.h&quot;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span style="color: #66D9EF">typedef</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> v[</span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span style="color: #F8F8F2">} Matrix;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span style="color: #F8F8F2">Vector </span><span style="color: #A6E22E">gemv</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> alpha, Matrix a, Vector x, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> beta, Vector y);</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">print_matrix</span><span style="color: #F8F8F2">(Matrix a);</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span style="color: #959077">#endif</span>
+</code></pre></div></td></tr></table></div>
+<p>Vectorのvは2要素の配列，Matrixのvは4要素の配列です．行列は行ごとに並べ，<code>v[0]</code>と<code>v[1]</code>が第1行，<code>v[2]</code>と<code>v[3]</code>が第2行です．行番号i，列番号jを0から数えると，対応する添字は<code>2 * i + j</code>です．</p>
+<h3 id="72">7.2　計算の実装<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p><code>axpy(alpha, a, b)</code>は，ベクトルの各成分で<code>alpha * a + b</code>を計算します．ここでは入力を値渡しにし，新しいVectorを返すため，呼び出し側のaやbは変更しません．</p>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-14">14</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;vector.h&quot;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span style="color: #F8F8F2">Vector </span><span style="color: #A6E22E">axpy</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> alpha, Vector a, Vector b)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span style="color: #F8F8F2">    Vector result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {{alpha </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> a.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> b.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">],</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span style="color: #F8F8F2">                      alpha </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> a.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> b.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">]}};</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> result;</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">print_vector</span><span style="color: #F8F8F2">(Vector a)</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;(%.1f, %.1f)</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">], a.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">]);</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><code>gemv(alpha, a, x, beta, y)</code>は<code>alpha * A * x + beta * y</code>です．行列とベクトルの積Axでは，第1成分に第1行とxの積の和，第2成分に第2行とxの積の和を使います．</p>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">matrix.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-17">17</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;matrix.h&quot;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span style="color: #F8F8F2">Vector </span><span style="color: #A6E22E">gemv</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> alpha, Matrix a, Vector x, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> beta, Vector y)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span style="color: #F8F8F2">    Vector result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {{</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span style="color: #F8F8F2">        alpha </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> (a.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> x.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> a.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> x.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">]) </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> beta </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> y.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">],</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span style="color: #F8F8F2">        alpha </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> (a.v[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> x.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> a.v[</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> x.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">]) </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> beta </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> y.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">]</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span style="color: #F8F8F2">    }};</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> result;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">print_matrix</span><span style="color: #F8F8F2">(Matrix a)</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;[%.1f %.1f]</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">[%.1f %.1f]</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span style="color: #F8F8F2">           a.v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">], a.v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">], a.v[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">], a.v[</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">]);</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector_main.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-14">14</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;matrix.h&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;vector.h&quot;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span style="color: #F8F8F2">    Vector x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {{</span><span style="color: #AE81FF">1.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">}};</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span style="color: #F8F8F2">    Vector y </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {{</span><span style="color: #AE81FF">3.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">4.0</span><span style="color: #F8F8F2">}};</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span style="color: #F8F8F2">    Matrix a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {{</span><span style="color: #AE81FF">1.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">-1.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">-1.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">1.0</span><span style="color: #F8F8F2">}};</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span style="color: #F8F8F2">    print_matrix(a);</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span style="color: #F8F8F2">    print_vector(axpy(</span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">, x, y));</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span style="color: #F8F8F2">    print_vector(gemv(</span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">, a, x, </span><span style="color: #AE81FF">1.0</span><span style="color: #F8F8F2">, y));</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/12/vector.h">vector.h</a> ／ <a download="download" href="sample/12/matrix.h">matrix.h</a> ／ <a download="download" href="sample/12/vector.c">vector.c</a> ／ <a download="download" href="sample/12/matrix.c">matrix.c</a> ／ <a download="download" href="sample/12/vector_main.c">vector_main.c</a></p>
+<p>このプロジェクトでコンパイルするのはvector_main.c，vector.c，matrix.cの3つです．実行すると次のようになります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>[1.0 -1.0]
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>[-1.0 1.0]
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>(5.0, 8.0)
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>(1.0, 6.0)
+</code></pre></div>
+<p><code>2x + y = (2×1+3, 2×2+4) = (5, 8)</code>です．一方，<code>Ax = (1−2, −1+2) = (−1, 1)</code>なので，<code>2Ax + y = (1, 6)</code>になります．ファイル分割の前に手計算し，分割後も同じ計算になっていることを確かめましょう．</p>
+<h3 id="73">7.3　発展：内部の構造を隠す<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<p>上のヘッダではメンバを公開しているため，利用者が<code>x.v[0]</code>と直接書けます．内部を配列から別の表現へ変更すると，利用者のコードも修正が必要です．もう一段進むと，ヘッダでは次のように名前だけを知らせる方法があります．<strong>これは上の完成例とは別の設計案です．そのまま置き換えません．</strong></p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span style="color: #66D9EF">typedef</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">vector</span><span style="color: #F8F8F2"> Vector;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">get_vec_element</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p, </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> index);</span>
+</code></pre></div>
+<p>struct vectorの中身を示していないので，この段階では不完全型です．利用者は<code>Vector *</code>を扱えますが，<code>Vector x;</code>で実体を用意したり，<code>sizeof(Vector)</code>を調べたり，メンバを直接参照したりはできません．実装の.cの中で<code>struct vector { double v[2]; };</code>と定義し，必要な操作を関数で提供します．</p>
+<p>実体をライブラリ側で動的に作る場合には，作成関数，失敗を知らせる方法，解放関数をそろえます．例えば解放関数を<code>void destroy_vector(Vector **p);</code>とすれば，解放後に呼び出し元のポインタをNULLにする設計ができます．ただし，他のポインタに複製された参照まで自動的にNULLになるわけではありません．この実装は，第13回のmalloc・freeと所有権を学んでから扱います．</p>
+<p>添字を渡す取得関数では0〜1などの範囲の契約も必要です．無理なキャストで内部をのぞくのではなく，公開された操作を使います．内部を隠すことと，入力検査・寿命管理が不要になることは別です．</p>
+<h2 id="8">8　標準ライブラリを使い分ける<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p>自作のライブラリと同様に，標準ライブラリも「宣言を読み，決められた条件で呼び出す」ものです．ヘッダを1つ読めばすべての関数が宣言されるわけではありません．使用する機能に対応したヘッダを取り込みます．</p>
+<table>
+<thead>
+<tr>
+<th>ヘッダ</th>
+<th>主な内容</th>
+<th>使うときの確認</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>math.h</td>
+<td>cos，exp，pow，sqrt，fabsなど</td>
+<td>引数の範囲，浮動小数点誤差</td>
+</tr>
+<tr>
+<td>limits.h / float.h</td>
+<td>INT_MAX，FLT_MAXなど</td>
+<td>大きさ，範囲，精度は型・処理系ごとに異なる</td>
+</tr>
+<tr>
+<td>ctype.h</td>
+<td>isalpha，isdigitなど</td>
+<td>引数がEOFまたはunsigned charで表せる値か</td>
+</tr>
+<tr>
+<td>string.h</td>
+<td>strcpy，memcpy，memcmpなど</td>
+<td>終端，容量，バイト数，領域の重なり</td>
+</tr>
+<tr>
+<td>assert.h</td>
+<td>assertマクロ</td>
+<td>開発中の前提確認であり，入力検査の代わりではない</td>
+</tr>
+<tr>
+<td>stdlib.h</td>
+<td>strtol，qsort，rand，srandなど</td>
+<td>変換失敗，比較関数の契約，乱数の性質</td>
+</tr>
+</tbody>
+</table>
+<h3 id="81">8.1　数学関数と型の限界<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<p><code>sqrt(9.0)</code>は3，<code>pow(3.0, 2.0)</code>は9，<code>fabs(-2.5)</code>は2.5を計算します．cosの角度はラジアンです．<code>exp(x)</code>は自然対数の底eのx乗です．<code>sqrt</code>に負の値を渡すなど，数学的に定義されない入力を避け，範囲が不明なら先に検査します．計算結果には丸め誤差があるため，厳密な実数と同じだとは考えません．</p>
+<p>円周率の<code>M_PI</code>はISO C17の標準マクロではありません．この授業では必要なら<code>acos(-1.0)</code>を使うか，必要な精度の定数を自分で定義します．環境固有のマクロが別の処理系でも使えると思い込まないようにします．</p>
+<p>INT_MINとINT_MAXはintの範囲を表します．一方，<strong>FLT_MINはfloatの最も負の値ではなく，最小の正の正規化数</strong>です．負の側の有限値の限界は通常<code>-FLT_MAX</code>で表します．FLT_TRUE_MINは非正規化数を含む最小の正の値です．範囲を表すマクロと，精度を表すFLT_DIGなどは意味が違います．</p>
+<h3 id="82">8.2　文字の判定とバイト列のコピー<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<p>isalphaやisdigitは，条件に合えば0以外を返します．「真なら必ず1」ではありません．真偽を0または1で表示したいなら<code>isdigit((unsigned char)c) != 0</code>とします．charが符号付きの環境で負の値をそのまま渡さないようにします．getcharの結果をintで保持した場合はEOFと区別できます．</p>
+<p>次の2つの操作は，途中に終端文字があるデータで違いが分かります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> src[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #E6DB74">&#39;a&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;b&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;c&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;d&#39;</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> text[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> bytes[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span style="color: #959077">/* string.hを取り込んだ関数内で行う操作の例 */</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span style="color: #F8F8F2">strcpy(text, src);</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span style="color: #F8F8F2">memcpy(bytes, src, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> src);</span>
+</code></pre></div>
+<p>strcpyは最初の<code>'\0'</code>までを，その終端も含めてコピーします．memcpyは指定された5バイトをそのままコピーするので，cとdもコピーされます．この例のコピー先は十分な容量を持ち，重なっていません．一般の入力でも安全という意味ではありません．MSVCでstrcpyに警告が出る場合も，単に警告を消すのではなく容量の根拠を確認します．</p>
+<p>memcpyは文字列の終端を補いません．コピー先・元の範囲を確保し，領域が重なる場合にはmemmoveを検討します．ポインタをコピーしても参照先までは複製しません．構造体のmemcmpも，パディングがあるため値の等価判定としては使えないことを第11回と結び付けましょう．</p>
+<h3 id="83-assert">8.3　assertによる前提の確認<a class="headerlink" href="#83-assert" title="Permanent link">&para;</a></h3>
+<p>assertは関数ではなくマクロで，式が偽なら診断を出して異常終了します．開発時に「ここに来たらこの条件が成立するはず」を確認するものです．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span style="color: #959077">/* assert.hを取り込んだ関数内．nは検査済みの個数 */</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span style="color: #F8F8F2">assert(n </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;&amp;</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> capacity);</span>
+</code></pre></div>
+<p>NDEBUGが定義されているとassertは無効になります．そのため，ユーザーの入力やファイルの内容はifなどで常に検査します．<code>assert(++n &lt; capacity);</code>のように副作用を入れると，設定によってnを増やす処理自体がなくなるので不適切です．assertが正常に通っただけで，すべての入力に正しいと保証されたわけでもありません．</p>
+<h3 id="84">8.4　擬似乱数と並べ替え<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
+<p>randは0〜RAND_MAXの整数を返します．srandで種を与え，同じ処理系で同じ種から始めれば同じ系列を再現できます．系列そのものは処理系に依存するので，他の環境と数値が一致するとは限りません．種は通常ループの前に一度設定します．</p>
+<p><code>(double)rand() / RAND_MAX</code>は0と1の両端を含み得ます．<code>rand() % 10</code>は0〜9になりますが，取り得る元の値の個数が10で割り切れなければ偏りがあります．randは暗号やパスワード生成のための乱数ではありません．</p>
+<p>qsortは配列を並べ替えます．要素の先頭アドレス，個数，1要素のサイズ，比較関数を渡します．比較関数は2つの要素を受け取り，第1要素が小さければ負，等しければ0，大きければ正を返します．int同士でも<code>a - b</code>を返すとオーバーフローし得るため，大小比較から−1・0・1を選びます．演習ではこの比較処理を内部関数にし，並べ替え操作だけを公開します．</p>
+<p>stdlib.hには外部コマンドを実行するsystemもあります．これは文字列からOS側の処理を起動する機能であり，未確認の入力を渡すと意図しないコマンドを実行する危険があります．この授業では存在と役割の説明にとどめ，実行する演習は行いません．</p>
+<h2 id="9">9　ライブラリ利用の設定を整理する<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<p>「ヘッダが見つからない」と「関数の実装が見つからない」を区別するため，設定を段階に分けます．</p>
+<table>
+<thead>
+<tr>
+<th>必要なもの</th>
+<th>Visual Studioで確認する場所の例</th>
+<th>役割</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.hの検索先</td>
+<td>C/C++ → 全般 → 追加のインクルード ディレクトリ</td>
+<td>宣言を読む</td>
+</tr>
+<tr>
+<td>.libの検索先</td>
+<td>リンカー → 全般 → 追加のライブラリ ディレクトリ</td>
+<td>指定された.libを探す</td>
+</tr>
+<tr>
+<td>使う.libの名前</td>
+<td>リンカー → 入力 → 追加の依存ファイル</td>
+<td>実際にリンクする対象を指定する</td>
+</tr>
+<tr>
+<td>同じソリューション内のライブラリ</td>
+<td>利用側のプロジェクト参照</td>
+<td>依存先のビルドやリンクを連携させる</td>
+</tr>
+<tr>
+<td>実行時のDLL</td>
+<td>配布元の指示に従った配置・検索先</td>
+<td>ロード時・実行時に実装を利用する</td>
+</tr>
+</tbody>
+</table>
+<p>検索フォルダだけを設定しても，その中のすべてのライブラリが自動的に使われるわけではありません．逆に，.libの場所を直接指定する方法なら検索先を別途追加しなくてもよい場合があります．同じソリューション内の参照と，配布済み.libを名前で指定する方法を混同しないようにします．</p>
+<p>静的ライブラリはオブジェクトをまとめたもので，作成時にアプリ用のmainは必要ありません．Windowsの.libに対し，他の環境では.aがよく使われます．共有ライブラリも.dllのほか.soなどの名称があります．他の環境向けのビルド操作をそのまま入力する必要はありません．</p>
+<p>静的ライブラリの実装を更新したら，利用側を再リンクして更新分を取り込みます．DLLは互換性の保たれた更新ならアプリを再リンクせず交換できる場合がありますが，引数の型，構造体の配置，呼び出し規約などが変われば単純な交換では済みません．x86/x64や実行時ライブラリの設定もそろえます．不明な配布元から同名のDLLを探して置く方法で解決しないでください．</p>
+<h2 id="_4">確認問題<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<ol>
+<li>ヘッダのインクルードはリンクと同じ処理か．</li>
+<li>インクルードガードは何の重複を防ぐか．</li>
+<li>宣言が正しくてもリンクで失敗する例を挙げよ．</li>
+<li>calc.cの本体の変更とcalc.hの宣言の変更では，再コンパイルが必要な範囲はどう違うか．</li>
+<li>matrix.hがvector.hを自分で取り込む理由を説明せよ．</li>
+<li>extern宣言をヘッダに置くことと，初期値付きの変数定義を置くことはどう違うか．</li>
+<li>静的ライブラリを更新したとき，すでに作った.exeの内容も自動的に変わるか．</li>
+<li>FLT_MIN，isdigitの戻り値，assertについて，間違えやすい点を1つずつ挙げよ．</li>
+</ol>
+<details class="note">
+<summary>確認の要点</summary>
+<p>includeは宣言などの取り込み，リンクは定義との結び付けです．ガードは同一翻訳単位内でのヘッダの再取り込みを抑えます．実装を除外すれば，宣言が正しくてもリンクに失敗します．ヘッダの変更はそれを読む各翻訳単位へ波及します．型の依存先をヘッダ自身で取り込むと，読み込む順序に依存しにくくなります．externによる宣言と領域を与える定義は区別し，静的ライブラリの更新は再リンクして取り込みます．FLT_MINは正の値，文字判定の真は非0，assertは設定で無効になり得る，という点も確認してください．</p>
+</details>
+<p><a class="md-button md-button--primary" href="ex12.html">演習へ</a>
+<a href="index.html">全体の目次</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="ex11.html" class="md-footer__link md-footer__link--prev" aria-label="前: 演習：構造体">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                演習：構造体
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="ex12.html" class="md-footer__link md-footer__link--next" aria-label="次: 演習：コンパイル">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                演習：コンパイル
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "search.highlight", "search.suggest"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,3020 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="C言語を通してプログラミングの基礎を学ぶ講義・演習資料">
+      
+      
+      
+      
+        <link rel="prev" href="ex05.html">
+      
+      
+        <link rel="next" href="ex06.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>第6回 講義：文字列 - プログラミング言語I・ソフトウェア演習I</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="css/custom.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#6" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-header__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            プログラミング言語I・ソフトウェア演習I
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第6回 講義：文字列
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec01.html" class="md-tabs__link">
+          
+  
+  
+  第1回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec02.html" class="md-tabs__link">
+          
+  
+  
+  第2回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec03.html" class="md-tabs__link">
+          
+  
+  
+  第3回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec04.html" class="md-tabs__link">
+          
+  
+  
+  第4回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec05.html" class="md-tabs__link">
+          
+  
+  
+  第5回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="lec06.html" class="md-tabs__link">
+          
+  
+  
+  第6回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec07.html" class="md-tabs__link">
+          
+  
+  
+  第7回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec08.html" class="md-tabs__link">
+          
+  
+  
+  第8回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec09.html" class="md-tabs__link">
+          
+  
+  
+  第9回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec10.html" class="md-tabs__link">
+          
+  
+  
+  第10回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec11.html" class="md-tabs__link">
+          
+  
+  
+  第11回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec12.html" class="md-tabs__link">
+          
+  
+  
+  第12回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec13.html" class="md-tabs__link">
+          
+  
+  
+  第13回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec14.html" class="md-tabs__link">
+          
+  
+  
+  第14回
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-nav__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    プログラミング言語I・ソフトウェア演習I
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第1回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第1回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第2回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第2回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第3回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            第3回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第4回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            第4回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第5回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            第5回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    第6回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            第6回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    講義：文字列
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="lec06.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：文字列
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 文字と文字列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 文字と文字列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      前回とのつながりと作業の準備
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1文字は整数としても読める
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#char" class="md-nav__link">
+    <span class="md-ellipsis">
+      終端を持つchar配列
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      初期化とメモリ上の並び
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 表示・変更・コピー
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 表示・変更・コピー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      最初の終端で文字列が終わる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      文字列を関数へ渡して走査する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      書式も文字列だが，データとは分ける
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 文字列ライブラリ
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 文字列ライブラリ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strlensizeof" class="md-nav__link">
+    <span class="md-ellipsis">
+      strlenとsizeofを比較する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strcpystrcat" class="md-nav__link">
+    <span class="md-ellipsis">
+      strcpyとstrcatの役割を読む
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      容量を確かめて連結する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strcmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      strcmpは最初に違う文字で決まる
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 文字コードと長さ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 数値の型変換
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 数値の型変換">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      暗黙の変換が起きる4つの場面
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      通常の算術型変換と整数拡張
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      代入先の型が大きくても，計算は先に終わる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      狭い型への変換と往復
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      符号付きと符号なしを混ぜない
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 例：コピー元とコピー先
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 例：コピー元とコピー先">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      実行順を追う
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      よくある間違い
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第7回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            第7回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第8回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            第8回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第9回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            第9回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第10回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            第10回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第11回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            第11回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第12回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            第12回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第13回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            第13回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第14回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            第14回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 文字と文字列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 文字と文字列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      前回とのつながりと作業の準備
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1文字は整数としても読める
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#char" class="md-nav__link">
+    <span class="md-ellipsis">
+      終端を持つchar配列
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      初期化とメモリ上の並び
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 表示・変更・コピー
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 表示・変更・コピー">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      最初の終端で文字列が終わる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      文字列を関数へ渡して走査する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      書式も文字列だが，データとは分ける
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 文字列ライブラリ
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 文字列ライブラリ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#strlensizeof" class="md-nav__link">
+    <span class="md-ellipsis">
+      strlenとsizeofを比較する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strcpystrcat" class="md-nav__link">
+    <span class="md-ellipsis">
+      strcpyとstrcatの役割を読む
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      容量を確かめて連結する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strcmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      strcmpは最初に違う文字で決まる
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 文字コードと長さ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 数値の型変換
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 数値の型変換">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      暗黙の変換が起きる4つの場面
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      通常の算術型変換と整数拡張
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      代入先の型が大きくても，計算は先に終わる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      狭い型への変換と往復
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      符号付きと符号なしを混ぜない
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 例：コピー元とコピー先
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 例：コピー元とコピー先">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      実行順を追う
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      よくある間違い
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="6">第6回　文字列<a class="headerlink" href="#6" title="Permanent link">&para;</a></h1>
+<h2 id="_1">到達目標<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>文字と文字列，終端文字と数字の0を区別できる．</li>
+<li>容量を考えて文字列をコピー・比較できる．</li>
+<li>型変換が行われるタイミングと情報の損失を説明できる．</li>
+</ul>
+<h2 id="1">1　文字と文字列<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<h3 id="environment">前回とのつながりと作業の準備<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
+<p>第5回では，同じ型の値を配列にまとめ，関数へ渡す方法を学びました．今回はchar配列を使って文字列を扱います．数値配列との違いは，<strong>値0の終端文字を文字列の終わりの目印にする</strong>ことです．後半では，文字コードや整数・小数の計算にも関係する型変換を整理します．</p>
+<p>作業場所はPL1の下のweek06です．Visual Studioで課題ごとに空のプロジェクトを作り，.cファイルを追加します．<a href="lec01.html#hello">第1回の設定</a>と同じくC17・Cとしてコンパイル・警告レベル4を使います．文字列はソース内の固定値で用意し，キーボード入力は次回扱います．</p>
+<p>短いコード片はmain内に置き，関数定義はmainの外へ置きます．printfにはstdio.h，文字列ライブラリにはstring.hをインクルードしてください．今回の例はASCIIの英数字と記号を対象とし，日本語の文字コードは第10回で扱います．</p>
+<h3 id="1_1">1文字は整数としても読める<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> ch </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;a&#39;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;character=%c code=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, ch, ch);</span>
+</code></pre></div>
+<p>ASCIIではcharacter=a code=97と表示されます．%cは対応する文字，%dは整数として表示します．'A'は65，'B'は66で，大文字と小文字は別の値です．文字コードをそのまま数値で書くより，'a'のように文字で書く方が意図を読み取りやすくなります．</p>
+<p>ASCIIは0〜127の符号位置を使います．その中には改行などの制御文字もあり，すべてが画面上の記号になるわけではありません．charは授業の環境では8ビットですが，ASCII自体が8ビットすべてを使うわけではありません．</p>
+<h3 id="char">終端を持つchar配列<a class="headerlink" href="#char" title="Permanent link">&para;</a></h3>
+<p><code>'A'</code> は文字定数，<code>"A"</code> は文字列リテラルです．Cの文字列は，charの並びを<strong>終端文字 <code>'\0'</code></strong> で終えたものです．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> word[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>添字</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要素</td>
+<td>'c'</td>
+<td>'a'</td>
+<td>'t'</td>
+<td>'\0'</td>
+</tr>
+</tbody>
+</table>
+<p>文字列の長さは3，配列の要素数は4です．<code>char word[16] = "cat";</code> とすれば，容量16のうち文字列には4要素を使います．終端までの部分が文字列なので，配列の容量と文字列の長さは違います．</p>
+<table>
+<thead>
+<tr>
+<th>表記</th>
+<th>意味</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>整数のゼロ</td>
+</tr>
+<tr>
+<td>'0'</td>
+<td>数字として見える文字．ASCIIでは値48</td>
+</tr>
+<tr>
+<td>'\0'</td>
+<td>値0の文字．文字列の終わり</td>
+</tr>
+<tr>
+<td>"0"</td>
+<td>'0'と'\0'からなる文字列</td>
+</tr>
+<tr>
+<td>"\0"</td>
+<td>'\0'が2個の配列．明示した0と自動的に付く終端を含む</td>
+</tr>
+<tr>
+<td>""</td>
+<td>'\0'だけの配列．長さ0の空文字列</td>
+</tr>
+</tbody>
+</table>
+<p>"\0"はsizeofで2バイト，strlenでは0です．最初の要素が終端だからです．'\0'は<strong>ヌル文字</strong>とも呼びます．後で学ぶポインタのNULLとは区別してください．Windowsではバックスラッシュが円記号に見える場合がありますが，ソースのエスケープはバックスラッシュと0で書きます．</p>
+<h3 id="_2">初期化とメモリ上の並び<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>char word[] = "cat";は，char word[] = {'c', 'a', 't', '\0'};と同じ並びを用意します．要素数を省略すると終端を含めた4になります．char word[6] = "cat";では初期化で残った要素も0になります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>添字         0       1       2       3       4       5
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>           ┌───────┬───────┬───────┬───────┬───────┬───────┐
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>要素       │ &#39;c&#39;   │ &#39;a&#39;   │ &#39;t&#39;   │ &#39;\0&#39;  │ &#39;\0&#39;  │ &#39;\0&#39;  │
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ASCII値    │ 99    │ 97    │ 116   │ 0     │ 0     │ 0     │
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>           └───────┴───────┴───────┴───────┴───────┴───────┘
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>文字列       └─── 表示する3文字 ───┘  ↑ 最初の終端
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>配列容量     └──────────────── 6バイト ──────────────────┘
+</code></pre></div>
+<p>各要素は1バイトで連続します．数値とアドレスを同時に見れば，第5回の配列と同じ仕組みだと確認できます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> s; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;index=%zu code=%d address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span style="color: #F8F8F2">           i, s[i], (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">s[i]);</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>codeは99，97，116，0の順です．%cで終端を表示しても目に見える文字にはなりません．アドレスの具体値は環境によりますが，隣接要素は1バイトずつ進みます．</p>
+<div class="admonition warning">
+<p class="admonition-title">終端を含めて領域を用意する</p>
+<p>catには最低4要素必要です．char s[3] = "cat";はCでは終端なしの配列になり，%sやstrlenで文字列として扱えません．範囲外を読ませて結果を観察するのではなく，配列の要素を紙に書いて不足を確認します．</p>
+</div>
+<p>char s[3] = "hello";のように文字そのものも収まらない初期化は，Cの制約に違反し診断の対象になります．「余分な文字が都合よく切り捨てられる」と考えてはいけません．終端がない配列を%sへ渡した場合も，隣の変数が表示されるなど特定の結果は保証されません．</p>
+<h2 id="2">2　表示・変更・コピー<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p><code>printf("%s\n", word);</code> は終端まで表示します．<code>word[0] = 'C';</code> は書き換え可能な配列の要素を変更します．<code>word = "dog";</code> のような配列への代入はできません．</p>
+<p>文字列をコピーするには，終端を含めて1文字ずつ移すか，ライブラリ関数を使います．どちらもコピー先の容量が必要です．読み込んだ文字列をprintfの書式そのものにせず，<code>printf("%s", word);</code> のようにデータとして渡します．</p>
+<h3 id="_3">最初の終端で文字列が終わる<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #E6DB74">&#39;a&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;b&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;c&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;d&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;e&#39;</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, s);</span>
+</code></pre></div>
+<p>表示はabcです．配列は6要素ですが，最初の終端より後のdとeは，この文字列の一部としては読まれません．word[1] = '\0';とすればwordの表示は先頭1文字だけになります．配列そのものの容量が小さくなったわけではありません．</p>
+<p>文字列リテラルも添字で読むことができ，"abcd"[3]は'd'です．ただし文字列リテラル自体を書き換えてはいけません．char word[] = "cat";では，リテラルから別の書き換え可能な配列を初期化しています．ポインタでリテラルを指す場合との違いは第8回で扱います．</p>
+<h3 id="_4">文字列を関数へ渡して走査する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">count_spaces</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[])</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; s[i] </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (s[i] </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39; &#39;</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span style="color: #F8F8F2">            </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">count;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span style="color: #F8F8F2">        }</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> count;</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>この関数へ"abc def gh"を渡すと2，"ijk lmn opq rst"なら3を返します．' 'は半角スペースであり，タブや改行は数えません．constは要素をこの引数から変更しないことを表します．size_tを使う宣言にはstddef.hなどが必要です．</p>
+<p>数値配列では長さを別に渡しましたが，ここでは終端から終わりが分かります．ただし，<strong>読み取り可能な領域内に終端が存在すること</strong>が前提です．終端があるから配列の容量も分かる，という意味ではありません．関数の配列引数へsizeofを使っても元の容量は得られません．</p>
+<h3 id="_5">書式も文字列だが，データとは分ける<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> format[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">printf(format, n);</span>
+</code></pre></div>
+<p>自分で内容を固定した書式文字列を変数から渡すこともでき，この例は2を表示します．ただし，任意のデータをprintf(text);と渡すと，含まれる%が書式として解釈されます．通常はprintf("%s", text);と書き，書式と表示したいデータを分離します．</p>
+<h2 id="3">3　文字列ライブラリ<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<p><code>&lt;string.h&gt;</code> をインクルードして使います．</p>
+<table>
+<thead>
+<tr>
+<th>関数</th>
+<th>役割</th>
+<th>注意点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>strlen(s)</td>
+<td>終端を除く長さ</td>
+<td>size_tを返す．終端のある文字列が必要</td>
+</tr>
+<tr>
+<td>strcmp(a, b)</td>
+<td>内容を辞書式に比較</td>
+<td>等しければ0，前なら負，後なら正</td>
+</tr>
+<tr>
+<td>strcpy(dst, src)</td>
+<td>終端を含めてコピー</td>
+<td>容量を自動確認しない．重なる領域には使わない</td>
+</tr>
+<tr>
+<td>strcat(dst, src)</td>
+<td>末尾に連結</td>
+<td>元の長さ＋追加の長さ＋1の容量が必要</td>
+</tr>
+</tbody>
+</table>
+<p>strcmpの結果が-1や1になるとは限りません．<strong>符号だけ</strong>を調べます．文字列の内容の比較には <code>==</code> を使いません．</p>
+<p>この回の実行例では，容量を確認した要素ごとのコピーを用います．Visual Studio固有の警告を一括で無効にする必要はありません．</p>
+<h3 id="strlensizeof">strlenとsizeofを比較する<a class="headerlink" href="#strlensizeof" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>宣言</th>
+<th style="text-align: right;">sizeofで求める容量</th>
+<th style="text-align: right;">strlenで求める長さ</th>
+<th style="text-align: right;">終端込みで必要な量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char s[] = "abc";</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>char s[10] = "abc";</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>char s[10] = "";</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+<p>strlenは最初の終端までを調べます．sizeofはその配列全体の大きさです．途中の要素を終端へ書き換えるとstrlenの結果は変わりますが，sizeofの結果は変わりません．どちらの結果もsize_t型なので%zuで表示します．</p>
+<h3 id="strcpystrcat">strcpyとstrcatの役割を読む<a class="headerlink" href="#strcpystrcat" title="Permanent link">&para;</a></h3>
+<p>次は標準関数の読み方を知るためのコードです．Visual Studioではstrcpy・strcatに安全性に関するC4996の診断が出ることがあるため，今回の実行課題では後述の容量確認付きループを使います．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> destination[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #F8F8F2">strcpy(destination, </span><span style="color: #E6DB74">&quot;hello&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> joined[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;hoge&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span style="color: #F8F8F2">strcat(joined, </span><span style="color: #E6DB74">&quot;fuga&quot;</span><span style="color: #F8F8F2">);</span>
+</code></pre></div>
+<p>destinationにはhelloと終端の6バイト，joinedにはhogefugaと終端の9バイトが入ります．どちらの容量も10のままです．strcpyは先頭から上書きし，strcatは元の文字列の終端位置から追加して，新しい末尾にも終端を書きます．strcatのコピー先は，呼び出す前から終端を持つ文字列でなければなりません．</p>
+<p>これらの関数はコピー先の容量を引数で受け取らず，自動的に配列を大きくもしません．容量不足や領域の重なりを起こしてはいけません．容量を渡せる別の関数を使う場合も，正しい容量と有効な引数を渡す責任は残ります．</p>
+<h3 id="_6">容量を確かめて連結する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> joined[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;hoge&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> suffix[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;fuga&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> used </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(joined);</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> added </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(suffix);</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (added </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> joined </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> used) {</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> added; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span style="color: #F8F8F2">        joined[used </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> suffix[i];</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, joined);</span>
+</code></pre></div>
+<p>usedは4，addedも4です．残り6バイトに，追加する4文字と終端が収まるのでhogefugaになります．&lt;= addedは終端もコピーするためです．このコードはjoinedが容量内で終端を持ち，suffixとは別の配列であることを前提にしています．収まらない場合は追加せず，元の文字列を保ちます．</p>
+<h3 id="strcmp">strcmpは最初に違う文字で決まる<a class="headerlink" href="#strcmp" title="Permanent link">&para;</a></h3>
+<p>strcmp("abc", "abc")は0，strcmp("abc", "abcd")は負，strcmp("b", "a")は正です．同じ位置の文字を先頭から比較し，最初に異なる位置で順序が決まります．abcとabcdなら，3文字の後の終端と'd'が違うため，短い方が先になります．</p>
+<p>概念的には「同じ文字なら次へ進む，両方が終端なら等しい，異なるならその位置の大小を返す」という処理です．標準のstrcmpは比較する文字をunsigned charとして解釈します．実装によって差の値を返す場合もありますが，結果がちょうど−1や1，あるいは−100になることには依存しないでください．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> comparison </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strcmp(</span><span style="color: #E6DB74">&quot;abc&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&quot;abcd&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (comparison </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;before</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (comparison </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;equal</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;after</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>文字列の長さを比較しているわけではなく，"z"は"aaa"より後です．また，大小文字を区別し，言語ごとの辞書の並び順を自動で理解するわけではありません．</p>
+<h2 id="4">4　文字コードと長さ<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>この回の演習ではASCIIの英数字を使います．ASCIIでは英大文字・英小文字・数字に数値が割り当てられています．<code>'7' - '0'</code> は7です．<code>"123"</code> は3文字なので，数値123にするには各桁を解釈する処理が必要です．キャストだけでは数値へ変換できません．</p>
+<p>日本語は1文字を複数バイトで表す場合があります．strlenは見た目の文字数ではなく，終端までの<strong>バイト数</strong>を返します．文字コードは第10回で詳しく扱います．</p>
+<p>数字の文字を数値へ変えるときは，先に'0'〜'9'の範囲かを調べます．範囲外の'A'などから'0'を引いても，数字を解釈した結果にはなりません．ASCIIの英大文字を小文字へ変える場合も，'A'〜'Z'だけを選び，'a' - 'A'を加えます．空白，数字，記号をそのまま残すことが重要です．</p>
+<p>ASCII表を調べるなら，印字可能な32〜126を%cと整数値で表示します．0〜31と127は制御用なので，文字として出力する代わりに値や名称で確認しましょう．タブや改行を不用意に出力すると，表の配置自体が変わります．</p>
+<h2 id="5">5　数値の型変換<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> mean </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count;</span>
+</code></pre></div>
+<p><code>(double)total</code> は明示的な型変換（キャスト）です．除算の前に変換するため3.5になります．<code>(double)(total / count)</code> は整数除算の後なので3.0です．</p>
+<p>代入や計算でも暗黙の変換が行われます．<code>int n = (int)3.9;</code> は3，<code>(int)-3.9</code> は-3です．変換先の整数型の範囲に収まる場合だけ行います．浮動小数点数から整数への変換は小数部分を失い，大きな整数をfloatへ変換する場合も精度を失うことがあります．</p>
+<p>小さい整数型は計算前に通常intへ整数拡張されます．ただしint同士の演算が，桁あふれを避けるため自動でlong longになることはありません．符号付きと符号なしを混ぜた比較にも注意します．</p>
+<h3 id="4_1">暗黙の変換が起きる4つの場面<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>場面</th>
+<th>例</th>
+<th>何が変わるか</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>異なる型の演算</td>
+<td>2 + 0.5</td>
+<td>intの2をdoubleへ変換して加算</td>
+</tr>
+<tr>
+<td>代入・初期化</td>
+<td>double x = 3;</td>
+<td>intの3をdoubleへ変換</td>
+</tr>
+<tr>
+<td>宣言された引数へ渡す</td>
+<td>intを受ける関数へ3.9を渡す</td>
+<td>仮引数の型intへ変換</td>
+</tr>
+<tr>
+<td>returnで返す</td>
+<td>intの関数でreturn 3.9;</td>
+<td>戻り値型intへ変換</td>
+</tr>
+</tbody>
+</table>
+<p>最後の2つは3となり，処理系が情報損失について警告することがあります．警告を消すためだけにキャストせず，そもそも整数を受け取る・返す仕様でよいかを考えます．</p>
+<h3 id="_7">通常の算術型変換と整数拡張<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>この回の型の組み合わせでは，intとfloatならfloat，floatとdoubleならdoubleへ型をそろえて計算します．ただし「自動変換なら情報を失わない」とは限りません．大きな整数をfloatへ移すと，下位の桁を区別できなくなる場合があります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> c1 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">, c2 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">100</span><span style="color: #F8F8F2">, c3 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> c1 </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> c2 </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> c3;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result);</span>
+</code></pre></div>
+<p>MSVCではこれらのcharの全値をintで表せるため，計算前にintへ拡張します．途中の1000もintで計算され，結果は50です．一般には，小さい整数型の全値をintで表せるならint，表せなければunsigned intへ拡張する規則です．</p>
+<h3 id="_8">代入先の型が大きくても，計算は先に終わる<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">50000</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> square </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2">)i </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> i;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%lld</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, square);</span>
+</code></pre></div>
+<p>この例では先にlong longへ変換してから掛けるので2500000000になります．long long square = i * i;では右辺がint同士の演算のままで，32ビットintの範囲を超えます．その危険な形を実行する実験は行いません．MSVCのlongは4バイトなので，この例ではlongではなくlong longを使います．</p>
+<p>10進整数リテラルは接尾辞がなければint，long，long longの順に表現できる型が選ばれます．MSVCでは5000000000はlongにも収まりません．long long n = 5000000000LL;のように意図する型を明示し，%lldで表示します．小さい型に入れて失った値を，printfの書式だけで復元することはできません．書式と実際の引数の型の不一致も避けてください．</p>
+<p>float x = 3.223;ではdoubleのリテラルからfloatへ変換します．floatを意図するなら3.223fと書けますが，どちらも小数が必ず厳密に保存されるという意味ではありません．</p>
+<h3 id="_9">狭い型への変換と往復<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>変換</th>
+<th>この回での注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小数→整数</td>
+<td>範囲内で小数部を0方向へ切り捨てる．四捨五入ではない</td>
+</tr>
+<tr>
+<td>整数→狭い符号付き整数</td>
+<td>範囲外ならC17では結果またはシグナルが処理系定義．特定の値を期待しない</td>
+</tr>
+<tr>
+<td>整数→符号なし整数</td>
+<td>変換先の範囲に入るよう，最大値＋1を法とする値になる</td>
+</tr>
+<tr>
+<td>整数→float</td>
+<td>値によって精度が失われる．バイト数だけで安全と判断しない</td>
+</tr>
+</tbody>
+</table>
+<p>例えば8ビットunsigned charへ整数300を変換すると，256を法として44になります．符号付き整数の<strong>計算のオーバーフロー</strong>は未定義動作であり，ここでの整数型への変換規則とは別です．浮動小数点数を整数へ変換するときも，整数部分が変換先で表せない場合は安全ではありません．</p>
+<p>MSVCでchar c = 'A';をint iへ移し，そのiをcharへ戻す場合，もとの値は保たれます．一方，intからcharなどへ縮めて情報を失った後にintへ戻しても，失った情報は復元されません．キャストは警告を抑えるおまじないでも，値の範囲を保証する検査でもありません．</p>
+<h3 id="_10">符号付きと符号なしを混ぜない<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>int i = -10;，unsigned int u = 10u;としてi &lt; uを比較すると，iがunsigned intへ変換されます．32ビットunsigned intでは−10が4294967286として扱われ，結果は偽です．この比較は読解例であり，実際のコードでは型と値の範囲を整理してから比較します．</p>
+<p>uがINT_MAX以下と確認できる場合に限り，i &lt; (int)uとすればint同士で比較できます．無条件にキャストすると別の情報損失を生むため，先に範囲を確かめることが必要です．strlenやsizeofのsize_tも符号なしなので，負数との比較や，0から1を引く操作には注意してください．</p>
+<h2 id="6_1">6　例：コピー元とコピー先<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h2>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">strings.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-20">20</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;string.h&gt;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> word[</span><span style="color: #AE81FF">16</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> copy[</span><span style="color: #AE81FF">16</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> length </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(word);</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (length </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> copy) {</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> length; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span style="color: #F8F8F2">            copy[i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> word[i];</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span style="color: #F8F8F2">        }</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span style="color: #F8F8F2">    word[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;C&#39;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%s %s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, word, copy);</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;length=%zu capacity=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, strlen(word), </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> word);</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;equal=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, strcmp(word, copy) </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">, count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;mean=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count);</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/06/strings.c">strings.c</a></p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Cat cat
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>length=3 capacity=16
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>equal=0
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>mean=3.5
+</code></pre></div>
+<p>コピーのループが <code>i &lt;= length</code> なのは，終端も移すためです．コピー後にwordを変更しても，別の配列copyの要素は変わりません．</p>
+<h3 id="_11">実行順を追う<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>時点</th>
+<th>word</th>
+<th>copy</th>
+<th>注目点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初期化後</td>
+<td>cat</td>
+<td>空文字列</td>
+<td>copyの先頭は0</td>
+</tr>
+<tr>
+<td>コピー後</td>
+<td>cat</td>
+<td>cat</td>
+<td>添字0〜3の4要素を移す</td>
+</tr>
+<tr>
+<td>word[0]の変更後</td>
+<td>Cat</td>
+<td>cat</td>
+<td>別々の配列なので片方だけ変化</td>
+</tr>
+</tbody>
+</table>
+<p>lengthは最初に求めた3です．容量16に対するlength &lt; sizeof copyは，終端用の1要素を残せるかを調べています．容量が3なら条件は偽になり，コピーせず初期化済みの空文字列を保ちます．このときも%sへ渡せる終端があります．</p>
+<h3 id="_12">よくある間違い<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>症状・疑問</th>
+<th>確認すること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文字列の後ろに余分な表示が出る</td>
+<td>終端が容量内にあるか．結果観察より原因修正を優先</td>
+</tr>
+<tr>
+<td>空文字列のsizeofが0でない</td>
+<td>終端用の1要素が必要</td>
+</tr>
+<tr>
+<td>同じ文字列なのに==が真にならない</td>
+<td>内容比較にstrcmpを使ったか</td>
+</tr>
+<tr>
+<td>コピー後の容量が変わらない</td>
+<td>内容の長さと配列容量は別</td>
+</tr>
+<tr>
+<td>平均の小数部が失われる</td>
+<td>割り算の前に型を変えたか</td>
+</tr>
+<tr>
+<td>大きな値を別の書式で表示しても直らない</td>
+<td>計算・代入の時点で情報を失っていないか</td>
+</tr>
+</tbody>
+</table>
+<p>「文字数＋1の容量」「終端の位置」「変換が起きるタイミング」を順に確認してから演習へ進みましょう．</p>
+<h2 id="_13">確認問題<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<ol>
+<li>strlenとsizeofは何を数えるか．</li>
+<li>strcmpの戻り値を-1と直接比較してよいか．</li>
+<li>(double)(7 / 2)と(double)7 / 2の違いは何か．</li>
+</ol>
+<p><a class="md-button md-button--primary" href="ex06.html">演習へ</a>
+<a href="index.html">全体の目次</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="ex05.html" class="md-footer__link md-footer__link--prev" aria-label="前: 演習：配列と関数">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                演習：配列と関数
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="ex06.html" class="md-footer__link md-footer__link--next" aria-label="次: 演習：文字列">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                演習：文字列
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "search.highlight", "search.suggest"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

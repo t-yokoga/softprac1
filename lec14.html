@@ -1,0 +1,3341 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="C言語を通してプログラミングの基礎を学ぶ講義・演習資料">
+      
+      
+      
+      
+        <link rel="prev" href="ex13.html">
+      
+      
+        <link rel="next" href="ex14.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>第14回 講義：再帰 - プログラミング言語I・ソフトウェア演習I</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="css/custom.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#14" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-header__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            プログラミング言語I・ソフトウェア演習I
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第14回 講義：再帰
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec01.html" class="md-tabs__link">
+          
+  
+  
+  第1回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec02.html" class="md-tabs__link">
+          
+  
+  
+  第2回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec03.html" class="md-tabs__link">
+          
+  
+  
+  第3回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec04.html" class="md-tabs__link">
+          
+  
+  
+  第4回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec05.html" class="md-tabs__link">
+          
+  
+  
+  第5回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec06.html" class="md-tabs__link">
+          
+  
+  
+  第6回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec07.html" class="md-tabs__link">
+          
+  
+  
+  第7回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec08.html" class="md-tabs__link">
+          
+  
+  
+  第8回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec09.html" class="md-tabs__link">
+          
+  
+  
+  第9回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec10.html" class="md-tabs__link">
+          
+  
+  
+  第10回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec11.html" class="md-tabs__link">
+          
+  
+  
+  第11回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec12.html" class="md-tabs__link">
+          
+  
+  
+  第12回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec13.html" class="md-tabs__link">
+          
+  
+  
+  第13回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="lec14.html" class="md-tabs__link">
+          
+  
+  
+  第14回
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-nav__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    プログラミング言語I・ソフトウェア演習I
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第1回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第1回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第2回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第2回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第3回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            第3回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第4回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            第4回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第5回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            第5回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第6回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            第6回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第7回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            第7回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第8回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            第8回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第9回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            第9回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第10回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            第10回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第11回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            第11回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第12回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            第12回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第13回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            第13回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    第14回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            第14回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    講義：再帰
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="lec14.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：再帰
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      今回の見通し
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 小さい問題に分ける
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 小さい問題に分ける">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 再帰的な定義をプログラムにする
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 入力の範囲も停止の根拠に含める
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 設計の4つの問い
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 呼び出しと復帰
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 呼び出しと復帰">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 待っている計算は消えない
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 引数のコピーと共有するデータ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 例：階乗と最大公約数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 例：階乗と最大公約数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 階乗の型と上限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 互除法の変化を追う
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 スタックと呼び出し深さ
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 スタックと呼び出し深さ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 スタックフレームの概念図
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 呼び出し回数と最大深さ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 スタックとヒープの後始末は別
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 例：表示位置で流れを見る
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 例：表示位置で流れを見る">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 表示を置く位置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-visual-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Visual Studioでの観察手順
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 再帰と繰り返し
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 再帰と繰り返し">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 何を保存すれば反復にできるか
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 末尾再帰
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7 分岐する再帰と重複計算
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 分岐する再帰と重複計算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 呼び出し回数の漸化式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 順序と共有カウンタ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 改善の方向
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8 木構造を再帰で走査する
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 木構造を再帰で走査する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 構造体のポインタでつなぐ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 表示する場所で順序が変わる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 停止の前提と寿命
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9 安全な再帰の確認方法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 安全な再帰の確認方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 停止と資源を別々に調べる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 小さな境界から確かめる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 再帰を選ぶ基準
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      今回の見通し
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 小さい問題に分ける
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 小さい問題に分ける">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 再帰的な定義をプログラムにする
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 入力の範囲も停止の根拠に含める
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 設計の4つの問い
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 呼び出しと復帰
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 呼び出しと復帰">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 待っている計算は消えない
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 引数のコピーと共有するデータ
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 例：階乗と最大公約数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 例：階乗と最大公約数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 階乗の型と上限
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 互除法の変化を追う
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 スタックと呼び出し深さ
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 スタックと呼び出し深さ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 スタックフレームの概念図
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 呼び出し回数と最大深さ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 スタックとヒープの後始末は別
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 例：表示位置で流れを見る
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 例：表示位置で流れを見る">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 表示を置く位置
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-visual-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Visual Studioでの観察手順
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 再帰と繰り返し
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 再帰と繰り返し">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 何を保存すれば反復にできるか
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 末尾再帰
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7 分岐する再帰と重複計算
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 分岐する再帰と重複計算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 呼び出し回数の漸化式
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 順序と共有カウンタ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 改善の方向
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8 木構造を再帰で走査する
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 木構造を再帰で走査する">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 構造体のポインタでつなぐ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 表示する場所で順序が変わる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 停止の前提と寿命
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9 安全な再帰の確認方法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 安全な再帰の確認方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 停止と資源を別々に調べる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 小さな境界から確かめる
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 再帰を選ぶ基準
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="14">第14回　再帰<a class="headerlink" href="#14" title="Permanent link">&para;</a></h1>
+<h2 id="_1">到達目標<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>基底条件と再帰の進み方を設計できる．</li>
+<li>呼び出しと復帰を順に追跡できる．</li>
+<li>呼び出し深さ，スタック，数値の範囲に注意できる．</li>
+<li>同じ処理を反復へ書き換え，保持する情報と処理量を比較できる．</li>
+<li>二分木の走査を通して，再帰がデータの形に合う場面を説明できる．</li>
+</ul>
+<h2 id="_2">今回の見通し<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>第13回では，変数や動的領域の寿命を学びました．今回は，ある関数が終了する前に同じ関数を再び呼ぶ<strong>再帰</strong>を扱います．同じソースコードを実行していても，呼び出しごとの引数や局所変数は別々です．「次の呼び出しへ進む流れ」と「結果を受け取って戻る流れ」の両方を追いかけましょう．</p>
+<p>最初は階乗と合計で直線的な呼び出しを理解し，互除法を反復と比較します．発展として，フィボナッチ数の計算量と，木の形に沿った走査を考えます．複雑な式を覚えるより，停止・進行・復帰の3点を言葉で説明することを重視します．</p>
+<p>環境はWindowsのVisual Studio，C17です．今回は別々の例を別プロジェクトに入れ，mainの重複を避けます．大きな入力で再帰の限界を探すのではなく，小さく安全な入力を使って動きを観察します．</p>
+<h2 id="1">1　小さい問題に分ける<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>再帰は，関数が自分自身を呼び出すことです．例えば階乗は <code>0! = 1</code>，<code>n! = n × (n - 1)!</code> と定義できます．5!を求めるには4!が必要で，さらに3!へと小さくします．</p>
+<p>必要なのは次の2点です．</p>
+<ul>
+<li>その場で答えを返せる<strong>基底条件（停止条件）</strong>．</li>
+<li>呼び出すたびに基底条件へ近づく変化．</li>
+</ul>
+<p>条件を書くだけでは十分ではありません．例えばnが減らなければ，到達できないまま呼び出し続けます．</p>
+<h3 id="11">1.1　再帰的な定義をプログラムにする<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>階乗は，0以上の整数nに対して定義します．0!は1とし，nが正ならnと(n−1)!を掛けます．0!を0にすると，以後のすべての結果が0になってしまいます．0の場合だけを特別扱いするのではなく，積を組み立てる出発点として1が必要です．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>問題：n!を求める
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  n = 0      → これ以上分けずに1を返す
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  n &gt; 0      → (n - 1)!を求め，nを掛けて返す
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>小さくなる量：n
+</code></pre></div>
+<p>関数の中で自分と同じ関数を呼ぶことを直接再帰といいます．複数の関数が互いに呼び合う間接再帰もありますが，今回の実装は直接再帰を中心にします．どちらも「いつ止まり，何が小さくなるか」を説明できなければなりません．</p>
+<h3 id="12">1.2　入力の範囲も停止の根拠に含める<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>nが0以上なら，n−1を繰り返すと0へ到達します．しかし負数から始めると，0から遠ざかります．基底条件を<code>n == 0</code>と書いただけでは，あらゆる整数で止まることを保証できません．<strong>関数が受け付ける範囲を先に決める</strong>必要があります．</p>
+<p>符号なし整数でも，0から1を引けば負の数にならず，大きな値へ回り込みます．そのため0の判定はn−1を計算する前に置きます．また，<code>factorial(n--)</code>は呼び出し先へ減少前の値を渡すため，期待した進み方になりません．今回は副作用を使わず<code>n - 1</code>を引数にします．</p>
+<h3 id="13-4">1.3　設計の4つの問い<a class="headerlink" href="#13-4" title="Permanent link">&para;</a></h3>
+<ol>
+<li>この関数は何を返すか．引数が表す問題を1文で定義する．</li>
+<li>再帰せず答えが分かる最小の場合は何か．</li>
+<li>どの引数をどう変えると，必ずその場合へ近づくか．</li>
+<li>小さい問題の答えを受け取った後，どの処理をして返すか．</li>
+</ol>
+<p>例えば合計なら「0〜nの合計を返す」「n=0なら0」「n−1へ進む」「戻った答えにnを足す」となります．階乗と形は似ていますが，基底値も組み合わせる演算も違います．見た目だけでコードを流用しないようにしましょう．</p>
+<h2 id="2">2　呼び出しと復帰<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>階乗の3!は次のように進みます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>factorial(3) = 3 × factorial(2)   計算の続きを待つ
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>factorial(2) = 2 × factorial(1)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>factorial(1) = 1 × factorial(0)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>factorial(0) = 1                 基底条件
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>              ↓ 復帰
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>factorial(1) = 1
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>factorial(2) = 2
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>factorial(3) = 6
+</code></pre></div>
+<p>各呼び出しの仮引数nは別々です．深い呼び出しでnが0になっても，待っている呼び出しのnまで0になるわけではありません．</p>
+<h3 id="21">2.1　待っている計算は消えない<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><code>return n * factorial(n - 1);</code>は「次の関数を呼んだら，この関数はもう終わり」という意味ではありません．呼び出しの結果が届いてから掛け算をし，その値を返します．次のように分けて読むと分かりやすくなります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #959077">/* factorialの再帰部分と同じ意味の断片 */</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> smaller </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> factorial(n </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> smaller;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> result;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>呼び出し</th>
+<th>子へ渡す値</th>
+<th>子の戻り値</th>
+<th>自分の戻り値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>factorial(0)</td>
+<td>呼ばない</td>
+<td>なし</td>
+<td>1</td>
+</tr>
+<tr>
+<td>factorial(1)</td>
+<td>0</td>
+<td>1</td>
+<td>1×1 = 1</td>
+</tr>
+<tr>
+<td>factorial(2)</td>
+<td>1</td>
+<td>1</td>
+<td>2×1 = 2</td>
+</tr>
+<tr>
+<td>factorial(3)</td>
+<td>2</td>
+<td>2</td>
+<td>3×2 = 6</td>
+</tr>
+</tbody>
+</table>
+<p>呼び出し順に表を上から埋めようとすると，まだ結果が分かりません．基底条件まで進み，復帰順に戻り値を埋めます．再帰が難しく見える理由の1つは，この2方向を同時に考えようとすることです．</p>
+<h3 id="22">2.2　引数のコピーと共有するデータ<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>整数nを値渡しした場合，各呼び出しは独立したnを持ちます．一方，ポインタを渡す場合には，ポインタ変数はコピーされても参照先が共有されます．呼び出し回数を1つのカウンタへ蓄積する例では，この共有を意図して使います．</p>
+<p>static局所変数も呼び出しごとに新しく作られる変数ではありません．第13回で学んだとおり，すべての呼び出しから同じオブジェクトを使います．再帰途中の値を保存するつもりで不用意にstaticを付けると，深い呼び出しで上書きされることがあります．</p>
+<p>「同じ名前nがある」と「同じ変数を共有している」は別です．呼び出し番号や深さを添えて，n₁，n₂のように紙へ書き分けると追跡しやすくなります．</p>
+<h2 id="3">3　例：階乗と最大公約数<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">recursion.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-20">20</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-21">21</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-22">22</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">factorial</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) { </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">; }</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> factorial(n </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">gcd</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> b)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (b </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) { </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> a; }</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> gcd(b, a </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> b);</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span style="color: #F8F8F2">        fprintf(stderr, </span><span style="color: #E6DB74">&quot;n must be 0..20</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%u! = %llu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, n, factorial(n));</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;gcd=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, gcd(</span><span style="color: #AE81FF">48</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">18</span><span style="color: #F8F8F2">));</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/14/recursion.c">recursion.c</a></p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>5! = 120
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gcd=6
+</code></pre></div>
+<p>階乗は急速に大きくなります．この例では，unsigned long longに結果が収まる<strong>0〜20</strong>に限定します．unsignedだから無限に計算できるわけではありません．関数の引数nもこの範囲という契約です．</p>
+<p>最大公約数はユークリッドの互除法を使います．bが0ならaを返し，そうでなければ(a, b)を(b, a % b)に変えます．bが正なら余りはbより小さく，0へ近づきます．<strong>bが0か調べてから剰余を求める</strong>ので，0による剰余を避けられます．この講義ではgcd(0, 0)は数学的な最大公約数の入力対象外とします．</p>
+<h3 id="31">3.1　階乗の型と上限<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>20!は2432902008176640000です．一般的な64ビットunsigned long longの最大値18446744073709551615以下ですが，21!はそれを超えます．C17でunsigned long longが少なくともこの64ビット相当の範囲を持つことを踏まえ，この教材ではより広い型の環境でも0〜20に統一します．</p>
+<p>戻り値だけを広い型にしても，途中を狭い型で計算すれば安全とは限りません．今回の積はfactorialの戻り値がunsigned long longなので，nもその型へ変換されて乗算されます．printfは戻り値に%llu，unsigned intのnには%uを使います．</p>
+<p>符号なし整数のあふれは，計算が止まって必ずエラーになるわけではありません．小さな値へ回り込んだ出力を正解として扱わないように，計算前に範囲を検査します．符号付き整数のオーバーフローにも依存しません．</p>
+<p>この例のfactorial自身は0〜20を前提とする内部関数です．mainの検査を通らない別の呼び出しを追加するなら，その場所でも契約を守ります．外から使うAPIにする場合には，成功・失敗を返す入口と，再帰の本体を分ける方法があります．演習で扱います．</p>
+<h3 id="32">3.2　互除法の変化を追う<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>48と18の最大公約数は，18と12，12と6，6と0の最大公約数と等しくなります．</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>次の呼び出し</th>
+<th>戻り値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>48</td>
+<td>18</td>
+<td>gcd(18, 12)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>18</td>
+<td>12</td>
+<td>gcd(12, 6)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>12</td>
+<td>6</td>
+<td>gcd(6, 0)</td>
+<td>6</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0</td>
+<td>呼ばない</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p>a=q×b+rと書けるとき，aとbをともに割り切る数はbとrも割り切ります．逆方向も成り立つので，公約数の集合が変わりません．bが正のとき0≤r&lt;bなので，第2引数は厳密に小さくなります．これが「答えを保つ理由」と「止まる理由」です．</p>
+<p>gcd(18,48)では最初の余りが18になり，次はgcd(48,18)です．a&lt;bでも同じ関数を使えます．gcd(7,0)とgcd(0,7)はいずれも7です．(0,0)では本体が0を返す形でも，この授業の数学的な入力範囲としては拒否します．実装が何か返すことと，仕様上有効な入力であることを区別しましょう．</p>
+<h2 id="4">4　スタックと呼び出し深さ<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>一般的な実装は，関数呼び出しごとの局所変数や戻る位置をスタックで管理します．途中の計算を残して次の関数を呼び，終わったら逆順に戻ります．深い再帰では使用する領域も増える場合があり，限界を超えると失敗します．</p>
+<p>ただし，最適化で呼び出し方が変わる場合があるため，すべてのCの再帰が必ず同じ物理的スタックを使うとは限りません．「深さはいくつまで安全か」を一律の数字で決めず，大きな入力には反復や別のアルゴリズムも検討します．</p>
+<h3 id="41">4.1　スタックフレームの概念図<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>呼び出しごとに必要な情報のまとまりをスタックフレームと呼びます．factorial(3)からfactorial(0)まで進んだ時点を概念的に表すと，次のようになります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>現在実行中   factorial(0)  n=0，1を返す
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>待機中       factorial(1)  n=1，戻った値に1を掛ける
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>待機中       factorial(2)  n=2，戻った値に2を掛ける
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>待機中       factorial(3)  n=3，戻った値に3を掛ける
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>呼び出し元   main          最終結果を表示する
+</code></pre></div>
+<p>一番後に呼ばれた関数から先に戻ります．これを後入れ先出し（LIFO）といいます．図の上下は説明用であり，実際のアドレスの増減方向を表すものではありません．戻る場所や保存する値の実装は，処理系・最適化・呼び出し規約によって変わります．</p>
+<p>基底条件でreturnしても，mainへ一気に戻るわけではありません．1つ手前の呼び出しへ戻り，その関数の続きを実行します．必要な計算を終えるたびに，もう1段戻ります．</p>
+<h3 id="42">4.2　呼び出し回数と最大深さ<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>本講義では，深さを「同時に有効な対象関数の呼び出しの個数」とし，最初の呼び出しを深さ1と数えます．mainやprintfは含めません．factorial(3)なら総呼び出し回数4，最大深さも4です．しかし，1回から2つの再帰呼び出しへ分かれる場合には一致しません．</p>
+<p>各段の局所配列が大きければ，浅い再帰でも多くの領域を使います．「再帰が100回だから大丈夫」と回数だけで判断しないことが大切です．逆に，小さい作業領域でも，深さが入力に比例して非常に大きくなる設計には注意が必要です．</p>
+<h3 id="43">4.3　スタックとヒープの後始末は別<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>再帰から戻ると，通常の自動変数の寿命は終了します．これらへfreeを呼んではいけません．一方，各呼び出しでmallocした領域は，returnだけでは自動解放されません．再帰だから第13回の所有権の規則が変わるわけではありません．</p>
+<p>また，呼び出し先が有効な間は，待っている呼び出し元の自動変数もまだ生きています．生存中の変数へのポインタを下位へ渡して使うことはできますが，寿命が終わった呼び出しの局所変数のアドレスを保存し続けてはいけません．</p>
+<div class="admonition warning">
+<p class="admonition-title">止まらない再帰は実行課題にしない</p>
+<p>無限再帰で実際にクラッシュさせる必要はありません．停止条件と変化を紙で確認し，小さな入力で追跡します．</p>
+</div>
+<h2 id="5">5　例：表示位置で流れを見る<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">trace.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-20">20</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-21">21</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-22">22</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-23">23</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">sum_to</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;enter %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, n);</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span style="color: #F8F8F2">        printf(</span><span style="color: #E6DB74">&quot;leave 0: 0</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> sum_to(n </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;leave %d: %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, n, result);</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> result;</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">100</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span style="color: #F8F8F2">        fputs(</span><span style="color: #E6DB74">&quot;n must be 0..100</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, stderr);</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> sum_to(n);</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;sum=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result);</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/14/trace.c">trace.c</a></p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>enter 3
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>enter 2
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>enter 1
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>enter 0
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>leave 0: 0
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>leave 1: 1
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>leave 2: 3
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>leave 3: 6
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>sum=6
+</code></pre></div>
+<p>Visual Studioでは再帰呼び出しの行にブレークポイントを置き，F5でデバッグを開始できます．「呼び出し履歴」で待っている呼び出しを見て，F11でステップインします．その場のnと呼び出し履歴を対応させましょう．</p>
+<h3 id="51">5.1　表示を置く位置<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p>enterは再帰呼び出しより前にあるので，3，2，1，0の順に表示されます．leaveは子の呼び出しが終わった後にあるので，0，1，2，3の順になります．sum_to(0)のleaveは基底条件の中にあり，他のleaveと分けて書いてあります．</p>
+<p><code>int result = n + sum_to(n - 1);</code>では，右辺の再帰呼び出しが戻るまでresultの初期化は完了しません．デバッガが未初期化のresultを表示しても，その数値を計算の途中結果として読まないでください．</p>
+<p>この例はnを0〜100に制限し，最大合計5050をintで扱います．入力を検査してから再帰へ入ります．n=0でも1回は関数を呼びますが，再帰呼び出しを追加しません．</p>
+<h3 id="52-visual-studio">5.2　Visual Studioでの観察手順<a class="headerlink" href="#52-visual-studio" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Debug構成でビルドし，sum_to内のifの行へF9でブレークポイントを置く．</li>
+<li>F5で開始し，ローカル変数のnを確認する．</li>
+<li>「デバッグ → ウィンドウ → 呼び出し履歴」を開く．</li>
+<li>次の再帰呼び出しへF11で入り，nが1減ることと，履歴に同じ関数が増えることを確認する．</li>
+<li>n=0に到達したら，呼び出し履歴から待機中のsum_toを選び，その呼び出しのnと比較する．</li>
+<li>復帰を進め，resultが1，3，6と確定していくことを確認する．</li>
+</ol>
+<p>履歴上の行を選ぶ操作は，調べる呼び出しの文脈を変えるだけで，実行時間を巻き戻す操作ではありません．F10は呼び出し先全体を実行して先へ進むため，再帰内部を追いたい行ではF11を使います．printf内部へ入りたくない場面ではF10を使い分けます．操作の詳細は<a href="https://learn.microsoft.com/en-us/visualstudio/debugger/getting-started-with-the-debugger-cpp?view=vs-2022">Microsoftのデバッガ入門</a>も参照できます．</p>
+<h2 id="6">6　再帰と繰り返し<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>階乗や合計はforでも簡単に書けます．再帰は木構造など「同じ形の小さい問題」に分かれる処理に向いていますが，常に速いとは限りません．再帰でフィボナッチ数を素朴に求めると同じ値を何度も計算します．<strong>呼び出し回数</strong>と<strong>最大の深さ</strong>も違う量です．1回の呼び出しから2回呼べば，深さが小さくても総回数は増えます．</p>
+<h3 id="61">6.1　何を保存すれば反復にできるか<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>互除法では，必要なのは現在のaとbです．余りを一時変数に保存して(a,b)を更新すれば，whileで書けます．階乗では，ここまでの積を変数へ蓄えながら1からnまで進みます．再帰の引数が変化することと，反復の状態変数が変化することを対応させましょう．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #959077">/* nは0〜20を前提とする */</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">factorial_loop</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> n; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span style="color: #F8F8F2">        result </span><span style="color: #FF4689">*=</span><span style="color: #F8F8F2"> i;</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> result;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>0ならループを1回も実行せず1を返します．この例では反復のための追加領域が入力に比例して増えません．ただし，木の走査のように「後で戻って右側も処理する」必要がある場合は，反復版でも明示的なスタックなどに続きを記録する必要があります．何でも1つのカウンタだけに置き換えられるとは限りません．</p>
+<h3 id="62">6.2　末尾再帰<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p>gcdの<code>return gcd(b, a % b);</code>は，再帰の答えを受け取った後の演算がありません．このように，再帰呼び出しが最後の処理になる形を末尾再帰と呼びます．一方，階乗の<code>return n * factorial(n - 1);</code>では戻った後に掛け算が残るため，この形の末尾再帰ではありません．</p>
+<p>処理系が末尾再帰を反復に相当する処理へ最適化する場合がありますが，C17はその最適化を保証しません．「末尾再帰に書けばスタックが増えない」と仮定して大きな入力を与えないでください．深さを避けたい場合は，意図を明示して反復にする方法があります．</p>
+<h2 id="7">7　分岐する再帰と重複計算<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>フィボナッチ数をF(0)=0，F(1)=1，F(n)=F(n−1)+F(n−2)と定義します．数列の先頭は0，1，1，2，3，5，8です．定義をそのまま関数にすると，1回の呼び出しから2つへ分かれます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>fib(4)
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>├─ fib(3)
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>│  ├─ fib(2)
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>│  │  ├─ fib(1)
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>│  │  └─ fib(0)
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>│  └─ fib(1)
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>└─ fib(2)
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>   ├─ fib(1)
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>   └─ fib(0)
+</code></pre></div>
+<p>fib(2)を2回計算しています．全体では9回呼び出しますが，左右の枝は順に処理するので，同時に9個を待機させるわけではありません．最も深い経路4→3→2→1は4個です．深さと総回数を別々に数えます．</p>
+<h3 id="71">7.1　呼び出し回数の漸化式<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>基底条件でも関数を呼んだ回数は1です．C(0)=C(1)=1とし，n≥2ではC(n)=1+C(n−1)+C(n−2)です．先頭の1は自分の呼び出しを表します．したがってC(2)=3，C(3)=5，C(4)=9，C(5)=15となります．</p>
+<p>入力が大きくなると，単純な反復に比べて重複計算が急増します．返す答えの大きさだけでなく，計算に何回関数を呼ぶかも考える必要があります．授業では素朴な再帰版を0〜20に制限し，巨大な値で処理時間の限界を試しません．</p>
+<h3 id="72">7.2　順序と共有カウンタ<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p><code>fib(n - 1) + fib(n - 2)</code>の左右を，Cが必ず左から計算するとは限りません．表示順や共有カウンタの観察を行う実装では，次のように文を分けて順序を明示します．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> left </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> fib(n </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> right </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> fib(n </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> left </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> right;</span>
+</code></pre></div>
+<p>演習では回数や深さの記録をポインタで渡し，各呼び出しの入口で更新します．実行順序を1つに定めてから，紙に描いた木と対応させます．</p>
+<h3 id="73">7.3　改善の方向<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<p>前の2項を保持して順に計算する反復なら，各項を一度ずつ求められます．計算済みの値を表へ保存して再利用するメモ化という方法もあります．ただし，メモ化は重複を減らす方法であり，再帰深さを必ずなくす方法ではありません．今回の演習では反復版との比較を行い，メモ化は考え方の紹介にとどめます．</p>
+<h2 id="8">8　木構造を再帰で走査する<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p>再帰は，データ自体が同じ形の部分へ分かれる場面で役立ちます．根付き木には根（root）があり，根以外の各ノードには親が1つあります．子を持たないノードは葉（leaf）です．同じ親を持つノードは兄弟と呼びます．</p>
+<p>二分木では，各ノードが左と右の最大2つの子を持ちます．一方の子がない場合もあり，「二分木ならすべての段が埋まる」とは限りません．最下段以外が埋まり，最下段が左から詰まった形は完全二分木と呼び，二分木全体の一部です．また，値の大小で配置する二分探索木とは別の概念です．</p>
+<h3 id="81">8.1　構造体のポインタでつなぐ<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>          1
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>       /     \
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>      2       7
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>     / \     / \
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    3   6   8  10
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>   / \     /
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  4   5   9
+</code></pre></div>
+<p>この木では，1の左部分木も，2を根とする同じ形の問題として処理できます．子がない場所をNULLで表せば，NULLに来たら何もしないことが基底条件になります．</p>
+<p>Nodeは自分と同じ型へのポインタを持つ自己参照構造体です．本体の中にNodeそのものを無限に埋め込むのではなく，固定サイズのポインタを置いて他のノードを参照します．</p>
+<h3 id="82">8.2　表示する場所で順序が変わる<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>走査</th>
+<th>自分を処理する位置</th>
+<th>手順</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>行きがけ順（preorder）</td>
+<td>子を処理する前</td>
+<td>自分 → 左 → 右</td>
+</tr>
+<tr>
+<td>通りがけ順（inorder）</td>
+<td>左の後，右の前</td>
+<td>左 → 自分 → 右</td>
+</tr>
+<tr>
+<td>帰りがけ順（postorder）</td>
+<td>両方の子の後</td>
+<td>左 → 右 → 自分</td>
+</tr>
+</tbody>
+</table>
+<p>ここで「左」は左の子1個を表示するだけではなく，左部分木全体を同じ方法で処理するという意味です．これらは深さ優先の走査です．左右の部分木を先に処理するか後に処理するかで，出力順を変更できます．</p>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tree.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-20">20</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-21">21</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-22">22</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-23">23</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-24">24</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-25">25</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-26">26</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-27">27</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-28">28</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-29">29</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-30">30</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-31">31</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-32">32</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-33">33</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-34">34</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-35">35</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-36">36</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-37">37</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-38">38</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-39">39</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-40">40</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-41">41</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-42">42</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-43">43</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-44">44</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-45">45</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-46">46</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-47">47</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-48">48</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-49">49</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-50">50</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-51">51</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-52">52</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-53">53</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span style="color: #66D9EF">typedef</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">node</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> value;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">node</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">left;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">node</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">right;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span style="color: #F8F8F2">} Node;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">preorder</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Node </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p)</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) { </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2">; }</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot; %d&quot;</span><span style="color: #F8F8F2">, p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">value);</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span style="color: #F8F8F2">    preorder(p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">left);</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span style="color: #F8F8F2">    preorder(p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">right);</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">inorder</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Node </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p)</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) { </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2">; }</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a><span style="color: #F8F8F2">    inorder(p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">left);</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot; %d&quot;</span><span style="color: #F8F8F2">, p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">value);</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span style="color: #F8F8F2">    inorder(p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">right);</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">postorder</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Node </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p)</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) { </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2">; }</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span style="color: #F8F8F2">    postorder(p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">left);</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span style="color: #F8F8F2">    postorder(p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">right);</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot; %d&quot;</span><span style="color: #F8F8F2">, p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">value);</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35"></a><span style="color: #F8F8F2">    Node nodes[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37"></a><span style="color: #F8F8F2">        nodes[i].value </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span style="color: #F8F8F2">    nodes[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">].left </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">];  nodes[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">].right </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">6</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40"></a><span style="color: #F8F8F2">    nodes[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">].left </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">];  nodes[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">].right </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-12-41" name="__codelineno-12-41"></a><span style="color: #F8F8F2">    nodes[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">].left </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">];  nodes[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">].right </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-12-42" name="__codelineno-12-42"></a><span style="color: #F8F8F2">    nodes[</span><span style="color: #AE81FF">6</span><span style="color: #F8F8F2">].left </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">];  nodes[</span><span style="color: #AE81FF">6</span><span style="color: #F8F8F2">].right </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">9</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-12-43" name="__codelineno-12-43"></a><span style="color: #F8F8F2">    nodes[</span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">].left </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">8</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-12-44" name="__codelineno-12-44"></a>
+<a id="__codelineno-12-45" name="__codelineno-12-45"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;pre:&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-12-46" name="__codelineno-12-46"></a><span style="color: #F8F8F2">    preorder(</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]);</span>
+<a id="__codelineno-12-47" name="__codelineno-12-47"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">in:&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-12-48" name="__codelineno-12-48"></a><span style="color: #F8F8F2">    inorder(</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]);</span>
+<a id="__codelineno-12-49" name="__codelineno-12-49"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">post:&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-12-50" name="__codelineno-12-50"></a><span style="color: #F8F8F2">    postorder(</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">nodes[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]);</span>
+<a id="__codelineno-12-51" name="__codelineno-12-51"></a><span style="color: #F8F8F2">    putchar(</span><span style="color: #E6DB74">&#39;\n&#39;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-12-52" name="__codelineno-12-52"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-12-53" name="__codelineno-12-53"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/14/tree.c">tree.c</a></p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pre: 1 2 3 4 5 6 7 8 9 10
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>in: 4 3 5 2 6 1 9 8 7 10
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>post: 4 5 3 6 2 9 8 10 7 1
+</code></pre></div>
+<p>配列の添字0〜9と，ノードに保存した値1〜10を区別してください．nodes[0]の値は1です．初期化子{0}は，省略したポインタメンバをNULLに初期化します．これはcallocで全ビット0にすることと，型の規則としての説明が異なります．</p>
+<h3 id="83">8.3　停止の前提と寿命<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<p>この関数は，有限で循環のない木を渡すことを前提とします．子を親へつなぎ直すと，NULLへ到達しない経路ができるため，この単純な走査では止まりません．一般のグラフでは，訪問済みかどうかを記録するなど別の仕組みが必要です．循環を作って実行する実験は行いません．</p>
+<p>各ノードはmainの局所配列の要素ですが，走査中はmainも終了していないため有効です．今回はmallocしていないので，ノードへfreeを呼んではいけません．再帰でたどることと，動的確保していることは別です．</p>
+<p>ノード数をN，最長経路上のノード数をhとすると，各実ノードを一度ずつ処理する仕事量はNに比例します．呼び出しの最大深さはhに比例し，NULLの呼び出しも数える場合はh+1です．片側だけに偏る木ではhがNになり，少ない分岐でも深い再帰になり得ます．</p>
+<h2 id="9">9　安全な再帰の確認方法<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<h3 id="91">9.1　停止と資源を別々に調べる<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
+<p>数学的に有限回で止まることと，現実の資源の範囲内で計算できることは別です．nが1ずつ減るから必ず問題ない，とは限りません．数値範囲，呼び出し回数，深さ，1段あたりの領域を分けて確認します．</p>
+<table>
+<thead>
+<tr>
+<th>確認項目</th>
+<th>階乗</th>
+<th>互除法</th>
+<th>木の走査</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基底条件</td>
+<td>n=0</td>
+<td>b=0</td>
+<td>p=NULL</td>
+</tr>
+<tr>
+<td>小さくなるもの</td>
+<td>n</td>
+<td>第2引数b</td>
+<td>たどる部分木</td>
+</tr>
+<tr>
+<td>入力の契約</td>
+<td>0〜20</td>
+<td>非負，両方0でない</td>
+<td>有限，循環なし，有効なノード</td>
+</tr>
+<tr>
+<td>戻って行う処理</td>
+<td>nを掛ける</td>
+<td>値をそのまま返す</td>
+<td>走査順に応じて表示・次の子</td>
+</tr>
+<tr>
+<td>主な注意</td>
+<td>結果のあふれ</td>
+<td>0による剰余</td>
+<td>偏った木の深さ，参照先の寿命</td>
+</tr>
+</tbody>
+</table>
+<h3 id="92">9.2　小さな境界から確かめる<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
+<p>まず基底条件そのもの，次にその1つ手前，通常値，許可した最大値，拒否する値を試します．入力を拒否する経路では，再帰へ入らないことも確認します．表示した値が正しいだけでなく，呼び出しの流れも予測と一致することが重要です．</p>
+<p>意図しない再帰が動き始めた場合には，表示が止まらなくなるまで待たず，Visual Studioの「デバッグの停止」で終了します．スタックオーバーフローの発生回数やエラーメッセージは処理系によって異なります．特定の回数やSegmentation faultという文字列を学習目標にはしません．</p>
+<h3 id="93">9.3　再帰を選ぶ基準<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
+<p>階乗や合計のように反復が簡潔な場合は，反復の方が見通しよく書けることがあります．木や入れ子の構造のように問題自体が再帰的なら，再帰は処理とデータの対応を表しやすくなります．「短いからよい」「再帰だから遅い」と一律に判断せず，正しさ，読みやすさ，重複計算，最大深さの観点で比較しましょう．</p>
+<h2 id="_3">確認問題<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>再帰を止めるためにはどの2点が必要か．</li>
+<li>各呼び出しの仮引数は同じ変数か．</li>
+<li>呼び出し回数と最大の深さは同じか．</li>
+<li>gcdでb==0を剰余計算より先に調べるのはなぜか．</li>
+<li>factorialの掛け算は，再帰呼び出しの前と後のどちらで完成するか．</li>
+<li>static変数は再帰呼び出しごとに独立しているか．</li>
+<li>inorderの出力は，任意の二分木で必ず昇順になるか．</li>
+<li>有限回で停止する再帰なら，どんな入力でも実行して安全か．</li>
+</ol>
+<details class="note">
+<summary>確認の要点</summary>
+<p>基底条件とそこへ近づく変化が必要です．通常の仮引数は呼び出しごとに別ですが，staticやポインタの参照先は共有され得ます．階乗は戻った後に掛け算をし，互除法は0による剰余を先の条件で避けます．分岐する再帰では回数と深さが異なります．inorderは大小関係を保証する二分探索木でなければ昇順とは限りません．停止の証明とは別に，数値と資源の範囲も確認します．</p>
+</details>
+<p><a class="md-button md-button--primary" href="ex14.html">演習へ</a>
+<a href="index.html">全体の目次</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="ex13.html" class="md-footer__link md-footer__link--prev" aria-label="前: 演習：メモリ管理">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                演習：メモリ管理
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="ex14.html" class="md-footer__link md-footer__link--next" aria-label="次: 演習：再帰">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                演習：再帰
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "search.highlight", "search.suggest"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

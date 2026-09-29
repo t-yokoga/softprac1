@@ -1,0 +1,3431 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="C言語を通してプログラミングの基礎を学ぶ講義・演習資料">
+      
+      
+      
+      
+        <link rel="prev" href="ex12.html">
+      
+      
+        <link rel="next" href="ex13.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>第13回 講義：メモリ管理 - プログラミング言語I・ソフトウェア演習I</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="css/custom.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-header__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            プログラミング言語I・ソフトウェア演習I
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第13回 講義：メモリ管理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec01.html" class="md-tabs__link">
+          
+  
+  
+  第1回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec02.html" class="md-tabs__link">
+          
+  
+  
+  第2回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec03.html" class="md-tabs__link">
+          
+  
+  
+  第3回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec04.html" class="md-tabs__link">
+          
+  
+  
+  第4回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec05.html" class="md-tabs__link">
+          
+  
+  
+  第5回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec06.html" class="md-tabs__link">
+          
+  
+  
+  第6回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec07.html" class="md-tabs__link">
+          
+  
+  
+  第7回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec08.html" class="md-tabs__link">
+          
+  
+  
+  第8回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec09.html" class="md-tabs__link">
+          
+  
+  
+  第9回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec10.html" class="md-tabs__link">
+          
+  
+  
+  第10回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec11.html" class="md-tabs__link">
+          
+  
+  
+  第11回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec12.html" class="md-tabs__link">
+          
+  
+  
+  第12回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="lec13.html" class="md-tabs__link">
+          
+  
+  
+  第13回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec14.html" class="md-tabs__link">
+          
+  
+  
+  第14回
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-nav__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    プログラミング言語I・ソフトウェア演習I
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第1回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第1回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第2回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第2回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第3回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            第3回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第4回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            第4回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第5回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            第5回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第6回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            第6回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第7回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            第7回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第8回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            第8回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第9回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            第9回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第10回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            第10回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第11回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            第11回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第12回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            第12回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    第13回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            第13回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    講義：メモリ管理
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="lec13.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：メモリ管理
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      今回の見通し
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 どこまで有効な領域か
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 どこまで有効な領域か">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 ポインタ自身と，指す領域を分ける
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 スタックとヒープの使い分け
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 実行時に個数を決める
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 実行時に個数を決める">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 個数とバイト数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 掛け算の前に調べる理由
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 例：1からnまでの配列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 例：1からnまでの配列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 処理を順番に読む
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 確保した後の終了経路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-free" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 freeと所有権
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 freeと所有権">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 所有と借用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 リークは代入でも起きる
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-callocrealloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 callocとrealloc
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 callocとrealloc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 3つの確保関数の比較
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-realloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 reallocは成功してから持ち替える
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 確保失敗を扱う
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 確保失敗を扱う">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 戻り値が第一の判断材料
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 資源を消費せずに失敗経路を試す
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7 構造体の生成と解放
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 構造体の生成と解放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 動的なメンバを持つ場合
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      8 発展：内部を隠したVector
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 発展：内部を隠したVector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 公開する契約
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 実装だけが中身を知る
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 途中失敗も同じ場所で後始末する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9 スコープ・記憶期間・リンケージ
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 スコープ・記憶期間・リンケージ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-static" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 staticの初期化と代入は別
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-extern" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 externと定義の確認
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 他の言語との比較
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第14回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            第14回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      到達目標
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      今回の見通し
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 どこまで有効な領域か
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 どこまで有効な領域か">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 ポインタ自身と，指す領域を分ける
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 スタックとヒープの使い分け
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 実行時に個数を決める
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 実行時に個数を決める">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 個数とバイト数
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 掛け算の前に調べる理由
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-1n" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 例：1からnまでの配列
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 例：1からnまでの配列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 処理を順番に読む
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 確保した後の終了経路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-free" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 freeと所有権
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 freeと所有権">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 所有と借用
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 リークは代入でも起きる
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-callocrealloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 callocとrealloc
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 callocとrealloc">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 3つの確保関数の比較
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-realloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 reallocは成功してから持ち替える
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 確保失敗を扱う
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 確保失敗を扱う">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 戻り値が第一の判断材料
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 資源を消費せずに失敗経路を試す
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7 構造体の生成と解放
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 構造体の生成と解放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 動的なメンバを持つ場合
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      8 発展：内部を隠したVector
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 発展：内部を隠したVector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 公開する契約
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 実装だけが中身を知る
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 途中失敗も同じ場所で後始末する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9 スコープ・記憶期間・リンケージ
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 スコープ・記憶期間・リンケージ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-static" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 staticの初期化と代入は別
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-extern" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 externと定義の確認
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 他の言語との比較
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="13">第13回　メモリ管理<a class="headerlink" href="#13" title="Permanent link">&para;</a></h1>
+<h2 id="_1">到達目標<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>自動・静的・動的な記憶域の寿命を説明できる．</li>
+<li>必要な個数を検査してmallocし，初期化・使用・freeできる．</li>
+<li>リーク・二重解放・解放後の使用を避けられる．</li>
+<li>callocとreallocを使い分け，失敗時にも元の領域を失わずに処理できる．</li>
+<li>構造体の生成・利用・解放を関数に分け，所有者を説明できる．</li>
+</ul>
+<h2 id="_2">今回の見通し<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>配列の要素数を実行前に固定できない場合や，関数の終了後もデータを残したい場合には，領域の寿命を自分で管理する方法が必要になります．第8・9回のポインタ，第11回の構造体，第12回のモジュール分割を組み合わせ，動的なデータを安全に扱いましょう．</p>
+<p>今回は「確保できたら使う」だけでなく，<strong>誰が初期化し，誰が解放し，失敗したら何を残すか</strong>までを1つの処理として考えます．前半は1本の動的配列，後半は構造体を返す関数と，内部を隠したVectorの例です．WindowsのVisual StudioでC17の.cファイルとして実行します．</p>
+<h2 id="1">1　どこまで有効な領域か<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>変数の名前が使える範囲と，領域の寿命は別の概念です．</p>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>例</th>
+<th>寿命の目安</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自動記憶域</td>
+<td>通常の局所変数・固定長配列</td>
+<td>ブロックの実行中</td>
+</tr>
+<tr>
+<td>静的記憶域</td>
+<td>ファイルスコープの変数・static局所変数</td>
+<td>プログラム全体の実行中</td>
+</tr>
+<tr>
+<td>動的に確保した記憶域</td>
+<td>mallocで得た領域</td>
+<td>確保成功からfree等で解放するまで</td>
+</tr>
+</tbody>
+</table>
+<p>通常の実装では関数呼び出しにスタック，動的確保にヒープが使われます．ただし，Cの言語仕様がすべての変数の物理的な置き場所を固定しているわけではありません．最適化の影響もあるため，まず寿命の規則を理解します．</p>
+<p><code>static int count = 0;</code> を関数内に置くと，名前はその関数のブロック内ですが値は呼び出しの間も保持されます．巨大な局所配列を作れば常に安全，というわけでもありません．</p>
+<h3 id="11">1.1　ポインタ自身と，指す領域を分ける<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>関数の実行中
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  局所変数p [アドレス] ──→ 動的領域 [要素0][要素1][要素2]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>return pで呼び出し元へアドレスを返した後
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>  関数内のpの寿命は終了
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  呼び出し元q [同じアドレス] ──→ 動的領域はまだ有効
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>free(q)の後
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  動的領域の寿命は終了．qや別名から読み書きしない
+</code></pre></div>
+<p>pという<strong>ポインタ変数</strong>が局所変数であることと，pが指す領域が局所変数であることは同じではありません．mallocで確保した領域は，ポインタを持つ関数が戻っても自動では解放されません．逆に，通常の局所配列の先頭アドレスを返しても，その配列の寿命は延びません．</p>
+<p>次は誤りを読むための断片です．実行して結果を確かめる課題にはしません．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #959077">/* 誤った設計：この関数は使用しない */</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">bad_array</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> values[</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> values;</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>valuesは関数から戻ると寿命が終わります．たまたま以前の値が見えたとしても，有効な配列として使える根拠にはなりません．配列を作る関数が必要なら，呼び出し元に領域を用意してもらう方法と，動的確保した領域を返す方法を選びます．前者でも，呼び出し元の配列が生きている間なら別の関数へ渡して使えます．「局所配列は複数の関数で使えない」という意味ではありません．</p>
+<h3 id="12">1.2　スタックとヒープの使い分け<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>観点</th>
+<th>通常の局所配列</th>
+<th>動的に確保した配列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>領域を得る</td>
+<td>配列を定義する</td>
+<td>mallocやcallocを呼ぶ</td>
+</tr>
+<tr>
+<td>寿命の終わり</td>
+<td>宣言したブロックの実行終了</td>
+<td>freeまたはreallocによる解放</td>
+</tr>
+<tr>
+<td>要素数</td>
+<td>この授業では固定長を使う</td>
+<td>実行時の入力から決められる</td>
+</tr>
+<tr>
+<td>サイズの変更</td>
+<td>同じ配列オブジェクトの長さは変えられない</td>
+<td>reallocで別の大きさの領域に更新できる</td>
+</tr>
+<tr>
+<td>管理の負担</td>
+<td>スコープに沿って自動で管理</td>
+<td>失敗・初期化・解放を設計する</td>
+</tr>
+</tbody>
+</table>
+<p>一般にスタックにはヒープとは別の容量制限があります．巨大な局所配列は危険ですが，ヒープなら必ず確保できるわけでもありません．容量はOS，実行形式，設定，残り資源に左右されます．授業では100MBの配列や最大サイズの確保で故意に資源を消費する実験は行いません．小さなデータで管理手順を確かめます．</p>
+<p>アドレスを表示するなら<code>printf("%p", (void *)p);</code>のように型を合わせます．通常のWindowsアプリで見えるのは仮想アドレスで，物理メモリの番地そのものではありません．マイコンなどOSのない環境ではリンカの設定で配置を指定する場合もあります．アドレスの大小だけからスタック・ヒープの位置関係を一般化しないでください．</p>
+<h2 id="2">2　実行時に個数を決める<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<p>mallocは指定したバイト数を確保し，成功なら領域へのポインタ，失敗ならNULLを返します．宣言は <code>&lt;stdlib.h&gt;</code> にあります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">values </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> malloc(n </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">values);</span>
+</code></pre></div>
+<p>Cではmallocの戻り値をint <em>へ明示的にキャストする必要はありません．<code>sizeof *values</code> と書けば，要素の型を変更したときにサイズ指定も追従します．sizeof(int </em>)だとポインタ自体のサイズなので間違いです．</p>
+<p>必ず次の順序で扱います．</p>
+<ol>
+<li>個数が目的に合う範囲か調べる．</li>
+<li>バイト数の掛け算がsize_tの範囲を超えないか調べる．</li>
+<li>mallocの戻り値を確認する．</li>
+<li>各要素を初期化してから読む．</li>
+<li>必要なくなったらfreeする．</li>
+</ol>
+<p><code>n &gt; SIZE_MAX / sizeof *values</code> を先に調べると，掛け算であふれる前に拒否できます．符号付きの負数をsize_tへ変換する前にも検査が必要です．この講義では個数0を拒否し，ゼロサイズ確保の扱いを避けます．</p>
+<h3 id="21">2.1　個数とバイト数<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p>mallocの引数は要素数ではなく<strong>バイト数</strong>で，型はsize_tです．仮にsizeof(int)が4の環境なら，intを5個確保するには20バイトが必要です．ただし4を直接書くのではなくsizeofを使います．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>n = 5，sizeof *values = 4 の場合の概念図
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>values ─→ [ int ][ int ][ int ][ int ][ int ]
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>添字          0      1      2      3      4
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>総バイト数 = 5 × 4 = 20
+</code></pre></div>
+<p><code>values + 1</code>は次のint要素を指します．1バイト先とは限りません．mallocは通常のintや構造体を置くのに適した境界へ整列した領域を返すので，この授業の型では追加の位置調整は不要です．</p>
+<p><code>sizeof values</code>はポインタ変数のサイズです．確保したバイト数は分かりません．<code>sizeof values / sizeof values[0]</code>でも個数を求められません．sizeofによる配列全体の大きさの取得は，式の型が本当に配列である場合の話であり，「同じ関数内にあるか」だけでは決まりません．配列を引数で受け取った関数でも，個数を別に受け取ります．</p>
+<h3 id="22">2.2　掛け算の前に調べる理由<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>size_tは符号なし整数型です．積が表現範囲を超えると，小さな値へ回り込む可能性があります．必要量より小さい領域を確保し，大きな配列だと思って使うと範囲外アクセスになります．<code>n * sizeof *values</code>を計算した後ではなく，除算を使って先に上限を判定します．</p>
+<p><code>(size_t)-1</code>はsize_tの最大値になります．これは負の個数を正しい個数へ直す方法ではありません．負数を先に拒否しないと，極端に大きな要求へ変わってしまうことを示しています．最大値はstdint.hのSIZE_MAXで表せます．</p>
+<p>アプリケーション上の上限（ここでは1000）と，型が表せるバイト数の上限は別です．前者は過剰な資源使用を避けるため，後者は計算の正しさを守るために調べます．両方を満たしても，実際の確保が成功するとは限りません．</p>
+<h2 id="3-1n">3　例：1からnまでの配列<a class="headerlink" href="#3-1n" title="Permanent link">&para;</a></h2>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">dynamic.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-20">20</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-21">21</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-22">22</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-23">23</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-24">24</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-25">25</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-26">26</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-27">27</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-28">28</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-29">29</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-30">30</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-31">31</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-32">32</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-33">33</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-34">34</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-35">35</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-36">36</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-37">37</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-38">38</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-4-39">39</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdlib.h&gt;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdint.h&gt;</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;errno.h&gt;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> argc, </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">argv[])</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (argc </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span style="color: #F8F8F2">        fprintf(stderr, </span><span style="color: #E6DB74">&quot;usage: Dynamic count (1..1000)</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">end;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span style="color: #F8F8F2">    errno </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strtol(argv[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">], </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">end, </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (argv[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> end </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">end </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> errno </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> ERANGE </span><span style="color: #FF4689">||</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a><span style="color: #F8F8F2">        count </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1000</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span style="color: #F8F8F2">        fprintf(stderr, </span><span style="color: #E6DB74">&quot;count must be 1..1000</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2">)count;</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">values </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> SIZE_MAX </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">values) {</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a><span style="color: #F8F8F2">        fprintf(stderr, </span><span style="color: #E6DB74">&quot;size overflow</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a><span style="color: #F8F8F2">    values </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> malloc(n </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">values);</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (values </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a><span style="color: #F8F8F2">        fprintf(stderr, </span><span style="color: #E6DB74">&quot;allocation failed</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> sum </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> n; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a><span style="color: #F8F8F2">        values[i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2">)i </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a><span style="color: #F8F8F2">        sum </span><span style="color: #FF4689">+=</span><span style="color: #F8F8F2"> values[i];</span>
+<a id="__codelineno-4-34" name="__codelineno-4-34"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-4-35" name="__codelineno-4-35"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;n=%zu sum=%lld mean=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, n, sum, (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)sum </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> n);</span>
+<a id="__codelineno-4-36" name="__codelineno-4-36"></a><span style="color: #F8F8F2">    free(values);</span>
+<a id="__codelineno-4-37" name="__codelineno-4-37"></a><span style="color: #F8F8F2">    values </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-4-38" name="__codelineno-4-38"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-39" name="__codelineno-4-39"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/13/dynamic.c">dynamic.c</a></p>
+<p>第10回と同じVisual Studioの「コマンド引数」に5を指定すると，<code>n=5 sum=15 mean=3.0</code> と表示します．nは1〜1000に限定し，合計にはlong longを使います．配列の容量はポインタだけでは分からないため，nを一緒に管理します．</p>
+<p>malloc直後の領域は初期化されていません．前の内容を表示して調べるのではなく，自分で値を設定します．</p>
+<h3 id="31">3.1　処理を順番に読む<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>手順</th>
+<th>確認していること</th>
+<th>失敗した場合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>argcの検査</td>
+<td>個数を表す引数が1つあるか</td>
+<td>確保前に終了</td>
+</tr>
+<tr>
+<td>strtol</td>
+<td>数字があり，末尾まで変換でき，longの範囲内か</td>
+<td>確保前に終了</td>
+</tr>
+<tr>
+<td>countの検査</td>
+<td>1〜1000か</td>
+<td>確保前に終了</td>
+</tr>
+<tr>
+<td>SIZE_MAXによる検査</td>
+<td>バイト数の積を表せるか</td>
+<td>確保前に終了</td>
+</tr>
+<tr>
+<td>mallocとNULL判定</td>
+<td>実際に領域を得られたか</td>
+<td>要素へ触れずに終了</td>
+</tr>
+<tr>
+<td>初期化と集計</td>
+<td>各要素へ書いてから読む</td>
+<td>有効添字は0〜n−1</td>
+</tr>
+<tr>
+<td>free</td>
+<td>所有している領域の利用を終える</td>
+<td>解放後は参照しない</td>
+</tr>
+</tbody>
+</table>
+<p>初期化のループでは，<code>values[i] = ...;</code>の後に<code>sum += values[i];</code>を実行しています．この順序が重要です．最大値n=1000でも要素は1〜1000，合計は500500なので，今回の合計用のlong longの範囲に収まります．</p>
+<p>strtolは先頭の空白や+符号を受け付けます．この例では末尾の余計な文字は拒否します．数値の仕様とメモリの仕様をそれぞれ確認し，たまたま小さい値になったから受け付ける，という処理にしません．</p>
+<h3 id="32">3.2　確保した後の終了経路<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>この例では確保後に失敗する処理がありません．ファイル読み込みなどを追加すると，途中で終了する経路が増えます．その場合には，正常終了の直前だけでなく，<strong>確保後のすべての終了経路</strong>で解放する必要があります．確保前のエラーには解放対象がない，という違いも整理しましょう．</p>
+<h2 id="4-free">4　freeと所有権<a class="headerlink" href="#4-free" title="Permanent link">&para;</a></h2>
+<p>freeには，動的確保で得てまだ解放していない<strong>先頭のポインタ</strong>，またはNULLを渡します．局所配列，文字列リテラル，途中の要素のアドレスは渡せません．</p>
+<table>
+<thead>
+<tr>
+<th>問題</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>メモリリーク</td>
+<td>解放する前に確保した領域へ到達する手段を失う</td>
+</tr>
+<tr>
+<td>二重解放</td>
+<td>同じ領域を2回解放する</td>
+</tr>
+<tr>
+<td>解放後の使用</td>
+<td>寿命の終わった領域へアクセスする</td>
+</tr>
+<tr>
+<td>範囲外アクセス</td>
+<td>確保した個数を超えて読み書きする</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所有者</strong>を「最後に解放する責任を持つ側」として決めると整理できます．関数が動的領域を返すなら，呼び出し側が解放するのかを仕様に書きます．</p>
+<p><code>free(p); p = NULL;</code> はpを誤って再使用しにくくしますが，別のポインタqにも同じアドレスをコピーしていたなら，qは自動ではNULLになりません．別名参照も含めて使わないことが必要です．</p>
+<h3 id="41">4.1　所有と借用<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>確保後                     解放後
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>所有者p ─┐                 p = NULL
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>         ├→ [動的な配列]    [領域の寿命は終了]
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>借用者q ─┘                 qを評価・参照・freeしない
+</code></pre></div>
+<p>例えばmainが配列を確保し，表示関数に渡す場合，表示関数は一時的に借りて読むだけです．表示関数が勝手にfreeすると，mainがその後使えなくなります．反対に，生成関数が新しい配列を返す場合は，呼び出し元へ解放責任を移す仕様にできます．これはCの型だけで自動的に検査される規則ではないので，コメントや関数名でも明示します．</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>意味</th>
+<th>その後の責任</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>q = p;</code></td>
+<td>ポインタ値のコピー</td>
+<td>領域は1つ．所有者を増やしたことにしない</td>
+</tr>
+<tr>
+<td>新しい領域を確保して要素をコピー</td>
+<td>データの複製</td>
+<td>2つの領域をそれぞれ解放する</td>
+</tr>
+<tr>
+<td>ポインタを関数の引数へ渡す</td>
+<td>呼び出し先にも参照を渡す</td>
+<td>借用か所有権移動かを仕様で決める</td>
+</tr>
+<tr>
+<td><code>free(p);</code></td>
+<td>領域の寿命を終える</td>
+<td>どの別名からも使わない</td>
+</tr>
+</tbody>
+</table>
+<p>freeはポインタ変数を書き換える関数ではありません．解放前のポインタ値は解放後には有効な参照として使えず，比較や表示による確認もしません．<code>p = NULL;</code>は以前の値を読み出さずに上書きする操作です．</p>
+<h3 id="42">4.2　リークは代入でも起きる<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p>動的領域を指す唯一のポインタに別のアドレスを代入すると，元の領域へ到達できなくなります．<code>p = NULL;</code>も解放の代わりにはなりません．「ポインタを消す」と「指す領域を解放する」を区別してください．</p>
+<p>mallocが成功した回数だけfreeを書く，という数合わせも不十分です．どの成功した確保に対する解放かを追跡します．free(NULL)は何もしないので安全ですが，未初期化のポインタを渡してよいわけではありません．管理用のポインタは初めにNULLにしておくと，途中失敗時の後始末をまとめやすくなります．</p>
+<p>freeは使用中の領域を再利用可能にする操作であり，その内容を必ず0で消したり，OSへ直ちに返したりする保証ではありません．タスクマネージャーの表示がすぐ減らないことだけで，解放に失敗したとは判断できません．</p>
+<h2 id="5-callocrealloc">5　callocとrealloc<a class="headerlink" href="#5-callocrealloc" title="Permanent link">&para;</a></h2>
+<p>callocは個数と要素サイズを受け，領域の全ビットを0にして確保します．int配列なら0で初期化できます．ただし全ビット0があらゆる型の意味上の0やNULLを表すとは限りません．戻り値と個数の検査は必要です．</p>
+<p>reallocは確保済みの領域のサイズを変更します．場所が移る場合があります．新しいサイズが正の場合，失敗するとNULLを返し，元の領域は残ります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">next </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> realloc(values, new_n </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">values);</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (next </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">    values </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> next;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #F8F8F2">    </span><span style="color: #959077">/* 増えた要素は別途初期化する */</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span style="color: #F8F8F2">    </span><span style="color: #959077">/* 元のvaluesはまだ有効．必要に応じて解放して終了する */</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>この断片の前にnew_n &gt; 0とサイズの積を検査します．成功時は古い別名ポインタや要素へのポインタを使い続けてはいけません．<code>values = realloc(values, ...)</code> と直接代入すると，失敗時に元の領域への唯一の手がかりを失う場合があります．</p>
+<h3 id="51-3">5.1　3つの確保関数の比較<a class="headerlink" href="#51-3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>関数</th>
+<th>主な用途</th>
+<th>内容の初期化</th>
+<th>失敗時</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>malloc(bytes)</td>
+<td>新しく必要量を確保</td>
+<td>行わない</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>calloc(n, size)</td>
+<td>新しく配列を確保</td>
+<td>全ビットを0にする</td>
+<td>NULL</td>
+</tr>
+<tr>
+<td>realloc(p, bytes)</td>
+<td>既存領域の大きさを更新</td>
+<td>元と新しいサイズの小さい方まで保持．増分は未初期化</td>
+<td>正のサイズならNULL，元の領域は有効</td>
+</tr>
+</tbody>
+</table>
+<p>callocでも個数を検査し，戻り値を確認します．ポインタのメンバは必要なら明示的にNULLを代入し，浮動小数点数も型に合う値で初期化すれば，表現への依存を避けられます．</p>
+<h3 id="52-realloc">5.2　reallocは成功してから持ち替える<a class="headerlink" href="#52-realloc" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>失敗： next = NULL       values ─→ 元の領域（まだ有効）
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>成功： next ─→ 新しい領域（移動する場合がある）
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>       values = next    古いポインタや古い要素への参照は使わない
+</code></pre></div>
+<p>成功時は，たとえ見かけ上同じ場所だったとしても，返されたポインタを使って参照を作り直します．元のポインタと返されたポインタの値を比較して「移動したか」を判定する必要はありません．</p>
+<p>縮小した場合は，残る先頭部分だけが有効です．拡張した場合は，増えた部分に値を代入してから読みます．realloc(NULL, 正のサイズ)はmallocに相当しますが，この授業では確保と変更の役割を分けて書きます．サイズ0のreallocはC17でも扱いが複雑なので使用せず，全要素を捨てる場合はfreeしてNULLを代入します．</p>
+<h2 id="6">6　確保失敗を扱う<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1　戻り値が第一の判断材料<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p>メモリ不足は起こりにくいから省略してよい，とは考えません．NULLかどうかを確認する前に<code>p[0]</code>や<code>p-&gt;x</code>を使うと，失敗時に不正なアクセスになります．サイズ検査とNULL検査は異なる問題を防ぎます．</p>
+<p>errnoは関数が失敗の理由を知らせるために使う仕組みです．errno.hで利用できますが，成功時に自動で0へ戻るとは限りません．<strong>errnoだけを見てmallocの成功・失敗を判定しません．</strong> ISO Cではmallocが失敗理由をerrnoへ設定することまで一律には要求されません．MSVCのmallocでは失敗時にENOMEMを設定することが説明されています．<a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/malloc?view=msvc-170">Microsoft：malloc</a></p>
+<p>perrorは現在のerrnoに対応する説明を標準エラー出力へ出し，strerrorは指定したエラー番号の説明文字列を返します．メッセージは環境・言語設定に依存するので，文面の完全一致を正解にしません．失敗直後のerrnoを保存しておけば，別の処理で変わってしまうのを避けられます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #959077">/* MSVCでの診断の断片．pはmallocの戻り値 */</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> saved_errno </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> errno;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #F8F8F2">    fprintf(stderr, </span><span style="color: #E6DB74">&quot;%s: allocation failed (%d)</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, __func__, saved_errno);</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span style="color: #F8F8F2">    </span><span style="color: #959077">/* errnoの設定が保証される環境ならperrorなども利用できる */</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<p>この断片にはstdio.hとerrno.hが必要です．<code>__func__</code>は現在の関数名を表す，C99以降の定義済み識別子です．通常の#defineによるマクロではありません．どの関数で失敗したかを示す診断に使えます．</p>
+<h3 id="62">6.2　資源を消費せずに失敗経路を試す<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p>本当に空きメモリがなくなるまで確保を繰り返す方法は，授業用PCや他の作業へ影響します．代わりに，演習では確保を担当する小さな関数に「試験時だけNULLを返す」分岐を入れます．確認したいのはOSがメモリ不足になる様子ではなく，<strong>失敗した後でプログラムが安全に終了し，確保済みの領域を残さないこと</strong>です．</p>
+<p>関数の内部でreturnすると，その関数から呼び出し元へ戻ります．exitはプログラム全体を終了します．mainからのreturnもプログラム終了につながりますが，普通の生成関数ではNULLなどで失敗を返すと，利用側が回復・表示・後始末を選べます．exitを呼んでも，呼び出し元に書いた後始末の文が順に実行されるわけではありません．</p>
+<h2 id="7">7　構造体の生成と解放<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>Pointのような構造体も<code>malloc(sizeof *p)</code>で1個分を確保できます．成功を確認してから，メンバへ代入します．第11回の複合リテラルを使えば，構造体全体を初期化するように代入できます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #959077">/* Point *pの確保に成功した後の例 */</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (Point){.x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> x, .y </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> y};</span>
+</code></pre></div>
+<p>左辺はpではなく<code>*p</code>です．pはアドレス，*pは確保した構造体本体を表します．局所変数Pointのアドレスを返すのとは異なり，mallocした本体は関数から戻った後も生きています．複合リテラルの値を本体へコピーしているので，一時的な値のアドレスを返しているわけでもありません．</p>
+<h3 id="71">7.1　動的なメンバを持つ場合<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">typedef</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> length;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">data;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span style="color: #F8F8F2">} IntBuffer;</span>
+</code></pre></div>
+<p>この構造体の本体を確保しても，dataの指す配列は自動で作られません．本体と配列を別に確保したなら，解放も別です．配列の確保に失敗した場合には，先に成功した本体の確保を解放する必要があります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>buffer ─→ [ length | data ] ─→ [int][int][int]
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>              本体の確保           配列の確保
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>解放順：dataの指す配列 → bufferの指す本体
+</code></pre></div>
+<p>本体を先にfreeしてから<code>buffer-&gt;data</code>を読むのは解放後の使用です．また，構造体を代入してもポインタメンバの参照先まではコピーされません．2つの構造体が同じ配列を指す場合，両方が所有者のつもりで解放すると二重解放になります．所有権移動，借用，独立したコピーのどれかを決めます．</p>
+<h2 id="8-vector">8　発展：内部を隠したVector<a class="headerlink" href="#8-vector" title="Permanent link">&para;</a></h2>
+<p>第12回の不完全型の説明を，動く3ファイルのプログラムへつなげます．利用側はVectorのメンバを直接触らず，生成・計算・取得・解放の関数を使います．第12回のVectorとは別のプロジェクトにしてください．</p>
+<h3 id="81">8.1　公開する契約<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector.h</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-16">16</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span style="color: #959077">#ifndef PL1_DYNAMIC_VECTOR_H</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span style="color: #959077">#define PL1_DYNAMIC_VECTOR_H</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stddef.h&gt;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span style="color: #66D9EF">typedef</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">vector</span><span style="color: #F8F8F2"> Vector;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span style="color: #959077">/* Successful creation transfers ownership to the caller. */</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span style="color: #F8F8F2">Vector </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">vector_create</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> x, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> y);</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span style="color: #F8F8F2">Vector </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">vector_axpy</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> alpha, </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a, </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b);</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span style="color: #959077">/* On failure, leave *out unchanged. */</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">vector_get</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p, </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> index, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">out);</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span style="color: #959077">/* p may be NULL; *p must be NULL or an owned live Vector. */</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">vector_destroy</span><span style="color: #F8F8F2">(Vector </span><span style="color: #FF4689">**</span><span style="color: #F8F8F2">p);</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a><span style="color: #959077">#endif</span>
+</code></pre></div></td></tr></table></div>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>成功時</th>
+<th>失敗・注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vector_create</td>
+<td>初期化した新しいVectorを返す</td>
+<td>確保失敗ならNULL．成功時は呼び出し元が所有</td>
+</tr>
+<tr>
+<td>vector_axpy</td>
+<td>alpha×a+bを新しく確保して返す</td>
+<td>NULL入力・確保失敗ならNULL．入力は借りるだけ</td>
+</tr>
+<tr>
+<td>vector_get</td>
+<td>指定成分を*outへ保存し1を返す</td>
+<td>NULL・添字範囲外なら0，保存先は変更しない</td>
+</tr>
+<tr>
+<td>vector_destroy</td>
+<td>所有するVectorを解放し，*pをNULLにする</td>
+<td>pがNULLでも何もしない．*pはNULLまたは有効な所有対象</td>
+</tr>
+</tbody>
+</table>
+<p>NULLを検査しても，解放済みのポインタや無関係なアドレスが安全になるわけではありません．渡すポインタの寿命と所有権は呼び出し側で守ります．演習では小さな有限のdouble値を用い，演算のオーバーフローは対象にしません．</p>
+<h3 id="82">8.2　実装だけが中身を知る<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-20">20</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-21">21</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-22">22</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-23">23</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-24">24</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-25">25</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-26">26</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-27">27</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-28">28</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-29">29</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-30">30</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-31">31</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-32">32</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-33">33</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-34">34</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-35">35</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-36">36</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-37">37</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-38">38</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-39">39</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-40">40</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-41">41</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-42">42</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;vector.h&quot;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdlib.h&gt;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span style="color: #66D9EF">struct</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">vector</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> v[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span style="color: #F8F8F2">Vector </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">vector_create</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> x, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> y)</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span style="color: #F8F8F2">    Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> malloc(</span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p);</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (Vector){.v </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {x, y}};</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> p;</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17"></a>
+<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span style="color: #F8F8F2">Vector </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">vector_axpy</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> alpha, </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a, </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b)</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (a </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> b </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> vector_create(alpha </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> a</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> b</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">v[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">],</span>
+<a id="__codelineno-13-24" name="__codelineno-13-24"></a><span style="color: #F8F8F2">                         alpha </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> a</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> b</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">v[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">]);</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26"></a>
+<a id="__codelineno-13-27" name="__codelineno-13-27"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">vector_get</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p, </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> index, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">out)</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> index </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> out </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">out </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> p</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">v[index];</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-13-35" name="__codelineno-13-35"></a>
+<a id="__codelineno-13-36" name="__codelineno-13-36"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">vector_destroy</span><span style="color: #F8F8F2">(Vector </span><span style="color: #FF4689">**</span><span style="color: #F8F8F2">p)</span>
+<a id="__codelineno-13-37" name="__codelineno-13-37"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-13-38" name="__codelineno-13-38"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (p </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-13-39" name="__codelineno-13-39"></a><span style="color: #F8F8F2">        free(</span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p);</span>
+<a id="__codelineno-13-40" name="__codelineno-13-40"></a><span style="color: #F8F8F2">        </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-13-41" name="__codelineno-13-41"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-13-42" name="__codelineno-13-42"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p>struct vectorの定義はvector.cだけにあります．そのため，sizeof *pやp-&gt;vを使えるのは中身を知る実装側です．利用側では<code>Vector *</code>を宣言できますが，Vectorの実体をローカルに作ることや，そのサイズの取得はできません．</p>
+<p>vector_destroyへは<code>&amp;x</code>のように<strong>ポインタ変数のアドレス</strong>を渡します．Vector <em><em>pから</em>pを変更すると，呼び出し元のxもNULLになります．単にVector </em>を引数に取り，その局所的なコピーへNULLを代入するだけでは，呼び出し元は変わりません．</p>
+<h3 id="83">8.3　途中失敗も同じ場所で後始末する<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector_main.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-20">20</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-21">21</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-22">22</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-23">23</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-24">24</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-25">25</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-26">26</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-27">27</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-28">28</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-29">29</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-30">30</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-31">31</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-32">32</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-33">33</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-34">34</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-35">35</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-36">36</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-37">37</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-38">38</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-39">39</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-40">40</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&quot;vector.h&quot;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span style="color: #F8F8F2">    Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span style="color: #F8F8F2">    Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">y </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span style="color: #F8F8F2">    Vector </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> status </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> first, second;</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span style="color: #F8F8F2">    x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> vector_create(</span><span style="color: #AE81FF">1.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (x </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span style="color: #F8F8F2">        fputs(</span><span style="color: #E6DB74">&quot;allocation failed</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, stderr);</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">goto</span><span style="color: #F8F8F2"> cleanup;</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17"></a><span style="color: #F8F8F2">    y </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> vector_create(</span><span style="color: #AE81FF">3.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">4.0</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (y </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span style="color: #F8F8F2">        fputs(</span><span style="color: #E6DB74">&quot;allocation failed</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, stderr);</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">goto</span><span style="color: #F8F8F2"> cleanup;</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22"></a><span style="color: #F8F8F2">    result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> vector_axpy(</span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">, x, y);</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (result </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> NULL) {</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24"></a><span style="color: #F8F8F2">        fputs(</span><span style="color: #E6DB74">&quot;allocation failed</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, stderr);</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">goto</span><span style="color: #F8F8F2"> cleanup;</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (</span><span style="color: #FF4689">!</span><span style="color: #F8F8F2">vector_get(result, </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">, </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">first) </span><span style="color: #FF4689">||</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28"></a><span style="color: #F8F8F2">        </span><span style="color: #FF4689">!</span><span style="color: #F8F8F2">vector_get(result, </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">, </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">second)) {</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29"></a><span style="color: #F8F8F2">        fputs(</span><span style="color: #E6DB74">&quot;invalid access</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, stderr);</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">goto</span><span style="color: #F8F8F2"> cleanup;</span>
+<a id="__codelineno-14-31" name="__codelineno-14-31"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;result=%.1f %.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, first, second);</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33"></a><span style="color: #F8F8F2">    status </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-34" name="__codelineno-14-34"></a>
+<a id="__codelineno-14-35" name="__codelineno-14-35"></a><span style="color: #F8F8F2">cleanup:</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36"></a><span style="color: #F8F8F2">    vector_destroy(</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">result);</span>
+<a id="__codelineno-14-37" name="__codelineno-14-37"></a><span style="color: #F8F8F2">    vector_destroy(</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">y);</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38"></a><span style="color: #F8F8F2">    vector_destroy(</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">x);</span>
+<a id="__codelineno-14-39" name="__codelineno-14-39"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> status;</span>
+<a id="__codelineno-14-40" name="__codelineno-14-40"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/13/vector.h">vector.h</a> ／ <a download="download" href="sample/13/vector.c">vector.c</a> ／ <a download="download" href="sample/13/vector_main.c">vector_main.c</a></p>
+<p>2x+y=(5,8)なので，出力は<code>result=5.0 8.0</code>です．x，y，resultはそれぞれ別の領域を所有します．3回目の確保に失敗したら，resultはNULLですがxとyはすでに確保済みです．まとめて後始末する経路が必要になります．</p>
+<p><code>cleanup:</code>はラベル，<code>goto cleanup;</code>はそのラベルへ制御を移す文です．ここでは複数の失敗箇所から<strong>最後の後始末へ進む用途に限定</strong>しています．すべての所有ポインタを最初にNULLで初期化し，必要な変数も先に宣言しています．初期化を飛び越えて未定義の変数を使うような飛び方はしません．</p>
+<p>statusの初期値は失敗を表す1です．すべて成功した場合だけ0へ変え，後始末の後に返します．free(NULL)が安全なので，まだ作られていないオブジェクトも同じ後始末へ渡せます．解放責任をまとめることで，returnの追加による解放漏れを防ぎやすくなります．</p>
+<h2 id="9">9　スコープ・記憶期間・リンケージ<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<p>同じstaticやexternでも，「いつまで値があるか」と「どこから名前を使えるか」を混同しないようにします．</p>
+<table>
+<thead>
+<tr>
+<th>宣言の例</th>
+<th>名前の見える範囲・結び付き</th>
+<th>記憶期間</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>関数内の<code>int n = 0;</code></td>
+<td>宣言したブロック内，リンケージなし</td>
+<td>自動</td>
+</tr>
+<tr>
+<td>関数内の<code>static int n = 0;</code></td>
+<td>宣言したブロック内，リンケージなし</td>
+<td>静的</td>
+</tr>
+<tr>
+<td>ファイルスコープの<code>int total = 0;</code></td>
+<td>通常は外部リンケージ．他の.cからは適切な宣言が必要</td>
+<td>静的</td>
+</tr>
+<tr>
+<td>ファイルスコープの<code>static int total = 0;</code></td>
+<td>内部リンケージ．同じ翻訳単位内</td>
+<td>静的</td>
+</tr>
+<tr>
+<td><code>extern int total;</code></td>
+<td>既存の定義を参照する宣言</td>
+<td>参照するオブジェクトに従う</td>
+</tr>
+</tbody>
+</table>
+<h3 id="91-static">9.1　staticの初期化と代入は別<a class="headerlink" href="#91-static" title="Permanent link">&para;</a></h3>
+<p>関数内の<code>static int count = 0;</code>は，関数を呼ぶたびに0を代入する処理ではありません．Cでは静的記憶期間のオブジェクトはプログラム開始前に一度初期化されます．「関数が初めて呼ばれたときに初期化する」というC++の一部の規則と混同しないでください．<a href="https://learn.microsoft.com/en-us/cpp/c-language/lifetime?view=msvc-170">Microsoft：Cの寿命</a></p>
+<p>一方，<code>static int count;</code>とした後，普通の文として<code>count = 0;</code>を書けば，その代入は呼ぶたびに実行されます．staticを外した通常の局所変数の初期化とも比較すると違いが分かります．静的記憶期間の整数は明示的な初期化子がなければ0になりますが，通常の局所変数には同じ規則を期待できません．</p>
+<h3 id="92-extern">9.2　externと定義の確認<a class="headerlink" href="#92-extern" title="Permanent link">&para;</a></h3>
+<p>第12回と同じく，ヘッダに<code>extern int total;</code>，1つの.cに<code>int total = 0;</code>を置きます．他の.cに定義があっても，宣言なしに使えるわけではありません．逆に全ファイルがextern宣言だけなら，実体を定義していないため，使用箇所のリンクで解決できません．</p>
+<p>externと初期化子を組み合わせたファイルスコープの宣言は，宣言だけではなく定義になります．本講義ではヘッダを宣言のみに保つため，その書き方を使いません．また，ファイルスコープの<code>int total;</code>は仮定義であり，単なるextern宣言の代用にはしません．同じ翻訳単位で<code>int total = 1024;</code>の後に<code>int total;</code>があっても，初期値は1024です．異なる翻訳単位に仮定義をばらまく設計にはしないでください．</p>
+<h3 id="93">9.3　他の言語との比較<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
+<p>Cでは，動的領域の所有者と解放のタイミングを自分で管理します．Pythonなどでは参照の管理やガベージコレクションによって自動管理され，Rustでは所有権を型や言語の規則として扱います．どの方式にも利点と制約があります．自動管理ならファイルなどすべての資源管理を考えなくてよい，という意味ではありません．第15回で言語ごとの考え方を比較します．</p>
+<h2 id="_3">確認問題<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>malloc直後に要素を読んでよいか．</li>
+<li>sizeofポインタとsizeof要素のどちらで確保量を計算するか．</li>
+<li>free後に1つの変数をNULLへ変えるだけで，すべての別名が安全になるか．</li>
+<li>局所的なポインタ変数の寿命と，mallocした領域の寿命は同じか．</li>
+<li>reallocが正のサイズへの変更に失敗したとき，元の領域はどうなるか．</li>
+<li>3つ目のオブジェクトの確保に失敗した場合，先に確保した2つを誰が解放するか．</li>
+<li><code>static int count = 0;</code>と，static宣言後の<code>count = 0;</code>の違いは何か．</li>
+<li>callocでポインタを含む構造体を確保しただけで，すべての意味上の初期値を保証できるか．</li>
+</ol>
+<details class="note">
+<summary>確認の要点</summary>
+<p>mallocした領域は初期化してから読みます．確保量は個数×要素サイズであり，ポインタサイズから個数を復元できません．別名参照は解放後に使わず，正のサイズへのrealloc失敗時は元の領域を保持します．各終了経路の所有者が解放し，局所的なポインタ変数が消えることを自動解放だと思わないようにします．staticの初期化と通常の代入も別です．callocは全ビット0であり，型の意味に合わせた初期化とは区別します．</p>
+</details>
+<p><a class="md-button md-button--primary" href="ex13.html">演習へ</a>
+<a href="index.html">全体の目次</a></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="ex12.html" class="md-footer__link md-footer__link--prev" aria-label="前: 演習：コンパイル">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                演習：コンパイル
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="ex13.html" class="md-footer__link md-footer__link--next" aria-label="次: 演習：メモリ管理">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                演習：メモリ管理
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "search.highlight", "search.suggest"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>

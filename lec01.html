@@ -1,0 +1,2985 @@
+
+<!doctype html>
+<html lang="ja" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="C言語を通してプログラミングの基礎を学ぶ講義・演習資料">
+      
+      
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="ex01.html">
+      
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.19">
+    
+    
+      
+        <title>第1回 講義：プログラミングの基礎 - プログラミング言語I・ソフトウェア演習I</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="css/custom.css">
+    
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          コンテンツにスキップ
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-header__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            プログラミング言語I・ソフトウェア演習I
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              第1回 講義：プログラミングの基礎
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="検索">
+        
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            検索を初期化
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="index.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="lec01.html" class="md-tabs__link">
+          
+  
+  
+  第1回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec02.html" class="md-tabs__link">
+          
+  
+  
+  第2回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec03.html" class="md-tabs__link">
+          
+  
+  
+  第3回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec04.html" class="md-tabs__link">
+          
+  
+  
+  第4回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec05.html" class="md-tabs__link">
+          
+  
+  
+  第5回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec06.html" class="md-tabs__link">
+          
+  
+  
+  第6回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec07.html" class="md-tabs__link">
+          
+  
+  
+  第7回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec08.html" class="md-tabs__link">
+          
+  
+  
+  第8回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec09.html" class="md-tabs__link">
+          
+  
+  
+  第9回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec10.html" class="md-tabs__link">
+          
+  
+  
+  第10回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec11.html" class="md-tabs__link">
+          
+  
+  
+  第11回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec12.html" class="md-tabs__link">
+          
+  
+  
+  第12回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec13.html" class="md-tabs__link">
+          
+  
+  
+  第13回
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="lec14.html" class="md-tabs__link">
+          
+  
+  
+  第14回
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="index.html" title="プログラミング言語I・ソフトウェア演習I" class="md-nav__button md-logo" aria-label="プログラミング言語I・ソフトウェア演習I" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    プログラミング言語I・ソフトウェア演習I
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    第1回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            第1回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    講義：プログラミングの基礎
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="lec01.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1．プログラミングとは
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      2．作業を始める前に
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2．作業を始める前に">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visual-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Studioの役割
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guicli" class="md-nav__link">
+    <span class="md-ellipsis">
+      GUIとCLI：操作を伝える方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      作業用フォルダ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ファイル・フォルダとパス
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hello" class="md-nav__link">
+    <span class="md-ellipsis">
+      3．最初のCプログラム
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3．最初のCプログラム">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      プロジェクトを作成する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      hello.cを追加する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cとしてビルドする設定
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      ビルドする
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      実行する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4c" class="md-nav__link">
+    <span class="md-ellipsis">
+      4．Cプログラムの構造
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4．Cプログラムの構造">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#include" class="md-nav__link">
+    <span class="md-ellipsis">
+      #include：必要な宣言を読み込む
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main：プログラムの入口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      printf：文字列を表示する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return" class="md-nav__link">
+    <span class="md-ellipsis">
+      return：処理を終える
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      インデントとコメント
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5．表示を変えてみる
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5．表示を変えてみる">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      編集してからもう一度ビルドする
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      改行や特殊な文字
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      6．エラーメッセージを読む
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6．エラーメッセージを読む">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      エラーと警告
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      うまくいかないときの確認順序
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7．まとめ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex01.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：プログラミングの基礎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第2回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            第2回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex02.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：変数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第3回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            第3回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex03.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：演算子
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第4回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            第4回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex04.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：制御構造
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第5回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            第5回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex05.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：配列と関数
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第6回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            第6回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex06.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：文字列
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第7回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            第7回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex07.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：入出力
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第8回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            第8回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex08.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第9回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            第9回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex09.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ポインタ2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_11" id="__nav_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第10回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_11">
+            <span class="md-nav__icon md-icon"></span>
+            第10回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex10.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：ファイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_12" id="__nav_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第11回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_12">
+            <span class="md-nav__icon md-icon"></span>
+            第11回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex11.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：構造体
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_13" id="__nav_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第12回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_13">
+            <span class="md-nav__icon md-icon"></span>
+            第12回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex12.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：コンパイル
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第13回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            第13回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex13.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：メモリ管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_15" id="__nav_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    第14回
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_15">
+            <span class="md-nav__icon md-icon"></span>
+            第14回
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="lec14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    講義：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ex14.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    演習：再帰
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目次">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1．プログラミングとは
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      2．作業を始める前に
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2．作業を始める前に">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visual-studio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visual Studioの役割
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#guicli" class="md-nav__link">
+    <span class="md-ellipsis">
+      GUIとCLI：操作を伝える方法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      作業用フォルダ
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      ファイル・フォルダとパス
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hello" class="md-nav__link">
+    <span class="md-ellipsis">
+      3．最初のCプログラム
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3．最初のCプログラム">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      プロジェクトを作成する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#helloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      hello.cを追加する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cとしてビルドする設定
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      ビルドする
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      実行する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4c" class="md-nav__link">
+    <span class="md-ellipsis">
+      4．Cプログラムの構造
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4．Cプログラムの構造">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#include" class="md-nav__link">
+    <span class="md-ellipsis">
+      #include：必要な宣言を読み込む
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main：プログラムの入口
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#printf" class="md-nav__link">
+    <span class="md-ellipsis">
+      printf：文字列を表示する
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return" class="md-nav__link">
+    <span class="md-ellipsis">
+      return：処理を終える
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      インデントとコメント
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5．表示を変えてみる
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5．表示を変えてみる">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      編集してからもう一度ビルドする
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      改行や特殊な文字
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      6．エラーメッセージを読む
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6．エラーメッセージを読む">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      エラーと警告
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      うまくいかないときの確認順序
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      7．まとめ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      確認問題
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1">第1回　プログラミングの基礎<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<p>今回は，WindowsのVisual Studioを使ってC言語のプログラムを作成し，ビルドして実行するまでの流れを学びます．
+最初のプログラムは，画面に <code>Hello, world!</code> と表示する短いものです．
+ファイルの場所，ビルドの意味，プログラムの構造を理解することが，これからの学習の土台になります．</p>
+<div class="admonition abstract">
+<p class="admonition-title">到達目標</p>
+<ul>
+<li>ソースファイルと実行ファイルを区別できる．</li>
+<li>Visual StudioでCのプロジェクトを作成し，ビルド・実行できる．</li>
+<li>短いCプログラムの構造を説明できる．</li>
+<li>エラーの場所を調べ，修正して再実行できる．</li>
+</ul>
+</div>
+<h2 id="1_1">1．プログラミングとは<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
+<p>プログラムは，コンピュータに実行させたい処理を記述したものです．
+例えば，測定データの平均を計算する，文字列を検索する，画面に図形を表示する，といった処理をプログラムとして表せます．</p>
+<p>プログラミングでは，おおまかに次の作業を行います．</p>
+<ol>
+<li><strong>何をしたいかを決める</strong>：入力と，得たい結果を整理する．</li>
+<li><strong>手順を考える</strong>：必要な処理を，小さな処理の組み合わせとして表す．</li>
+<li><strong>コードを書く</strong>：プログラミング言語の規則に従って記述する．</li>
+<li><strong>実行して確かめる</strong>：期待した結果になるかを調べ，必要なら修正する．</li>
+</ol>
+<p>この講義では <strong>C言語</strong> を使います．C言語では，値の型やメモリの扱いを意識しながらプログラムを組み立てます．
+今回はその入口として，コードを書いて実行する流れを身に付けましょう．</p>
+<h2 id="environment">2．作業を始める前に<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h2>
+<h3 id="visual-studio">Visual Studioの役割<a class="headerlink" href="#visual-studio" title="Permanent link">&para;</a></h3>
+<p><strong>Visual Studio</strong> は，エディタ，コンパイラ，デバッガなどをまとめて利用できる <strong>統合開発環境（IDE）</strong> です．
+この講義では，Windows版のVisual Studioと，そのC/C++コンパイラである <strong>MSVC</strong> を使います．</p>
+<table>
+<thead>
+<tr>
+<th>道具・機能</th>
+<th>役割</th>
+<th>今回行うこと</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Visual Studioのエディタ</td>
+<td>ソースコードを編集・保存する</td>
+<td><code>hello.c</code> を作成する</td>
+</tr>
+<tr>
+<td>コンパイラなどのビルドツール</td>
+<td>ソースコードから実行ファイルを作る</td>
+<td>プロジェクトをビルドする</td>
+</tr>
+<tr>
+<td>コンソール画面</td>
+<td>プログラムの文字入出力を表示する</td>
+<td><code>Hello, world!</code> を確認する</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">必要な機能の確認</p>
+<p>Visual Studioに <strong>「C++によるデスクトップ開発」</strong> が導入されていることを確認してください．C言語もこの機能で扱います．
+「空のプロジェクト」が見つからない場合は，Visual Studio Installerで導入状況を確認します．授業用PCでは，教員の案内に従ってください．</p>
+<p>この資料の言語設定はC17です．C17を選べるMSVCを使います（Visual Studio 2019ではバージョン16.8以降）．メニューの表記はバージョンによって多少異なります．</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Visual StudioとVisual Studio Codeは別のアプリケーション</p>
+<p>この講義で使うのは <strong>Visual Studio</strong> です．Visual Studio Code（VS Code）の画面とは操作が異なります．</p>
+</div>
+<h3 id="guicli">GUIとCLI：操作を伝える方法<a class="headerlink" href="#guicli" title="Permanent link">&para;</a></h3>
+<p><strong>GUI（Graphical User Interface）</strong> は，ボタンやメニューなどを画面上で選んで操作する方法です．エクスプローラーでフォルダを開くことや，Visual Studioのメニューからビルドすることが該当します．</p>
+<p><strong>CLI（Command Line Interface）</strong> は，文字で書いた命令（コマンド）を入力して操作する方法です．コマンドには，行いたい処理の名前に加えて，対象のファイルや動作を指定する情報を渡します．同じ操作を繰り返したり，一連の処理を自動化したりするときに役立ちます．</p>
+<p>GUIとCLIは，コンピュータへ指示を伝える方法の違いです．どちらでもファイルの操作やビルドを行えます．<strong>この授業ではVisual StudioのGUIで操作し，コマンド入力の実習は行いません．</strong> また，自作プログラムの文字が表示されるコンソール画面と，操作用のコマンドを入力する画面は，役割を区別してください．</p>
+<h3 id="_1">作業用フォルダ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>エクスプローラーで，自分が保存できる場所に <code>PL1</code> フォルダを作成し，その中に <code>week01</code> フォルダを作成してください．
+この <code>week01</code> を，第1回の作業場所にします．例えば，ドキュメントフォルダの中に作成してかまいません．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>PL1/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── week01/
+</code></pre></div>
+<p>エクスプローラーのアドレスバーから，<code>week01</code> の <strong>実際のフルパス</strong> を確認しておきましょう．
+ユーザ名や，OneDriveを利用しているかどうかによって，パスは異なります．</p>
+<h3 id="_2">ファイル・フォルダとパス<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p><strong>ファイル</strong>は，ソースコードなどのデータを保存する単位です．<strong>フォルダ（ディレクトリ）</strong> は，ファイルや別のフォルダをまとめる入れ物です．hello.cの.cは<strong>拡張子</strong>で，ファイルの種類を見分ける手掛かりになります．ソースファイル.cと，ビルドで作られる実行ファイル.exeは別のファイルです．</p>
+<p>ファイルやフォルダの場所を表す文字列を<strong>パス</strong>と呼びます．次は説明用の配置です．実際のプロジェクトの配置とは異なる場合があります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>C:\Users\student\Documents\PL1\
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── week01\
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│   └── hello.c
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>└── week02\
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    └── area.c
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>例</th>
+<th>読み方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>絶対パス（フルパス）</td>
+<td><code>C:\Users\student\Documents\PL1\week01\hello.c</code></td>
+<td>ドライブからたどって場所を指定する</td>
+</tr>
+<tr>
+<td>相対パス</td>
+<td><code>week01\hello.c</code></td>
+<td>基準がPL1フォルダなら，その下のweek01にあるhello.c</td>
+</tr>
+<tr>
+<td>相対パス</td>
+<td><code>.\hello.c</code></td>
+<td>基準フォルダ自身（.）にあるhello.c</td>
+</tr>
+<tr>
+<td>相対パス</td>
+<td><code>..\week02\area.c</code></td>
+<td>基準がweek01なら，親フォルダ（..）に戻り，week02のarea.cへ進む</td>
+</tr>
+</tbody>
+</table>
+<p>相対パスは，<strong>どのフォルダを基準にするか</strong>で指す場所が変わります．プログラム実行時の基準を<strong>作業ディレクトリ</strong>と呼び，ソースファイルの保存先と常に同じとは限りません．ファイルをプログラムから開く際の設定は第10回で扱います．ここでは，ファイル名だけでなく保存場所も確認する習慣を付けましょう．</p>
+<div class="admonition note">
+<p class="admonition-title">パスの表記</p>
+<p>Windowsのパスの区切りにはバックスラッシュを使います．表示環境によっては円記号に見えることがあります．上の例は場所を説明する表記であり，Cの文字列リテラルではありません．Cの文字列に書く場合のエスケープは，後の節で扱います．</p>
+</div>
+<h2 id="hello">3．最初のCプログラム<a class="headerlink" href="#hello" title="Permanent link">&para;</a></h2>
+<h3 id="_3">プロジェクトを作成する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>Visual Studioでは，プログラムのファイルとビルド設定を <strong>プロジェクト</strong> としてまとめます．
+プロジェクトをまとめて管理する単位を <strong>ソリューション</strong> と呼びます．まずは，1つのソリューションに1つのプロジェクトを作ります．</p>
+<ol>
+<li>Visual Studioを起動し，<strong>「新しいプロジェクトの作成」</strong> を選ぶ．既に起動している場合は，「ファイル → 新規作成 → プロジェクト」を選ぶ．</li>
+<li>検索欄で <strong>「空のプロジェクト」</strong> を探す．<strong>C++／Windowsの空のプロジェクト</strong> を選ぶ．</li>
+<li>プロジェクト名を <strong><code>HelloC</code></strong> とし，「場所」に先ほどの <code>week01</code> を指定する．</li>
+<li><strong>「ソリューションとプロジェクトを同じディレクトリに配置する」</strong> にチェックを入れ，作成する．</li>
+</ol>
+<p>この設定では，<code>week01</code> の下に <code>HelloC</code> フォルダが作られ，その中でプロジェクトを管理します．</p>
+<div class="admonition tip">
+<p class="admonition-title">テンプレートはC++でも，作成するソースはC</p>
+<p>Visual Studioでは，C言語のプログラムもC++のプロジェクト機能で管理します．次の手順で拡張子を <strong><code>.c</code></strong> にし，Cとしてコンパイルする設定を確認します．
+C++用の <code>.cpp</code> のままにしないでください．</p>
+</div>
+<h3 id="helloc">hello.cを追加する<a class="headerlink" href="#helloc" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>ソリューション エクスプローラー</strong> の「ソース ファイル」を右クリックする．表示されていなければ「表示 → ソリューション エクスプローラー」を開く．</li>
+<li><strong>「追加 → 新しい項目」</strong> を選ぶ．</li>
+<li>「C++ファイル（.cpp）」を選び，<strong>名前を <code>hello.c</code> に変更して</strong>追加する．簡易入力欄が出る場合も，ファイル名を <code>hello.c</code> にする．</li>
+<li>次のコードを入力し，<strong>Ctrl+S</strong> で保存する．</li>
+</ol>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-1">1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-2">2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-3">3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-4">4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-5">5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-6">6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-7">7</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;Hello, world!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/01/hello.c">サンプルファイルをダウンロード</a></p>
+<p>人が読める形で書かれたプログラムを <strong>ソースコード</strong>，保存したファイルを <strong>ソースファイル</strong> と呼びます．
+ファイル名が <code>hello.c</code> であることを確認してください．<code>hello.cpp</code> や <code>hello.c.txt</code> とは異なります．</p>
+<h3 id="c">Cとしてビルドする設定<a class="headerlink" href="#c" title="Permanent link">&para;</a></h3>
+<p>ソリューションではなく，<strong>プロジェクト <code>HelloC</code></strong> を右クリックして「プロパティ」を開きます．上部の「構成」を「すべての構成」，「プラットフォーム」を「すべてのプラットフォーム」にして，次の項目を確認・設定します．</p>
+<table>
+<thead>
+<tr>
+<th>設定場所</th>
+<th>項目</th>
+<th>設定値</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C/C++ → 詳細設定</td>
+<td>コンパイル言語</td>
+<td>Cコードとしてコンパイル（<code>/TC</code>）</td>
+</tr>
+<tr>
+<td>C/C++ → 言語</td>
+<td>C言語標準</td>
+<td>ISO C17標準（<code>/std:c17</code>）</td>
+</tr>
+<tr>
+<td>C/C++ → 全般</td>
+<td>警告レベル</td>
+<td>レベル4（<code>/W4</code>）</td>
+</tr>
+</tbody>
+</table>
+<p>「適用」または「OK」で保存します．C言語標準の項目がなければ，使用しているVisual Studioやツールセットを確認してください．
+<code>/TC</code> はこのプロジェクトをC専用にする設定です．新しい課題のプロジェクトでも同様に設定します．</p>
+<h3 id="_4">ビルドする<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>「ビルド → ソリューションのビルド」</strong> を選びます（通常のショートカットは <strong>Ctrl+Shift+B</strong>）．</p>
+<p>ソースコードをコンピュータが実行できる形へ翻訳することを <strong>コンパイル</strong> と呼びます．
+<strong>ビルド</strong> は，コンパイルや必要なコードを結び付けるリンクなどを行い，実行ファイルを作る作業です．詳しい処理段階は第12回で学びます．</p>
+<p>「出力」ウィンドウの表示対象を「ビルド」にすると，処理結果を確認できます．見つからない場合は「表示 → 出力」を開いてください．
+<strong>成功し，失敗したプロジェクトがないこと</strong>を確認します．警告が出ていれば，その内容も読んでください．</p>
+<div class="admonition note">
+<p class="admonition-title">実行ファイルはどこにできるか</p>
+<p>作成されるファイルは，通常 <strong><code>HelloC.exe</code></strong> です．出力先はビルド構成により異なり，例えば <code>x64\Debug</code> などのフォルダになります．
+<strong>ビルドの出力に表示される <code>.exe</code> のフルパス</strong>を確認してください．ソースと同じ場所にできるとは限りません．</p>
+</div>
+<h3 id="_5">実行する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>「デバッグ → デバッグなしで開始」</strong> を選びます（<strong>Ctrl+F5</strong>）．
+コンソール画面に，次の内容が表示されます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Hello, world!
+</code></pre></div>
+<p>Visual Studioが，終了コードや「何かキーを押してください」といった案内を追加で表示する場合があります．それらは，今回の <code>printf</code> が表示した文字列とは別です．確認後，コンソールを閉じます．</p>
+<div class="build-flow" role="img" aria-label="hello.cをビルドしてHelloC.exeを作り，実行するとHello, world!が表示される">
+  <div class="stage"><strong>hello.c</strong><span>ソースファイル</span></div>
+  <div class="arrow">ビルド<b aria-hidden="true">→</b></div>
+  <div class="stage"><strong>HelloC.exe</strong><span>実行ファイル</span></div>
+  <div class="arrow">実行<b aria-hidden="true">→</b></div>
+  <div class="stage"><strong>Hello, world!</strong><span>プログラムの出力</span></div>
+</div>
+
+<p><strong>ソースを保存する操作，実行ファイルを作る操作，作ったプログラムを動かす操作は，それぞれ別です．</strong>
+Visual Studioが実行前にビルドを自動で行う場合もありますが，最初は各段階の結果を確認しましょう．</p>
+<h2 id="4c">4．Cプログラムの構造<a class="headerlink" href="#4c" title="Permanent link">&para;</a></h2>
+<h3 id="include">#include：必要な宣言を読み込む<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+</code></pre></div>
+<p><code>stdio.h</code> は標準入出力に関する <strong>ヘッダ</strong> です．この例では，後で使う <code>printf</code> の宣言を利用できるようにします．
+<code>#include</code> は，コンパイルに先立つ前処理の指示です．末尾にセミコロンは付けません．</p>
+<h3 id="main">main：プログラムの入口<a class="headerlink" href="#main" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> main(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+</code></pre></div>
+<p>今回のような通常のCプログラムは，<code>main</code> 関数から処理を始めます．
+<code>int</code> は整数を返すこと，<code>void</code> はここでは引数を受け取らないことを表します．
+関数を自分で定義する方法は第5回で学びます．まずはこの形を使ってください．</p>
+<p><code>{</code> と <code>}</code> で囲まれた部分に，実行する処理を書きます．今回の例では，表示を行ってから終了します．</p>
+<h3 id="printf">printf：文字列を表示する<a class="headerlink" href="#printf" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;Hello, world!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+</code></pre></div>
+<p><code>printf</code> は，指定した内容を標準出力へ書き出す関数です．この実行例では，標準出力はコンソール画面につながっています．
+<code>"..."</code> で囲んだものを <strong>文字列リテラル</strong> と呼びます．最後の <code>\n</code> は改行を表します．</p>
+<p>関数を呼び出す式などの末尾に <code>;</code> を置くと，1つの文になります．
+<strong>すべての行末に <code>;</code> を付けるわけではありません</strong>．<code>#include</code> や，ここでの <code>main</code> の宣言部分，開き波括弧の行には付けません．</p>
+<h3 id="return">return：処理を終える<a class="headerlink" href="#return" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+</code></pre></div>
+<p><code>return</code> は関数の処理を終え，値を返します．
+<code>main</code> から <code>0</code> を返すと，プログラムが正常に終了したことを実行環境へ伝えます．画面に数字の <code>0</code> を表示する命令ではありません．</p>
+<h3 id="_6">インデントとコメント<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>波括弧の内側を字下げすると，処理のまとまりが読み取りやすくなります．この資料では，基本的に半角空白4つ分の <strong>インデント</strong> を使います．
+また，コードの意味を説明する文章を <strong>コメント</strong> として書けます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #959077">// これは行末までのコメントです．</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #959077">/* この書き方では，囲まれた部分がコメントです． */</span>
+</code></pre></div>
+<p>コメントの文章自体が，画面に表示されることはありません．
+コード中の記号は，半角の <code>"</code>，<code>;</code>，<code>(</code>，<code>)</code>，<code>{</code>，<code>}</code> を使ってください．</p>
+<h2 id="5">5．表示を変えてみる<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="_7">編集してからもう一度ビルドする<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><code>hello.c</code> の表示する文字列を，次のように変更します．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;Hello, C!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+</code></pre></div>
+<p>変更後は，<strong>保存 → ビルド → 実行</strong>をもう一度行ってください．
+ソースを編集・保存しただけでは，既に作成した実行ファイルは変わりません．</p>
+<h3 id="_8">改行や特殊な文字<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>特殊な文字を表す記法を <strong>エスケープシーケンス</strong> と呼びます．</p>
+<table>
+<thead>
+<tr>
+<th>ソースコード中の記法</th>
+<th>表すもの</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\n</code></td>
+<td>改行</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>水平タブ</td>
+</tr>
+<tr>
+<td><code>\"</code></td>
+<td>二重引用符 <code>"</code></td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>バックスラッシュ <code>\</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>printf</code> で <code>%</code> そのものを表示する場合は，書式文字列内に <code>%%</code> と書きます．これはバックスラッシュによるエスケープとは別の，<code>printf</code> の書式の規則です．</p>
+<p>次の例では，<strong>現在の <code>hello.c</code> の内容を一時的に置き換えて</strong>動作を確認してください．別の <code>main</code> を持つファイルを，同じプロジェクトに追加しないようにします．</p>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">表示を確かめるコード</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-10-10">10</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;First line</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">Second line</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;She said, </span><span style="color: #AE81FF">\&quot;</span><span style="color: #E6DB74">Hello!</span><span style="color: #AE81FF">\&quot;\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;Backslash: </span><span style="color: #AE81FF">\\\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;Progress: 100%%</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div></td></tr></table></div>
+<p><a download="download" href="sample/01/escape.c">この例のソースをダウンロード</a></p>
+<p>ビルドして実行すると，次の内容を表示します．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>First line
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Second line
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>She said, &quot;Hello!&quot;
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Backslash: \
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>Progress: 100%
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">ソースの改行と，表示の改行は別</p>
+<p>ソースコードを読みやすく改行することと，文字列に <code>\n</code> を入れることは別です．
+表示中に改行したい場合は，文字列の中に <code>\n</code> を書きます．2回続けると，間に空行を入れられます．</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Windowsでのバックスラッシュの表示</p>
+<p>フォントやキーボードの設定によっては，バックスラッシュが円記号のように見える場合があります．
+エスケープに使うのは半角のバックスラッシュです．全角の円記号を入力しないでください．</p>
+</div>
+<h2 id="errors">6．エラーメッセージを読む<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
+<h3 id="_9">エラーと警告<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>コンパイラは，コードに問題を見つけると診断メッセージを表示します．</p>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>基本的な扱い</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>エラー</td>
+<td>ビルドに失敗する．原因を直してからやり直す．</td>
+</tr>
+<tr>
+<td>警告</td>
+<td>ビルドできる場合でも，問題の可能性がある．内容を読み，原因を確認する．</td>
+</tr>
+</tbody>
+</table>
+<p>例えば，<code>printf</code> の行末のセミコロンを忘れたとします．</p>
+<div class="highlight" style="background: #272822"><span class="filename">間違いを含むコードの一部</span><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;Hello, world!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">)</span>
+</code></pre></div>
+<p>MSVCでは，例えば <strong>C2143</strong> という番号と，<code>;</code> がないことを示す構文エラーの説明が表示されます．文面や行番号は環境により異なります．
+「エラー一覧」の <strong>ファイル・行・説明</strong> を確認し，該当項目をダブルクリックしてコードへ移動します．必要なら「出力」のビルドログも確認してください．</p>
+<p>最初の診断から調べることが大切です．1か所の間違いが，多数の診断につながる場合があります．
+また，コンパイラが問題に気付いた場所と，実際に直すべき場所が同じとは限りません．<strong>示された行の前の行</strong>も確認しましょう．</p>
+<div class="admonition warning">
+<p class="admonition-title">ビルドに失敗したら，古いプログラムを起動しない</p>
+<p>Visual Studioが「最後に成功したビルドを実行するか」と尋ねる場合は，実行せず，まずエラーを修正してください．
+古い <code>.exe</code> が動いても，今編集しているコードが正しくビルドされたとはいえません．</p>
+</div>
+<h3 id="_10">うまくいかないときの確認順序<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>状況</th>
+<th>確認すること</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>空のプロジェクトが見つからない</td>
+<td>C++によるデスクトップ開発が導入されているか．C++／Windowsで検索しているか．</td>
+</tr>
+<tr>
+<td>Cとして扱われない</td>
+<td>拡張子が <code>.c</code> か．コンパイル言語が <code>/TC</code> か．</td>
+</tr>
+<tr>
+<td><code>main</code> が重複しているというエラー</td>
+<td>同じプロジェクトに，別々のmainを持つファイルを追加していないか．</td>
+</tr>
+<tr>
+<td><code>pch.h</code> などが必要といわれる</td>
+<td>空のプロジェクトを選んだか．課題と異なるテンプレートを使っていないか．</td>
+</tr>
+<tr>
+<td>編集した内容が表示されない</td>
+<td>保存・ビルドに成功したか．正しいプロジェクト／exeを実行しているか．</td>
+</tr>
+<tr>
+<td>ファイルが見つからない</td>
+<td>ソリューション エクスプローラーで，対象のプロジェクトにファイルが追加されているか．保存先は正しいか．</td>
+</tr>
+<tr>
+<td>エラーはないが結果が違う</td>
+<td>文字列の内容や <code>\n</code> を見直す．ビルド成功だけでは，目的どおりの動作は保証されない．</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7">7．まとめ<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>プログラムを作る基本の流れは，<strong>編集 → 保存 → ビルド → 実行 → 結果の確認</strong>です．</p>
+<h2 id="_11">確認問題<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p>次の問いに，自分の言葉で答えてみましょう．</p>
+<ul>
+<li>ソースファイルと実行ファイルは，何が違うか．</li>
+<li>Visual StudioでC言語のファイルを追加するとき，何に注意するか．</li>
+<li><code>printf("Hello, world!\n");</code> の <code>\n</code> と <code>;</code> は，それぞれ何を表すか．</li>
+<li>保存しただけで，既にある実行ファイルの内容は変わるか．</li>
+</ul>
+<p>次は<a href="ex01.html">第1回の演習</a>に取り組んでください．</p>
+<div class="lesson-links">
+<p><a class="md-button md-button--primary" href="ex01.html">演習へ進む</a>
+<a class="md-button" href="index.html">トップページへ</a></p>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  ページトップへ戻る
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="フッター" >
+        
+          
+          <a href="index.html" class="md-footer__link md-footer__link--prev" aria-label="前: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                前
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="ex01.html" class="md-footer__link md-footer__link--next" aria-label="次: 演習：プログラミングの基礎">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                次
+              </span>
+              <div class="md-ellipsis">
+                演習：プログラミングの基礎
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": ".", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.footer", "content.code.copy", "content.code.annotate", "search.highlight", "search.suggest"], "search": "assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": null}</script>
+    
+    
+      <script src="assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
