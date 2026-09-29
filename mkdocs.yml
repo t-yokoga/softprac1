@@ -1,0 +1,104 @@
+site_name: プログラミング言語I・ソフトウェア演習I
+site_description: C言語を通してプログラミングの基礎を学ぶ講義・演習資料
+use_directory_urls: false
+exclude_docs: |
+  lec15.md
+  ex15.md
+  sample/15/
+
+nav:
+  - Home: index.md
+  - 第1回:
+      - 講義：プログラミングの基礎: lec01.md
+      - 演習：プログラミングの基礎: ex01.md
+  - 第2回:
+      - 講義：変数: lec02.md
+      - 演習：変数: ex02.md
+  - 第3回:
+      - 講義：演算子: lec03.md
+      - 演習：演算子: ex03.md
+  - 第4回:
+      - 講義：制御構造: lec04.md
+      - 演習：制御構造: ex04.md
+  - 第5回:
+      - 講義：配列と関数: lec05.md
+      - 演習：配列と関数: ex05.md
+  - 第6回:
+      - 講義：文字列: lec06.md
+      - 演習：文字列: ex06.md
+  - 第7回:
+      - 講義：入出力: lec07.md
+      - 演習：入出力: ex07.md
+  - 第8回:
+      - 講義：ポインタ1: lec08.md
+      - 演習：ポインタ1: ex08.md
+  - 第9回:
+      - 講義：ポインタ2: lec09.md
+      - 演習：ポインタ2: ex09.md
+  - 第10回:
+      - 講義：ファイル: lec10.md
+      - 演習：ファイル: ex10.md
+  - 第11回:
+      - 講義：構造体: lec11.md
+      - 演習：構造体: ex11.md
+  - 第12回:
+      - 講義：コンパイル: lec12.md
+      - 演習：コンパイル: ex12.md
+  - 第13回:
+      - 講義：メモリ管理: lec13.md
+      - 演習：メモリ管理: ex13.md
+  - 第14回:
+      - 講義：再帰: lec14.md
+      - 演習：再帰: ex14.md
+
+theme:
+  name: material
+  language: ja
+  font: false
+  palette:
+    scheme: default
+    primary: green
+    accent: green
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.code.annotate
+    - search.highlight
+    - search.suggest
+
+plugins:
+  - search:
+      lang: ja
+  - offline
+
+extra_css:
+  - css/custom.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      use_pygments: true
+      noclasses: true
+      pygments_style: monokai
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: [docs]
+      check_paths: true
+
+validation:
+  nav:
+    not_found: warn
+  links:
+    not_found: warn
+    anchors: warn

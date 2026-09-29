@@ -1,0 +1,9 @@
+/site/
+/.venv/
+/instructor/
+/lecture/
+/docs/lec15.md
+/docs/ex15.md
+/docs/sample/15/
+__pycache__/
+.DS_Store
