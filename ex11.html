@@ -2546,7 +2546,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec11.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week11 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week11</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">今回の進め方<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -2560,17 +2560,17 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>Pointの移動</td>
+<td><code>Point</code>の移動</td>
 <td>値渡しとポインタ経由の変更</td>
 </tr>
 <tr>
 <td>2</td>
-<td>Student配列の平均</td>
+<td><code>Student</code>配列の平均</td>
 <td>配列と構造体メンバの組合せ</td>
 </tr>
 <tr>
 <td>3</td>
-<td>Rectの面積</td>
+<td><code>Rect</code>の面積</td>
 <td>入れ子の構造体とメンバ参照</td>
 </tr>
 <tr>
@@ -2591,43 +2591,43 @@
 <tr>
 <td>発展3</td>
 <td>配置の観察</td>
-<td>sizeofとoffsetof</td>
+<td><code>sizeof</code>と<code>offsetof</code></td>
 </tr>
 </tbody>
 </table>
 <p>今回の座標には有限な−1000〜1000の値を使います．点数は0〜100です．入力の範囲を決め，出力を予測してから実行します．大きな構造体のコピー速度を競う課題ではありません．まず，何がコピーされ，どの変数が変更されるかを説明できるようにします．</p>
-<p>構造体の定義はmainより前に置きます．同じプロジェクトに複数のmainを置かず，別課題の型定義を重複して貼り付けないでください．指定初期化子の書き方で診断が出た場合は，.cppではなく.cで，C17としてコンパイルしているかも確認します．</p>
+<p>構造体の定義は<code>main</code>より前に置きます．同じプロジェクトに複数の<code>main</code>を置かず，別課題の型定義を重複して貼り付けないでください．指定初期化子の書き方で診断が出た場合は，<code>.cpp</code>ではなく<code>.c</code>で，C17としてコンパイルしているかも確認します．</p>
 <h2 id="1">課題1　値とポインタの違い<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>PointMove</code> プロジェクトでstructs.cを実行し，movedを呼んだ直後とmove_in_placeを呼んだ直後のaを比較します．移動量を0，0にした場合も確認してください．</p>
+<p><code>PointMove</code> プロジェクトで<code>structs.c</code>を実行し，<code>moved</code>を呼んだ直後と<code>move_in_place</code>を呼んだ直後の<code>a</code>を比較します．移動量を0，0にした場合も確認してください．</p>
 <h3 id="_3">変更される対象を追跡する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>ダウンロードしたstructs.cの最初の出力は，aが(1.0, 2.0)，bが(4.0, 1.0)です．movedの中にもpというPointがありますが，それはmainのaとは別のコピーです．呼び出し前後で次の表を埋めてください．</p>
+<p>ダウンロードした<code>structs.c</code>の最初の出力は，<code>a</code>が(1.0, 2.0)，<code>b</code>が(4.0, 1.0)です．<code>moved</code>の中にも<code>p</code>という<code>Point</code>がありますが，それは<code>main</code>の<code>a</code>とは別のコピーです．呼び出し前後で次の表を埋めてください．</p>
 <table>
 <thead>
 <tr>
 <th>時点</th>
-<th style="text-align: right;">a.x</th>
-<th style="text-align: right;">a.y</th>
-<th style="text-align: right;">b.x</th>
-<th style="text-align: right;">b.y</th>
+<th style="text-align: right;"><code>a.x</code></th>
+<th style="text-align: right;"><code>a.y</code></th>
+<th style="text-align: right;"><code>b.x</code></th>
+<th style="text-align: right;"><code>b.y</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>aの初期化直後</td>
+<td><code>a</code>の初期化直後</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">まだない</td>
 <td style="text-align: right;">まだない</td>
 </tr>
 <tr>
-<td>movedの戻り値でbを初期化した後</td>
+<td><code>moved</code>の戻り値で<code>b</code>を初期化した後</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
-<td>move_in_placeでaを変更した後</td>
+<td><code>move_in_place</code>で<code>a</code>を変更した後</td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">4</td>
@@ -2635,32 +2635,32 @@
 </tr>
 </tbody>
 </table>
-<p>最後にaとbが同じ座標になっても，同じ保存場所になったわけではありません．その後にb.x = 100.0;を追加すれば，変わるのはbだけです．aも変わると予想した場合は，構造体のコピーをポインタのコピーと混同していないか，図で確かめましょう．</p>
+<p>最後に<code>a</code>と<code>b</code>が同じ座標になっても，同じ保存場所になったわけではありません．その後に<code>b.x = 100.0;</code>を追加すれば，変わるのは<code>b</code>だけです．<code>a</code>も変わると予想した場合は，構造体のコピーをポインタのコピーと混同していないか，図で確かめましょう．</p>
 <h3 id="3">3つの呼び出し方を比較する<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>次の例は，aを(1, 2)で初期化した状態から，それぞれ独立に試します．bの宣言や表示も，試す形に合わせて整理してください．</p>
+<p>次の例は，<code>a</code>を(1, 2)で初期化した状態から，それぞれ独立に試します．<code>b</code>の宣言や表示も，試す形に合わせて整理してください．</p>
 <table>
 <thead>
 <tr>
 <th>呼び出し方</th>
-<th>実行後のa</th>
+<th>実行後の<code>a</code></th>
 <th>理由</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>moved(a, 3.0, -1.0);</td>
+<td><code>moved(a, 3.0, -1.0);</code></td>
 <td>(1, 2)</td>
 <td>結果を受け取っていない</td>
 </tr>
 <tr>
-<td>a = moved(a, 3.0, -1.0);</td>
+<td><code>a = moved(a, 3.0, -1.0);</code></td>
 <td>(4, 1)</td>
-<td>計算結果をaへ代入した</td>
+<td>計算結果を<code>a</code>へ代入した</td>
 </tr>
 <tr>
-<td>move_in_place(&amp;a, 3.0, -1.0);</td>
+<td><code>move_in_place(&amp;a, 3.0, -1.0);</code></td>
 <td>(4, 1)</td>
-<td>aのアドレスを渡して変更した</td>
+<td><code>a</code>のアドレスを渡して変更した</td>
 </tr>
 </tbody>
 </table>
@@ -2669,7 +2669,7 @@
 <table>
 <thead>
 <tr>
-<th>dx，dy</th>
+<th><code>dx</code>，<code>dy</code></th>
 <th>初期値(1, 2)からの移動結果</th>
 </tr>
 </thead>
@@ -2688,18 +2688,18 @@
 </tr>
 </tbody>
 </table>
-<p>元のサンプルではmovedとmove_in_placeの2か所に移動量があります．両方を同じ条件へ変更して比較してください．片方だけ変えた場合，aとbの結果が違うのは自然です．</p>
-<p><strong>説明すること</strong>：move_in_placeのpはポインタのコピーです．なぜそのコピーからaを書き換えられるのでしょうか．p自体とpが指すPointを別の箱として描いてください．NULLや初期化していないポインタは渡しません．</p>
+<p>元のサンプルでは<code>moved</code>と<code>move_in_place</code>の2か所に移動量があります．両方を同じ条件へ変更して比較してください．片方だけ変えた場合，<code>a</code>と<code>b</code>の結果が違うのは自然です．</p>
+<p><strong>説明すること</strong>：<code>move_in_place</code>の<code>p</code>はポインタのコピーです．なぜそのコピーから<code>a</code>を書き換えられるのでしょうか．<code>p</code>自体と<code>p</code>が指す<code>Point</code>を別の箱として描いてください．<code>NULL</code>や初期化していないポインタは渡しません．</p>
 <h2 id="2">課題2　点数の平均<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>Students</code> プロジェクトで名前と点数を持つStudentを定義し，Aki=80，Ren=70，Mio=90の平均を表示してください．点数は0〜100，人数は1〜3とします．</p>
+<p><code>Students</code> プロジェクトで名前と点数を持つ<code>Student</code>を定義し，<code>Aki=80</code>，<code>Ren=70</code>，<code>Mio=90</code>の平均を表示してください．点数は0〜100，人数は1〜3とします．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>配列の各要素から.scoreを取り出します．計算の関数は読み取り専用です．</p>
+<p>配列の各要素から<code>.score</code>を取り出します．計算の関数は読み取り専用です．</p>
 </details>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
 <h3 id="_5">配列要素とメンバを順に読む<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>a[1]は2人目のStudent，a[1].scoreはその点数70，a[1].nameは名前を保存した配列です．a[1].name[0]は'R'になります．添字とドットのどちらを使っているかを順に確認してください．</p>
-<p>関数の仮引数aはStudent配列の先頭へのポインタです．Studentを1個渡すのとは違い，3人分の構造体が自動でコピーされているわけではありません．平均関数では変更しないことを示すためにconstを付けています．</p>
+<p><code>a[1]</code>は2人目の<code>Student</code>，<code>a[1].score</code>はその点数70，<code>a[1].name</code>は名前を保存した配列です．<code>a[1].name[0]</code>は<code>'R'</code>になります．添字とドットのどちらを使っているかを順に確認してください．</p>
+<p>関数の仮引数<code>a</code>は<code>Student</code>配列の先頭へのポインタです．<code>Student</code>を1個渡すのとは違い，3人分の構造体が自動でコピーされているわけではありません．平均関数では変更しないことを示すために<code>const</code>を付けています．</p>
 <table>
 <thead>
 <tr>
@@ -2709,30 +2709,30 @@
 </thead>
 <tbody>
 <tr>
-<td>元の点数，n=1</td>
+<td>元の点数，<code>n=1</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>元の点数，n=2</td>
+<td>元の点数，<code>n=2</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>全員0，n=3</td>
+<td>全員0，<code>n=3</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>全員100，n=3</td>
+<td>全員100，<code>n=3</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>80，70，91，n=3</td>
+<td>80，70，91，<code>n=3</code></td>
 <td>記入してください</td>
 </tr>
 </tbody>
 </table>
-<p>平均関数には1&lt;=n&lt;=3で，実際にn人分のデータがあることを約束して渡します．n=4なら存在しない要素へ進み，n=0なら0で割るので，どちらも実行する実験にはしません．</p>
+<p>平均関数には<code>1&lt;=n&lt;=3</code>で，実際に<code>n</code>人分のデータがあることを約束して渡します．<code>n=4</code>なら存在しない要素へ進み，<code>n=0</code>なら0で割るので，どちらも実行する実験にはしません．</p>
 <h3 id="_6">名前と点数を一緒に交換する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>mainでa[0]とa[2]を交換する場合は，次のように構造体全体をコピーできます．</p>
+<p><code>main</code>で<code>a[0]</code>と<code>a[2]</code>を交換する場合は，次のように構造体全体をコピーできます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #F8F8F2">Student temp </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> a[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">];</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">a[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> a[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">];</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #F8F8F2">a[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> temp;</span>
@@ -2740,29 +2740,29 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%s %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a[i].name, a[i].score);</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>表示順はMio 90，Ren 70，Aki 80です．平均は80.0のままです．scoreだけを交換すると，名前と点数の対応が壊れます．構造体へまとめたことで「1人分」という単位で操作できる点を確認してください．</p>
+<p>表示順は<code>Mio 90</code>，<code>Ren 70</code>，<code>Aki 80</code>です．平均は80.0のままです．<code>score</code>だけを交換すると，名前と点数の対応が壊れます．構造体へまとめたことで「1人分」という単位で操作できる点を確認してください．</p>
 <h3 id="_7">名前を比較する<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>同じ学生のデータかを「名前と点数が一致すること」と定義する場合，string.hを追加して次の条件を使えます．ここでleftとrightはStudent型の変数です．</p>
+<p>同じ学生のデータかを「名前と点数が一致すること」と定義する場合，<code>string.h</code>を追加して次の条件を使えます．ここで<code>left</code>と<code>right</code>は<code>Student</code>型の変数です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> same </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strcmp(left.name, right.name) </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;&amp;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">           left.score </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> right.score;</span>
 </code></pre></div>
-<p>left == rightという比較はCの構造体には使えません．また，nameのアドレスの一致を調べるのではなく，文字列の内容を比較します．同名の学生を区別する必要があるなら，学生番号など別のメンバを設計する必要があります．</p>
+<p><code>left == right</code>という比較はCの構造体には使えません．また，<code>name</code>のアドレスの一致を調べるのではなく，文字列の内容を比較します．同名の学生を区別する必要があるなら，学生番号など別のメンバを設計する必要があります．</p>
 <h2 id="3_1">課題3　長方形を表す<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
-<p>Pointを2つ持つRectを定義してください．左下(1, 2)，右上(5, 5)から面積12.0を求めます．右上のx・yはそれぞれ左下以上とします．</p>
+<p><code>Point</code>を2つ持つ<code>Rect</code>を定義してください．左下(1, 2)，右上(5, 5)から面積12.0を求めます．右上の<code>x</code>・<code>y</code>はそれぞれ左下以上とします．</p>
 <p>幅0，高さ0でも面積0になることを確認します．</p>
 <h3 id="_8">メンバ参照を分解する<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>mainのr.lower.xと，areaの引数rに対するr-&gt;lower.xは同じ書き方ではありません．前者のrはRect本体，後者のrはRectへのポインタです．関数をまたいで同じ変数名を使っているため，宣言を確認してください．</p>
-<p>mainでRect *q = &r;とすると，次の4つは同じ値1.0を表します．</p>
+<p><code>main</code>の<code>r.lower.x</code>と，<code>area</code>の引数<code>r</code>に対する<code>r-&gt;lower.x</code>は同じ書き方ではありません．前者の<code>r</code>は<code>Rect</code>本体，後者の<code>r</code>は<code>Rect</code>へのポインタです．関数をまたいで同じ変数名を使っているため，宣言を確認してください．</p>
+<p><code>main</code>で<code>Rect *q = &amp;r;</code>とすると，次の4つは同じ値1.0を表します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f %.1f %.1f %.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">       r.lower.x, (r.lower).x, q</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">lower.x, (q</span><span style="color: #FF4689">-&gt;</span><span style="color: #F8F8F2">lower).x);</span>
 </code></pre></div>
-<p>lowerはPoint本体であってPointへのポインタではありません．そのためq-&gt;lower-&gt;xとは書けません．また，*q.lower.xという書き方では必要な間接参照の順序になりません．</p>
+<p><code>lower</code>は<code>Point</code>本体であって<code>Point</code>へのポインタではありません．そのため<code>q-&gt;lower-&gt;x</code>とは書けません．また，<code>*q.lower.x</code>という書き方では必要な間接参照の順序になりません．</p>
 <h3 id="_9">面積の境界を確認する<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>lower</th>
-<th>upper</th>
+<th><code>lower</code></th>
+<th><code>upper</code></th>
 <th style="text-align: right;">幅</th>
 <th style="text-align: right;">高さ</th>
 <th style="text-align: right;">面積</th>
@@ -2799,19 +2799,19 @@
 </tr>
 </tbody>
 </table>
-<p>この課題のareaは，upperの各座標がlower以上であることを前提にしています．逆向きの座標を渡したら必ず適切な面積になる，という仕様ではありません．両方の差が負なら積が正になってしまうので，面積が正だっただけでは前提を守った証拠にもなりません．座標の順序をそろえる処理は発展2で扱います．</p>
+<p>この課題の<code>area</code>は，<code>upper</code>の各座標が<code>lower</code>以上であることを前提にしています．逆向きの座標を渡したら必ず適切な面積になる，という仕様ではありません．両方の差が負なら積が正になってしまうので，面積が正だっただけでは前提を守った証拠にもなりません．座標の順序をそろえる処理は発展2で扱います．</p>
 <h3 id="_10">名前もメンバにする<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>Rectの型にchar name[21];を追加すると，座標と名前をまとめられます．その場合は初期化も，例えば次の形へ変更します．</p>
+<p><code>Rect</code>の型に<code>char name[21];</code>を追加すると，座標と名前をまとめられます．その場合は初期化も，例えば次の形へ変更します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #F8F8F2">Rect r </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">    .lower </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">1.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">},</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    .upper </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">5.0</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">5.0</span><span style="color: #F8F8F2">},</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span style="color: #F8F8F2">    .name </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;sample&quot;</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span style="color: #F8F8F2">};</span>
 </code></pre></div>
-<p>この断片はnameを追加した型でのみ使えます．21要素なので，ASCIIなら20文字と終端を保存できます．r.nameを別の文字列で更新する場合，宣言後にr.name = "other";とは書けません．配列の容量を確かめて文字をコピーする必要があります．構造体全体の代入ができることと，配列メンバ単独への代入ができることは別です．</p>
+<p>この断片は<code>name</code>を追加した型でのみ使えます．21要素なので，ASCIIなら20文字と終端を保存できます．<code>r.name</code>を別の文字列で更新する場合，宣言後に<code>r.name = "other";</code>とは書けません．配列の容量を確かめて文字をコピーする必要があります．構造体全体の代入ができることと，配列メンバ単独への代入ができることは別です．</p>
 <h2 id="4">課題4　配列メンバとポインタメンバを比較する<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>Studentのnameがchar配列ではなくchar *なら，構造体をコピーした後の2つのnameは何を指すでしょうか．図で説明してください．</p>
-<h3 id="copymembers">CopyMembersプロジェクト<a class="headerlink" href="#copymembers" title="Permanent link">&para;</a></h3>
+<p><code>Student</code>の<code>name</code>が<code>char</code>配列ではなく<code>char *</code>なら，構造体をコピーした後の2つの<code>name</code>は何を指すでしょうか．図で説明してください．</p>
+<h3 id="copymembers"><code>CopyMembers</code>プロジェクト<a class="headerlink" href="#copymembers" title="Permanent link">&para;</a></h3>
 <p>配列を内部に持つ場合と，別の配列を指す場合を同じプログラムで比較します．どの出力が同じになり，どの出力が違うか，先に矢印の図を描いてください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>array=Hoge hoge
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>pointer=Hoge Hoge same=1
@@ -2828,38 +2828,38 @@
 </thead>
 <tbody>
 <tr>
-<td>a1.text[0] = 'H';</td>
-<td>a1の内部配列</td>
-<td>a2には見えない</td>
+<td><code>a1.text[0] = 'H';</code></td>
+<td><code>a1</code>の内部配列</td>
+<td><code>a2</code>には見えない</td>
 </tr>
 <tr>
-<td>p1.text[0] = 'H';</td>
-<td>共有しているbuffer</td>
-<td>p2からも見える</td>
+<td><code>p1.text[0] = 'H';</code></td>
+<td>共有している<code>buffer</code></td>
+<td><code>p2</code>からも見える</td>
 </tr>
 <tr>
-<td>p1.text = other;</td>
-<td>p1に入っているアドレス</td>
-<td>p2のアドレスは変わらない</td>
+<td><code>p1.text = other;</code></td>
+<td><code>p1</code>に入っているアドレス</td>
+<td><code>p2</code>のアドレスは変わらない</td>
 </tr>
 </tbody>
 </table>
-<p>ポインタをコピーした直後は同じ場所を指すため，==で1になります．最後は別々の配列を指すので0です．これはアドレスの比較を意図したものです．文字列の内容を比較したい場面のstrcmpとは目的が違います．</p>
-<p>実際のアドレスを表示するならprintf("%p", (void *)p1.text);とします．具体的な数値より，同じか違うかを確認してください．構造体自体のアドレス&amp;p1と，メンバに保存されたp1.textも別物です．</p>
+<p>ポインタをコピーした直後は同じ場所を指すため，<code>==</code>で1になります．最後は別々の配列を指すので0です．これはアドレスの比較を意図したものです．文字列の内容を比較したい場面の<code>strcmp</code>とは目的が違います．</p>
+<p>実際のアドレスを表示するなら<code>printf("%p", (void *)p1.text);</code>とします．具体的な数値より，同じか違うかを確認してください．構造体自体のアドレス<code>&amp;p1</code>と，メンバに保存された<code>p1.text</code>も別物です．</p>
 <h3 id="_12">全体を別の文字列へ変える場合<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>長さ4のhogeを長さ4のfugaへ置き換えるなら，終端を含む5個をコピーします．次の断片を，先頭1文字だけを書き換えていた行の代わりに使えます．a1.textには7要素があり，この固定の文字列は収まります．</p>
+<p>長さ4の<code>hoge</code>を長さ4の<code>fuga</code>へ置き換えるなら，終端を含む5個をコピーします．次の断片を，先頭1文字だけを書き換えていた行の代わりに使えます．<code>a1.text</code>には7要素があり，この固定の文字列は収まります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> replacement[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;fuga&quot;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> replacement; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">    a1.text[i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> replacement[i];</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>配列版ではa1がfuga，a2がhogeです．同様のコピーをbufferへ行えば，p1とp2の両方からfugaが見えます．任意の長さの文字列を受け付けるなら，第8回の容量検査を行う関数が必要です．この固定入力に十分な容量があることを，一般の文字列にもそのまま当てはめないでください．</p>
+<p>配列版では<code>a1</code>が<code>fuga</code>，<code>a2</code>が<code>hoge</code>です．同様のコピーを<code>buffer</code>へ行えば，<code>p1</code>と<code>p2</code>の両方から<code>fuga</code>が見えます．任意の長さの文字列を受け付けるなら，第8回の容量検査を行う関数が必要です．この固定入力に十分な容量があることを，一般の文字列にもそのまま当てはめないでください．</p>
 <h3 id="_13">危険な例は実行せず説明する<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>次の状況について，何が問題かを説明してください．</p>
 <ol>
-<li>ポインタメンバへ文字列リテラル"hoge"を入れ，その先へ書き込む．</li>
-<li>関数内のchar buffer[8]を指す構造体を返し，関数終了後に表示する．</li>
-<li>未初期化のTextPointerへ，いきなりtext[0]を書き込む．</li>
+<li>ポインタメンバへ文字列リテラル<code>"hoge"</code>を入れ，その先へ書き込む．</li>
+<li>関数内の<code>char buffer[8]</code>を指す構造体を返し，関数終了後に表示する．</li>
+<li>未初期化の<code>TextPointer</code>へ，いきなり<code>text[0]</code>を書き込む．</li>
 </ol>
 <h2 id="1_1">発展1　初期化と構造体を返す関数<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
 <p><code>PointInit</code>プロジェクトで，メンバ名を指定した初期化，省略したメンバ，複合リテラル，構造体の戻り値を確認します．</p>
@@ -2868,14 +2868,14 @@
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>assigned=-1.0 4.0
 </code></pre></div>
 <h3 id="_14">宣言順と指定順を比較する<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p>aは.yを先に書いていますが，yへ2.0，xへ10.0が入ります．<code>Point a = {2.0, 10.0};</code>へ変えるとx=2.0，y=10.0となり，同じ意味にはなりません．名前を指定しない初期化は宣言順に対応します．</p>
-<p>partial.yとzeroの両メンバは0.0です．これを「初期化しなくても構造体は0になる」と説明してはいけません．<code>Point partial;</code>とだけ宣言したローカル変数のメンバを表示する実験はしません．</p>
-<p>最後の代入で(Point)を省略した形は正しい代入式ではありません．複合リテラルはPoint型の値として扱えるため，構造体全体の代入に利用できます．個別にa.x，a.yへ代入する方法と使い分けます．</p>
-<h3 id="typedef">typedefの意味を説明する<a class="headerlink" href="#typedef" title="Permanent link">&para;</a></h3>
-<p><code>typedef int JPY;</code>と<code>JPY price = 100;</code>は別の役割です．前者は別名を付け，後者は変数を作ります．Pointも同じで，typedefの定義だけで座標データが1個作られるわけではありません．</p>
-<p>発展として，Pointをタグ付きのtypedefへ書き換え，変数宣言の1つだけをstruct pointに変えても，同じ型として扱えることを確認してください．型の定義を追加するのではなく，既存の定義を書き換えます．</p>
+<p><code>a</code>は<code>.y</code>を先に書いていますが，<code>y</code>へ2.0，<code>x</code>へ10.0が入ります．<code>Point a = {2.0, 10.0};</code>へ変えると<code>x=2.0</code>，<code>y=10.0</code>となり，同じ意味にはなりません．名前を指定しない初期化は宣言順に対応します．</p>
+<p><code>partial.y</code>と<code>zero</code>の両メンバは0.0です．これを「初期化しなくても構造体は0になる」と説明してはいけません．<code>Point partial;</code>とだけ宣言したローカル変数のメンバを表示する実験はしません．</p>
+<p>最後の代入で<code>(Point)</code>を省略した形は正しい代入式ではありません．複合リテラルは<code>Point</code>型の値として扱えるため，構造体全体の代入に利用できます．個別に<code>a.x</code>，<code>a.y</code>へ代入する方法と使い分けます．</p>
+<h3 id="typedef"><code>typedef</code>の意味を説明する<a class="headerlink" href="#typedef" title="Permanent link">&para;</a></h3>
+<p><code>typedef int JPY;</code>と<code>JPY price = 100;</code>は別の役割です．前者は別名を付け，後者は変数を作ります．<code>Point</code>も同じで，<code>typedef</code>の定義だけで座標データが1個作られるわけではありません．</p>
+<p>発展として，<code>Point</code>をタグ付きの<code>typedef</code>へ書き換え，変数宣言の1つだけをstruct pointに変えても，同じ型として扱えることを確認してください．型の定義を追加するのではなく，既存の定義を書き換えます．</p>
 <h2 id="2_1">発展2　長方形を正規化して点を判定する<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h2>
-<p><code>RectContains</code>プロジェクトを作ります．2点が逆順でも，xとyそれぞれの下限・上限へそろえた長方形を作る関数normalizedと，点が範囲内かを判定するcontainsを使います．この課題の範囲は下限を含み，上限を含みません．</p>
+<p><code>RectContains</code>プロジェクトを作ります．2点が逆順でも，<code>x</code>と<code>y</code>それぞれの下限・上限へそろえた長方形を作る関数<code>normalized</code>と，点が範囲内かを判定する<code>contains</code>を使います．この課題の範囲は下限を含み，上限を含みません．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>sample lower=1.0 1.0 upper=3.0 4.0
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>inside=1 original=1.0 4.0
 </code></pre></div>
@@ -2884,8 +2884,8 @@
 <thead>
 <tr>
 <th>入力の2点</th>
-<th>正規化後のlower</th>
-<th>正規化後のupper</th>
+<th>正規化後の<code>lower</code></th>
+<th>正規化後の<code>upper</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2911,10 +2911,10 @@
 </tr>
 </tbody>
 </table>
-<p>それぞれを別々に試します．2点を一括で交換するだけでは，3行目や4行目を正規化できません．また，xを交換した後の値を使ってyを判定する必要はなく，各軸を独立に処理できます．</p>
-<p>関数の最初のRect result = r;は，座標だけでなく名前もコピーします．座標だけを新しい未初期化のRectへ書き込むと，nameが未設定のままになってしまいます．戻す構造体のすべてのメンバが，どこで値を得たのかを説明してください．</p>
+<p>それぞれを別々に試します．2点を一括で交換するだけでは，3行目や4行目を正規化できません．また，<code>x</code>を交換した後の値を使って<code>y</code>を判定する必要はなく，各軸を独立に処理できます．</p>
+<p>関数の最初の<code>Rect result = r;</code>は，座標だけでなく名前もコピーします．座標だけを新しい未初期化の<code>Rect</code>へ書き込むと，<code>name</code>が未設定のままになってしまいます．戻す構造体のすべてのメンバが，どこで値を得たのかを説明してください．</p>
 <h3 id="_16">内側・外側・境界を調べる<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<p>lower=(1, 1)，upper=(3, 4)へ正規化した長方形について確認します．</p>
+<p><code>lower=(1, 1)</code>，<code>upper=(3, 4)</code>へ正規化した長方形について確認します．</p>
 <table>
 <thead>
 <tr>
@@ -2937,53 +2937,53 @@
 <tr>
 <td>(1, 3)</td>
 <td style="text-align: right;">記入してください</td>
-<td>xが下限でもyが範囲内</td>
+<td><code>x</code>が下限でも<code>y</code>が範囲内</td>
 </tr>
 <tr>
 <td>(3, 2)</td>
 <td style="text-align: right;">記入してください</td>
-<td>xの上限を含まない</td>
+<td><code>x</code>の上限を含まない</td>
 </tr>
 <tr>
 <td>(2, 4)</td>
 <td style="text-align: right;">記入してください</td>
-<td>yの上限を含まない</td>
+<td><code>y</code>の上限を含まない</td>
 </tr>
 <tr>
 <td>(0, 2)</td>
 <td style="text-align: right;">記入してください</td>
-<td>xが下限より小さい</td>
+<td><code>x</code>が下限より小さい</td>
 </tr>
 <tr>
 <td>(2, 5)</td>
 <td style="text-align: right;">記入してください</td>
-<td>yが上限より大きい</td>
+<td><code>y</code>が上限より大きい</td>
 </tr>
 </tbody>
 </table>
-<p>幅0や高さ0の長方形では，この条件を満たす点はありません．例えばlower=(1, 1)，upper=(1, 4)でp=(1, 2)でも0です．閉じた図形なら境界も含めるという直感だけで，&lt;を&lt;=へ変えないでください．まず仕様を決めます．</p>
+<p>幅0や高さ0の長方形では，この条件を満たす点はありません．例えば<code>lower=(1, 1)</code>，<code>upper=(1, 4)</code>で<code>p=(1, 2)</code>でも0です．閉じた図形なら境界も含めるという直感だけで，<code>&lt;</code>を<code>&lt;=</code>へ変えないでください．まず仕様を決めます．</p>
 <h3 id="_17">元のデータと計算結果<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<p>normalizedはrの値を変更して返すのではなく，rのコピーから結果を作ります．呼び出し元のrは入力の順序のままです．元も正規化したい場合はr = normalized(r);と代入します．</p>
-<p>名前の保持を確かめるには，.nameを"test_rect"などへ変えて実行します．名前が長すぎて21要素に収まらない例は使いません．名前を保存することと座標を並べ替えることは別の処理ですが，1つの構造体の戻り値にまとめられます．</p>
+<p><code>normalized</code>は<code>r</code>の値を変更して返すのではなく，<code>r</code>のコピーから結果を作ります．呼び出し元の<code>r</code>は入力の順序のままです．元も正規化したい場合は<code>r = normalized(r);</code>と代入します．</p>
+<p>名前の保持を確かめるには，<code>.name</code>を<code>"test_rect"</code>などへ変えて実行します．名前が長すぎて21要素に収まらない例は使いません．名前を保存することと座標を並べ替えることは別の処理ですが，1つの構造体の戻り値にまとめられます．</p>
 <h2 id="3_2">発展3　構造体のサイズを観察する<a class="headerlink" href="#3_2" title="Permanent link">&para;</a></h2>
-<p><code>StructLayout</code>プロジェクトではstdio.hとstddef.hを読み込み，講義のRecordを定義します．次の断片をmainへ置きます．</p>
+<p><code>StructLayout</code>プロジェクトでは<code>stdio.h</code>と<code>stddef.h</code>を読み込み，講義の<code>Record</code>を定義します．次の断片を<code>main</code>へ置きます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;size=%zu tag=%zu count=%zu flag=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #F8F8F2">       </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(Record), offsetof(Record, tag),</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #F8F8F2">       offsetof(Record, count), offsetof(Record, flag));</span>
 </code></pre></div>
-<p>通常のVisual Studio x64の既定設定ではsize=12 tag=0 count=4 flag=8となります．ただし環境や配置設定によって結果が違っても，直ちに誤りとは限りません．sizeofが3個のメンバのサイズの単純な合計と違う場合，どこに隙間があるかを図にしてください．</p>
-<p>この実験は隙間の中身を表示するものではありません．パディングの値が一定だと仮定せず，メンバの位置と全体サイズだけを調べます．memcmpで構造体全体を比較して，同じデータか判定する課題にも使いません．</p>
-<p>第10回と結び付けて考えましょう．構造体全体をfwriteした場合，どのような情報まで保存されるでしょうか．メンバの表現だけでなく，処理系依存の配置も含まれます．ポインタメンバのアドレスを保存しても，次の実行で同じ文字列を指せるとは限りません．保存形式はメンバごとに意味を決めて設計する必要があります．</p>
+<p>通常のVisual Studio x64の既定設定では<code>size=12 tag=0 count=4 flag=8</code>となります．ただし環境や配置設定によって結果が違っても，直ちに誤りとは限りません．<code>sizeof</code>が3個のメンバのサイズの単純な合計と違う場合，どこに隙間があるかを図にしてください．</p>
+<p>この実験は隙間の中身を表示するものではありません．パディングの値が一定だと仮定せず，メンバの位置と全体サイズだけを調べます．<code>memcmp</code>で構造体全体を比較して，同じデータか判定する課題にも使いません．</p>
+<p>第10回と結び付けて考えましょう．構造体全体を<code>fwrite</code>した場合，どのような情報まで保存されるでしょうか．メンバの表現だけでなく，処理系依存の配置も含まれます．ポインタメンバのアドレスを保存しても，次の実行で同じ文字列を指せるとは限りません．保存形式はメンバごとに意味を決めて設計する必要があります．</p>
 <h2 id="_18">確認問題<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <ol>
-<li>struct pointの定義とPoint p;は何が違うか．</li>
-<li>指定初期化子で.yを先に書くと，値の対応は変わるか．</li>
+<li>struct pointの定義と<code>Point p;</code>は何が違うか．</li>
+<li>指定初期化子で<code>.y</code>を先に書くと，値の対応は変わるか．</li>
 <li>構造体内の配列もコピーされるのに，通常の配列代入ができないのは矛盾か．</li>
-<li>Pointを値で渡す場合とPoint配列を渡す場合は同じか．</li>
-<li>q-&gt;lower.xでは，なぜ-&gt;とドットが両方必要か．</li>
+<li><code>Point</code>を値で渡す場合と<code>Point</code>配列を渡す場合は同じか．</li>
+<li><code>q-&gt;lower.x</code>では，なぜ-&gt;とドットが両方必要か．</li>
 <li>ポインタメンバのコピーは，指す先の寿命を延ばすか．</li>
 <li>長方形を正規化するとき，2点を交換するだけで十分か．</li>
-<li>containsで上限の点が0になるのはバグか．</li>
+<li><code>contains</code>で上限の点が0になるのはバグか．</li>
 </ol>
 <h2 id="_19">チェックリスト<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <ul>

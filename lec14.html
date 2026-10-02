@@ -2686,7 +2686,7 @@
 <h2 id="_2">今回の見通し<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>第13回では，変数や動的領域の寿命を学びました．今回は，ある関数が終了する前に同じ関数を再び呼ぶ<strong>再帰</strong>を扱います．同じソースコードを実行していても，呼び出しごとの引数や局所変数は別々です．「次の呼び出しへ進む流れ」と「結果を受け取って戻る流れ」の両方を追いかけましょう．</p>
 <p>最初は階乗と合計で直線的な呼び出しを理解し，互除法を反復と比較します．発展として，フィボナッチ数の計算量と，木の形に沿った走査を考えます．複雑な式を覚えるより，停止・進行・復帰の3点を言葉で説明することを重視します．</p>
-<p>環境はWindowsのVisual Studio，C17です．今回は別々の例を別プロジェクトに入れ，mainの重複を避けます．大きな入力で再帰の限界を探すのではなく，小さく安全な入力を使って動きを観察します．</p>
+<p>環境はWindowsのVisual Studio，C17です．今回は別々の例を別プロジェクトに入れ，<code>main</code>の重複を避けます．大きな入力で再帰の限界を探すのではなく，小さく安全な入力を使って動きを観察します．</p>
 <h2 id="1">1　小さい問題に分ける<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>再帰は，関数が自分自身を呼び出すことです．例えば階乗は <code>0! = 1</code>，<code>n! = n × (n - 1)!</code> と定義できます．5!を求めるには4!が必要で，さらに3!へと小さくします．</p>
 <p>必要なのは次の2点です．</p>
@@ -2694,9 +2694,9 @@
 <li>その場で答えを返せる<strong>基底条件（停止条件）</strong>．</li>
 <li>呼び出すたびに基底条件へ近づく変化．</li>
 </ul>
-<p>条件を書くだけでは十分ではありません．例えばnが減らなければ，到達できないまま呼び出し続けます．</p>
+<p>条件を書くだけでは十分ではありません．例えば<code>n</code>が減らなければ，到達できないまま呼び出し続けます．</p>
 <h3 id="11">1.1　再帰的な定義をプログラムにする<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>階乗は，0以上の整数nに対して定義します．0!は1とし，nが正ならnと(n−1)!を掛けます．0!を0にすると，以後のすべての結果が0になってしまいます．0の場合だけを特別扱いするのではなく，積を組み立てる出発点として1が必要です．</p>
+<p>階乗は，0以上の整数<code>n</code>に対して定義します．0!は1とし，<code>n</code>が正なら<code>n</code>と<code>(n</code>−1)!を掛けます．0!を0にすると，以後のすべての結果が0になってしまいます．0の場合だけを特別扱いするのではなく，積を組み立てる出発点として1が必要です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>問題：n!を求める
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  n = 0      → これ以上分けずに1を返す
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  n &gt; 0      → (n - 1)!を求め，nを掛けて返す
@@ -2704,8 +2704,8 @@
 </code></pre></div>
 <p>関数の中で自分と同じ関数を呼ぶことを直接再帰といいます．複数の関数が互いに呼び合う間接再帰もありますが，今回の実装は直接再帰を中心にします．どちらも「いつ止まり，何が小さくなるか」を説明できなければなりません．</p>
 <h3 id="12">1.2　入力の範囲も停止の根拠に含める<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>nが0以上なら，n−1を繰り返すと0へ到達します．しかし負数から始めると，0から遠ざかります．基底条件を<code>n == 0</code>と書いただけでは，あらゆる整数で止まることを保証できません．<strong>関数が受け付ける範囲を先に決める</strong>必要があります．</p>
-<p>符号なし整数でも，0から1を引けば負の数にならず，大きな値へ回り込みます．そのため0の判定はn−1を計算する前に置きます．また，<code>factorial(n--)</code>は呼び出し先へ減少前の値を渡すため，期待した進み方になりません．今回は副作用を使わず<code>n - 1</code>を引数にします．</p>
+<p><code>n</code>が0以上なら，<code>n</code>−1を繰り返すと0へ到達します．しかし負数から始めると，0から遠ざかります．基底条件を<code>n == 0</code>と書いただけでは，あらゆる整数で止まることを保証できません．<strong>関数が受け付ける範囲を先に決める</strong>必要があります．</p>
+<p>符号なし整数でも，0から1を引けば負の数にならず，大きな値へ回り込みます．そのため0の判定は<code>n</code>−1を計算する前に置きます．また，<code>factorial(n--)</code>は呼び出し先へ減少前の値を渡すため，期待した進み方になりません．今回は副作用を使わず<code>n - 1</code>を引数にします．</p>
 <h3 id="13-4">1.3　設計の4つの問い<a class="headerlink" href="#13-4" title="Permanent link">&para;</a></h3>
 <ol>
 <li>この関数は何を返すか．引数が表す問題を1文で定義する．</li>
@@ -2713,7 +2713,7 @@
 <li>どの引数をどう変えると，必ずその場合へ近づくか．</li>
 <li>小さい問題の答えを受け取った後，どの処理をして返すか．</li>
 </ol>
-<p>例えば合計なら「0〜nの合計を返す」「n=0なら0」「n−1へ進む」「戻った答えにnを足す」となります．階乗と形は似ていますが，基底値も組み合わせる演算も違います．見た目だけでコードを流用しないようにしましょう．</p>
+<p>例えば合計なら「0〜<code>n</code>の合計を返す」「<code>n=0</code>なら0」「<code>n</code>−1へ進む」「戻った答えに<code>n</code>を足す」となります．階乗と形は似ていますが，基底値も組み合わせる演算も違います．見た目だけでコードを流用しないようにしましょう．</p>
 <h2 id="2">2　呼び出しと復帰<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p>階乗の3!は次のように進みます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>factorial(3) = 3 × factorial(2)   計算の続きを待つ
@@ -2725,7 +2725,7 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>factorial(2) = 2
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>factorial(3) = 6
 </code></pre></div>
-<p>各呼び出しの仮引数nは別々です．深い呼び出しでnが0になっても，待っている呼び出しのnまで0になるわけではありません．</p>
+<p>各呼び出しの仮引数<code>n</code>は別々です．深い呼び出しで<code>n</code>が0になっても，待っている呼び出しの<code>n</code>まで0になるわけではありません．</p>
 <h3 id="21">2.1　待っている計算は消えない<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><code>return n * factorial(n - 1);</code>は「次の関数を呼んだら，この関数はもう終わり」という意味ではありません．呼び出しの結果が届いてから掛け算をし，その値を返します．次のように分けて読むと分かりやすくなります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #959077">/* factorialの再帰部分と同じ意味の断片 */</span>
@@ -2744,36 +2744,36 @@
 </thead>
 <tbody>
 <tr>
-<td>factorial(0)</td>
+<td><code>factorial(0)</code></td>
 <td>呼ばない</td>
 <td>なし</td>
 <td>1</td>
 </tr>
 <tr>
-<td>factorial(1)</td>
+<td><code>factorial(1)</code></td>
 <td>0</td>
 <td>1</td>
-<td>1×1 = 1</td>
+<td>1×<code>1 = 1</code></td>
 </tr>
 <tr>
-<td>factorial(2)</td>
+<td><code>factorial(2)</code></td>
 <td>1</td>
 <td>1</td>
-<td>2×1 = 2</td>
+<td>2×<code>1 = 2</code></td>
 </tr>
 <tr>
-<td>factorial(3)</td>
+<td><code>factorial(3)</code></td>
 <td>2</td>
 <td>2</td>
-<td>3×2 = 6</td>
+<td>3×<code>2 = 6</code></td>
 </tr>
 </tbody>
 </table>
 <p>呼び出し順に表を上から埋めようとすると，まだ結果が分かりません．基底条件まで進み，復帰順に戻り値を埋めます．再帰が難しく見える理由の1つは，この2方向を同時に考えようとすることです．</p>
 <h3 id="22">2.2　引数のコピーと共有するデータ<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>整数nを値渡しした場合，各呼び出しは独立したnを持ちます．一方，ポインタを渡す場合には，ポインタ変数はコピーされても参照先が共有されます．呼び出し回数を1つのカウンタへ蓄積する例では，この共有を意図して使います．</p>
-<p>static局所変数も呼び出しごとに新しく作られる変数ではありません．第13回で学んだとおり，すべての呼び出しから同じオブジェクトを使います．再帰途中の値を保存するつもりで不用意にstaticを付けると，深い呼び出しで上書きされることがあります．</p>
-<p>「同じ名前nがある」と「同じ変数を共有している」は別です．呼び出し番号や深さを添えて，n₁，n₂のように紙へ書き分けると追跡しやすくなります．</p>
+<p>整数<code>n</code>を値渡しした場合，各呼び出しは独立した<code>n</code>を持ちます．一方，ポインタを渡す場合には，ポインタ変数はコピーされても参照先が共有されます．呼び出し回数を1つのカウンタへ蓄積する例では，この共有を意図して使います．</p>
+<p><code>static</code>局所変数も呼び出しごとに新しく作られる変数ではありません．第13回で学んだとおり，すべての呼び出しから同じオブジェクトを使います．再帰途中の値を保存するつもりで不用意に<code>static</code>を付けると，深い呼び出しで上書きされることがあります．</p>
+<p>「同じ名前<code>n</code>がある」と「同じ変数を共有している」は別です．呼び出し番号や深さを添えて，<code>n</code>₁，<code>n</code>₂のように紙へ書き分けると追跡しやすくなります．</p>
 <h2 id="3">3　例：階乗と最大公約数<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">recursion.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-2"> 2</a></span>
@@ -2819,24 +2819,24 @@
 <a id="__codelineno-3-21" name="__codelineno-3-21"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-3-22" name="__codelineno-3-22"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/14/recursion.c">recursion.c</a></p>
+<p><a download="download" href="sample/14/recursion.c"><code>recursion.c</code></a></p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>5! = 120
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gcd=6
 </code></pre></div>
-<p>階乗は急速に大きくなります．この例では，unsigned long longに結果が収まる<strong>0〜20</strong>に限定します．unsignedだから無限に計算できるわけではありません．関数の引数nもこの範囲という契約です．</p>
-<p>最大公約数はユークリッドの互除法を使います．bが0ならaを返し，そうでなければ(a, b)を(b, a % b)に変えます．bが正なら余りはbより小さく，0へ近づきます．<strong>bが0か調べてから剰余を求める</strong>ので，0による剰余を避けられます．この講義ではgcd(0, 0)は数学的な最大公約数の入力対象外とします．</p>
+<p>階乗は急速に大きくなります．この例では，<code>unsigned long long</code>に結果が収まる<strong>0〜20</strong>に限定します．<code>unsigned</code>だから無限に計算できるわけではありません．関数の引数<code>n</code>もこの範囲という契約です．</p>
+<p>最大公約数はユークリッドの互除法を使います．<code>b</code>が0なら<code>a</code>を返し，そうでなければ<code>(a, b)</code>を<code>(b, a % b)</code>に変えます．<code>b</code>が正なら余りは<code>b</code>より小さく，0へ近づきます．<strong><code>b</code>が0か調べてから剰余を求める</strong>ので，0による剰余を避けられます．この講義では<code>gcd(0, 0)</code>は数学的な最大公約数の入力対象外とします．</p>
 <h3 id="31">3.1　階乗の型と上限<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p>20!は2432902008176640000です．一般的な64ビットunsigned long longの最大値18446744073709551615以下ですが，21!はそれを超えます．C17でunsigned long longが少なくともこの64ビット相当の範囲を持つことを踏まえ，この教材ではより広い型の環境でも0〜20に統一します．</p>
-<p>戻り値だけを広い型にしても，途中を狭い型で計算すれば安全とは限りません．今回の積はfactorialの戻り値がunsigned long longなので，nもその型へ変換されて乗算されます．printfは戻り値に%llu，unsigned intのnには%uを使います．</p>
+<p>20!は2432902008176640000です．一般的な64ビット<code>unsigned long long</code>の最大値18446744073709551615以下ですが，21!はそれを超えます．C17で<code>unsigned long long</code>が少なくともこの64ビット相当の範囲を持つことを踏まえ，この教材ではより広い型の環境でも0〜20に統一します．</p>
+<p>戻り値だけを広い型にしても，途中を狭い型で計算すれば安全とは限りません．今回の積は<code>factorial</code>の戻り値が<code>unsigned long long</code>なので，<code>n</code>もその型へ変換されて乗算されます．<code>printf</code>は戻り値に<code>%llu</code>，<code>unsigned int</code>の<code>n</code>には<code>%u</code>を使います．</p>
 <p>符号なし整数のあふれは，計算が止まって必ずエラーになるわけではありません．小さな値へ回り込んだ出力を正解として扱わないように，計算前に範囲を検査します．符号付き整数のオーバーフローにも依存しません．</p>
-<p>この例のfactorial自身は0〜20を前提とする内部関数です．mainの検査を通らない別の呼び出しを追加するなら，その場所でも契約を守ります．外から使うAPIにする場合には，成功・失敗を返す入口と，再帰の本体を分ける方法があります．演習で扱います．</p>
+<p>この例の<code>factorial</code>自身は0〜20を前提とする内部関数です．<code>main</code>の検査を通らない別の呼び出しを追加するなら，その場所でも契約を守ります．外から使うAPIにする場合には，成功・失敗を返す入口と，再帰の本体を分ける方法があります．演習で扱います．</p>
 <h3 id="32">3.2　互除法の変化を追う<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>48と18の最大公約数は，18と12，12と6，6と0の最大公約数と等しくなります．</p>
 <table>
 <thead>
 <tr>
-<th>a</th>
-<th>b</th>
+<th><code>a</code></th>
+<th><code>b</code></th>
 <th>次の呼び出し</th>
 <th>戻り値</th>
 </tr>
@@ -2845,19 +2845,19 @@
 <tr>
 <td>48</td>
 <td>18</td>
-<td>gcd(18, 12)</td>
+<td><code>gcd(18, 12)</code></td>
 <td>6</td>
 </tr>
 <tr>
 <td>18</td>
 <td>12</td>
-<td>gcd(12, 6)</td>
+<td><code>gcd(12, 6)</code></td>
 <td>6</td>
 </tr>
 <tr>
 <td>12</td>
 <td>6</td>
-<td>gcd(6, 0)</td>
+<td><code>gcd(6, 0)</code></td>
 <td>6</td>
 </tr>
 <tr>
@@ -2868,13 +2868,13 @@
 </tr>
 </tbody>
 </table>
-<p>a=q×b+rと書けるとき，aとbをともに割り切る数はbとrも割り切ります．逆方向も成り立つので，公約数の集合が変わりません．bが正のとき0≤r&lt;bなので，第2引数は厳密に小さくなります．これが「答えを保つ理由」と「止まる理由」です．</p>
-<p>gcd(18,48)では最初の余りが18になり，次はgcd(48,18)です．a&lt;bでも同じ関数を使えます．gcd(7,0)とgcd(0,7)はいずれも7です．(0,0)では本体が0を返す形でも，この授業の数学的な入力範囲としては拒否します．実装が何か返すことと，仕様上有効な入力であることを区別しましょう．</p>
+<p><code>a=q</code>×<code>b+r</code>と書けるとき，<code>a</code>と<code>b</code>をともに割り切る数は<code>b</code>と<code>r</code>も割り切ります．逆方向も成り立つので，公約数の集合が変わりません．<code>b</code>が正のとき0≤<code>r&lt;b</code>なので，第2引数は厳密に小さくなります．これが「答えを保つ理由」と「止まる理由」です．</p>
+<p><code>gcd(18,48)</code>では最初の余りが18になり，次は<code>gcd(48,18)</code>です．<code>a&lt;b</code>でも同じ関数を使えます．<code>gcd(7,0)</code>と<code>gcd(0,7)</code>はいずれも7です．(0,0)では本体が0を返す形でも，この授業の数学的な入力範囲としては拒否します．実装が何か返すことと，仕様上有効な入力であることを区別しましょう．</p>
 <h2 id="4">4　スタックと呼び出し深さ<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>一般的な実装は，関数呼び出しごとの局所変数や戻る位置をスタックで管理します．途中の計算を残して次の関数を呼び，終わったら逆順に戻ります．深い再帰では使用する領域も増える場合があり，限界を超えると失敗します．</p>
 <p>ただし，最適化で呼び出し方が変わる場合があるため，すべてのCの再帰が必ず同じ物理的スタックを使うとは限りません．「深さはいくつまで安全か」を一律の数字で決めず，大きな入力には反復や別のアルゴリズムも検討します．</p>
 <h3 id="41">4.1　スタックフレームの概念図<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>呼び出しごとに必要な情報のまとまりをスタックフレームと呼びます．factorial(3)からfactorial(0)まで進んだ時点を概念的に表すと，次のようになります．</p>
+<p>呼び出しごとに必要な情報のまとまりをスタックフレームと呼びます．<code>factorial(3)</code>から<code>factorial(0)</code>まで進んだ時点を概念的に表すと，次のようになります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>現在実行中   factorial(0)  n=0，1を返す
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>待機中       factorial(1)  n=1，戻った値に1を掛ける
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>待機中       factorial(2)  n=2，戻った値に2を掛ける
@@ -2882,12 +2882,12 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>呼び出し元   main          最終結果を表示する
 </code></pre></div>
 <p>一番後に呼ばれた関数から先に戻ります．これを後入れ先出し（LIFO）といいます．図の上下は説明用であり，実際のアドレスの増減方向を表すものではありません．戻る場所や保存する値の実装は，処理系・最適化・呼び出し規約によって変わります．</p>
-<p>基底条件でreturnしても，mainへ一気に戻るわけではありません．1つ手前の呼び出しへ戻り，その関数の続きを実行します．必要な計算を終えるたびに，もう1段戻ります．</p>
+<p>基底条件で<code>return</code>しても，<code>main</code>へ一気に戻るわけではありません．1つ手前の呼び出しへ戻り，その関数の続きを実行します．必要な計算を終えるたびに，もう1段戻ります．</p>
 <h3 id="42">4.2　呼び出し回数と最大深さ<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<p>本講義では，深さを「同時に有効な対象関数の呼び出しの個数」とし，最初の呼び出しを深さ1と数えます．mainやprintfは含めません．factorial(3)なら総呼び出し回数4，最大深さも4です．しかし，1回から2つの再帰呼び出しへ分かれる場合には一致しません．</p>
+<p>本講義では，深さを「同時に有効な対象関数の呼び出しの個数」とし，最初の呼び出しを深さ1と数えます．<code>main</code>や<code>printf</code>は含めません．<code>factorial(3)</code>なら総呼び出し回数4，最大深さも4です．しかし，1回から2つの再帰呼び出しへ分かれる場合には一致しません．</p>
 <p>各段の局所配列が大きければ，浅い再帰でも多くの領域を使います．「再帰が100回だから大丈夫」と回数だけで判断しないことが大切です．逆に，小さい作業領域でも，深さが入力に比例して非常に大きくなる設計には注意が必要です．</p>
 <h3 id="43">4.3　スタックとヒープの後始末は別<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
-<p>再帰から戻ると，通常の自動変数の寿命は終了します．これらへfreeを呼んではいけません．一方，各呼び出しでmallocした領域は，returnだけでは自動解放されません．再帰だから第13回の所有権の規則が変わるわけではありません．</p>
+<p>再帰から戻ると，通常の自動変数の寿命は終了します．これらへ<code>free</code>を呼んではいけません．一方，各呼び出しで<code>malloc</code>した領域は，<code>return</code>だけでは自動解放されません．再帰だから第13回の所有権の規則が変わるわけではありません．</p>
 <p>また，呼び出し先が有効な間は，待っている呼び出し元の自動変数もまだ生きています．生存中の変数へのポインタを下位へ渡して使うことはできますが，寿命が終わった呼び出しの局所変数のアドレスを保存し続けてはいけません．</p>
 <div class="admonition warning">
 <p class="admonition-title">止まらない再帰は実行課題にしない</p>
@@ -2940,7 +2940,7 @@
 <a id="__codelineno-6-22" name="__codelineno-6-22"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-6-23" name="__codelineno-6-23"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/14/trace.c">trace.c</a></p>
+<p><a download="download" href="sample/14/trace.c"><code>trace.c</code></a></p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>enter 3
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>enter 2
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>enter 1
@@ -2951,25 +2951,25 @@
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>leave 3: 6
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>sum=6
 </code></pre></div>
-<p>Visual Studioでは再帰呼び出しの行にブレークポイントを置き，F5でデバッグを開始できます．「呼び出し履歴」で待っている呼び出しを見て，F11でステップインします．その場のnと呼び出し履歴を対応させましょう．</p>
+<p>Visual Studioでは再帰呼び出しの行にブレークポイントを置き，<code>F5</code>でデバッグを開始できます．「呼び出し履歴」で待っている呼び出しを見て，<code>F11</code>でステップインします．その場の<code>n</code>と呼び出し履歴を対応させましょう．</p>
 <h3 id="51">5.1　表示を置く位置<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
-<p>enterは再帰呼び出しより前にあるので，3，2，1，0の順に表示されます．leaveは子の呼び出しが終わった後にあるので，0，1，2，3の順になります．sum_to(0)のleaveは基底条件の中にあり，他のleaveと分けて書いてあります．</p>
-<p><code>int result = n + sum_to(n - 1);</code>では，右辺の再帰呼び出しが戻るまでresultの初期化は完了しません．デバッガが未初期化のresultを表示しても，その数値を計算の途中結果として読まないでください．</p>
-<p>この例はnを0〜100に制限し，最大合計5050をintで扱います．入力を検査してから再帰へ入ります．n=0でも1回は関数を呼びますが，再帰呼び出しを追加しません．</p>
+<p><code>enter</code>は再帰呼び出しより前にあるので，3，2，1，0の順に表示されます．<code>leave</code>は子の呼び出しが終わった後にあるので，0，1，2，3の順になります．<code>sum_to(0)</code>の<code>leave</code>は基底条件の中にあり，他の<code>leave</code>と分けて書いてあります．</p>
+<p><code>int result = n + sum_to(n - 1);</code>では，右辺の再帰呼び出しが戻るまで<code>result</code>の初期化は完了しません．デバッガが未初期化の<code>result</code>を表示しても，その数値を計算の途中結果として読まないでください．</p>
+<p>この例は<code>n</code>を0〜100に制限し，最大合計5050を<code>int</code>で扱います．入力を検査してから再帰へ入ります．<code>n=0</code>でも1回は関数を呼びますが，再帰呼び出しを追加しません．</p>
 <h3 id="52-visual-studio">5.2　Visual Studioでの観察手順<a class="headerlink" href="#52-visual-studio" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Debug構成でビルドし，sum_to内のifの行へF9でブレークポイントを置く．</li>
-<li>F5で開始し，ローカル変数のnを確認する．</li>
+<li>Debug構成でビルドし，<code>sum_to</code>内の<code>if</code>の行へ<code>F9</code>でブレークポイントを置く．</li>
+<li><code>F5</code>で開始し，ローカル変数の<code>n</code>を確認する．</li>
 <li>「デバッグ → ウィンドウ → 呼び出し履歴」を開く．</li>
-<li>次の再帰呼び出しへF11で入り，nが1減ることと，履歴に同じ関数が増えることを確認する．</li>
-<li>n=0に到達したら，呼び出し履歴から待機中のsum_toを選び，その呼び出しのnと比較する．</li>
-<li>復帰を進め，resultが1，3，6と確定していくことを確認する．</li>
+<li>次の再帰呼び出しへ<code>F11</code>で入り，<code>n</code>が1減ることと，履歴に同じ関数が増えることを確認する．</li>
+<li><code>n=0</code>に到達したら，呼び出し履歴から待機中の<code>sum_to</code>を選び，その呼び出しの<code>n</code>と比較する．</li>
+<li>復帰を進め，<code>result</code>が1，3，6と確定していくことを確認する．</li>
 </ol>
-<p>履歴上の行を選ぶ操作は，調べる呼び出しの文脈を変えるだけで，実行時間を巻き戻す操作ではありません．F10は呼び出し先全体を実行して先へ進むため，再帰内部を追いたい行ではF11を使います．printf内部へ入りたくない場面ではF10を使い分けます．操作の詳細は<a href="https://learn.microsoft.com/en-us/visualstudio/debugger/getting-started-with-the-debugger-cpp?view=vs-2022">Microsoftのデバッガ入門</a>も参照できます．</p>
+<p>履歴上の行を選ぶ操作は，調べる呼び出しの文脈を変えるだけで，実行時間を巻き戻す操作ではありません．<code>F10</code>は呼び出し先全体を実行して先へ進むため，再帰内部を追いたい行では<code>F11</code>を使います．<code>printf</code>内部へ入りたくない場面では<code>F10</code>を使い分けます．操作の詳細は<a href="https://learn.microsoft.com/en-us/visualstudio/debugger/getting-started-with-the-debugger-cpp?view=vs-2022">Microsoftのデバッガ入門</a>も参照できます．</p>
 <h2 id="6">6　再帰と繰り返し<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
-<p>階乗や合計はforでも簡単に書けます．再帰は木構造など「同じ形の小さい問題」に分かれる処理に向いていますが，常に速いとは限りません．再帰でフィボナッチ数を素朴に求めると同じ値を何度も計算します．<strong>呼び出し回数</strong>と<strong>最大の深さ</strong>も違う量です．1回の呼び出しから2回呼べば，深さが小さくても総回数は増えます．</p>
+<p>階乗や合計は<code>for</code>でも簡単に書けます．再帰は木構造など「同じ形の小さい問題」に分かれる処理に向いていますが，常に速いとは限りません．再帰でフィボナッチ数を素朴に求めると同じ値を何度も計算します．<strong>呼び出し回数</strong>と<strong>最大の深さ</strong>も違う量です．1回の呼び出しから2回呼べば，深さが小さくても総回数は増えます．</p>
 <h3 id="61">6.1　何を保存すれば反復にできるか<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
-<p>互除法では，必要なのは現在のaとbです．余りを一時変数に保存して(a,b)を更新すれば，whileで書けます．階乗では，ここまでの積を変数へ蓄えながら1からnまで進みます．再帰の引数が変化することと，反復の状態変数が変化することを対応させましょう．</p>
+<p>互除法では，必要なのは現在の<code>a</code>と<code>b</code>です．余りを一時変数に保存して<code>(a,b)</code>を更新すれば，<code>while</code>で書けます．階乗では，ここまでの積を変数へ蓄えながら1から<code>n</code>まで進みます．再帰の引数が変化することと，反復の状態変数が変化することを対応させましょう．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #959077">/* nは0〜20を前提とする */</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">factorial_loop</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n)</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #F8F8F2">{</span>
@@ -2982,10 +2982,10 @@
 </code></pre></div>
 <p>0ならループを1回も実行せず1を返します．この例では反復のための追加領域が入力に比例して増えません．ただし，木の走査のように「後で戻って右側も処理する」必要がある場合は，反復版でも明示的なスタックなどに続きを記録する必要があります．何でも1つのカウンタだけに置き換えられるとは限りません．</p>
 <h3 id="62">6.2　末尾再帰<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
-<p>gcdの<code>return gcd(b, a % b);</code>は，再帰の答えを受け取った後の演算がありません．このように，再帰呼び出しが最後の処理になる形を末尾再帰と呼びます．一方，階乗の<code>return n * factorial(n - 1);</code>では戻った後に掛け算が残るため，この形の末尾再帰ではありません．</p>
+<p><code>gcd</code>の<code>return gcd(b, a % b);</code>は，再帰の答えを受け取った後の演算がありません．このように，再帰呼び出しが最後の処理になる形を末尾再帰と呼びます．一方，階乗の<code>return n * factorial(n - 1);</code>では戻った後に掛け算が残るため，この形の末尾再帰ではありません．</p>
 <p>処理系が末尾再帰を反復に相当する処理へ最適化する場合がありますが，C17はその最適化を保証しません．「末尾再帰に書けばスタックが増えない」と仮定して大きな入力を与えないでください．深さを避けたい場合は，意図を明示して反復にする方法があります．</p>
 <h2 id="7">7　分岐する再帰と重複計算<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
-<p>フィボナッチ数をF(0)=0，F(1)=1，F(n)=F(n−1)+F(n−2)と定義します．数列の先頭は0，1，1，2，3，5，8です．定義をそのまま関数にすると，1回の呼び出しから2つへ分かれます．</p>
+<p>フィボナッチ数を<code>F(0)=0</code>，<code>F(1)=1</code>，<code>F(n)=F(n</code>−<code>1)+F(n</code>−2)と定義します．数列の先頭は0，1，1，2，3，5，8です．定義をそのまま関数にすると，1回の呼び出しから2つへ分かれます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>fib(4)
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>├─ fib(3)
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>│  ├─ fib(2)
@@ -2996,9 +2996,9 @@
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>   ├─ fib(1)
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>   └─ fib(0)
 </code></pre></div>
-<p>fib(2)を2回計算しています．全体では9回呼び出しますが，左右の枝は順に処理するので，同時に9個を待機させるわけではありません．最も深い経路4→3→2→1は4個です．深さと総回数を別々に数えます．</p>
+<p><code>fib(2)</code>を2回計算しています．全体では9回呼び出しますが，左右の枝は順に処理するので，同時に9個を待機させるわけではありません．最も深い経路4→3→2→1は4個です．深さと総回数を別々に数えます．</p>
 <h3 id="71">7.1　呼び出し回数の漸化式<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
-<p>基底条件でも関数を呼んだ回数は1です．C(0)=C(1)=1とし，n≥2ではC(n)=1+C(n−1)+C(n−2)です．先頭の1は自分の呼び出しを表します．したがってC(2)=3，C(3)=5，C(4)=9，C(5)=15となります．</p>
+<p>基底条件でも関数を呼んだ回数は1です．C(0)=C(1)=1とし，<code>n</code>≥2ではC(n)=1+C(n−1)+C(n−2)です．先頭の1は自分の呼び出しを表します．したがってC(2)=3，C(3)=5，C(4)=9，C(5)=15となります．</p>
 <p>入力が大きくなると，単純な反復に比べて重複計算が急増します．返す答えの大きさだけでなく，計算に何回関数を呼ぶかも考える必要があります．授業では素朴な再帰版を0〜20に制限し，巨大な値で処理時間の限界を試しません．</p>
 <h3 id="72">7.2　順序と共有カウンタ<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <p><code>fib(n - 1) + fib(n - 2)</code>の左右を，Cが必ず左から計算するとは限りません．表示順や共有カウンタの観察を行う実装では，次のように文を分けて順序を明示します．</p>
@@ -3010,7 +3010,7 @@
 <h3 id="73">7.3　改善の方向<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
 <p>前の2項を保持して順に計算する反復なら，各項を一度ずつ求められます．計算済みの値を表へ保存して再利用するメモ化という方法もあります．ただし，メモ化は重複を減らす方法であり，再帰深さを必ずなくす方法ではありません．今回の演習では反復版との比較を行い，メモ化は考え方の紹介にとどめます．</p>
 <h2 id="8">8　木構造を再帰で走査する<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
-<p>再帰は，データ自体が同じ形の部分へ分かれる場面で役立ちます．根付き木には根（root）があり，根以外の各ノードには親が1つあります．子を持たないノードは葉（leaf）です．同じ親を持つノードは兄弟と呼びます．</p>
+<p>再帰は，データ自体が同じ形の部分へ分かれる場面で役立ちます．根付き木には根（<code>root</code>）があり，根以外の各ノードには親が1つあります．子を持たないノードは葉（<code>leaf</code>）です．同じ親を持つノードは兄弟と呼びます．</p>
 <p>二分木では，各ノードが左と右の最大2つの子を持ちます．一方の子がない場合もあり，「二分木ならすべての段が埋まる」とは限りません．最下段以外が埋まり，最下段が左から詰まった形は完全二分木と呼び，二分木全体の一部です．また，値の大小で配置する二分探索木とは別の概念です．</p>
 <h3 id="81">8.1　構造体のポインタでつなぐ<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>          1
@@ -3021,8 +3021,8 @@
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>   / \     /
 <a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>  4   5   9
 </code></pre></div>
-<p>この木では，1の左部分木も，2を根とする同じ形の問題として処理できます．子がない場所をNULLで表せば，NULLに来たら何もしないことが基底条件になります．</p>
-<p>Nodeは自分と同じ型へのポインタを持つ自己参照構造体です．本体の中にNodeそのものを無限に埋め込むのではなく，固定サイズのポインタを置いて他のノードを参照します．</p>
+<p>この木では，1の左部分木も，2を根とする同じ形の問題として処理できます．子がない場所を<code>NULL</code>で表せば，<code>NULL</code>に来たら何もしないことが基底条件になります．</p>
+<p><code>Node</code>は自分と同じ型へのポインタを持つ自己参照構造体です．本体の中に<code>Node</code>そのものを無限に埋め込むのではなく，固定サイズのポインタを置いて他のノードを参照します．</p>
 <h3 id="82">8.2　表示する場所で順序が変わる<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3034,17 +3034,17 @@
 </thead>
 <tbody>
 <tr>
-<td>行きがけ順（preorder）</td>
+<td>行きがけ順（<code>preorder</code>）</td>
 <td>子を処理する前</td>
 <td>自分 → 左 → 右</td>
 </tr>
 <tr>
-<td>通りがけ順（inorder）</td>
+<td>通りがけ順（<code>inorder</code>）</td>
 <td>左の後，右の前</td>
 <td>左 → 自分 → 右</td>
 </tr>
 <tr>
-<td>帰りがけ順（postorder）</td>
+<td>帰りがけ順（<code>postorder</code>）</td>
 <td>両方の子の後</td>
 <td>左 → 右 → 自分</td>
 </tr>
@@ -3157,19 +3157,19 @@
 <a id="__codelineno-12-52" name="__codelineno-12-52"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-12-53" name="__codelineno-12-53"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/14/tree.c">tree.c</a></p>
+<p><a download="download" href="sample/14/tree.c"><code>tree.c</code></a></p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>pre: 1 2 3 4 5 6 7 8 9 10
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>in: 4 3 5 2 6 1 9 8 7 10
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>post: 4 5 3 6 2 9 8 10 7 1
 </code></pre></div>
-<p>配列の添字0〜9と，ノードに保存した値1〜10を区別してください．nodes[0]の値は1です．初期化子{0}は，省略したポインタメンバをNULLに初期化します．これはcallocで全ビット0にすることと，型の規則としての説明が異なります．</p>
+<p>配列の添字0〜9と，ノードに保存した値1〜10を区別してください．<code>nodes[0]</code>の値は1です．初期化子{0}は，省略したポインタメンバを<code>NULL</code>に初期化します．これは<code>calloc</code>で全ビット0にすることと，型の規則としての説明が異なります．</p>
 <h3 id="83">8.3　停止の前提と寿命<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
-<p>この関数は，有限で循環のない木を渡すことを前提とします．子を親へつなぎ直すと，NULLへ到達しない経路ができるため，この単純な走査では止まりません．一般のグラフでは，訪問済みかどうかを記録するなど別の仕組みが必要です．循環を作って実行する実験は行いません．</p>
-<p>各ノードはmainの局所配列の要素ですが，走査中はmainも終了していないため有効です．今回はmallocしていないので，ノードへfreeを呼んではいけません．再帰でたどることと，動的確保していることは別です．</p>
-<p>ノード数をN，最長経路上のノード数をhとすると，各実ノードを一度ずつ処理する仕事量はNに比例します．呼び出しの最大深さはhに比例し，NULLの呼び出しも数える場合はh+1です．片側だけに偏る木ではhがNになり，少ない分岐でも深い再帰になり得ます．</p>
+<p>この関数は，有限で循環のない木を渡すことを前提とします．子を親へつなぎ直すと，<code>NULL</code>へ到達しない経路ができるため，この単純な走査では止まりません．一般のグラフでは，訪問済みかどうかを記録するなど別の仕組みが必要です．循環を作って実行する実験は行いません．</p>
+<p>各ノードは<code>main</code>の局所配列の要素ですが，走査中は<code>main</code>も終了していないため有効です．今回は<code>malloc</code>していないので，ノードへ<code>free</code>を呼んではいけません．再帰でたどることと，動的確保していることは別です．</p>
+<p>ノード数を<code>N</code>，最長経路上のノード数を<code>h</code>とすると，各実ノードを一度ずつ処理する仕事量は<code>N</code>に比例します．呼び出しの最大深さは<code>h</code>に比例し，<code>NULL</code>の呼び出しも数える場合は<code>h+1</code>です．片側だけに偏る木では<code>h</code>が<code>N</code>になり，少ない分岐でも深い再帰になり得ます．</p>
 <h2 id="9">9　安全な再帰の確認方法<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
 <h3 id="91">9.1　停止と資源を別々に調べる<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
-<p>数学的に有限回で止まることと，現実の資源の範囲内で計算できることは別です．nが1ずつ減るから必ず問題ない，とは限りません．数値範囲，呼び出し回数，深さ，1段あたりの領域を分けて確認します．</p>
+<p>数学的に有限回で止まることと，現実の資源の範囲内で計算できることは別です．<code>n</code>が1ずつ減るから必ず問題ない，とは限りません．数値範囲，呼び出し回数，深さ，1段あたりの領域を分けて確認します．</p>
 <table>
 <thead>
 <tr>
@@ -3182,14 +3182,14 @@
 <tbody>
 <tr>
 <td>基底条件</td>
-<td>n=0</td>
-<td>b=0</td>
-<td>p=NULL</td>
+<td><code>n=0</code></td>
+<td><code>b=0</code></td>
+<td><code>p=NULL</code></td>
 </tr>
 <tr>
 <td>小さくなるもの</td>
-<td>n</td>
-<td>第2引数b</td>
+<td><code>n</code></td>
+<td>第2引数<code>b</code></td>
 <td>たどる部分木</td>
 </tr>
 <tr>
@@ -3200,7 +3200,7 @@
 </tr>
 <tr>
 <td>戻って行う処理</td>
-<td>nを掛ける</td>
+<td><code>n</code>を掛ける</td>
 <td>値をそのまま返す</td>
 <td>走査順に応じて表示・次の子</td>
 </tr>
@@ -3222,15 +3222,15 @@
 <li>再帰を止めるためにはどの2点が必要か．</li>
 <li>各呼び出しの仮引数は同じ変数か．</li>
 <li>呼び出し回数と最大の深さは同じか．</li>
-<li>gcdでb==0を剰余計算より先に調べるのはなぜか．</li>
-<li>factorialの掛け算は，再帰呼び出しの前と後のどちらで完成するか．</li>
-<li>static変数は再帰呼び出しごとに独立しているか．</li>
-<li>inorderの出力は，任意の二分木で必ず昇順になるか．</li>
+<li><code>gcd</code>で<code>b==0</code>を剰余計算より先に調べるのはなぜか．</li>
+<li><code>factorial</code>の掛け算は，再帰呼び出しの前と後のどちらで完成するか．</li>
+<li><code>static</code>変数は再帰呼び出しごとに独立しているか．</li>
+<li><code>inorder</code>の出力は，任意の二分木で必ず昇順になるか．</li>
 <li>有限回で停止する再帰なら，どんな入力でも実行して安全か．</li>
 </ol>
 <details class="note">
 <summary>確認の要点</summary>
-<p>基底条件とそこへ近づく変化が必要です．通常の仮引数は呼び出しごとに別ですが，staticやポインタの参照先は共有され得ます．階乗は戻った後に掛け算をし，互除法は0による剰余を先の条件で避けます．分岐する再帰では回数と深さが異なります．inorderは大小関係を保証する二分探索木でなければ昇順とは限りません．停止の証明とは別に，数値と資源の範囲も確認します．</p>
+<p>基底条件とそこへ近づく変化が必要です．通常の仮引数は呼び出しごとに別ですが，<code>static</code>やポインタの参照先は共有され得ます．階乗は戻った後に掛け算をし，互除法は0による剰余を先の条件で避けます．分岐する再帰では回数と深さが異なります．<code>inorder</code>は大小関係を保証する二分探索木でなければ昇順とは限りません．停止の証明とは別に，数値と資源の範囲も確認します．</p>
 </details>
 <p><a class="md-button md-button--primary" href="ex14.html">演習へ</a>
 <a href="index.html">全体の目次</a></p>

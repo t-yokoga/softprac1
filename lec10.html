@@ -2504,7 +2504,7 @@
 <h2 id="1">1　ファイルの入口と出口<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="environment">前回までとのつながり<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
 <p>第7回では標準入力・標準出力，第8・9回ではポインタと配列を学びました．今回はプログラムが終了しても残るデータを，ファイルへ保存したり読み戻したりします．入力データを毎回ソースへ書き直すのではなく，同じプログラムに違うファイルを渡せるようにします．</p>
-<p>今回の例はWindowsのVisual Studio，C17，.cファイルで実行します．ソースを書くエディタ，実行するプログラム，データを保存するフォルダを区別してください．ファイルを「プロジェクトへ追加すること」と「実行時に正しい場所へ保存すること」は別です．</p>
+<p>今回の例はWindowsのVisual Studio，C17，<code>.c</code>ファイルで実行します．ソースを書くエディタ，実行するプログラム，データを保存するフォルダを区別してください．ファイルを「プロジェクトへ追加すること」と「実行時に正しい場所へ保存すること」は別です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>起動時の引数：input.txt
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>        |
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        v
@@ -2529,32 +2529,32 @@
 <tbody>
 <tr>
 <td>開く</td>
-<td>fopen(名前, モード)</td>
-<td>失敗ならNULL</td>
+<td><code>fopen(</code>名前, モード)</td>
+<td>失敗なら<code>NULL</code></td>
 </tr>
 <tr>
 <td>1文字読む</td>
-<td>fgetc(fp)</td>
-<td>intで受け，EOFを調べる</td>
+<td><code>fgetc(fp)</code></td>
+<td><code>int</code>で受け，<code>EOF</code>を調べる</td>
 </tr>
 <tr>
 <td>行を読む</td>
-<td>fgets(buf, 容量, fp)</td>
-<td>成功ならbuf，失敗・入力終了ならNULL</td>
+<td><code>fgets(buf,</code> 容量<code>, fp)</code></td>
+<td>成功なら<code>buf</code>，失敗・入力終了なら<code>NULL</code></td>
 </tr>
 <tr>
 <td>書式付きで書く</td>
-<td>fprintf(fp, ...)</td>
+<td><code>fprintf(fp, ...)</code></td>
 <td>負の戻り値はエラー</td>
 </tr>
 <tr>
 <td>閉じる</td>
-<td>fclose(fp)</td>
-<td>成功は0，失敗はEOF</td>
+<td><code>fclose(fp)</code></td>
+<td>成功は0，失敗は<code>EOF</code></td>
 </tr>
 </tbody>
 </table>
-<p>fgetcがEOFを返した後，ferrorでエラーか確認します．<code>while (!feof(fp))</code> で先に終了を予測するのではなく，読み取り関数の戻り値でループを制御します．最後に改行がないファイルもあり得ます．</p>
+<p><code>fgetc</code>が<code>EOF</code>を返した後，<code>ferror</code>でエラーか確認します．<code>while (!feof(fp))</code> で先に終了を予測するのではなく，読み取り関数の戻り値でループを制御します．最後に改行がないファイルもあり得ます．</p>
 <table>
 <thead>
 <tr>
@@ -2564,30 +2564,30 @@
 </thead>
 <tbody>
 <tr>
-<td>r</td>
+<td><code>r</code></td>
 <td>既存ファイルを読む</td>
 </tr>
 <tr>
-<td>w</td>
+<td><code>w</code></td>
 <td>新規作成または既存内容を消して書く</td>
 </tr>
 <tr>
-<td>a</td>
+<td><code>a</code></td>
 <td>末尾へ追記する</td>
 </tr>
 <tr>
-<td>rb，wb</td>
+<td><code>rb</code>，<code>wb</code></td>
 <td>変換をしないバイナリの読み・書き</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="admonition-title">wとwbは既存ファイルを上書きする</p>
-<p>練習用の新しいフォルダで，指定した出力名だけを使います．大切なデータを出力先に指定しないでください．閉じる際に書き込みが失敗する場合もあるため，fcloseも検査します．</p>
+<p>練習用の新しいフォルダで，指定した出力名だけを使います．大切なデータを出力先に指定しないでください．閉じる際に書き込みが失敗する場合もあるため，<code>fclose</code>も検査します．</p>
 </div>
-<h3 id="file">FILEとファイル名は別のもの<a class="headerlink" href="#file" title="Permanent link">&para;</a></h3>
-<p>ファイル名は<code>"input.txt"</code>のような文字列，<code>FILE *fp</code>は開いたストリームを扱うものです．fpへファイル名のアドレスを代入しても，ファイルは開けません．FILEの内部構造を自分で操作せず，stdio.hの関数へ渡します．</p>
-<p><code>FILE *</code>の宣言だけではファイルは開かれません．fopenが成功して初めて使えます．閉じた後は，同じfpをfgetcやfprintfへ渡したり，もう一度fcloseしたりしてはいけません．必要なら再びfopenし，新しい結果を使います．</p>
+<h3 id="file"><code>FILE</code>とファイル名は別のもの<a class="headerlink" href="#file" title="Permanent link">&para;</a></h3>
+<p>ファイル名は<code>"input.txt"</code>のような文字列，<code>FILE *fp</code>は開いたストリームを扱うものです．<code>fp</code>へファイル名のアドレスを代入しても，ファイルは開けません．<code>FILE</code>の内部構造を自分で操作せず，<code>stdio.h</code>の関数へ渡します．</p>
+<p><code>FILE *</code>の宣言だけではファイルは開かれません．<code>fopen</code>が成功して初めて使えます．閉じた後は，同じ<code>fp</code>を<code>fgetc</code>や<code>fprintf</code>へ渡したり，もう一度<code>fclose</code>したりしてはいけません．必要なら再び<code>fopen</code>し，新しい結果を使います．</p>
 <table>
 <thead>
 <tr>
@@ -2600,7 +2600,7 @@
 <tr>
 <td>開くのに失敗</td>
 <td>診断して終了する</td>
-<td>NULLを読み書き関数へ渡す</td>
+<td><code>NULL</code>を読み書き関数へ渡す</td>
 </tr>
 <tr>
 <td>読み取り途中に失敗</td>
@@ -2614,65 +2614,65 @@
 </tr>
 <tr>
 <td>正常に処理できた</td>
-<td>fcloseの結果も確認する</td>
+<td><code>fclose</code>の結果も確認する</td>
 <td>終了時の自動処理だけに頼る</td>
 </tr>
 </tbody>
 </table>
-<p>プログラムの配列はメモリ上のデータ，ファイルは保存先です．どちらかを変更しても，他方が自動的に同期されるわけではありません．また，出力はバッファに一時的に蓄えられることがあり，fprintfが成功してもfcloseで失敗が分かる場合があります．</p>
+<p>プログラムの配列はメモリ上のデータ，ファイルは保存先です．どちらかを変更しても，他方が自動的に同期されるわけではありません．また，出力はバッファに一時的に蓄えられることがあり，<code>fprintf</code>が成功しても<code>fclose</code>で失敗が分かる場合があります．</p>
 <h3 id="_2">標準入出力・ファイル・文字列の対応<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>処理</th>
 <th>標準入出力</th>
-<th>FILEを指定する</th>
+<th><code>FILE</code>を指定する</th>
 <th>文字列を対象にする</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1文字読む</td>
-<td>getchar</td>
-<td>fgetc，getc</td>
+<td><code>getchar</code></td>
+<td><code>fgetc</code>，<code>getc</code></td>
 <td>配列の添字で読む</td>
 </tr>
 <tr>
 <td>1文字書く</td>
-<td>putchar</td>
-<td>fputc，putc</td>
+<td><code>putchar</code></td>
+<td><code>fputc</code>，<code>putc</code></td>
 <td>配列の添字へ代入</td>
 </tr>
 <tr>
 <td>1行読む</td>
-<td>fgetsでstdinを指定</td>
-<td>fgets</td>
+<td><code>fgets</code>で<code>stdin</code>を指定</td>
+<td><code>fgets</code></td>
 <td>文字列中の改行などを調べる</td>
 </tr>
 <tr>
 <td>文字列を書く</td>
-<td>puts</td>
-<td>fputs</td>
+<td><code>puts</code></td>
+<td><code>fputs</code></td>
 <td>容量を確かめてコピー</td>
 </tr>
 <tr>
 <td>書式を指定して読む</td>
-<td>scanf</td>
-<td>fscanf</td>
-<td>sscanf</td>
+<td><code>scanf</code></td>
+<td><code>fscanf</code></td>
+<td><code>sscanf</code></td>
 </tr>
 <tr>
 <td>書式を指定して書く</td>
-<td>printf</td>
-<td>fprintf</td>
-<td>snprintf</td>
+<td><code>printf</code></td>
+<td><code>fprintf</code></td>
+<td><code>snprintf</code></td>
 </tr>
 </tbody>
 </table>
-<p>putsは末尾に改行を付けますが，fputsは自動では付けません．fgetsは読み取った改行を配列に残します．fgetcは文字をunsigned char相当の値としてintで返し，EOFと区別できるようにします．freadは後述のとおり，文字列の終端を自動で追加しません．</p>
-<p>getsは容量を指定できずC17にはないため使用しません．sprintfも出力先の容量を指定できないので，本講義ではsnprintfを選びます．strtokやstrcpyは行入力関数の代用品ではありません．関数名が似ていても，引数と戻り値を確認します．</p>
+<p><code>puts</code>は末尾に改行を付けますが，<code>fputs</code>は自動では付けません．<code>fgets</code>は読み取った改行を配列に残します．<code>fgetc</code>は文字を<code>unsigned char</code>相当の値として<code>int</code>で返し，<code>EOF</code>と区別できるようにします．<code>fread</code>は後述のとおり，文字列の終端を自動で追加しません．</p>
+<p><code>gets</code>は容量を指定できずC17にはないため使用しません．<code>sprintf</code>も出力先の容量を指定できないので，本講義では<code>snprintf</code>を選びます．<code>strtok</code>や<code>strcpy</code>は行入力関数の代用品ではありません．関数名が似ていても，引数と戻り値を確認します．</p>
 <h3 id="_3">書式付き入力を読むときの注意<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>例えば，入力が<code>ID:13</code>で，整数がintの範囲内だと分かっている場合は，次のように読めます．ここではfpは開くことに成功した読み取り用ストリームです．</p>
+<p>例えば，入力が<code>ID:13</code>で，整数が<code>int</code>の範囲内だと分かっている場合は，次のように読めます．ここでは<code>fp</code>は開くことに成功した読み取り用ストリームです．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> id;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (fscanf(fp, </span><span style="color: #E6DB74">&quot;ID:%d&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">id) </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;id=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, id);</span>
@@ -2680,40 +2680,40 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span style="color: #F8F8F2">    fprintf(stderr, </span><span style="color: #E6DB74">&quot;invalid ID</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>戻り値1は整数を1個代入できたという意味です．<code>ID:</code>などの文字は入力と一致する必要があります．0は書式不一致，最初の代入より前に入力終了や読み取り失敗があればEOFです．失敗したidを表示してはいけません．また，1が返っても行末まで正しいとは限りません．<code>ID:13x</code>なら整数13を読み，xが残る場合があります．</p>
-<p>任意の巨大な整数を%dで読むと，戻り値の確認だけでは範囲外変換を安全に処理できません．外部から来る数値は，容量を決めて文字列として読み，strtolで範囲まで確認する形を演習で使います．sscanfも文字列を対象とするだけで，すべての入力検証を自動で行うわけではありません．</p>
+<p>戻り値1は整数を1個代入できたという意味です．<code>ID:</code>などの文字は入力と一致する必要があります．0は書式不一致，最初の代入より前に入力終了や読み取り失敗があれば<code>EOF</code>です．失敗した<code>id</code>を表示してはいけません．また，1が返っても行末まで正しいとは限りません．<code>ID:13x</code>なら整数13を読み，<code>x</code>が残る場合があります．</p>
+<p>任意の巨大な整数を<code>%d</code>で読むと，戻り値の確認だけでは範囲外変換を安全に処理できません．外部から来る数値は，容量を決めて文字列として読み，<code>strtol</code>で範囲まで確認する形を演習で使います．<code>sscanf</code>も文字列を対象とするだけで，すべての入力検証を自動で行うわけではありません．</p>
 <h2 id="2">2　起動時に情報を渡す<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>int main(int argc, char *argv[])</code> とすると，起動時に指定した引数を受け取れます．通常，argcにはプログラム名も含む個数，argv[0]にはプログラム名，argv[1]以降には追加の引数が入ります．<code>argv[argc]</code> はNULLです．要素へアクセスする前にargcを確認します．</p>
+<p><code>int main(int argc, char *argv[])</code> とすると，起動時に指定した引数を受け取れます．通常，<code>argc</code>にはプログラム名も含む個数，<code>argv[0]</code>にはプログラム名，<code>argv[1]</code>以降には追加の引数が入ります．<code>argv[argc]</code> は<code>NULL</code>です．要素へアクセスする前に<code>argc</code>を確認します．</p>
 <h3 id="arguments">Visual Studioでの設定<a class="headerlink" href="#arguments" title="Permanent link">&para;</a></h3>
 <ol>
 <li>対象の<strong>プロジェクト</strong>を右クリックし，「プロパティ」を開く．</li>
 <li>実行に使う構成・プラットフォームを選び，「構成プロパティ → デバッグ」を開く．</li>
 <li>「コマンド引数」に <code>input.txt</code> と入力する．実行ファイル名は書かない．</li>
 <li>「作業ディレクトリ」を <code>$(ProjectDir)</code> にする．</li>
-<li>.vcxprojがあるフォルダにinput.txtを保存し，ビルドして実行する．</li>
+<li><code>.vcxproj</code>があるフォルダに<code>input.txt</code>を保存し，ビルドして実行する．</li>
 </ol>
 <p>空白を含むファイル名は <code>"my input.txt"</code> のように引用符で囲みます．相対パスはソースの位置ではなく<strong>作業ディレクトリ</strong>を基準に解決されます．設定項目の意味は<a href="https://learn.microsoft.com/en-us/cpp/build/reference/debugging-prop-pages?view=msvc-170">Microsoftのデバッグ設定</a>でも確認できます．</p>
-<h3 id="argcargv">argcとargvの対応を描く<a class="headerlink" href="#argcargv" title="Permanent link">&para;</a></h3>
-<p>コマンド引数欄へ<code>input.txt 42</code>と書くと，通常は次の関係になります．argv[0]の具体的な表示は環境によって異なります．</p>
+<h3 id="argcargv"><code>argc</code>と<code>argv</code>の対応を描く<a class="headerlink" href="#argcargv" title="Permanent link">&para;</a></h3>
+<p>コマンド引数欄へ<code>input.txt 42</code>と書くと，通常は次の関係になります．<code>argv[0]</code>の具体的な表示は環境によって異なります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>argc = 3
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>argv[0] --&gt; 実行プログラムを表す文字列
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>argv[1] --&gt; &quot;input.txt&quot;
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>argv[2] --&gt; &quot;42&quot;
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>argv[3] = NULL
 </code></pre></div>
-<p>argvは，第9回で扱ったポインタ配列の引数です．仮引数<code>char *argv[]</code>は<code>char **argv</code>とも書けます．argcとargvという名前自体は任意ですが，この慣用的な名前を使います．argv[2]は整数42ではなく，'4'，'2'，終端からなる文字列を指します．</p>
-<p>追加の引数がない通常の実行ではargcは1です．argv[1]はNULLなので，%sやstrtolへ渡してはいけません．空文字列を引数として渡す場合は違います．引数欄の<code>""</code>は，終端だけを持つ文字列を1個渡すので，argcは通常2になります．引数の個数が正しくても内容が正しいとは限りません．</p>
-<p><code>const char *filename = argv[1];</code>は文字列を複製する処理ではありません．同じ文字列の先頭アドレスを保存するだけです．引数を使う前に個数と内容を確認し，プログラムの使い方に合わなければstderrへ説明して終了します．</p>
+<p><code>argv</code>は，第9回で扱ったポインタ配列の引数です．仮引数<code>char *argv[]</code>は<code>char **argv</code>とも書けます．<code>argc</code>と<code>argv</code>という名前自体は任意ですが，この慣用的な名前を使います．<code>argv[2]</code>は整数42ではなく，<code>'4'</code>，<code>'2'</code>，終端からなる文字列を指します．</p>
+<p>追加の引数がない通常の実行では<code>argc</code>は1です．<code>argv[1]</code>は<code>NULL</code>なので，<code>%s</code>や<code>strtol</code>へ渡してはいけません．空文字列を引数として渡す場合は違います．引数欄の<code>""</code>は，終端だけを持つ文字列を1個渡すので，<code>argc</code>は通常2になります．引数の個数が正しくても内容が正しいとは限りません．</p>
+<p><code>const char *filename = argv[1];</code>は文字列を複製する処理ではありません．同じ文字列の先頭アドレスを保存するだけです．引数を使う前に個数と内容を確認し，プログラムの使い方に合わなければ<code>stderr</code>へ説明して終了します．</p>
 <h3 id="_4">複数の引数を順に扱う<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>次は，argv[1]以降を空白で区切って表示する処理です．mainの中で使います．プログラム名を表示対象から外すため，i=1から始めています．</p>
+<p>次は，<code>argv[1]</code>以降を空白で区切って表示する処理です．<code>main</code>の中で使います．プログラム名を表示対象から外すため，<code>i=1</code>から始めています．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> argc; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (i </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">) { putchar(</span><span style="color: #E6DB74">&#39; &#39;</span><span style="color: #F8F8F2">); }</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%s&quot;</span><span style="color: #F8F8F2">, argv[i]);</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span style="color: #F8F8F2">}</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span style="color: #F8F8F2">putchar(</span><span style="color: #E6DB74">&#39;\n&#39;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
-<p>引数欄が<code>red blue</code>ならred blue，引数なしなら改行だけです．<code>"red blue" green</code>は2つの引数です．引用符は空白を含む1つの引数を作るためのもので，通常その引用符自体はargvの文字列に含まれません．</p>
-<p>数値を合計する場合は各argv[i]を検査してから加えます．atoiやatofは簡潔ですが，変換失敗を十分に識別できないため，整数にはstrtol，実数にはstrtodを検討します．実数も変換の終点・範囲と，必要なら非有限値を検査します．atoiは「安全なstrtolの省略形」ではありません．</p>
+<p>引数欄が<code>red blue</code>なら<code>red blue</code>，引数なしなら改行だけです．<code>"red blue" green</code>は2つの引数です．引用符は空白を含む1つの引数を作るためのもので，通常その引用符自体は<code>argv</code>の文字列に含まれません．</p>
+<p>数値を合計する場合は各<code>argv[i]</code>を検査してから加えます．<code>atoi</code>や<code>atof</code>は簡潔ですが，変換失敗を十分に識別できないため，整数には<code>strtol</code>，実数には<code>strtod</code>を検討します．実数も変換の終点・範囲と，必要なら非有限値を検査します．<code>atoi</code>は「安全な<code>strtol</code>の省略形」ではありません．</p>
 <h3 id="_5">パスが見つからない場合<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2724,12 +2724,12 @@
 </thead>
 <tbody>
 <tr>
-<td>input.txtがあるのに開けない</td>
+<td><code>input.txt</code>があるのに開けない</td>
 <td>作業ディレクトリと実際の保存場所</td>
 </tr>
 <tr>
 <td>名前が一致しているように見える</td>
-<td>input.txt.txtのような二重拡張子</td>
+<td><code>input.txt.txt</code>のような二重拡張子</td>
 </tr>
 <tr>
 <td>空白を含む名前だけ失敗する</td>
@@ -2801,22 +2801,22 @@
 <a id="__codelineno-4-26" name="__codelineno-4-26"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-4-27" name="__codelineno-4-27"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/10/read_text.c">read_text.c</a></p>
-<p><code>_CRT_SECURE_NO_WARNINGS</code> は，ここで使用する標準Cのfopenに対するMSVCの非推奨診断を抑える指定です．<strong>ファイル先頭のインクルードより前</strong>に置きます．一般の警告を無効にする指定ではなく，処理を安全にする機能でもありません．この例では戻り値とエラーを明示的に検査します．</p>
+<p><a download="download" href="sample/10/read_text.c"><code>read_text.c</code></a></p>
+<p><code>_CRT_SECURE_NO_WARNINGS</code> は，ここで使用する標準Cの<code>fopen</code>に対するMSVCの非推奨診断を抑える指定です．<strong>ファイル先頭のインクルードより前</strong>に置きます．一般の警告を無効にする指定ではなく，処理を安全にする機能でもありません．この例では戻り値とエラーを明示的に検査します．</p>
 <p>診断の意味は<a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/security-features-in-the-crt?view=msvc-170">MicrosoftのCRTの説明</a>を参照してください．</p>
-<h3 id="read_textc">read_text.cの処理を追う<a class="headerlink" href="#read_textc" title="Permanent link">&para;</a></h3>
+<h3 id="read_textc"><code>read_text.c</code>の処理を追う<a class="headerlink" href="#read_textc" title="Permanent link">&para;</a></h3>
 <ol>
 <li>引数を1個受け取ったか，名前が空でないかを確認する．</li>
-<li>読み取りモードrで開き，NULLならperrorで理由を表示する．</li>
-<li>fgetcの戻り値をintへ受け取り，EOF以外をputcharへ渡す．</li>
-<li>ループを抜けたらferrorで読み取りエラーを調べる．</li>
-<li>fcloseで入力を閉じ，fflushで標準出力の書き込み結果も確認する．</li>
+<li>読み取りモード<code>r</code>で開き，<code>NULL</code>なら<code>perror</code>で理由を表示する．</li>
+<li><code>fgetc</code>の戻り値を<code>int</code>へ受け取り，<code>EOF</code>以外を<code>putchar</code>へ渡す．</li>
+<li>ループを抜けたら<code>ferror</code>で読み取りエラーを調べる．</li>
+<li><code>fclose</code>で入力を閉じ，<code>fflush</code>で標準出力の書き込み結果も確認する．</li>
 </ol>
-<p>空のファイルは失敗とは限りません．最初のfgetcがEOFを返し，ferrorが0なら，読み取るデータがなかっただけです．最後の文字が改行でなくても，文字を読むループはその文字を処理します．</p>
-<p>feofは「次に読めるかの予報」ではなく，既に行った読み取りで終端に達したかを調べるものです．<code>while (!feof(fp))</code>の中で読み取り結果を確認せず処理すると，最後に失敗した値を処理してしまうことがあります．終了を決めるのは読み取り関数の戻り値です．</p>
-<p>perrorはライブラリ等が設定したerrnoに対応する診断を表示します．通常のファイル終端はエラーではないため，短く読めたという理由だけでperrorを呼ぶと不適切なメッセージになる場合があります．内容が仕様に合わない場合は，自分で<code>invalid data</code>などと説明します．</p>
+<p>空のファイルは失敗とは限りません．最初の<code>fgetc</code>が<code>EOF</code>を返し，<code>ferror</code>が0なら，読み取るデータがなかっただけです．最後の文字が改行でなくても，文字を読むループはその文字を処理します．</p>
+<p><code>feof</code>は「次に読めるかの予報」ではなく，既に行った読み取りで終端に達したかを調べるものです．<code>while (!feof(fp))</code>の中で読み取り結果を確認せず処理すると，最後に失敗した値を処理してしまうことがあります．終了を決めるのは読み取り関数の戻り値です．</p>
+<p><code>perror</code>はライブラリ等が設定した<code>errno</code>に対応する診断を表示します．通常のファイル終端はエラーではないため，短く読めたという理由だけで<code>perror</code>を呼ぶと不適切なメッセージになる場合があります．内容が仕様に合わない場合は，自分で<code>invalid data</code>などと説明します．</p>
 <h3 id="_6">行単位で長さを調べる<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>次の例は，ASCII・NULバイトなし・各行31文字以内の入力を対象に，改行を除いた長さを表示します．Windowsでは通常のテキストモードがCRLFをLFへ変換します．</p>
+<p>次の例は，ASCII・<code>NUL</code>バイトなし・各行31文字以内の入力を対象に，改行を除いた長さを表示します．Windowsでは通常のテキストモードがCRLFをLFへ変換します．</p>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">line_lengths.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-2"> 2</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-5-3"> 3</a></span>
@@ -2883,12 +2883,12 @@
 <a id="__codelineno-5-32" name="__codelineno-5-32"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-33" name="__codelineno-5-33"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/10/line_lengths.c">line_lengths.c</a></p>
-<p>fgetsは容量32なら最大31バイトと終端を格納します．行末の改行が入っていたら，その1バイトだけを除きます．常にstrlen(line)−1とすると，最後に改行のない行の文字まで除いてしまいます．</p>
-<p>長さ31で改行が配列にない場合は，もう1文字だけ読みます．それが改行かEOFなら31文字の行として扱えます．それ以外なら32文字以上なので失敗にします．長い1行を複数行と数えないための検査です．空行は長さ0，空ファイルは出力なしです．途中にNULを含むデータはこの例の対象外で，バイナリとして扱います．</p>
+<p><a download="download" href="sample/10/line_lengths.c"><code>line_lengths.c</code></a></p>
+<p><code>fgets</code>は容量32なら最大31バイトと終端を格納します．行末の改行が入っていたら，その1バイトだけを除きます．常に<code>strlen(line)</code>−1とすると，最後に改行のない行の文字まで除いてしまいます．</p>
+<p>長さ31で改行が配列にない場合は，もう1文字だけ読みます．それが改行か<code>EOF</code>なら31文字の行として扱えます．それ以外なら32文字以上なので失敗にします．長い1行を複数行と数えないための検査です．空行は長さ0，空ファイルは出力なしです．途中に<code>NUL</code>を含むデータはこの例の対象外で，バイナリとして扱います．</p>
 <h2 id="4">4　テキストとバイナリ<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>文字列の123をテキストで保存すると，ASCIIでは <code>31 32 33</code>（十六進数）の3バイトです．数値123をバイナリでどう表すかは，定めた形式によります．両者とも物理的にはバイト列ですが，解釈の規則が違います．</p>
-<p>WindowsのCランタイムでは，テキストモードに改行変換などがあります．そのままのバイト列を扱うならbを指定します．fread・fwriteの戻り値は<strong>処理した要素数</strong>です．第2引数を1にした場合だけ，その数がバイト数と一致します．</p>
+<p>WindowsのCランタイムでは，テキストモードに改行変換などがあります．そのままのバイト列を扱うなら<code>b</code>を指定します．<code>fread</code>・<code>fwrite</code>の戻り値は<strong>処理した要素数</strong>です．第2引数を1にした場合だけ，その数がバイト数と一致します．</p>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">binary.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-2"> 2</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-6-3"> 3</a></span>
@@ -2945,8 +2945,8 @@
 <a id="__codelineno-6-27" name="__codelineno-6-27"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-6-28" name="__codelineno-6-28"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/10/binary.c">binary.c</a></p>
-<p>新しい練習フォルダで実行すると，bytes.binを作成し，読み返して <code>41 00 42 0A</code> と表示します．途中に0があっても読み取れます．これは文字列ではないため，%sでは表示しません．</p>
+<p><a download="download" href="sample/10/binary.c"><code>binary.c</code></a></p>
+<p>新しい練習フォルダで実行すると，<code>bytes.bin</code>を作成し，読み返して <code>41 00 42 0A</code> と表示します．途中に0があっても読み取れます．これは文字列ではないため，<code>%s</code>では表示しません．</p>
 <p>整数や構造体のメモリをそのまま保存すると，型のサイズ，<strong>エンディアン</strong>（複数バイトの並び順），構造体の隙間などに依存します．異なる環境で交換するデータでは，各フィールドのサイズ・順序・符号化を定めます．バイナリなら常に小さい・速い，という保証もありません．</p>
 <h3 id="_7">テキストモードとバイナリモード<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
@@ -2959,14 +2959,14 @@
 </thead>
 <tbody>
 <tr>
-<td>41 0D 0A 42</td>
-<td>A，改行，Bとして読む</td>
+<td><code>41 0D 0A 42</code></td>
+<td><code>A</code>，改行，<code>B</code>として読む</td>
 <td>4バイトをそのまま読む</td>
 </tr>
 <tr>
-<td>41 1A 42</td>
-<td>1Aを入力終了として扱う</td>
-<td>1Aも通常のデータ</td>
+<td><code>41 1A 42</code></td>
+<td><code>1A</code>を入力終了として扱う</td>
+<td><code>1A</code>も通常のデータ</td>
 </tr>
 <tr>
 <td>41 00 42</td>
@@ -2975,10 +2975,10 @@
 </tr>
 </tbody>
 </table>
-<p>CRは0D，LFは0Aです．Windowsでテキストモードへ<code>\n</code>を書けば通常CRLFとして保存されますが，バイナリモードではLFの1バイトのままです．0x1AはWindowsのテキスト入力で特別扱いされるバイトで，CのEOFという整数定数そのものではありません．</p>
-<p>ファイル名を.txtから.binへ変えても内容は変換されません．fopenのbは，文字列を自動で数値へ変換する指定でもありません．表示される文字ではなく，保存形式と入出力モードを分けて考えます．詳細は<a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen?view=msvc-170">Microsoftのfopen仕様</a>を参照してください．</p>
-<h3 id="freadfwrite4">freadとfwriteの4つの引数<a class="headerlink" href="#freadfwrite4" title="Permanent link">&para;</a></h3>
-<p><code>fread(buffer, size, count, fp)</code>は，fpから，1要素sizeバイトを最大count個読み，bufferから始まる領域へ格納します．<code>fwrite(data, size, count, fp)</code>は逆向きです．必要な保存領域は事前に確保しておきます．関数が配列を拡張してくれるわけではありません．</p>
+<p>CRは<code>0D</code>，LFは<code>0A</code>です．Windowsでテキストモードへ<code>\n</code>を書けば通常CRLFとして保存されますが，バイナリモードではLFの1バイトのままです．<code>0x1A</code>はWindowsのテキスト入力で特別扱いされるバイトで，Cの<code>EOF</code>という整数定数そのものではありません．</p>
+<p>ファイル名を<code>.txt</code>から<code>.bin</code>へ変えても内容は変換されません．<code>fopen</code>の<code>b</code>は，文字列を自動で数値へ変換する指定でもありません．表示される文字ではなく，保存形式と入出力モードを分けて考えます．詳細は<a href="https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/fopen-wfopen?view=msvc-170">Microsoftのfopen仕様</a>を参照してください．</p>
+<h3 id="freadfwrite4"><code>fread</code>と<code>fwrite</code>の4つの引数<a class="headerlink" href="#freadfwrite4" title="Permanent link">&para;</a></h3>
+<p><code>fread(buffer, size, count, fp)</code>は，<code>fp</code>から，1要素<code>size</code>バイトを最大<code>count</code>個読み，<code>buffer</code>から始まる領域へ格納します．<code>fwrite(data, size, count, fp)</code>は逆向きです．必要な保存領域は事前に確保しておきます．関数が配列を拡張してくれるわけではありません．</p>
 <table>
 <thead>
 <tr>
@@ -2989,37 +2989,37 @@
 </thead>
 <tbody>
 <tr>
-<td>size=1，count=16</td>
+<td><code>size=1</code>，<code>count=16</code></td>
 <td>最大16バイト</td>
 <td>1バイトの要素数</td>
 </tr>
 <tr>
-<td>size=4，count=4</td>
+<td><code>size=4</code>，<code>count=4</code></td>
 <td>最大16バイト</td>
 <td>完全な4バイト要素の個数</td>
 </tr>
 <tr>
-<td>size=sizeof(double)，count=3</td>
-<td>doubleが3個分</td>
-<td>完全なdouble要素の個数</td>
+<td><code>size=sizeof(double)</code>，<code>count=3</code></td>
+<td><code>double</code>が3個分</td>
+<td>完全な<code>double</code>要素の個数</td>
 </tr>
 </tbody>
 </table>
-<p>例えば4バイトの要素を4個要求して，残りが10バイトなら，完全な要素は2個分です．一部だけ読めた3個目を完成した値として使いません．バイト単位で不足を正確に数えたいならsize=1を使います．読み取れた個数が要求より小さいときは，ferrorと終端を確認します．</p>
-<p>binary.cのbufferは16バイトなので，読み取ったnバイトだけを表示します．freadはその後ろに<code>\0</code>を書きません．文字列として扱う必要があるなら終端用に1バイト残し，内容がテキストであることも確認します．00を途中に含むデータでは，終端を追加しても%sは途中までしか表示できません．</p>
-<p>このサンプルは自分で作る4バイトを読む専用例で，任意の大きなファイル全体を読むプログラムではありません．大きな入力では，一定サイズずつfreadを繰り返して処理する方法や，第13回の動的メモリ確保があります．読み込み先の容量と，ファイルの大きさを混同しないようにします．</p>
+<p>例えば4バイトの要素を4個要求して，残りが10バイトなら，完全な要素は2個分です．一部だけ読めた3個目を完成した値として使いません．バイト単位で不足を正確に数えたいなら<code>size=1</code>を使います．読み取れた個数が要求より小さいときは，<code>ferror</code>と終端を確認します．</p>
+<p><code>binary.c</code>の<code>buffer</code>は16バイトなので，読み取った<code>n</code>バイトだけを表示します．<code>fread</code>はその後ろに<code>\0</code>を書きません．文字列として扱う必要があるなら終端用に1バイト残し，内容がテキストであることも確認します．00を途中に含むデータでは，終端を追加しても<code>%s</code>は途中までしか表示できません．</p>
+<p>このサンプルは自分で作る4バイトを読む専用例で，任意の大きなファイル全体を読むプログラムではありません．大きな入力では，一定サイズずつ<code>fread</code>を繰り返して処理する方法や，第13回の動的メモリ確保があります．読み込み先の容量と，ファイルの大きさを混同しないようにします．</p>
 <h3 id="_8">バイナリ形式の約束とヘッダ<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>複数の数値を保存するなら，「先頭に個数，その後に数値を順番に置く」などの約束を作ります．個数や形式の情報をヘッダ，実際の値をデータ部分と呼びます．読み取った個数が配列容量以内か，その個数分のデータが本当にあるかを確認してから使います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>この回の小さな実験形式
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>[個数1バイト: 03][double 1個目][double 2個目][double 3個目]
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  ヘッダ           データ部分（同じ処理系でのみ読み戻す）
 </code></pre></div>
-<p>実際のファイル形式でも，先頭情報を読んで後続データを解釈します．ただし，すべての形式が固定長の同じヘッダを持つわけではありません．構造体をそのままfreadで読む方法にも，隙間・型サイズ・バイト順への依存があります．構造体は第11回で学びます．</p>
+<p>実際のファイル形式でも，先頭情報を読んで後続データを解釈します．ただし，すべての形式が固定長の同じヘッダを持つわけではありません．構造体をそのまま<code>fread</code>で読む方法にも，隙間・型サイズ・バイト順への依存があります．構造体は第11回で学びます．</p>
 <h3 id="_9">数値の保存と精度<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>テキストの<code>fprintf(fp, "%f", value)</code>は通常，小数点以下6桁で丸めて出力します．元のdoubleのすべての情報が残るとは限りません．十分な桁数で保存する方法もあり，テキストだから必ず精度が失われるわけではありません．一方，メモリ上のdoubleをバイナリ保存して同じ形式で読み戻せば，文字列変換による丸めは入りません．</p>
+<p>テキストの<code>fprintf(fp, "%f", value)</code>は通常，小数点以下6桁で丸めて出力します．元の<code>double</code>のすべての情報が残るとは限りません．十分な桁数で保存する方法もあり，テキストだから必ず精度が失われるわけではありません．一方，メモリ上の<code>double</code>をバイナリ保存して同じ形式で読み戻せば，文字列変換による丸めは入りません．</p>
 <p>小さな整数0を保存するなら，テキストは数字1文字で済む一方，固定幅の整数では複数バイトを使うこともあります．容量や速度は値・書式・ヘッダ・入出力環境によります．どちらが常に優れるかではなく，人が読めること，交換しやすいこと，数値を正確に戻せることなど，目的で選びます．</p>
 <h3 id="_10">バイトオーダを具体的に見る<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>16ビットの数値0x1234を2バイトで保存する約束なら，並べ方は次のようになります．</p>
+<p>16ビットの数値<code>0x1234</code>を2バイトで保存する約束なら，並べ方は次のようになります．</p>
 <table>
 <thead>
 <tr>
@@ -3041,7 +3041,7 @@
 </tr>
 </tbody>
 </table>
-<p>これは1バイトの中のビットを反転する話ではありません．複数バイトの順番です．実際の変数の表現はunsigned charのポインタで観察できます．stdio.hを読み込み，mainの中で次の断片を使います．</p>
+<p>これは1バイトの中のビットを反転する話ではありません．複数バイトの順番です．実際の変数の表現は<code>unsigned char</code>のポインタで観察できます．<code>stdio.h</code>を読み込み，<code>main</code>の中で次の断片を使います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">short</span><span style="color: #F8F8F2"> value </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">bytes </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">value;</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> value; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
@@ -3049,11 +3049,11 @@
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span style="color: #F8F8F2">           i </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> value </span><span style="color: #FF4689">?</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">:</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot; &quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>Visual Studioの通常のx64環境ではunsigned shortが2バイトで，01 00になります．型のサイズを常に2と決めつけず，ループではsizeofを使っています．これはオブジェクトの表現をunsigned charとして観察する例で，任意のバイト配列を強引にdoubleのポインタへ変えてよいという意味ではありません．</p>
-<p>第3回のビット演算で1バイトを表示するなら，unsigned char byte = 1;に対して，7から0へビット位置を調べます．Windowsでは1バイト8ビットなので00000001です．バイト順の比較でも，それぞれのバイト内の表示は上位ビットから行います．</p>
+<p>Visual Studioの通常のx64環境では<code>unsigned short</code>が2バイトで，01 00になります．型のサイズを常に2と決めつけず，ループでは<code>sizeof</code>を使っています．これはオブジェクトの表現を<code>unsigned char</code>として観察する例で，任意のバイト配列を強引に<code>double</code>のポインタへ変えてよいという意味ではありません．</p>
+<p>第3回のビット演算で1バイトを表示するなら，<code>unsigned char byte = 1;</code>に対して，7から0へビット位置を調べます．Windowsでは1バイト8ビットなので00000001です．バイト順の比較でも，それぞれのバイト内の表示は上位ビットから行います．</p>
 <h2 id="5">5　文字コード<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <p>ASCIIは英数字などの文字と数値の対応です．Unicodeは幅広い文字にコードポイントを割り当てます．UTF-8はUnicodeをバイト列にする符号化方式の1つで，多くの日本語文字は3バイトです．UTF-16は別の方式で，すべての文字が必ず2バイトというわけではありません．</p>
-<p>文字化けを避けるには，<strong>保存側と読み取り側で文字コードを合わせる</strong>必要があります．fopenやfgetsが自動でどんな文字コードでも変換するわけではありません．UTF-8の先頭にBOMが付く場合もあり，単純な数値読み取りでは問題になることがあります．演習の入力はまずASCIIだけ，BOMなしで保存します．日本語の表示はソース・ファイル・コンソールの設定が関係するため，strlenによるバイト数の観察とは分けます．</p>
+<p>文字化けを避けるには，<strong>保存側と読み取り側で文字コードを合わせる</strong>必要があります．<code>fopen</code>や<code>fgets</code>が自動でどんな文字コードでも変換するわけではありません．UTF-8の先頭にBOMが付く場合もあり，単純な数値読み取りでは問題になることがあります．演習の入力はまずASCIIだけ，BOMなしで保存します．日本語の表示はソース・ファイル・コンソールの設定が関係するため，<code>strlen</code>によるバイト数の観察とは分けます．</p>
 <h3 id="_11">文字・コードポイント・バイトを分ける<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3065,14 +3065,14 @@
 </thead>
 <tbody>
 <tr>
-<td>A</td>
-<td>U+0041</td>
+<td><code>A</code></td>
+<td><code>U+0041</code></td>
 <td>41</td>
 </tr>
 <tr>
 <td>あ</td>
-<td>U+3042</td>
-<td>E3 81 82</td>
+<td><code>U+3042</code></td>
+<td><code>E3 81 82</code></td>
 </tr>
 <tr>
 <td>😀</td>
@@ -3081,7 +3081,7 @@
 </tr>
 </tbody>
 </table>
-<p>同じ1つのコードポイントでも，UTF-8では1〜4バイトです．画面で1文字のように見えるものが複数のコードポイントからできることもあるため，コードポイント数と見た目の文字数も常に同じではありません．strlenは終端までのバイト数を数え，日本語の文字数を数える関数ではありません．</p>
+<p>同じ1つのコードポイントでも，UTF-8では1〜4バイトです．画面で1文字のように見えるものが複数のコードポイントからできることもあるため，コードポイント数と見た目の文字数も常に同じではありません．<code>strlen</code>は終端までのバイト数を数え，日本語の文字数を数える関数ではありません．</p>
 <p>UTF-16は16ビットの単位を使い，補助的な範囲の文字は2単位で表します．UTF-8のBOMはEF BB BFという先頭の3バイトで，UTF-8にバイト順の区別を付けるためのものではなく，符号化を示す目印です．BOMを付けるかどうかも読み書き側で合意する必要があります．<a href="https://www.unicode.org/faq/utf_bom.html">UnicodeのFAQ</a>に対応関係が整理されています．</p>
 <h3 id="_12">文字コードと改行コードは別<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>UTF-8で保存したファイルでも，改行はCRLFにもLFにもできます．文字コードを合わせても改行処理が自動ですべて解決するわけではありません．また，ファイル名の文字をOSにどう渡すかと，ファイル内部の文字をどう解釈するかも別問題です．本回はASCIIのファイル名と入力から始めます．</p>
@@ -3153,8 +3153,8 @@
 <a id="__codelineno-9-19" name="__codelineno-9-19"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-9-20" name="__codelineno-9-20"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/10/parse_number.c">parse_number.c</a></p>
-<p>strtolはlongへ変換し，endへ「変換が終わった位置」を返します．<code>&amp;end</code> は二重ポインタです．数字がなかった場合，後ろに文字が残った場合，longの範囲を超えた場合，課題の範囲0〜100を外れた場合を区別して検査します．この関数は先頭の空白と符号を許しますが，このコードは末尾の空白を含む余分な文字を拒否します．atoiのように失敗の識別が難しい関数より，検査の内容を明示できます．</p>
+<p><a download="download" href="sample/10/parse_number.c"><code>parse_number.c</code></a></p>
+<p><code>strtol</code>は<code>long</code>へ変換し，<code>end</code>へ「変換が終わった位置」を返します．<code>&amp;end</code> は二重ポインタです．数字がなかった場合，後ろに文字が残った場合，<code>long</code>の範囲を超えた場合，課題の範囲0〜100を外れた場合を区別して検査します．この関数は先頭の空白と符号を許しますが，このコードは末尾の空白を含む余分な文字を拒否します．<code>atoi</code>のように失敗の識別が難しい関数より，検査の内容を明示できます．</p>
 <h3 id="_13">検査の順番を理解する<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -3166,49 +3166,49 @@
 </thead>
 <tbody>
 <tr>
-<td>argc != 2</td>
+<td><code>argc != 2</code></td>
 <td>引数の過不足</td>
 <td>引数なし，42 50</td>
 </tr>
 <tr>
-<td>入力の先頭 == end</td>
+<td>入力の先頭 <code>== end</code></td>
 <td>数字を1つも読めない</td>
-<td>空文字列，abc</td>
+<td>空文字列，<code>abc</code></td>
 </tr>
 <tr>
-<td>*end != '\0'</td>
+<td><code>*end != '\0'</code></td>
 <td>末尾に余分な文字が残る</td>
-<td>12x，引用符で囲んだ42と空白</td>
+<td><code>12x</code>，引用符で囲んだ42と空白</td>
 </tr>
 <tr>
-<td>errno == ERANGE</td>
-<td>longで表せる範囲を超える</td>
+<td><code>errno == ERANGE</code></td>
+<td><code>long</code>で表せる範囲を超える</td>
 <td>極端に長い整数</td>
 </tr>
 <tr>
-<td>value &lt; 0またはvalue &gt; 100</td>
+<td><code>value &lt; 0</code>または<code>value &gt; 100</code></td>
 <td>課題が許す範囲を外れる</td>
 <td>−1，101</td>
 </tr>
 </tbody>
 </table>
-<p>strtolの前にerrno=0とするのは，前の処理のエラー状態と区別するためです．正常な値0と，変換できなかったときの0は，戻り値だけでは見分けられません．endとerrnoを組み合わせて判断します．</p>
-<p>同じ考え方をファイルから読んだ1行にも使えます．ただしfgetsが改行を残すので，行末の改行を取り除くか，検査時に改行だけを許す必要があります．引数用の検査をそのまま流用して正常な行まで拒否しないようにしましょう．</p>
+<p><code>strtol</code>の前に<code>errno=0</code>とするのは，前の処理のエラー状態と区別するためです．正常な値0と，変換できなかったときの0は，戻り値だけでは見分けられません．<code>end</code>と<code>errno</code>を組み合わせて判断します．</p>
+<p>同じ考え方をファイルから読んだ1行にも使えます．ただし<code>fgets</code>が改行を残すので，行末の改行を取り除くか，検査時に改行だけを許す必要があります．引数用の検査をそのまま流用して正常な行まで拒否しないようにしましょう．</p>
 <h2 id="7">7　保存形式を先に決める<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
-<p>演習では，二乗の一覧を次の形式で保存します．最初の行は個数N，続くN行が0からN−1までの整数を二乗した値です．N=4なら5行になります．</p>
+<p>演習では，二乗の一覧を次の形式で保存します．最初の行は個数<code>N</code>，続く<code>N</code>行が0から<code>N</code>−1までの整数を二乗した値です．<code>N=4</code>なら5行になります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>4
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>0
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>1
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>4
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>9
 </code></pre></div>
-<p>読み取り側は，個数が許容範囲か，値がN個あるか，数値として正しいか，余分なデータがないかを確認します．ヘッダに書かれているからといって無条件に信用しません．対象値を見つけても，ファイル全体の形式を検査するなら最後まで読みます．</p>
+<p>読み取り側は，個数が許容範囲か，値が<code>N</code>個あるか，数値として正しいか，余分なデータがないかを確認します．ヘッダに書かれているからといって無条件に信用しません．対象値を見つけても，ファイル全体の形式を検査するなら最後まで読みます．</p>
 <p>書くプログラムと読むプログラムは別プロジェクトにします．どちらも同じ保存形式の約束に従えば，ソースを共有しなくてもデータを交換できます．「とりあえず書いてから読む方法を考える」のではなく，値の範囲・順番・個数・改行・文字コードを決めてから実装するのが重要です．</p>
 <h2 id="_14">確認問題<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <ol>
-<li>fopenの結果を確認する前にfgetcを呼んでよいか．</li>
-<li>argc=1のときargv[1]を文字列として使ってよいか．</li>
-<li>UTF-8で保存した日本語のstrlenは見た目の文字数か．</li>
+<li><code>fopen</code>の結果を確認する前に<code>fgetc</code>を呼んでよいか．</li>
+<li><code>argc=1</code>のとき<code>argv[1]</code>を文字列として使ってよいか．</li>
+<li>UTF-8で保存した日本語の<code>strlen</code>は見た目の文字数か．</li>
 </ol>
 <p><a class="md-button md-button--primary" href="ex10.html">演習へ</a>
 <a href="index.html">全体の目次</a></p>

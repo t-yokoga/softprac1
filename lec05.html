@@ -2449,9 +2449,9 @@
 </ul>
 <h2 id="1">1　同じ型の値をまとめる<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="environment">前回とのつながりと準備<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
-<p>第4回ではカウンタを変えながら同じ処理を繰り返しました．今回は，カウンタを「何番目のデータを扱うか」に利用します．さらに，繰り返し使う処理を関数にまとめ，mainから呼び出します．<strong>データのまとまりが配列，処理のまとまりが関数</strong>と考えると役割を整理できます．</p>
-<p>作業場所はPL1の下のweek05です．<a href="lec01.html#hello">第1回</a>と同じく，Visual Studioの空のプロジェクトへ.cファイルを追加し，Cとしてコンパイル，C17，警告レベル4を確認します．短いコード片は指定された関数内に置き，完全なプログラムは別のプロジェクトで扱います．mainは1プロジェクトに1つです．</p>
-<p>今回の関数は1つのソースファイルに書きます．mainの中へ別の関数の定義を書かず，mainと並ぶ位置へ置いてください．複数のファイルへ分割する方法は第12回で学びます．</p>
+<p>第4回ではカウンタを変えながら同じ処理を繰り返しました．今回は，カウンタを「何番目のデータを扱うか」に利用します．さらに，繰り返し使う処理を関数にまとめ，<code>main</code>から呼び出します．<strong>データのまとまりが配列，処理のまとまりが関数</strong>と考えると役割を整理できます．</p>
+<p>作業場所は<code>PL1</code>の下の<code>week05</code>です．<a href="lec01.html#hello">第1回</a>と同じく，Visual Studioの空のプロジェクトへ<code>.c</code>ファイルを追加し，Cとしてコンパイル，C17，警告レベル4を確認します．短いコード片は指定された関数内に置き，完全なプログラムは別のプロジェクトで扱います．<code>main</code>は1プロジェクトに1つです．</p>
+<p>今回の関数は1つのソースファイルに書きます．<code>main</code>の中へ別の関数の定義を書かず，<code>main</code>と並ぶ位置へ置いてください．複数のファイルへ分割する方法は第12回で学びます．</p>
 <h3 id="_2">要素を番号で指定する<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>5人分の点数を別々の変数にする代わりに，配列を使います．配列は同じ型の要素が連続した領域に並ぶものです．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> scores[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">72</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">85</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">60</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">93</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">80</span><span style="color: #F8F8F2">};</span>
@@ -2478,7 +2478,7 @@
 <td>80</td>
 </tr>
 <tr>
-<td>scores[2] = 65の後</td>
+<td><code>scores[2] = 65</code>の後</td>
 <td>72</td>
 <td>85</td>
 <td>65</td>
@@ -2487,35 +2487,35 @@
 </tr>
 </tbody>
 </table>
-<p>宣言のscores[5]は「5個用意する」という意味ですが，式のscores[2]は「添字2の1個を選ぶ」という意味です．同じ角括弧でも，宣言と要素へのアクセスを区別します．Cは0始まりです．他の言語には1始まりのものもあるため，数学の「第1要素」とCの「添字0」を対応させましょう．</p>
+<p>宣言の<code>scores[5]</code>は「5個用意する」という意味ですが，式の<code>scores[2]</code>は「添字2の1個を選ぶ」という意味です．同じ角括弧でも，宣言と要素へのアクセスを区別します．Cは0始まりです．他の言語には1始まりのものもあるため，数学の「第1要素」とCの「添字0」を対応させましょう．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;scores[%d]=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, i, scores[i]);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>添字には定数だけでなくiのような整数の式も使えます．この例ではiが0から4へ変わり，すべての要素を順に読みます．要素数5の配列では，最後の添字は4です．</p>
+<p>添字には定数だけでなく<code>i</code>のような整数の式も使えます．この例では<code>i</code>が0から4へ変わり，すべての要素を順に読みます．要素数5の配列では，最後の添字は4です．</p>
 <h3 id="_3">初期化の方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a[</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">};</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> b[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">};</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> c[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">};</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> d[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
 </code></pre></div>
-<p>aとbはどちらも3要素です．初期化子がある場合，bのように要素数を省略すると，値の個数から決まります．cは{1, 1, 0, 0, 0}，dはすべて0になります．<strong>初期化子を書いたうえで省略した要素は0</strong>ですが，通常の局所配列をint a[3];と宣言するだけでは0になりません．</p>
-<p>後から値を入れるなら，a[0] = 12;のように各要素へ代入します．まだ値を入れていないa[0]に対するa[0]++も，最初に値を読むので使用できません．「よく分からない値が出るだけ」と考えず，未初期化の値は読まないことを守ってください．</p>
+<p><code>a</code>と<code>b</code>はどちらも3要素です．初期化子がある場合，<code>b</code>のように要素数を省略すると，値の個数から決まります．<code>c</code>は{1, 1, 0, 0, 0}，<code>d</code>はすべて0になります．<strong>初期化子を書いたうえで省略した要素は0</strong>ですが，通常の局所配列を<code>int a[3];</code>と宣言するだけでは0になりません．</p>
+<p>後から値を入れるなら，<code>a[0] = 12;</code>のように各要素へ代入します．まだ値を入れていない<code>a[0]</code>に対する<code>a[0]++</code>も，最初に値を読むので使用できません．「よく分からない値が出るだけ」と考えず，未初期化の値は読まないことを守ってください．</p>
 <div class="admonition warning">
 <p class="admonition-title">要素数と最後の添字は違う</p>
-<p>scores[5]は範囲外です．Cは通常，実行時に添字の範囲を自動検査しません．ビルドが成功しても正しいとは限りません．ループ条件はi &lt; 5とします．</p>
+<p><code>scores[5]</code>は範囲外です．Cは通常，実行時に添字の範囲を自動検査しません．ビルドが成功しても正しいとは限りません．ループ条件は<code>i &lt; 5</code>とします．</p>
 </div>
 <p><code>sizeof scores / sizeof scores[0]</code> は，配列そのものが見える場所で要素数を計算する式です．配列を <code>a = b;</code> のように丸ごと代入することはできません．コピーには要素ごとの代入などを使います．</p>
-<p>同様に，2つの配列をa == bと比較しても，全要素の値の一致を調べることにはなりません．同じ長さの配列の内容を比較するなら，各添字の要素を順に比較します．配列名が式の中で先頭の要素を指す情報として扱われる仕組みは第8回で学びます．</p>
+<p>同様に，2つの配列を<code>a == b</code>と比較しても，全要素の値の一致を調べることにはなりません．同じ長さの配列の内容を比較するなら，各添字の要素を順に比較します．配列名が式の中で先頭の要素を指す情報として扱われる仕組みは第8回で学びます．</p>
 <h3 id="_4">メモリ上では連続して並ぶ<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>intが4バイトの場合，int a[3] = {12, 3, 5};は合計12バイトを占めます．次は架空のアドレスによる概念図です．</p>
+<p><code>int</code>が4バイトの場合，<code>int a[3] = {12, 3, 5};</code>は合計12バイトを占めます．次は架空のアドレスによる概念図です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>先頭アドレス    0x1000         0x1004         0x1008
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>              ┌────────────┬────────────┬────────────┐
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>要素          │ a[0] = 12  │ a[1] = 3   │ a[2] = 5   │
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>              └────────────┴────────────┴────────────┘
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>サイズ           4バイト        4バイト        4バイト
 </code></pre></div>
-<p>第2回の別々の変数とは異なり，<strong>配列の要素は添字の順に連続して並ぶ</strong>ことが保証されます．次のコードで先頭アドレスを表示できます．具体的な値は実行ごとに変わり得ます．%pに合わせる(void *)の詳細は第8回で扱います．</p>
+<p>第2回の別々の変数とは異なり，<strong>配列の要素は添字の順に連続して並ぶ</strong>ことが保証されます．次のコードで先頭アドレスを表示できます．具体的な値は実行ごとに変わり得ます．<code>%p</code>に合わせる<code>(void *)</code>の詳細は第8回で扱います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a[</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">};</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;a[%d]=%d address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, i, a[i], (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">a[i]);</span>
@@ -2523,9 +2523,9 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;array=%zu element=%zu count=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span style="color: #F8F8F2">       </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> a, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> a[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">], </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> a[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]);</span>
 </code></pre></div>
-<p>intが4バイトなら最後の行はarray=12 element=4 count=3です．アドレスの差を目で確認する際は16進数の繰り上がりに注意します．アドレスの具体値をプログラムに書き込む必要はありません．sizeofの結果はsize_t型なので，表示書式は%zuです．</p>
+<p><code>int</code>が4バイトなら最後の行は<code>array=12 element=4 count=3</code>です．アドレスの差を目で確認する際は16進数の繰り上がりに注意します．アドレスの具体値をプログラムに書き込む必要はありません．<code>sizeof</code>の結果は<code>size_t</code>型なので，表示書式は<code>%zu</code>です．</p>
 <h3 id="_5">範囲外のアクセスは実行して確かめない<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>float a[3] = {0.5f, 0.3f, 0.8f};に対してa[3]を読むのは範囲外アクセスです．正しい添字は0，1，2だけです．結果は未定義動作であり，「必ずエラーが出る」「ランダムな値が1つ出る」とも決められません．負の添字も使用しません．配列の外へアクセスする例は，原因を説明して正しい添字へ直す読解問題として扱います．</p>
+<p><code>float a[3] = {0.5f, 0.3f, 0.8f};</code>に対して<code>a[3]</code>を読むのは範囲外アクセスです．正しい添字は0，1，2だけです．結果は未定義動作であり，「必ずエラーが出る」「ランダムな値が1つ出る」とも決められません．負の添字も使用しません．配列の外へアクセスする例は，原因を説明して正しい添字へ直す読解問題として扱います．</p>
 <h2 id="2">2　二次元配列<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> table[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {{</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">}, {</span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">6</span><span style="color: #F8F8F2">}};</span>
 </code></pre></div>
@@ -2559,7 +2559,7 @@
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>値：             1       2      3   │    4      5      6
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                 └─── 0行目 ───┘        └─── 1行目 ───┘
 </code></pre></div>
-<p>最後の添字（列）が変わる方向に要素が連続します．全体の要素数は2×3＝6ですが，table[0][3]は0行目の範囲外です．メモリ上で次の行が続いていても，正しくtable[1][0]と書く必要があります．</p>
+<p>最後の添字（列）が変わる方向に要素が連続します．全体の要素数は2×3＝6ですが，<code>table[0][3]</code>は0行目の範囲外です．メモリ上で次の行が続いていても，正しく<code>table[1][0]</code>と書く必要があります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> row </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; row </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">row) {</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> col </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; col </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">col) {</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #F8F8F2">        printf(</span><span style="color: #E6DB74">&quot;%d &quot;</span><span style="color: #F8F8F2">, table[row][col]);</span>
@@ -2567,18 +2567,18 @@
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>外側を列，内側を行に変えると，訪問順が変わります．ただしtable[row][col]の第1添字は常に行，第2添字は列です．ループの順を変えたからといって添字を逆にするわけではありません．</p>
+<p>外側を列，内側を行に変えると，訪問順が変わります．ただし<code>table[row][col]</code>の第1添字は常に行，第2添字は列です．ループの順を変えたからといって添字を逆にするわけではありません．</p>
 <h3 id="_7">三次元配列へ広げる<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>int data[2][3][4] = {0};は，「3行4列のまとまりが2つ」と考えられる24要素の配列です．添字の範囲は順に0〜1，0〜2，0〜3です．例えばdata[1][2][3]が最後の要素です．</p>
+<p><code>int data[2][3][4] = {0};</code>は，「3行4列のまとまりが2つ」と考えられる24要素の配列です．添字の範囲は順に0〜1，0〜2，0〜3です．例えば<code>data[1][2][3]</code>が最後の要素です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> data[</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #F8F8F2">data[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;last=%d count=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, data[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">],</span>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #F8F8F2">       </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> data </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> data[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">][</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]);</span>
 </code></pre></div>
-<p>表示はlast=7 count=24です．すべてを訪問するなら3つのループを入れ子にします．次元が増えても「各添字の範囲を守る」「最後の添字の方向に連続する」という考え方は同じです．</p>
+<p>表示は<code>last=7 count=24</code>です．すべてを訪問するなら3つのループを入れ子にします．次元が増えても「各添字の範囲を守る」「最後の添字の方向に連続する」という考え方は同じです．</p>
 <div class="admonition note">
 <p class="admonition-title">Visual Studioで使う配列の大きさ</p>
-<p>この講義ではリテラルかenumの定数で大きさを指定します．例えばenum { COUNT = 5 };とint a[COUNT];です．MSVCのCでは可変長配列（VLA）を使えません．Cのconst int n = 5;を配列の固定長定数として使う方法にも頼りません．実行時に大きさを決める方法は第13回で学びます．</p>
+<p>この講義ではリテラルか<code>enum</code>の定数で大きさを指定します．例えば<code>enum { COUNT = 5 };</code>と<code>int a[COUNT];</code>です．MSVCのCでは可変長配列（<code>VLA</code>）を使えません．Cの<code>const int n = 5;</code>を配列の固定長定数として使う方法にも頼りません．実行時に大きさを決める方法は第13回で学びます．</p>
 <p>MSVCの対応については<a href="https://learn.microsoft.com/en-us/cpp/preprocessor/predefined-macros?view=msvc-170">定義済みマクロの説明（<strong>STDC_NO_VLA</strong>）</a>でも確認できます．</p>
 </div>
 <h2 id="3">3　処理に名前を付ける<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
@@ -2588,30 +2588,30 @@
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> x;</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>関数は引数を受け取り，処理した結果を戻り値として返します．<code>int y = square(4);</code> ならyは16です．xは<strong>仮引数</strong>，4は<strong>実引数</strong>です．この例は，x*xがintの範囲に収まる値に限定します．</p>
-<p>呼び出すと，実引数の値を仮引数へ渡して関数本体を実行し，returnで呼び出し元へ戻ります．呼び出し元では，square(4)という式の値が16になり，それがyへ代入されます．関数の定義を書いただけでは，本体をその場で実行するわけではありません．</p>
+<p>関数は引数を受け取り，処理した結果を戻り値として返します．<code>int y = square(4);</code> なら<code>y</code>は16です．<code>x</code>は<strong>仮引数</strong>，4は<strong>実引数</strong>です．この例は，<code>x*x</code>が<code>int</code>の範囲に収まる値に限定します．</p>
+<p>呼び出すと，実引数の値を仮引数へ渡して関数本体を実行し，<code>return</code>で呼び出し元へ戻ります．呼び出し元では，<code>square(4)</code>という式の値が16になり，それが<code>y</code>へ代入されます．関数の定義を書いただけでは，本体をその場で実行するわけではありません．</p>
 <table>
 <thead>
 <tr>
 <th>部分</th>
-<th>squareの例</th>
+<th><code>square</code>の例</th>
 <th>役割</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>戻り値の型</td>
-<td>最初のint</td>
+<td>最初の<code>int</code></td>
 <td>呼び出し元へ返す値の型</td>
 </tr>
 <tr>
 <td>関数名</td>
-<td>square</td>
+<td><code>square</code></td>
 <td>呼び出すときの名前</td>
 </tr>
 <tr>
 <td>仮引数</td>
-<td>int x</td>
+<td><code>int x</code></td>
 <td>呼び出し時の値を受け取る変数</td>
 </tr>
 <tr>
@@ -2620,8 +2620,8 @@
 <td>実行する処理</td>
 </tr>
 <tr>
-<td>return</td>
-<td>return x * x;</td>
+<td><code>return</code></td>
+<td><code>return x * x;</code></td>
 <td>計算した値を返し，呼び出しを終える</td>
 </tr>
 </tbody>
@@ -2638,15 +2638,15 @@
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> dst;</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>main内でdouble v = -0.4;，double result = absolute(v);と書くと，resultは0.4になります．仮引数srcと呼び出し元のvは同じ名前でなくてかまいません．absolute(0.5)のようにリテラルも渡せ，printf("%.1f\n", absolute(0.5));のように返された値をそのまま表示にも使えます．この例では有限の小さな値を扱います．</p>
+<p><code>main</code>内で<code>double v = -0.4;</code>，<code>double result = absolute(v);</code>と書くと，<code>result</code>は0.4になります．仮引数<code>src</code>と呼び出し元の<code>v</code>は同じ名前でなくてかまいません．<code>absolute(0.5)</code>のようにリテラルも渡せ，<code>printf("%.1f\n", absolute(0.5));</code>のように返された値をそのまま表示にも使えます．この例では有限の小さな値を扱います．</p>
 <h3 id="_10">引数が複数の場合<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">volume</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> width, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> height, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> depth)</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> width </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> depth;</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>volume(2.0, 3.0, 4.0)は24.0です．引数はコンマで区切り，個数・型・順序を対応させます．戻り値用の変数を作らず，式を直接returnしてもかまいません．ここでは引数は0〜100の範囲とします．関数は通常1つの値を返します．複数の情報をまとめて扱う方法は，ポインタや構造体の回で学びます．</p>
-<p><code>return</code> は呼び出し元へ値を返す操作で，画面に表示する操作ではありません．表示はprintfの仕事です．値を返さない関数の戻り値型はvoidです．引数のない関数は <code>void show(void)</code> のように書きます．</p>
+<p><code>volume(2.0, 3.0, 4.0)</code>は24.0です．引数はコンマで区切り，個数・型・順序を対応させます．戻り値用の変数を作らず，式を直接<code>return</code>してもかまいません．ここでは引数は0〜100の範囲とします．関数は通常1つの値を返します．複数の情報をまとめて扱う方法は，ポインタや構造体の回で学びます．</p>
+<p><code>return</code> は呼び出し元へ値を返す操作で，画面に表示する操作ではありません．表示は<code>printf</code>の仕事です．値を返さない関数の戻り値型は<code>void</code>です．引数のない関数は <code>void show(void)</code> のように書きます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">display</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> value)</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;value=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, value);</span>
@@ -2658,8 +2658,8 @@
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;hello!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>void関数では値を付けないreturn;を使えます．末尾のreturn;は省略もできます．returnの後ろへ文を書いても，その呼び出しでは実行されません．voidでない関数は，必要なすべての経路で値を返すようにします．</p>
-<p>C17では引数なしを明確にするため(void)と書きます．宣言のvoid hello();は引数の型・個数を指定するプロトタイプにはならないため，この講義では使いません．戻り値がvoidなら，int x = hello();のように値として受け取ることはできません．</p>
+<p><code>void</code>関数では値を付けない<code>return;</code>を使えます．末尾の<code>return;</code>は省略もできます．<code>return</code>の後ろへ文を書いても，その呼び出しでは実行されません．<code>void</code>でない関数は，必要なすべての経路で値を返すようにします．</p>
+<p>C17では引数なしを明確にするため<code>(void)</code>と書きます．宣言の<code>void hello();</code>は引数の型・個数を指定するプロトタイプにはならないため，この講義では使いません．戻り値が<code>void</code>なら，<code>int x = hello();</code>のように値として受け取ることはできません．</p>
 <h3 id="_11">宣言を先に知らせる<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>関数を定義より前に呼ぶときは，<code>int square(int x);</code> のように<strong>プロトタイプ宣言</strong>を置きます．引数と戻り値の型をコンパイラが確認できるようにします．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>stdio.hのインクルード
@@ -2667,19 +2667,19 @@
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>mainの定義 → squareを呼ぶ
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>squareの定義（本体を書く）
 </code></pre></div>
-<p>int square(int);のように宣言では仮引数名を省略できます．定義と宣言の型を一致させてください．呼び出す場所で宣言が必要なのは，コンパイル時に呼び出し方を確認するためです．「mainより後ろの関数は実行時にまだ存在しない」という意味ではありません．</p>
-<p>mainも関数であり，この授業ではint main(void)を使います．return 0;はプログラムの正常終了を表します．コマンドライン引数を受け取るint main(int argc, char *argv[])という形は第10回で扱います．関数一般のreturnは呼び出し元へ戻りますが，mainからのreturnはプログラムの終了につながります．</p>
+<p><code>int square(int);</code>のように宣言では仮引数名を省略できます．定義と宣言の型を一致させてください．呼び出す場所で宣言が必要なのは，コンパイル時に呼び出し方を確認するためです．「<code>main</code>より後ろの関数は実行時にまだ存在しない」という意味ではありません．</p>
+<p><code>main</code>も関数であり，この授業では<code>int main(void)</code>を使います．<code>return 0;</code>はプログラムの正常終了を表します．コマンドライン引数を受け取る<code>int main(int argc, char *argv[])</code>という形は第10回で扱います．関数一般の<code>return</code>は呼び出し元へ戻りますが，<code>main</code>からの<code>return</code>はプログラムの終了につながります．</p>
 <h2 id="4">4　値渡しと配列の引数<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>通常のint引数は値のコピーです．関数内で仮引数xを変更しても，呼び出し元の変数は変わりません．</p>
+<p>通常の<code>int</code>引数は値のコピーです．関数内で仮引数<code>x</code>を変更しても，呼び出し元の変数は変わりません．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">plus_one</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> value)</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span style="color: #F8F8F2">    value </span><span style="color: #FF4689">+=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> value;</span>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>mainでint b = 10;としてplus_one(b);だけを実行すると，戻り値11は使われず，bは10のままです．int c = plus_one(b);ならcが11になり，b = plus_one(b);なら戻り値を代入することでbも11になります．関数呼び出しと代入を分けて考えましょう．</p>
+<p><code>main</code>で<code>int b = 10;</code>として<code>plus_one(b);</code>だけを実行すると，戻り値11は使われず，<code>b</code>は10のままです．<code>int c = plus_one(b);</code>なら<code>c</code>が11になり，<code>b = plus_one(b);</code>なら戻り値を代入することで<code>b</code>も11になります．関数呼び出しと代入を分けて考えましょう．</p>
 <p>一方，配列の引数は全要素がコピーされるのではありません．関数は元の要素にアクセスできます．長さは自動では伝わらないため，<code>sum_array(scores, COUNT)</code> のように別の引数で渡します．詳しい仕組みは第8回のポインタで学びます．</p>
-<p><code>const int a[]</code> は，その関数がaを通して要素を書き換えないことを表します．配列引数aにsizeofを使っても，元の配列全体のサイズは得られません．</p>
+<p><code>const int a[]</code> は，その関数が<code>a</code>を通して要素を書き換えないことを表します．配列引数<code>a</code>に<code>sizeof</code>を使っても，元の配列全体のサイズは得られません．</p>
 <h3 id="_12">配列の引数と長さの約束<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">sum_array</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a[], </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n)</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span style="color: #F8F8F2">{</span>
@@ -2690,15 +2690,15 @@
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> sum;</span>
 <a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>配列を渡すと，先頭の要素を指す情報（ポインタ）が値として渡されます．Cの値渡しが例外になるのではなく，コピーされるのが要素全体ではないということです．関数の仮引数のa[]はポインタとして扱われ，配列を作る宣言のa[]とは意味が違います．</p>
-<p>sizeof a自体は書けますが，この関数の中ではポインタのサイズになり，呼び出し元の配列全体のサイズではありません．そのためnを別に渡します．3要素の配列にn=5を指定しても，5要素へ拡張されるわけではなく，範囲外アクセスの原因になります．</p>
-<p>constを付けない配列引数なら，要素を書き換えることもできます．要素の変更は呼び出し元にも残るため，読むだけの関数にはconstを付け，関数の役割を明確にします．今回のsum_arrayやmax_scoreは配列を書き換えません．</p>
+<p>配列を渡すと，先頭の要素を指す情報（ポインタ）が値として渡されます．Cの値渡しが例外になるのではなく，コピーされるのが要素全体ではないということです．関数の仮引数の<code>a[]</code>はポインタとして扱われ，配列を作る宣言の<code>a[]</code>とは意味が違います．</p>
+<p><code>sizeof a</code>自体は書けますが，この関数の中ではポインタのサイズになり，呼び出し元の配列全体のサイズではありません．そのため<code>n</code>を別に渡します．3要素の配列に<code>n=5</code>を指定しても，5要素へ拡張されるわけではなく，範囲外アクセスの原因になります．</p>
+<p><code>const</code>を付けない配列引数なら，要素を書き換えることもできます．要素の変更は呼び出し元にも残るため，読むだけの関数には<code>const</code>を付け，関数の役割を明確にします．今回の<code>sum_array</code>や<code>max_score</code>は配列を書き換えません．</p>
 <h2 id="5_1">5　スコープと寿命<a class="headerlink" href="#5_1" title="Permanent link">&para;</a></h2>
-<p><strong>スコープ</strong>は名前が使える範囲です．ブロック内で宣言した名前は原則そのブロックの終わりまで使えます．forの初期化で宣言したiはforの外から使えません．別のブロックで同じ名前を使っても別の変数です．意図しない隠蔽を避けるため，名前の使い回しは控えます．</p>
-<p><strong>寿命</strong>は変数の領域が有効な期間です．通常の局所変数は，ブロックへの実行の進入に伴って用意され，抜けると寿命を終えます．名前の見える範囲と領域の有効期間は同じ概念ではありません．staticを使う場合などの違いは第13回で扱います．</p>
+<p><strong>スコープ</strong>は名前が使える範囲です．ブロック内で宣言した名前は原則そのブロックの終わりまで使えます．<code>for</code>の初期化で宣言した<code>i</code>は<code>for</code>の外から使えません．別のブロックで同じ名前を使っても別の変数です．意図しない隠蔽を避けるため，名前の使い回しは控えます．</p>
+<p><strong>寿命</strong>は変数の領域が有効な期間です．通常の局所変数は，ブロックへの実行の進入に伴って用意され，抜けると寿命を終えます．名前の見える範囲と領域の有効期間は同じ概念ではありません．<code>static</code>を使う場合などの違いは第13回で扱います．</p>
 <h3 id="_13">関数ごとの局所変数<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>absoluteのdstはその関数内だけで使える<strong>局所変数（ローカル変数）</strong>です．mainからdstという名前でアクセスすることはできません．同様に，mainの変数を別の関数からその名前で直接読むこともできません．必要な情報は引数として渡し，計算結果は戻り値として受け取ります．</p>
-<p>同じブロックでint aを2回宣言すると重複しますが，独立したブロックなら同名の別の変数を宣言できます．</p>
+<p><code>absolute</code>の<code>dst</code>はその関数内だけで使える<strong>局所変数（ローカル変数）</strong>です．<code>main</code>から<code>dst</code>という名前でアクセスすることはできません．同様に，<code>main</code>の変数を別の関数からその名前で直接読むこともできません．必要な情報は引数として渡し，計算結果は戻り値として受け取ります．</p>
+<p>同じブロックで<code>int a</code>を2回宣言すると重複しますが，独立したブロックなら同名の別の変数を宣言できます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">123</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a);</span>
@@ -2718,7 +2718,7 @@
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">count;</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>mainでcountを表示してからtick();を呼び，再び表示すると0から1へ変わります．一方，tick内にint count = 3;を追加すると，その関数では局所変数のcountが優先されます．++countは局所変数を4にするだけで，グローバル変数は0のままです．このように内側の名前が外側を見えなくすることを<strong>隠蔽（シャドーイング）</strong>と呼びます．</p>
+<p><code>main</code>で<code>count</code>を表示してから<code>tick();</code>を呼び，再び表示すると0から1へ変わります．一方，<code>tick</code>内に<code>int count = 3;</code>を追加すると，その関数では局所変数の<code>count</code>が優先されます．<code>++count</code>は局所変数を4にするだけで，グローバル変数は0のままです．このように内側の名前が外側を見えなくすることを<strong>隠蔽（シャドーイング）</strong>と呼びます．</p>
 <p>グローバル変数は実行開始から終了まで領域が存在し，明示的に初期化しない場合にも0で初期化されます．通常の未初期化の局所変数と区別してください．ただし，あらゆる関数で値を変える設計は原因を追いにくくなります．この回の課題では引数・戻り値・局所変数を基本とし，グローバル変数は挙動を読む補足例として扱います．</p>
 <h2 id="6">6　例：点数と行の合計<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">arrays.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-1"> 1</a></span>
@@ -2773,15 +2773,15 @@
 <a id="__codelineno-18-25" name="__codelineno-18-25"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> sum;</span>
 <a id="__codelineno-18-26" name="__codelineno-18-26"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/05/arrays.c">arrays.c</a></p>
+<p><a download="download" href="sample/05/arrays.c"><code>arrays.c</code></a></p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>total=390 mean=78.0
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>row 0: 6
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>row 1: 15
 </code></pre></div>
-<p>sum_arrayの契約は「nは0以上で，aから少なくともn個の有効なint要素を読めること」です．ここでは点数が0〜100，個数が5なので合計もintの範囲に収まります．</p>
+<p><code>sum_array</code>の契約は「<code>n</code>は0以上で，<code>a</code>から少なくとも<code>n</code>個の有効な<code>int</code>要素を読めること」です．ここでは点数が0〜100，個数が5なので合計も<code>int</code>の範囲に収まります．</p>
 <h3 id="_15">例題を分解して読む<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>enum { COUNT = 5 };は整数定数COUNTに5という名前を付けています．mainでは5要素のscoresを作り，その配列と要素数をsum_arrayへ渡します．関数内ではsumが0→72→157→217→310→390と変化し，390をmainへ返します．その値をmainのtotalへ保存して表示します．</p>
-<p>平均の計算をtotal / 5.0としているのは，整数除算を避けるためです．続く二次元配列の処理では，行が変わるたびにsumを0へ戻します．配列全体の合計と，行ごとの合計では初期化の位置が異なることに注目しましょう．</p>
+<p><code>enum { COUNT = 5 };</code>は整数定数<code>COUNT</code>に5という名前を付けています．<code>main</code>では5要素の<code>scores</code>を作り，その配列と要素数を<code>sum_array</code>へ渡します．関数内では<code>sum</code>が0→72→157→217→310→390と変化し，390を<code>main</code>へ返します．その値を<code>main</code>の<code>total</code>へ保存して表示します．</p>
+<p>平均の計算を<code>total / 5.0</code>としているのは，整数除算を避けるためです．続く二次元配列の処理では，行が変わるたびに<code>sum</code>を0へ戻します．配列全体の合計と，行ごとの合計では初期化の位置が異なることに注目しましょう．</p>
 <h3 id="_16">よくある間違い<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2793,7 +2793,7 @@
 <tbody>
 <tr>
 <td>最後に余分な値を読む</td>
-<td>i &lt;= COUNTではなくi &lt; COUNTか</td>
+<td><code>i &lt;= COUNT</code>ではなく<code>i &lt; COUNT</code>か</td>
 </tr>
 <tr>
 <td>合計が毎回変わる</td>
@@ -2825,7 +2825,7 @@
 <h2 id="_17">確認問題<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <ol>
 <li>要素数5の配列の最後の添字はいくつか．</li>
-<li>関数が値を返すこととprintfで表示することは同じか．</li>
+<li>関数が値を返すことと<code>printf</code>で表示することは同じか．</li>
 <li>配列を関数に渡すとき，なぜ長さも渡すのか．</li>
 </ol>
 <p><a class="md-button md-button--primary" href="ex05.html">演習へ</a>

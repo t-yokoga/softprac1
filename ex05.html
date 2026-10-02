@@ -2342,7 +2342,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec05.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week05 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week05</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">今回の進め方<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -2382,9 +2382,9 @@
 </tbody>
 </table>
 <p>各課題では，実行前に「配列の要素数」「使える添字」「関数へ渡す値」「返される値」を書き出します．境界の確認でも配列の外を読み書きしてはいけません．要素数を変更したら，ループと関数へ渡す長さも一緒に見直します．</p>
-<p>保存→ビルド→実行の順を守り，古い実行ファイルの結果と混同しないようにしてください．mainを複製するのではなく，初期値を変えて再ビルドします．関数はmainの外側に定義します．mainより後へ置く場合は，呼び出し前のプロトタイプ宣言を忘れないでください．</p>
+<p>保存→ビルド→実行の順を守り，古い実行ファイルの結果と混同しないようにしてください．<code>main</code>を複製するのではなく，初期値を変えて再ビルドします．関数は<code>main</code>の外側に定義します．<code>main</code>より後へ置く場合は，呼び出し前のプロトタイプ宣言を忘れないでください．</p>
 <h3 id="_3">ウォームアップ：初期化を読む<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>次の配列の全要素を紙上で書き出し，forで表示して確かめます．これはmain内に置くコード片です．表示にはstdio.hが必要です．</p>
+<p>次の配列の全要素を紙上で書き出し，<code>for</code>で表示して確かめます．これは<code>main</code>内に置くコード片です．表示には<code>stdio.h</code>が必要です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">};</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> b[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
@@ -2392,21 +2392,21 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
 <h2 id="1">課題1　最大の点数<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>Maximum</code> プロジェクトで，配列{72, 85, 60, 93, 80}の最大値を求める関数max_scoreを作ってください．要素数nは1以上，点数は0〜100とします．</p>
+<p><code>Maximum</code> プロジェクトで，配列{72, 85, 60, 93, 80}の最大値を求める関数<code>max_score</code>を作ってください．要素数<code>n</code>は1以上，点数は0〜100とします．</p>
 <details class="tip">
 <summary>ヒント</summary>
 <p>最大値の候補を最初の要素で初期化し，2番目以降と比べます．</p>
 </details>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
 <h3 id="_4">最大値の候補を追跡する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>関数へ入った時点でbestはa[0]の72です．その後は次のようになります．</p>
+<p>関数へ入った時点で<code>best</code>は<code>a[0]</code>の72です．その後は次のようになります．</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: right;">i</th>
-<th style="text-align: right;">a[i]</th>
-<th style="text-align: right;">比較前のbest</th>
-<th style="text-align: right;">更新後のbest</th>
+<th style="text-align: right;"><code>i</code></th>
+<th style="text-align: right;"><code>a[i]</code></th>
+<th style="text-align: right;">比較前の<code>best</code></th>
+<th style="text-align: right;">更新後の<code>best</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2436,13 +2436,13 @@
 </tr>
 </tbody>
 </table>
-<p>bestは「これまでに調べた要素の最大値」を保持します．最後の要素まで調べたら配列全体の最大値になる，という仕組みです．各比較の途中でreturnしてしまうと，残りの要素を調べられません．</p>
+<p><code>best</code>は「これまでに調べた要素の最大値」を保持します．最後の要素まで調べたら配列全体の最大値になる，という仕組みです．各比較の途中で<code>return</code>してしまうと，残りの要素を調べられません．</p>
 <h3 id="_5">異なる配列で確かめる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>配列</th>
-<th style="text-align: right;">渡すn</th>
+<th style="text-align: right;">渡す<code>n</code></th>
 <th style="text-align: right;">最大値</th>
 <th>注目点</th>
 </tr>
@@ -2474,15 +2474,15 @@
 </tr>
 </tbody>
 </table>
-<p>配列の後ろへ要素を増やすだけでは，呼び出しのmax_score(a, 5)の5は自動では変わりません．今回は表に合わせて手で変更してください．講義のsizeofによる要素数の計算は，配列を宣言したmainでは可能ですが，max_scoreの中では同じ方法を使えません．</p>
-<p><strong>説明すること</strong>：iを1から始める理由，戻り値を返す位置，constを付ける意図を説明してください．</p>
+<p>配列の後ろへ要素を増やすだけでは，呼び出しの<code>max_score(a, 5)</code>の5は自動では変わりません．今回は表に合わせて手で変更してください．講義の<code>sizeof</code>による要素数の計算は，配列を宣言した<code>main</code>では可能ですが，<code>max_score</code>の中では同じ方法を使えません．</p>
+<p><strong>説明すること</strong>：<code>i</code>を1から始める理由，戻り値を返す位置，<code>const</code>を付ける意図を説明してください．</p>
 <h2 id="2">課題2　列ごとの合計<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>講義のarrays.cを別の <code>ColumnSum</code> プロジェクトへ入れ，二次元配列の各列の合計を5，7，9の順に表示するよう変更してください．</p>
+<p>講義の<code>arrays.c</code>を別の <code>ColumnSum</code> プロジェクトへ入れ，二次元配列の各列の合計を5，7，9の順に表示するよう変更してください．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>外側を列，内側を行にします．sumの初期化は列ごとに必要です．</p>
+<p>外側を列，内側を行にします．<code>sum</code>の初期化は列ごとに必要です．</p>
 </details>
-<p>すべての要素を0にした場合も確認します．table[row][col]の添字は，ループの外側・内側の順と必ず一致しなければならないのでしょうか．</p>
+<p>すべての要素を0にした場合も確認します．<code>table[row][col]</code>の添字は，ループの外側・内側の順と必ず一致しなければならないのでしょうか．</p>
 <h3 id="_6">訪問順と合計を確認する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>点数の合計を表示する部分はそのままなので，変更後のプログラム全体の表示は次のようになります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>total=390 mean=78.0
@@ -2493,7 +2493,7 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: right;">外側のcol</th>
+<th style="text-align: right;">外側の<code>col</code></th>
 <th>内側で読む要素</th>
 <th>計算</th>
 </tr>
@@ -2501,26 +2501,26 @@
 <tbody>
 <tr>
 <td style="text-align: right;">0</td>
-<td>table[0][0]，table[1][0]</td>
+<td><code>table[0][0]</code>，<code>table[1][0]</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
 <td style="text-align: right;">1</td>
-<td>table[0][1]，table[1][1]</td>
+<td><code>table[0][1]</code>，<code>table[1][1]</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
 <td style="text-align: right;">2</td>
-<td>table[0][2]，table[1][2]</td>
+<td><code>table[0][2]</code>，<code>table[1][2]</code></td>
 <td>記入してください</td>
 </tr>
 </tbody>
 </table>
-<p>colが変わるたびにsumを0にする必要があります．sumの初期化を二重ループ全体の前へ移すと，5，12，21の累積になってしまいます．表示だけでなく，どの要素を足したかを確認してください．</p>
-<p>次にtableを{{1, 1, 1}, {2, 2, 2}}へ変更し，各列が3になることを確認します．さらに{{0}}へ変更すると，全要素が0になり，各列も0です．どの場合も点数配列scoresは変更していないので，最初のtotalの表示は変わりません．</p>
-<p><strong>説明すること</strong>：table[col][row]へ入れ替えてはいけない理由を，それぞれの添字の範囲から説明してください．この課題ではcolが2になるため，行数2の配列の第1添字にcolを使うと範囲外になります．危険な変更は実行せず，紙上で判断します．</p>
+<p><code>col</code>が変わるたびに<code>sum</code>を0にする必要があります．<code>sum</code>の初期化を二重ループ全体の前へ移すと，5，12，21の累積になってしまいます．表示だけでなく，どの要素を足したかを確認してください．</p>
+<p>次に<code>table</code>を{{1, 1, 1}, {2, 2, 2}}へ変更し，各列が3になることを確認します．さらに{{0}}へ変更すると，全要素が0になり，各列も0です．どの場合も点数配列<code>scores</code>は変更していないので，最初の<code>total</code>の表示は変わりません．</p>
+<p><strong>説明すること</strong>：<code>table[col][row]</code>へ入れ替えてはいけない理由を，それぞれの添字の範囲から説明してください．この課題では<code>col</code>が2になるため，行数2の配列の第1添字に<code>col</code>を使うと範囲外になります．危険な変更は実行せず，紙上で判断します．</p>
 <h3 id="_7">補足：三次元配列の添字<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>int data[2][3][4] = {0};の総要素数と，最後の要素を表す式を答えてください．最後の要素へ7を代入し，その要素を表示します．各次元の添字の範囲も説明してください．</p>
+<p><code>int data[2][3][4] = {0};</code>の総要素数と，最後の要素を表す式を答えてください．最後の要素へ7を代入し，その要素を表示します．各次元の添字の範囲も説明してください．</p>
 <h2 id="3">課題3　値渡しを確認する<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p><code>ValueCopy</code> プロジェクトで，次の結果を予測してから実行してください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
@@ -2538,28 +2538,28 @@
 <a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
 <h3 id="3_1">3つの呼び出し方を比べる<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
-<p>mainの中だけをそれぞれの形に変更してください．以下は独立した実験なので，毎回xを10から始めます．</p>
+<p><code>main</code>の中だけをそれぞれの形に変更してください．以下は独立した実験なので，毎回<code>x</code>を10から始めます．</p>
 <table>
 <thead>
 <tr>
 <th>呼び出し方</th>
-<th style="text-align: right;">呼び出し後のmainのx</th>
+<th style="text-align: right;">呼び出し後の<code>main</code>の<code>x</code></th>
 <th>戻り値の扱い</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>increment(x);</td>
+<td><code>increment(x);</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>int y = increment(x);</td>
+<td><code>int y = increment(x);</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>x = increment(x);</td>
+<td><code>x = increment(x);</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>記入してください</td>
 </tr>
@@ -2567,10 +2567,10 @@
 </table>
 <p>元の完全なプログラムの初期値を0，−1へ変更した場合の表示を予測してください．この課題では初期値は−100〜100に限定します．上限付近の整数に1を加える実験は行いません．</p>
 <h3 id="_8">呼び出しごとに別の局所変数になる<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>元のmainへ，最初の呼び出しの後にint z = increment(x);を追加してください．x，y，zの値を予測し，仮引数と呼び出し元の変数を区別して説明してください．</p>
-<p>一方，x = increment(x);を2回続ける場合はどうなるでしょうか．更新が関数の内側の変数だけに起きたのか，呼び出し元への代入でも起きたのかを分けて説明しましょう．</p>
+<p>元の<code>main</code>へ，最初の呼び出しの後に<code>int z = increment(x);</code>を追加してください．<code>x</code>，<code>y</code>，<code>z</code>の値を予測し，仮引数と呼び出し元の変数を区別して説明してください．</p>
+<p>一方，<code>x = increment(x);</code>を2回続ける場合はどうなるでしょうか．更新が関数の内側の変数だけに起きたのか，呼び出し元への代入でも起きたのかを分けて説明しましょう．</p>
 <h3 id="_9">スコープの読解<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>次の2つのブロックをmain内に書いた場合，表示を予想してください．それぞれのaは別の変数です．</p>
+<p>次の2つのブロックを<code>main</code>内に書いた場合，表示を予想してください．それぞれの<code>a</code>は別の変数です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">123</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a);</span>
@@ -2580,7 +2580,7 @@
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a);</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>この直後にprintfでaを表示できるか，2つの宣言を同じブロックへ移せるかも考えてください．関数の仮引数xとmainのxが共存できる理由も，範囲から説明してください．</p>
+<p>この直後に<code>printf</code>で<code>a</code>を表示できるか，2つの宣言を同じブロックへ移せるかも考えてください．関数の仮引数<code>x</code>と<code>main</code>の<code>x</code>が共存できる理由も，範囲から説明してください．</p>
 <h2 id="4">課題4　平均と累乗を関数にする<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p><code>Functions</code> プロジェクトで，次の2つの関数を作成します．引数と戻り値の型，計算してよい値の範囲を先に確認してください．</p>
 <table>
@@ -2594,23 +2594,23 @@
 </thead>
 <tbody>
 <tr>
-<td>average</td>
-<td>floatのaとb</td>
+<td><code>average</code></td>
+<td><code>float</code>の<code>a</code>と<code>b</code></td>
 <td>記入してください</td>
 <td>各値−100〜100</td>
 </tr>
 <tr>
-<td>power</td>
-<td>intのbaseとexponent</td>
+<td><code>power</code></td>
+<td><code>int</code>の<code>base</code>と<code>exponent</code></td>
 <td>記入してください</td>
-<td>baseは1〜5，exponentは0〜5</td>
+<td><code>base</code>は1〜5，<code>exponent</code>は0〜5</td>
 </tr>
 </tbody>
 </table>
-<p>関数をmainより後ろへ定義し，mainより前へプロトタイプ宣言を書きます．関数内で表示はせず，mainで戻り値を表示してください．最初の表示はaverage=3.0，power=32の2行にします．</p>
+<p>関数を<code>main</code>より後ろへ定義し，<code>main</code>より前へプロトタイプ宣言を書きます．関数内で表示はせず，<code>main</code>で戻り値を表示してください．最初の表示は<code>average=3.0</code>，<code>power=32</code>の2行にします．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>averageは(a + b) / 2.0fを返します．powerは結果を1で初期化し，baseをexponent回掛けます．^は累乗ではなく，第3回のビットXORなので使いません．</p>
+<p><code>average</code>は<code>(a + b) / 2.0f</code>を返します．<code>power</code>は結果を1で初期化し，<code>base</code>を<code>exponent</code>回掛けます．<code>^</code>は累乗ではなく，第3回のビット<code>XOR</code>なので使いません．</p>
 </details>
 <h3 id="_10">境界の値で確認する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <table>
@@ -2623,54 +2623,54 @@
 </thead>
 <tbody>
 <tr>
-<td>average(0.0f, 0.0f)</td>
+<td><code>average(0.0f, 0.0f)</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>同じ値の平均</td>
 </tr>
 <tr>
-<td>average(-4.0f, 2.0f)</td>
+<td><code>average(-4.0f, 2.0f)</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>負の値を含む平均</td>
 </tr>
 <tr>
-<td>average(1.0f, 2.0f)</td>
+<td><code>average(1.0f, 2.0f)</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>小数部を失わない</td>
 </tr>
 <tr>
-<td>power(2, 0)</td>
+<td><code>power(2, 0)</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>本体は0回で初期値を返す</td>
 </tr>
 <tr>
-<td>power(5, 1)</td>
+<td><code>power(5, 1)</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>1回だけ掛ける</td>
 </tr>
 <tr>
-<td>power(5, 5)</td>
+<td><code>power(5, 5)</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>課題で許す最大の結果</td>
 </tr>
 </tbody>
 </table>
-<p>引数は表の範囲を呼び出し側が守る設計です．このpowerは負の指数を扱う関数ではありません．整数の範囲を超えるほど繰り返すことも認めません．関数名だけで万能な計算ができると考えず，受け付ける値の範囲を約束します．</p>
-<p><strong>説明すること</strong>：resultを0で初期化してはいけない理由，returnをforの外へ置く理由，プロトタイプ宣言の末尾にセミコロンが必要な理由を説明してください．</p>
+<p>引数は表の範囲を呼び出し側が守る設計です．この<code>power</code>は負の指数を扱う関数ではありません．整数の範囲を超えるほど繰り返すことも認めません．関数名だけで万能な計算ができると考えず，受け付ける値の範囲を約束します．</p>
+<p><strong>説明すること</strong>：<code>result</code>を0で初期化してはいけない理由，<code>return</code>を<code>for</code>の外へ置く理由，プロトタイプ宣言の末尾にセミコロンが必要な理由を説明してください．</p>
 <h3 id="_11">戻り値と表示を分ける<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>averageの中でprintfだけを実行しても，平均を呼び出し元の計算に使えるわけではありません．float result = average(2.0f, 4.0f);と一度変数に保存してから表示する形へ変更し，同じ表示になることを確認してください．表示を担当するmainと，計算を担当する関数の分担が分かりやすくなります．</p>
+<p><code>average</code>の中で<code>printf</code>だけを実行しても，平均を呼び出し元の計算に使えるわけではありません．<code>float result = average(2.0f, 4.0f);</code>と一度変数に保存してから表示する形へ変更し，同じ表示になることを確認してください．表示を担当する<code>main</code>と，計算を担当する関数の分担が分かりやすくなります．</p>
 <h2 id="_12">発展　役割を分ける<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p>合計を返すsum_arrayと，平均を計算して表示するmainに分けてください．要素数は1〜5，値は0〜100とします．平均では <code>(double)total / n</code> とし，整数除算を避けます．この型変換は次回説明します．</p>
-<p>初期値でtotal=390 mean=78.0になります．{0}とn=1ではtotal=0 mean=0.0，{100, 100, 100}とn=3ではtotal=300 mean=100.0になることを確認します．合計関数単独ではn=0を受け付けても，平均は0で割れないので，このmainのnは1以上です．</p>
+<p>合計を返す<code>sum_array</code>と，平均を計算して表示する<code>main</code>に分けてください．要素数は1〜5，値は0〜100とします．平均では <code>(double)total / n</code> とし，整数除算を避けます．この型変換は次回説明します．</p>
+<p>初期値で<code>total=390 mean=78.0</code>になります．{0}と<code>n=1</code>では<code>total=0 mean=0.0</code>，{100, 100, 100}と<code>n=3</code>では<code>total=300 mean=100.0</code>になることを確認します．合計関数単独では<code>n=0</code>を受け付けても，平均は0で割れないので，この<code>main</code>の<code>n</code>は1以上です．</p>
 <h2 id="_13">確認問題<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ol>
-<li>int a[5] = {1, 1};の最後の要素の添字と値は何か．</li>
-<li>int table[2][3];に対してtable[0][3]を読んではいけないのはなぜか．</li>
-<li>intが4バイトなら，int a[3]の全体のサイズと隣接要素の間隔は何バイトか．</li>
-<li>配列を渡された関数の中でsizeof aから元の要素数を求められないのはなぜか．</li>
-<li>int b = 10;としてplus_one(b);だけを実行した後，bは何になるか．</li>
-<li>グローバル変数countと同名の局所変数を関数内へ宣言すると，その関数内の++countはどちらを変えるか．</li>
-<li>void関数のreturn;とint関数のreturn 0;は何が違うか．</li>
-<li>関数をmainより後ろに定義しても呼び出せるようにするには何が必要か．</li>
+<li><code>int a[5] = {1, 1};</code>の最後の要素の添字と値は何か．</li>
+<li><code>int table[2][3];</code>に対して<code>table[0][3]</code>を読んではいけないのはなぜか．</li>
+<li><code>int</code>が4バイトなら，<code>int a[3]</code>の全体のサイズと隣接要素の間隔は何バイトか．</li>
+<li>配列を渡された関数の中で<code>sizeof a</code>から元の要素数を求められないのはなぜか．</li>
+<li><code>int b = 10;</code>として<code>plus_one(b);</code>だけを実行した後，<code>b</code>は何になるか．</li>
+<li>グローバル変数<code>count</code>と同名の局所変数を関数内へ宣言すると，その関数内の<code>++count</code>はどちらを変えるか．</li>
+<li><code>void</code>関数の<code>return;</code>と<code>int</code>関数の<code>return 0;</code>は何が違うか．</li>
+<li>関数を<code>main</code>より後ろに定義しても呼び出せるようにするには何が必要か．</li>
 </ol>
 <h2 id="_14">チェックリスト<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <ul>

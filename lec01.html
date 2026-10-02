@@ -2540,9 +2540,9 @@
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>└── week01/
 </code></pre></div>
 <p>エクスプローラーのアドレスバーから，<code>week01</code> の <strong>実際のフルパス</strong> を確認しておきましょう．
-ユーザ名や，OneDriveを利用しているかどうかによって，パスは異なります．</p>
+ユーザ名や，<code>OneDrive</code>を利用しているかどうかによって，パスは異なります．</p>
 <h3 id="_2">ファイル・フォルダとパス<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p><strong>ファイル</strong>は，ソースコードなどのデータを保存する単位です．<strong>フォルダ（ディレクトリ）</strong> は，ファイルや別のフォルダをまとめる入れ物です．hello.cの.cは<strong>拡張子</strong>で，ファイルの種類を見分ける手掛かりになります．ソースファイル.cと，ビルドで作られる実行ファイル.exeは別のファイルです．</p>
+<p><strong>ファイル</strong>は，ソースコードなどのデータを保存する単位です．<strong>フォルダ（ディレクトリ）</strong> は，ファイルや別のフォルダをまとめる入れ物です．<code>hello.c</code>の<code>.c</code>は<strong>拡張子</strong>で，ファイルの種類を見分ける手掛かりになります．ソースファイル<code>.c</code>と，ビルドで作られる実行ファイル<code>.exe</code>は別のファイルです．</p>
 <p>ファイルやフォルダの場所を表す文字列を<strong>パス</strong>と呼びます．次は説明用の配置です．実際のプロジェクトの配置とは異なる場合があります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>C:\Users\student\Documents\PL1\
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── week01\
@@ -2567,17 +2567,17 @@
 <tr>
 <td>相対パス</td>
 <td><code>week01\hello.c</code></td>
-<td>基準がPL1フォルダなら，その下のweek01にあるhello.c</td>
+<td>基準が<code>PL1</code>フォルダなら，その下の<code>week01</code>にある<code>hello.c</code></td>
 </tr>
 <tr>
 <td>相対パス</td>
 <td><code>.\hello.c</code></td>
-<td>基準フォルダ自身（.）にあるhello.c</td>
+<td>基準フォルダ自身（.）にある<code>hello.c</code></td>
 </tr>
 <tr>
 <td>相対パス</td>
 <td><code>..\week02\area.c</code></td>
-<td>基準がweek01なら，親フォルダ（..）に戻り，week02のarea.cへ進む</td>
+<td>基準が<code>week01</code>なら，親フォルダ（..）に戻り，<code>week02</code>の<code>area.c</code>へ進む</td>
 </tr>
 </tbody>
 </table>
@@ -2602,11 +2602,11 @@
 <p>Visual Studioでは，C言語のプログラムもC++のプロジェクト機能で管理します．次の手順で拡張子を <strong><code>.c</code></strong> にし，Cとしてコンパイルする設定を確認します．
 C++用の <code>.cpp</code> のままにしないでください．</p>
 </div>
-<h3 id="helloc">hello.cを追加する<a class="headerlink" href="#helloc" title="Permanent link">&para;</a></h3>
+<h3 id="helloc"><code>hello.c</code>を追加する<a class="headerlink" href="#helloc" title="Permanent link">&para;</a></h3>
 <ol>
 <li><strong>ソリューション エクスプローラー</strong> の「ソース ファイル」を右クリックする．表示されていなければ「表示 → ソリューション エクスプローラー」を開く．</li>
 <li><strong>「追加 → 新しい項目」</strong> を選ぶ．</li>
-<li>「C++ファイル（.cpp）」を選び，<strong>名前を <code>hello.c</code> に変更して</strong>追加する．簡易入力欄が出る場合も，ファイル名を <code>hello.c</code> にする．</li>
+<li>「C++ファイル（<code>.cpp</code>）」を選び，<strong>名前を <code>hello.c</code> に変更して</strong>追加する．簡易入力欄が出る場合も，ファイル名を <code>hello.c</code> にする．</li>
 <li>次のコードを入力し，<strong>Ctrl+S</strong> で保存する．</li>
 </ol>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-2-1">1</a></span>
@@ -2654,7 +2654,7 @@ C++用の <code>.cpp</code> のままにしないでください．</p>
 </tr>
 </tbody>
 </table>
-<p>「適用」または「OK」で保存します．C言語標準の項目がなければ，使用しているVisual Studioやツールセットを確認してください．
+<p>「適用」または「<code>OK</code>」で保存します．C言語標準の項目がなければ，使用しているVisual Studioやツールセットを確認してください．
 <code>/TC</code> はこのプロジェクトをC専用にする設定です．新しい課題のプロジェクトでも同様に設定します．</p>
 <h3 id="_4">ビルドする<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p><strong>「ビルド → ソリューションのビルド」</strong> を選びます（通常のショートカットは <strong>Ctrl+Shift+B</strong>）．</p>
@@ -2684,26 +2684,26 @@ C++用の <code>.cpp</code> のままにしないでください．</p>
 <p><strong>ソースを保存する操作，実行ファイルを作る操作，作ったプログラムを動かす操作は，それぞれ別です．</strong>
 Visual Studioが実行前にビルドを自動で行う場合もありますが，最初は各段階の結果を確認しましょう．</p>
 <h2 id="4c">4．Cプログラムの構造<a class="headerlink" href="#4c" title="Permanent link">&para;</a></h2>
-<h3 id="include">#include：必要な宣言を読み込む<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
+<h3 id="include"><code>#include</code>：必要な宣言を読み込む<a class="headerlink" href="#include" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
 </code></pre></div>
 <p><code>stdio.h</code> は標準入出力に関する <strong>ヘッダ</strong> です．この例では，後で使う <code>printf</code> の宣言を利用できるようにします．
 <code>#include</code> は，コンパイルに先立つ前処理の指示です．末尾にセミコロンは付けません．</p>
-<h3 id="main">main：プログラムの入口<a class="headerlink" href="#main" title="Permanent link">&para;</a></h3>
+<h3 id="main"><code>main</code>：プログラムの入口<a class="headerlink" href="#main" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> main(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
 </code></pre></div>
 <p>今回のような通常のCプログラムは，<code>main</code> 関数から処理を始めます．
 <code>int</code> は整数を返すこと，<code>void</code> はここでは引数を受け取らないことを表します．
 関数を自分で定義する方法は第5回で学びます．まずはこの形を使ってください．</p>
 <p><code>{</code> と <code>}</code> で囲まれた部分に，実行する処理を書きます．今回の例では，表示を行ってから終了します．</p>
-<h3 id="printf">printf：文字列を表示する<a class="headerlink" href="#printf" title="Permanent link">&para;</a></h3>
+<h3 id="printf"><code>printf</code>：文字列を表示する<a class="headerlink" href="#printf" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;Hello, world!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
 <p><code>printf</code> は，指定した内容を標準出力へ書き出す関数です．この実行例では，標準出力はコンソール画面につながっています．
 <code>"..."</code> で囲んだものを <strong>文字列リテラル</strong> と呼びます．最後の <code>\n</code> は改行を表します．</p>
 <p>関数を呼び出す式などの末尾に <code>;</code> を置くと，1つの文になります．
 <strong>すべての行末に <code>;</code> を付けるわけではありません</strong>．<code>#include</code> や，ここでの <code>main</code> の宣言部分，開き波括弧の行には付けません．</p>
-<h3 id="return">return：処理を終える<a class="headerlink" href="#return" title="Permanent link">&para;</a></h3>
+<h3 id="return"><code>return</code>：処理を終える<a class="headerlink" href="#return" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 </code></pre></div>
 <p><code>return</code> は関数の処理を終え，値を返します．
@@ -2815,7 +2815,7 @@ Visual Studioが実行前にビルドを自動で行う場合もありますが�
 <p>例えば，<code>printf</code> の行末のセミコロンを忘れたとします．</p>
 <div class="highlight" style="background: #272822"><span class="filename">間違いを含むコードの一部</span><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;Hello, world!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">)</span>
 </code></pre></div>
-<p>MSVCでは，例えば <strong>C2143</strong> という番号と，<code>;</code> がないことを示す構文エラーの説明が表示されます．文面や行番号は環境により異なります．
+<p>MSVCでは，例えば <strong><code>C2143</code></strong> という番号と，<code>;</code> がないことを示す構文エラーの説明が表示されます．文面や行番号は環境により異なります．
 「エラー一覧」の <strong>ファイル・行・説明</strong> を確認し，該当項目をダブルクリックしてコードへ移動します．必要なら「出力」のビルドログも確認してください．</p>
 <p>最初の診断から調べることが大切です．1か所の間違いが，多数の診断につながる場合があります．
 また，コンパイラが問題に気付いた場所と，実際に直すべき場所が同じとは限りません．<strong>示された行の前の行</strong>も確認しましょう．</p>
@@ -2843,7 +2843,7 @@ Visual Studioが実行前にビルドを自動で行う場合もありますが�
 </tr>
 <tr>
 <td><code>main</code> が重複しているというエラー</td>
-<td>同じプロジェクトに，別々のmainを持つファイルを追加していないか．</td>
+<td>同じプロジェクトに，別々の<code>main</code>を持つファイルを追加していないか．</td>
 </tr>
 <tr>
 <td><code>pch.h</code> などが必要といわれる</td>
@@ -2851,7 +2851,7 @@ Visual Studioが実行前にビルドを自動で行う場合もありますが�
 </tr>
 <tr>
 <td>編集した内容が表示されない</td>
-<td>保存・ビルドに成功したか．正しいプロジェクト／exeを実行しているか．</td>
+<td>保存・ビルドに成功したか．正しいプロジェクト／<code>exe</code>を実行しているか．</td>
 </tr>
 <tr>
 <td>ファイルが見つからない</td>

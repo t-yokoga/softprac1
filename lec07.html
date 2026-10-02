@@ -2432,14 +2432,14 @@
 <h2 id="_1">到達目標<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>標準入力・標準出力・標準エラー出力を区別できる．</li>
-<li>EOFを失わずに文字を読み，容量を指定して行を読める．</li>
+<li><code>EOF</code>を失わずに文字を読み，容量を指定して行を読める．</li>
 <li>リダイレクトとパイプによる接続を説明できる．</li>
 </ul>
 <h2 id="1">1　プログラムと外部をつなぐストリーム<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="environment">前回とのつながりと準備<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
 <p>第6回では，ソース内に用意した文字列を処理しました．今回は，実行中に外から受け取ったデータを処理します．入力の長さや終了時点をプログラムがあらかじめ知っているとは限りません．<strong>データを読む・終了を判断する・結果を書く</strong>という役割を分けて考えましょう．</p>
-<p>作業場所はPL1の下のweek07です．<a href="lec01.html#hello">第1回の手順</a>で課題ごとに空のプロジェクトを作り，.cファイルを追加します．C17・Cとしてコンパイル・警告レベル4を使います．保存してCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．入力する場所はVisual Studioのエディタではなく，起動したプログラムのコンソールです．</p>
-<p>読み込みの例にはstdio.h，strlenも使う例にはstring.hが必要です．1つのプロジェクトへ複数のmainを入れないでください．この回もコマンド入力の実習は行いません．リダイレクトとパイプは接続図で理解します．</p>
+<p>作業場所は<code>PL1</code>の下の<code>week07</code>です．<a href="lec01.html#hello">第1回の手順</a>で課題ごとに空のプロジェクトを作り，<code>.c</code>ファイルを追加します．C17・Cとしてコンパイル・警告レベル4を使います．保存してCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．入力する場所はVisual Studioのエディタではなく，起動したプログラムのコンソールです．</p>
+<p>読み込みの例には<code>stdio.h</code>，<code>strlen</code>も使う例には<code>string.h</code>が必要です．1つのプロジェクトへ複数の<code>main</code>を入れないでください．この回もコマンド入力の実習は行いません．リダイレクトとパイプは接続図で理解します．</p>
 <p>ストリームは順番にデータを読み書きするための仕組みです．<code>&lt;stdio.h&gt;</code> には標準の3つのストリームが用意されています．</p>
 <table>
 <thead>
@@ -2451,28 +2451,28 @@
 </thead>
 <tbody>
 <tr>
-<td>stdin</td>
+<td><code>stdin</code></td>
 <td>標準入力</td>
 <td>キーボード</td>
 </tr>
 <tr>
-<td>stdout</td>
+<td><code>stdout</code></td>
 <td>標準出力</td>
 <td>画面</td>
 </tr>
 <tr>
-<td>stderr</td>
+<td><code>stderr</code></td>
 <td>標準エラー出力</td>
 <td>画面</td>
 </tr>
 </tbody>
 </table>
-<p>printfは標準出力へ書きます．エラーは <code>fprintf(stderr, "input error\n");</code> のように別の出力先へ書けます．どちらも画面に見えていても，同じストリームではありません．</p>
-<p>ストリームは単に「改行で区切られた文字列の集合」とは限りません．最後に改行がない入力や，空の入力もあります．また，第6回の文字列の終端'\0'が，自動的に入力の末尾へ流れてくるわけではありません．配列に保存して文字列として使うなら，終端を付ける必要があります．</p>
+<p><code>printf</code>は標準出力へ書きます．エラーは <code>fprintf(stderr, "input error\n");</code> のように別の出力先へ書けます．どちらも画面に見えていても，同じストリームではありません．</p>
+<p>ストリームは単に「改行で区切られた文字列の集合」とは限りません．最後に改行がない入力や，空の入力もあります．また，第6回の文字列の終端<code>'\0'</code>が，自動的に入力の末尾へ流れてくるわけではありません．配列に保存して文字列として使うなら，終端を付ける必要があります．</p>
 <p>データの出所がキーボードでもファイルでも，プログラムからは順番に読める入口として扱えます．この抽象化により，同じプログラムを異なる入力元へ接続できます．後でファイルを直接開く場合も，ストリームという考え方は共通です．</p>
 <h2 id="2-1">2　1文字ずつ読む<a class="headerlink" href="#2-1" title="Permanent link">&para;</a></h2>
-<h3 id="getcharputchar">getcharとputcharの役割<a class="headerlink" href="#getcharputchar" title="Permanent link">&para;</a></h3>
-<p><code>getchar()</code> は読み取った1バイトの値，または<strong>EOF</strong>をintで返します．EOFは入力の終了や読み取り失敗を知らせる特別な値で，文字そのものではありません．charへ先に保存すると，文字とEOFを正しく区別できないことがあります．</p>
+<h3 id="getcharputchar"><code>getchar</code>と<code>putchar</code>の役割<a class="headerlink" href="#getcharputchar" title="Permanent link">&para;</a></h3>
+<p><code>getchar()</code> は読み取った1バイトの値，または<strong><code>EOF</code></strong>を<code>int</code>で返します．<code>EOF</code>は入力の終了や読み取り失敗を知らせる特別な値で，文字そのものではありません．<code>char</code>へ先に保存すると，文字と<code>EOF</code>を正しく区別できないことがあります．</p>
 <table>
 <thead>
 <tr>
@@ -2484,21 +2484,21 @@
 </thead>
 <tbody>
 <tr>
-<td>getchar()</td>
-<td>stdin</td>
+<td><code>getchar()</code></td>
+<td><code>stdin</code></td>
 <td>1バイト</td>
-<td>unsigned charの値をintにしたもの，またはEOF</td>
+<td><code>unsigned char</code>の値を<code>int</code>にしたもの，または<code>EOF</code></td>
 </tr>
 <tr>
-<td>putchar(ch)</td>
-<td>stdout</td>
+<td><code>putchar(ch)</code></td>
+<td><code>stdout</code></td>
 <td>1バイト</td>
-<td>書いた文字の値，失敗時はEOF</td>
+<td>書いた文字の値，失敗時は<code>EOF</code></td>
 </tr>
 </tbody>
 </table>
-<p>関数名のcharは「単語」ではなく文字を表します．112と入力してEnterを押しても，最初のgetcharが返すのは整数112ではなく文字'1'の値です．続けて呼べば'1'，'2'，改行を順に読みます．日本語の見た目の1文字が，getcharの1回に対応するとは限りません．</p>
-<p>putchar('a');はaだけを書き，改行を自動では追加しません．改行したければputchar('\n');も必要です．EOFはstdio.hで定義される負の整数で，具体的に−1と決め打ちせずEOFという名前で比較します．printf("EOF=%d\n", EOF);で値は確認できますが，その数をキーボードから入力しても入力終了にはなりません．</p>
+<p>関数名の<code>char</code>は「単語」ではなく文字を表します．112と入力してEnterを押しても，最初の<code>getchar</code>が返すのは整数112ではなく文字<code>'1'</code>の値です．続けて呼べば<code>'1'</code>，<code>'2'</code>，改行を順に読みます．日本語の見た目の1文字が，<code>getchar</code>の1回に対応するとは限りません．</p>
+<p><code>putchar('a');</code>は<code>a</code>だけを書き，改行を自動では追加しません．改行したければ<code>putchar('\n');</code>も必要です．<code>EOF</code>は<code>stdio.h</code>で定義される負の整数で，具体的に−1と決め打ちせず<code>EOF</code>という名前で比較します．<code>printf("EOF=%d\n", EOF);</code>で値は確認できますが，その数をキーボードから入力しても入力終了にはなりません．</p>
 <h3 id="_2">複写プログラム<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">echo.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-0-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-0-2"> 2</a></span>
@@ -2532,22 +2532,22 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-0-16" name="__codelineno-0-16"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/07/echo.c">echo.c</a></p>
-<p>括弧の内側で代入し，その結果をEOFと比較しています．括弧を外すと，演算子の優先順位によって違う意味になるため注意します．入力終了とエラーは同じEOFで知らされるので，ループ後にferrorでエラーを確認します．putcharも失敗時にはEOFを返します．</p>
-<p>while ((ch = getchar()) != EOF)は，①読む，②chへ代入する，③EOFでないか調べる，の順です．条件に成功したときだけ本体へ入り，その文字を出力します．EOF自体はputcharへ渡しません．</p>
-<p>ch = getchar() != EOFとすると，!=の方が先にまとまるため，chへ入るのは読み取った文字でなく比較結果の0か1です．第3回の優先順位と代入式の値を使う例なので，括弧を省かないでください．</p>
-<p>読み込みと条件を分けた次の形も，基本的な流れは同じです．ここでは流れを示すため，出力エラーの処理は省略しています．実行には上の完全なecho.cを使います．</p>
+<p><a download="download" href="sample/07/echo.c"><code>echo.c</code></a></p>
+<p>括弧の内側で代入し，その結果を<code>EOF</code>と比較しています．括弧を外すと，演算子の優先順位によって違う意味になるため注意します．入力終了とエラーは同じ<code>EOF</code>で知らされるので，ループ後に<code>ferror</code>でエラーを確認します．<code>putchar</code>も失敗時には<code>EOF</code>を返します．</p>
+<p><code>while ((ch = getchar()) != EOF)</code>は，①読む，②<code>ch</code>へ代入する，③<code>EOF</code>でないか調べる，の順です．条件に成功したときだけ本体へ入り，その文字を出力します．<code>EOF</code>自体は<code>putchar</code>へ渡しません．</p>
+<p><code>ch = getchar() != EOF</code>とすると，<code>!=</code>の方が先にまとまるため，<code>ch</code>へ入るのは読み取った文字でなく比較結果の0か1です．第3回の優先順位と代入式の値を使う例なので，括弧を省かないでください．</p>
+<p>読み込みと条件を分けた次の形も，基本的な流れは同じです．ここでは流れを示すため，出力エラーの処理は省略しています．実行には上の完全な<code>echo.c</code>を使います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> ch </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> getchar();</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #66D9EF">while</span><span style="color: #F8F8F2"> (ch </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> EOF) {</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">    putchar(ch);</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span style="color: #F8F8F2">    ch </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> getchar();</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>こちらではループ前と本体末尾に読み込みを書きます．末尾のgetcharを忘れると同じ文字を繰り返し出力してしまいます．条件式へ読み込みをまとめる書き方は，その重複を減らしています．</p>
+<p>こちらではループ前と本体末尾に読み込みを書きます．末尾の<code>getchar</code>を忘れると同じ文字を繰り返し出力してしまいます．条件式へ読み込みをまとめる書き方は，その重複を減らしています．</p>
 <h3 id="visual-studio">Visual Studioで入力する<a class="headerlink" href="#visual-studio" title="Permanent link">&para;</a></h3>
-<p>Ctrl+F5で起動したコンソールに文字を入力してEnterを押します．入力した文字の表示と，プログラムによる出力の両方が見えることがあります．Windowsの通常のコンソールでは，<strong>新しい行の先頭でCtrl+Z，続けてEnter</strong>を押すと入力終了を知らせられます．キー自体が文字列の終端文字'\0'になるわけではありません．</p>
-<h3 id="entereof">EnterとEOFを区別する<a class="headerlink" href="#entereof" title="Permanent link">&para;</a></h3>
-<p>通常の対話コンソールでは，入力した文字がEnterまでいったん蓄えられ，Enterを押すと改行も含めてプログラムへ渡されます．ただし，この入力方式は実行環境の性質であり，getcharが常にEnterを待つというC言語の規則ではありません．すでに読み取り可能な文字が残っていれば，次の呼び出しはそれを読みます．</p>
+<p>Ctrl+F5で起動したコンソールに文字を入力してEnterを押します．入力した文字の表示と，プログラムによる出力の両方が見えることがあります．Windowsの通常のコンソールでは，<strong>新しい行の先頭でCtrl+Z，続けてEnter</strong>を押すと入力終了を知らせられます．キー自体が文字列の終端文字<code>'\0'</code>になるわけではありません．</p>
+<h3 id="entereof">Enterと<code>EOF</code>を区別する<a class="headerlink" href="#entereof" title="Permanent link">&para;</a></h3>
+<p>通常の対話コンソールでは，入力した文字がEnterまでいったん蓄えられ，Enterを押すと改行も含めてプログラムへ渡されます．ただし，この入力方式は実行環境の性質であり，<code>getchar</code>が常にEnterを待つというC言語の規則ではありません．すでに読み取り可能な文字が残っていれば，次の呼び出しはそれを読みます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>コンソールで ab と入力してEnter
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>              ↓
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>読む順序：    &#39;a&#39; → &#39;b&#39; → &#39;\n&#39; → 次の入力を待つ
@@ -2559,7 +2559,7 @@
 <tr>
 <th>状況</th>
 <th>意味</th>
-<th>EOFまで読むループ</th>
+<th><code>EOF</code>まで読むループ</th>
 </tr>
 </thead>
 <tbody>
@@ -2569,8 +2569,8 @@
 <td>まだ続く</td>
 </tr>
 <tr>
-<td>abの後にEnter</td>
-<td>a，b，改行が届く</td>
+<td><code>ab</code>の後にEnter</td>
+<td><code>a</code>，<code>b</code>，改行が届く</td>
 <td>まだ続く</td>
 </tr>
 <tr>
@@ -2585,16 +2585,16 @@
 </tr>
 </tbody>
 </table>
-<p>EOFは入力の状態，'\n'は改行の文字，'\0'は配列中の文字列の終端です．3つを混同しないでください．通常のEOF終了で集計結果を出すプログラムを，強制停止で終えても同じ動作にはなりません．デバッグ中は「デバッグの停止」で中断できますが，これは入力終了とは別です．</p>
+<p><code>EOF</code>は入力の状態，<code>'\n'</code>は改行の文字，<code>'\0'</code>は配列中の文字列の終端です．3つを混同しないでください．通常の<code>EOF</code>終了で集計結果を出すプログラムを，強制停止で終えても同じ動作にはなりません．デバッグ中は「デバッグの停止」で中断できますが，これは入力終了とは別です．</p>
 <h3 id="_3">読んだ文字を数える・変換する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>各getchar成功時にカウンタを1増やせば，読み取ったバイト数を数えられます．abcdとEnterを入力して終了した場合は，a，b，c，d，改行で5です．単語数を数えているわけではありません．Windowsのテキストモードでは改行の変換が行われるため，ディスク上のファイルのバイト数と同じとは限りません．</p>
-<p>また，出力の直前にputchar('/');を加えると，各入力文字の前にスラッシュを付けられます．abと改行なら/a/b/と改行になります．改行も1文字として処理するので，行末にもスラッシュが付きます．</p>
-<p>第6回の小文字化も，配列全体を用意せず，読み取ったchが'A'〜'Z'なら変更してからputcharすることで実装できます．入力を少しずつ処理して次へ渡すプログラムを<strong>フィルタ</strong>と呼びます．</p>
+<p>各<code>getchar</code>成功時にカウンタを1増やせば，読み取ったバイト数を数えられます．<code>abcd</code>とEnterを入力して終了した場合は，<code>a</code>，<code>b</code>，<code>c</code>，<code>d</code>，改行で5です．単語数を数えているわけではありません．Windowsのテキストモードでは改行の変換が行われるため，ディスク上のファイルのバイト数と同じとは限りません．</p>
+<p>また，出力の直前に<code>putchar('/');</code>を加えると，各入力文字の前にスラッシュを付けられます．<code>ab</code>と改行なら<code>/a/b/</code>と改行になります．改行も1文字として処理するので，行末にもスラッシュが付きます．</p>
+<p>第6回の小文字化も，配列全体を用意せず，読み取った<code>ch</code>が<code>'A'</code>〜<code>'Z'</code>なら変更してから<code>putchar</code>することで実装できます．入力を少しずつ処理して次へ渡すプログラムを<strong>フィルタ</strong>と呼びます．</p>
 <h2 id="3">3　行を読む<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<h3 id="fgets">fgetsは容量を指定する<a class="headerlink" href="#fgets" title="Permanent link">&para;</a></h3>
-<p><code>fgets(配列, 容量, stdin)</code> は，最大で容量-1個のcharを読み，成功すれば末尾に'\0'を付けます．改行まで読めた場合，改行も配列に含まれます．容量のないgetsは使用しません．</p>
-<p>この回では容量2以上の配列を使います．戻り値は成功なら配列の先頭を指す値，1文字も読めずに入力が終了した場合や読み取りエラーではNULLです．成功を確認する前に配列をstrlenや%sへ渡してはいけません．NULLの詳しい型はポインタの回で学び，今は読み込み失敗の判定として使います．</p>
-<p>例えばHelloとEnterなら，配列には'H'，'e'，'l'，'l'，'o'，'\n'，'\0'が入ります．strlenの結果は改行も含めて6です．最後の改行を'\0'に置き換えれば，本文Helloの長さ5になります．空行でも'\n'と'\0'を読めるので，読み込み自体は成功です．</p>
+<h3 id="fgets"><code>fgets</code>は容量を指定する<a class="headerlink" href="#fgets" title="Permanent link">&para;</a></h3>
+<p><code>fgets(配列, 容量, stdin)</code> は，最大で容量-1個の<code>char</code>を読み，成功すれば末尾に<code>'\0'</code>を付けます．改行まで読めた場合，改行も配列に含まれます．容量のない<code>gets</code>は使用しません．</p>
+<p>この回では容量2以上の配列を使います．戻り値は成功なら配列の先頭を指す値，1文字も読めずに入力が終了した場合や読み取りエラーでは<code>NULL</code>です．成功を確認する前に配列を<code>strlen</code>や<code>%s</code>へ渡してはいけません．<code>NULL</code>の詳しい型はポインタの回で学び，今は読み込み失敗の判定として使います．</p>
+<p>例えば<code>Hello</code>とEnterなら，配列には<code>'H'</code>，<code>'e'</code>，<code>'l'</code>，<code>'l'</code>，<code>'o'</code>，<code>'\n'</code>，<code>'\0'</code>が入ります．<code>strlen</code>の結果は改行も含めて6です．最後の改行を<code>'\0'</code>に置き換えれば，本文<code>Hello</code>の長さ5になります．空行でも<code>'\n'</code>と<code>'\0'</code>を読めるので，読み込み自体は成功です．</p>
 <h3 id="_4">改行を除去して本文の長さを調べる<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">line.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-2"> 2</a></span>
@@ -2660,15 +2660,15 @@
 <a id="__codelineno-3-31" name="__codelineno-3-31"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-3-32" name="__codelineno-3-32"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/07/line.c">line.c</a></p>
-<p>ASCIIのHelloなら <code>length=5 text=Hello</code> と表示します．この配列に入る本文は31バイトまでです．改行が入らなかった場合は残りを読んで，ちょうど31バイトなのか，超過したのかを区別します．これは1行のテキストを想定し，途中にNULバイトがある入力は対象にしません．</p>
+<p><a download="download" href="sample/07/line.c"><code>line.c</code></a></p>
+<p>ASCIIの<code>Hello</code>なら <code>length=5 text=Hello</code> と表示します．この配列に入る本文は31バイトまでです．改行が入らなかった場合は残りを読んで，ちょうど31バイトなのか，超過したのかを区別します．これは1行のテキストを想定し，途中に<code>NUL</code>バイトがある入力は対象にしません．</p>
 <p><code>fflush(stdout)</code> は，改行のない入力案内を送り出すために使っています．<code>fflush(stdin)</code> で入力を捨てる方法には頼りません．</p>
 <h3 id="_5">容量の直前・ちょうど・超過を区別する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>入力本文</th>
-<th>最初のfgetsで保存されるもの</th>
+<th>最初の<code>fgets</code>で保存されるもの</th>
 <th>追加の読み取り</th>
 <th>結果</th>
 </tr>
@@ -2694,73 +2694,73 @@
 </tr>
 </tbody>
 </table>
-<p>「配列の末尾に改行がない」だけでは，長すぎるとは断定できません．ちょうど31文字で改行が読み残されている場合や，改行なしで入力が終了した場合もあります．例題は残りを読み，改行・EOF以外の文字があればextraを1にして超過を知らせます．長すぎた行の残りを消費することは，次の入力へ読み残しを持ち越さないためにも重要です．</p>
-<p>line[--n] = '\0';は，nを1減らしてからその添字の改行を終端へ変えます．先にn &gt; 0を確認しているので，size_tの0から1を引いてしまうことを防げます．読み取った文字列には埋め込みのNULバイトがない，という今回の入力条件も守ってください．</p>
+<p>「配列の末尾に改行がない」だけでは，長すぎるとは断定できません．ちょうど31文字で改行が読み残されている場合や，改行なしで入力が終了した場合もあります．例題は残りを読み，改行・<code>EOF</code>以外の文字があれば<code>extra</code>を1にして超過を知らせます．長すぎた行の残りを消費することは，次の入力へ読み残しを持ち越さないためにも重要です．</p>
+<p><code>line[--n] = '\0';</code>は，<code>n</code>を1減らしてからその添字の改行を終端へ変えます．先に<code>n &gt; 0</code>を確認しているので，<code>size_t</code>の0から1を引いてしまうことを防げます．読み取った文字列には埋め込みの<code>NUL</code>バイトがない，という今回の入力条件も守ってください．</p>
 <h3 id="_6">読めなかった場合とエラー<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>1文字も入力せず終了すると，この例はNo line read.をstderrへ表示し，return 1;で終了します．改行だけを入力した場合は長さ0の正常な行です．空行と，行が存在しない入力は異なります．</p>
-<p>getcharでEOFが返る理由には，入力の終了と読み取りエラーがあります．ferror(stdin)はエラーの有無，feof(stdin)は終了状態の有無を調べます．feofを先に調べても次の読み込みの成功は予測できません．<strong>読み取り関数の戻り値を判定してから状態を調べる</strong>順序にします．</p>
+<p>1文字も入力せず終了すると，この例はNo line read.を<code>stderr</code>へ表示し，<code>return 1;</code>で終了します．改行だけを入力した場合は長さ0の正常な行です．空行と，行が存在しない入力は異なります．</p>
+<p><code>getchar</code>で<code>EOF</code>が返る理由には，入力の終了と読み取りエラーがあります．<code>ferror(stdin)</code>はエラーの有無，<code>feof(stdin)</code>は終了状態の有無を調べます．<code>feof</code>を先に調べても次の読み込みの成功は予測できません．<strong>読み取り関数の戻り値を判定してから状態を調べる</strong>順序にします．</p>
 <h2 id="4">4　書式付き入出力<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <h3 id="_7">出力する型と書式を対応させる<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>printfでは <code>%d</code>，<code>%f</code>，<code>%s</code> を型に合わせます．scanfは書式に従って入力を変換する関数です．例えば <code>scanf("%d", &amp;n)</code> は変換できた項目数を返すため，成功数の確認が必要です．アドレスを渡す意味は第8回で学びます．</p>
-<p>scanfでは数値の範囲外入力や読み残した改行にも注意が必要です．この回の必須演習はgetcharとfgetsで行います．数値文字列を検査して変換する方法は第10回で扱います．</p>
+<p><code>printf</code>では <code>%d</code>，<code>%f</code>，<code>%s</code> を型に合わせます．<code>scanf</code>は書式に従って入力を変換する関数です．例えば <code>scanf("%d", &amp;n)</code> は変換できた項目数を返すため，成功数の確認が必要です．アドレスを渡す意味は第8回で学びます．</p>
+<p><code>scanf</code>では数値の範囲外入力や読み残した改行にも注意が必要です．この回の必須演習は<code>getchar</code>と<code>fgets</code>で行います．数値文字列を検査して変換する方法は第10回で扱います．</p>
 <table>
 <thead>
 <tr>
-<th>printfに渡す値</th>
+<th><code>printf</code>に渡す値</th>
 <th>書式</th>
 <th>例</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>int</td>
-<td>%d</td>
+<td><code>int</code></td>
+<td><code>%d</code></td>
 <td>123</td>
 </tr>
 <tr>
-<td>unsigned int</td>
-<td>%u，%o，%x</td>
+<td><code>unsigned int</code></td>
+<td><code>%u</code>，<code>%o</code>，<code>%x</code></td>
 <td>十進，八進，十六進</td>
 </tr>
 <tr>
-<td>long / unsigned long</td>
+<td><code>long / unsigned long</code></td>
 <td>%ld / %lu</td>
 <td>値の大小にかかわらず型を合わせる</td>
 </tr>
 <tr>
-<td>long long / unsigned long long</td>
+<td><code>long long / unsigned long long</code></td>
 <td>%lld / %llu</td>
 <td>大きな整数</td>
 </tr>
 <tr>
-<td>double（floatは渡す際にdoubleへ変換）</td>
-<td>%f，%e，%g</td>
+<td><code>double</code>（<code>float</code>は渡す際に<code>double</code>へ変換）</td>
+<td><code>%f</code>，<code>%e</code>，<code>%g</code></td>
 <td>小数・指数形式</td>
 </tr>
 <tr>
-<td>size_t</td>
-<td>%zu</td>
-<td>sizeofやstrlenの結果</td>
+<td><code>size_t</code></td>
+<td><code>%zu</code></td>
+<td><code>sizeof</code>や<code>strlen</code>の結果</td>
 </tr>
 <tr>
-<td>intとして渡される文字</td>
-<td>%c</td>
-<td>'A'など</td>
+<td><code>int</code>として渡される文字</td>
+<td><code>%c</code></td>
+<td><code>'A'</code>など</td>
 </tr>
 <tr>
 <td>終端を持つ文字列</td>
-<td>%s</td>
-<td>"abc"など</td>
+<td><code>%s</code></td>
+<td><code>"abc"</code>など</td>
 </tr>
 <tr>
-<td>void *</td>
-<td>%p</td>
-<td>(void *)&amp;nなど</td>
+<td><code>void *</code></td>
+<td><code>%p</code></td>
+<td><code>(void *)&amp;n</code>など</td>
 </tr>
 </tbody>
 </table>
-<p>longの値が小さくても%dへ渡してよいという意味ではありません．実際の型に合わせます．書式の型・順序・個数を間違えると未定義動作になることがあり，単に変な表示が出るだけとは限りません．警告が出たら型を確認し，誤った書式で結果を試す実験は行いません．</p>
-<p>MSVCではchar・short・unsigned char・unsigned shortの値は，printfへ渡す際にintへ整数拡張されます．例えばunsigned char c = 200;はprintf("%d\n", c);で200と表示できます．unsigned intとして表示したい場合はprintf("%u\n", (unsigned int)c);のように型をそろえます．floatがdoubleへ変換されることと合わせ，<strong>宣言した型だけでなく，実際に渡される型</strong>を確認しましょう．</p>
+<p><code>long</code>の値が小さくても<code>%d</code>へ渡してよいという意味ではありません．実際の型に合わせます．書式の型・順序・個数を間違えると未定義動作になることがあり，単に変な表示が出るだけとは限りません．警告が出たら型を確認し，誤った書式で結果を試す実験は行いません．</p>
+<p>MSVCでは<code>char</code>・<code>short</code>・<code>unsigned char</code>・<code>unsigned short</code>の値は，<code>printf</code>へ渡す際に<code>int</code>へ整数拡張されます．例えば<code>unsigned char c = 200;</code>は<code>printf("%d\n", c);</code>で200と表示できます．<code>unsigned int</code>として表示したい場合は<code>printf("%u\n", (unsigned int)c);</code>のように型をそろえます．<code>float</code>が<code>double</code>へ変換されることと合わせ，<strong>宣言した型だけでなく，実際に渡される型</strong>を確認しましょう．</p>
 <h3 id="_8">幅と小数点以下の桁数<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> f </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">154.423</span><span style="color: #F8F8F2">;</span>
@@ -2770,7 +2770,7 @@
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>|3|    3|
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>|154.423000|154.42|  154.42|
 </code></pre></div>
-<p>%5dの5は<strong>最小の表示幅</strong>です．小さい値には左側へ空白を補いますが，123456のように6桁ある値は切り詰めず6桁すべてを表示します．幅には符号や小数点も含みます．%.2fの2は小数点以下の桁数です．表示の丸めを行っても，変数fに保存した値は変わりません．</p>
+<p><code>%5d</code>の5は<strong>最小の表示幅</strong>です．小さい値には左側へ空白を補いますが，123456のように6桁ある値は切り詰めず6桁すべてを表示します．幅には符号や小数点も含みます．<code>%.2f</code>の2は小数点以下の桁数です．表示の丸めを行っても，変数<code>f</code>に保存した値は変わりません．</p>
 <h3 id="_9">指数形式と基数の違い<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> value </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1.3e10</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%e</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, value);</span>
@@ -2778,38 +2778,38 @@
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">500u</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%u %o %x</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, n, n, n);</span>
 </code></pre></div>
-<p>%eでは1.300000e+10のように指数を使います．1.3e10というリテラルは1.3×10の10乗です．%gは値と指定精度に応じて通常形式か指数形式を選び，この例では154.423 1.3e+10になります．%gの精度は有効桁数で，%fの小数点以下の桁数とは意味が違います．</p>
-<p>最後の行は500 764 1f4です．同じ値を別の基数で表示しているだけで，数値自体は変わりません．八進整数リテラル0764，十六進整数リテラル0x1f4も十進数の500と同じ値です．整数に不用意に先頭の0を付けると八進数になる点に注意してください．</p>
-<h3 id="scanfprintf">scanfの書式はprintfと同じではない<a class="headerlink" href="#scanfprintf" title="Permanent link">&para;</a></h3>
-<p>scanf("ID:%d", &amp;n)は，ID:という文字列に続く整数を読み取ってnへ保存する指定です．ID:13なら成功しますが，ID :13のように固定部分が異なると一致しません．戻り値が1であることを確認してからnを使います．アドレスを渡すのは，関数が呼び出し元の変数へ書き込むためです．</p>
+<p><code>%e</code>では<code>1.300000e+10</code>のように指数を使います．<code>1.3e10</code>というリテラルは1.3×10の10乗です．<code>%g</code>は値と指定精度に応じて通常形式か指数形式を選び，この例では<code>154.423 1.3e+10</code>になります．<code>%g</code>の精度は有効桁数で，<code>%f</code>の小数点以下の桁数とは意味が違います．</p>
+<p>最後の行は<code>500 764 1f4</code>です．同じ値を別の基数で表示しているだけで，数値自体は変わりません．八進整数リテラル0764，十六進整数リテラル<code>0x1f4</code>も十進数の500と同じ値です．整数に不用意に先頭の0を付けると八進数になる点に注意してください．</p>
+<h3 id="scanfprintf"><code>scanf</code>の書式は<code>printf</code>と同じではない<a class="headerlink" href="#scanfprintf" title="Permanent link">&para;</a></h3>
+<p><code>scanf("ID:%d", &amp;n)</code>は，<code>ID:</code>という文字列に続く整数を読み取って<code>n</code>へ保存する指定です．<code>ID:13</code>なら成功しますが，<code>ID :13</code>のように固定部分が異なると一致しません．戻り値が1であることを確認してから<code>n</code>を使います．アドレスを渡すのは，関数が呼び出し元の変数へ書き込むためです．</p>
 <table>
 <thead>
 <tr>
 <th>対象</th>
-<th>printfで表示</th>
-<th>scanfで読み込む</th>
+<th><code>printf</code>で表示</th>
+<th><code>scanf</code>で読み込む</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>int n</td>
-<td>%dにn</td>
-<td>%dに&amp;n</td>
+<td><code>int n</code></td>
+<td><code>%d</code>に<code>n</code></td>
+<td><code>%d</code>に<code>&amp;n</code></td>
 </tr>
 <tr>
-<td>float f</td>
-<td>%fにf（doubleへ変換）</td>
-<td>%fに&amp;f</td>
+<td><code>float f</code></td>
+<td><code>%f</code>に<code>f</code>（<code>double</code>へ変換）</td>
+<td><code>%f</code>に<code>&amp;f</code></td>
 </tr>
 <tr>
-<td>double d</td>
-<td>%fにd</td>
-<td>%lfに&amp;d</td>
+<td><code>double d</code></td>
+<td><code>%f</code>に<code>d</code></td>
+<td><code>%lf</code>に<code>&amp;d</code></td>
 </tr>
 </tbody>
 </table>
-<p>scanfの戻り値は，変換して代入できた項目数です．一致しなければ0，最初の代入前に入力が終了するなどの入力失敗ならEOFになる場合があります．失敗後に同じ入力が残ることがあり，ただ繰り返すだけでは進まない場合もあります．%dの後に残った改行を，次のgetcharやfgetsが読む点にも注意します．</p>
-<p>Visual Studioではscanfに安全性の診断が出る場合もあります．この節はコードを読むための説明とし，必須演習はgetchar・fgetsで統一します．scanfの書式や型を変えるだけで，任意の範囲外数値を安全に検査できるとは考えないでください．</p>
+<p><code>scanf</code>の戻り値は，変換して代入できた項目数です．一致しなければ0，最初の代入前に入力が終了するなどの入力失敗なら<code>EOF</code>になる場合があります．失敗後に同じ入力が残ることがあり，ただ繰り返すだけでは進まない場合もあります．<code>%d</code>の後に残った改行を，次の<code>getchar</code>や<code>fgets</code>が読む点にも注意します．</p>
+<p>Visual Studioでは<code>scanf</code>に安全性の診断が出る場合もあります．この節はコードを読むための説明とし，必須演習は<code>getchar</code>・<code>fgets</code>で統一します．<code>scanf</code>の書式や型を変えるだけで，任意の範囲外数値を安全に検査できるとは考えないでください．</p>
 <h2 id="5">5　リダイレクトとパイプ<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <p>標準入力は必ずキーボード，標準出力は必ず画面，というわけではありません．<strong>リダイレクト</strong>は入出力の接続先をファイルなどへ変更することです．<strong>パイプ</strong>は，あるプログラムの標準出力を別のプログラムの標準入力へつなぐことです．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>通常の入力：    キーボード → プログラム → 画面
@@ -2821,7 +2821,7 @@
 <p class="admonition-title">この回の演習範囲</p>
 <p>演習ではVisual Studioのコンソール入力を使います．リダイレクトとパイプは接続関係を考える課題で確認し，シェルの操作は行いません．ファイルを直接開くプログラムは第10回で作成します．</p>
 </div>
-<p>結果だけをstdout，診断をstderrへ出しておくと，次のプログラムへ渡すデータにエラーメッセージが混ざりにくくなります．データ処理用のプログラムでは，入力案内をstdoutに出すかどうかも考える必要があります．</p>
+<p>結果だけを<code>stdout</code>，診断を<code>stderr</code>へ出しておくと，次のプログラムへ渡すデータにエラーメッセージが混ざりにくくなります．データ処理用のプログラムでは，入力案内を<code>stdout</code>に出すかどうかも考える必要があります．</p>
 <h3 id="_10">入力・出力・追記を区別する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>一般的なシェルの説明で現れる記号を，操作ではなく意味として整理します．これらはC言語の文法ではなく，実行環境側の接続指定です．</p>
 <table>
@@ -2834,12 +2834,12 @@
 </thead>
 <tbody>
 <tr>
-<td>&lt;</td>
+<td><code>&lt;</code></td>
 <td>ファイルを標準入力へ接続</td>
-<td>getcharのソースを変更する必要はない</td>
+<td><code>getchar</code>のソースを変更する必要はない</td>
 </tr>
 <tr>
-<td>&gt;</td>
+<td><code>&gt;</code></td>
 <td>標準出力をファイルへ接続</td>
 <td>既存ファイルの内容を上書きすることがある</td>
 </tr>
@@ -2851,19 +2851,19 @@
 <tr>
 <td>|</td>
 <td>左側の標準出力を右側の標準入力へ接続</td>
-<td>stderrまで自動で混ざるわけではない</td>
+<td><code>stderr</code>まで自動で混ざるわけではない</td>
 </tr>
 </tbody>
 </table>
 <p>入力と出力の接続変更を同時に行えば，「入力ファイル→フィルタ→結果ファイル」とできます．上書きと追記を間違えると既存の記録を失ったり，同じ結果を重複して保存したりします．授業では実際にファイルを上書きする操作は行わず，接続先と結果の違いを考えます．</p>
 <h3 id="_11">小さい処理を組み合わせる<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>固定の文字列を出力するechoのような機能，ファイル内容を出すcatのような機能，ファイル一覧を出すlsのような機能も，文字データを供給する側として考えられます．これらの名称は接続例を読むための紹介で，コマンドを実行する課題ではありません．一覧の表示形式などは，画面へ出す場合とパイプへ渡す場合で異なることもあります．</p>
+<p>固定の文字列を出力する<code>echo</code>のような機能，ファイル内容を出す<code>cat</code>のような機能，ファイル一覧を出す<code>ls</code>のような機能も，文字データを供給する側として考えられます．これらの名称は接続例を読むための紹介で，コマンドを実行する課題ではありません．一覧の表示形式などは，画面へ出す場合とパイプへ渡す場合で異なることもあります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>文字列を出力する処理
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  stdout → 小文字化フィルタ → バイト数を数える処理 → 結果ファイル
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                 ↓ stderr              ↓ stderr
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>               診断を画面へ           診断を画面へ
 </code></pre></div>
-<p>例えば上流がABCと改行を出すなら，小文字化後はabcと改行です．下流で改行も数えるなら4になります．ファイル内容を読む処理やファイル一覧を出す処理へ供給元を変えても，フィルタの仕組みは変わりません．ただし上流が改行を付けるかどうかまで含めて，実際に流れるデータを考える必要があります．</p>
+<p>例えば上流が<code>ABC</code>と改行を出すなら，小文字化後は<code>abc</code>と改行です．下流で改行も数えるなら4になります．ファイル内容を読む処理やファイル一覧を出す処理へ供給元を変えても，フィルタの仕組みは変わりません．ただし上流が改行を付けるかどうかまで含めて，実際に流れるデータを考える必要があります．</p>
 <p>パイプの先は，書き手がデータを流し終えるまで入力待ちになることがあります．入出力は「画面で見えた順に何でも受け取る」仕組みではなく，接続されたストリームを読む仕組みです．標準出力と標準エラー出力の表示順も，別々のバッファの影響を受ける場合があるため，画面上の並びだけを処理順の証拠にしないようにします．</p>
 <h2 id="6">6　確認の進め方とよくある間違い<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <table>
@@ -2876,7 +2876,7 @@
 <tbody>
 <tr>
 <td>Enterを押しても集計が出ない</td>
-<td>終了条件が改行かEOFか</td>
+<td>終了条件が改行か<code>EOF</code>か</td>
 </tr>
 <tr>
 <td>入力が2回表示される</td>
@@ -2884,11 +2884,11 @@
 </tr>
 <tr>
 <td>0や1の値しか処理されない</td>
-<td>getcharへの代入を括弧で囲んだか</td>
+<td><code>getchar</code>への代入を括弧で囲んだか</td>
 </tr>
 <tr>
-<td>EOFで止まらない</td>
-<td>戻り値をcharでなくintへ保存しているか</td>
+<td><code>EOF</code>で止まらない</td>
+<td>戻り値を<code>char</code>でなく<code>int</code>へ保存しているか</td>
 </tr>
 <tr>
 <td>次の行を読むとすぐ空行になる</td>
@@ -2911,8 +2911,8 @@
 <p>まず空の入力，空行，短い1行，複数行の順に確認します．次に容量の手前・ちょうど・超過を試します．読み取った1文字，配列へ保存した文字列，標準出力へ書いたデータを分けて記録すると，どの段階で予想と違ったかを特定できます．</p>
 <h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ol>
-<li>getcharの戻り値をintで受けるのはなぜか．</li>
-<li>fgetsで配列に改行が残るのはどんな場合か．</li>
+<li><code>getchar</code>の戻り値を<code>int</code>で受けるのはなぜか．</li>
+<li><code>fgets</code>で配列に改行が残るのはどんな場合か．</li>
 <li>標準出力と標準エラー出力を分ける利点は何か．</li>
 </ol>
 <p><a class="md-button md-button--primary" href="ex07.html">演習へ</a>

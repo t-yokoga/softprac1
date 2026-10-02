@@ -2587,19 +2587,19 @@
 <ul>
 <li>変数を宣言・初期化し，代入によって値を変更できる．</li>
 <li>整数・小数・1文字に適した型を選べる．</li>
-<li>printfの書式を型に合わせ，値を表示できる．</li>
+<li><code>printf</code>の書式を型に合わせ，値を表示できる．</li>
 <li>変数の値・サイズ・アドレスを区別できる．</li>
 <li>実行前に値の変化を予測し，実行結果と比較できる．</li>
 </ul>
 </div>
 <h2 id="environment">1．前回の復習と作業の準備<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h2>
 <h3 id="_1">表示するだけのプログラムから，値を使うプログラムへ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>第1回では，mainの中に次の文を書きました．</p>
+<p>第1回では，<code>main</code>の中に次の文を書きました．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;Hello, world!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
-<p>今回はmain内に変数を用意し，その値をprintfへ渡します．mainや#includeの基本の形，保存・ビルド・実行の順序は前回と同じです．</p>
+<p>今回は<code>main</code>内に変数を用意し，その値を<code>printf</code>へ渡します．<code>main</code>や<code>#include</code>の基本の形，保存・ビルド・実行の順序は前回と同じです．</p>
 <h3 id="2_1">第2回の作業場所<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
-<p>エクスプローラーで，前回のPL1フォルダの中に <code>week02</code> を作成してください．
+<p>エクスプローラーで，前回の<code>PL1</code>フォルダの中に <code>week02</code> を作成してください．
 第1回のファイルはそのまま残し，第2回のプログラムを別に管理します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PL1/
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── week01/
@@ -2607,12 +2607,12 @@
 </code></pre></div>
 <ol>
 <li>Visual StudioでC++／Windowsの「空のプロジェクト」を作成する．</li>
-<li>プロジェクト名を <code>Variables</code>，場所をweek02にし，ソリューションとプロジェクトを同じディレクトリに配置する．</li>
+<li>プロジェクト名を <code>Variables</code>，場所を<code>week02</code>にし，ソリューションとプロジェクトを同じディレクトリに配置する．</li>
 <li>「ソース ファイル」へ <code>variables.c</code> を追加する．</li>
-<li>Cコードとしてコンパイル（/TC），C17，警告レベル4を設定する．</li>
+<li>Cコードとしてコンパイル（<code>/TC</code>），C17，警告レベル4を設定する．</li>
 </ol>
 <p>詳しい画面操作は<a href="lec01.html#hello">第1回のプロジェクト作成</a>を参照してください．
-以降の短いコードは，特に指定がなければmain内に書く<strong>コードの一部</strong>です．
+以降の短いコードは，特に指定がなければ<code>main</code>内に書く<strong>コードの一部</strong>です．
 同じ名前の変数を同じ場所で何度も宣言しないよう，確認する断片へ置き換えて試します．</p>
 <div class="admonition note">
 <p class="admonition-title">今回の入力はソースコードで指定する</p>
@@ -2633,12 +2633,12 @@
 </thead>
 <tbody>
 <tr>
-<td>int</td>
+<td><code>int</code></td>
 <td>型</td>
 <td>整数を扱う</td>
 </tr>
 <tr>
-<td>height</td>
+<td><code>height</code></td>
 <td>変数名</td>
 <td>縦の長さを表す名前</td>
 </tr>
@@ -2648,7 +2648,7 @@
 <td>最初に保存する値</td>
 </tr>
 <tr>
-<td>;</td>
+<td><code>;</code></td>
 <td>文法上の区切り</td>
 <td>この宣言を終える</td>
 </tr>
@@ -2656,7 +2656,7 @@
 </table>
 <p><strong>変数</strong>は，値を保存する領域に名前を付けたものです．
 よく「名前の付いた箱」と例えられますが，何でも入れられる箱ではありません．型によって扱う値の種類や範囲が決まります．</p>
-<p>heightという名前だけで「縦の長さ」という意味がC言語に伝わるわけではありません．
+<p><code>height</code>という名前だけで「縦の長さ」という意味がC言語に伝わるわけではありません．
 その意味は人が読み取ります．<code>a</code> とだけ書くよりも <code>height</code> と書いた方が，計算の目的を理解しやすくなります．</p>
 <h3 id="_3">宣言・初期化・代入を区別する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>変数の型と名前を知らせることを<strong>宣言</strong>といいます．宣言と同時に最初の値を与えることが<strong>初期化</strong>です．
@@ -2672,16 +2672,16 @@
 <p>この講義では，可能な限り宣言時に初期化します．使う直前まで値が決まらない場合も，読む前には必ず値を設定します．</p>
 <div class="admonition warning">
 <p class="admonition-title">宣言しただけで0になるとは限らない</p>
-<p>main内の通常の局所変数は，初期化しなければ値が定まっていません．未初期化の値をprintfで表示して「どんな値か調べる」ことはしません．たまたま0に見えても，正しいコードにはなりません．</p>
+<p><code>main</code>内の通常の局所変数は，初期化しなければ値が定まっていません．未初期化の値を<code>printf</code>で表示して「どんな値か調べる」ことはしません．たまたま0に見えても，正しいコードにはなりません．</p>
 </div>
 <h3 id="_4">代入は右辺から左辺へ<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><code>height = 12;</code> は「heightと12が等しい」という主張ではなく，「右辺の12を左辺のheightへ保存する」操作です．
+<p><code>height = 12;</code> は「<code>height</code>と12が等しい」という主張ではなく，「右辺の12を左辺の<code>height</code>へ保存する」操作です．
 <code>12 = height;</code> とは書けません．値を保存できる変数を左辺に置きます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, count);</span>
 </code></pre></div>
-<p>2行目では，まず右辺のcountの現在値3に1を足して4を求め，その後で左辺のcountへ4を保存します．
+<p>2行目では，まず右辺の<code>count</code>の現在値3に1を足して4を求め，その後で左辺の<code>count</code>へ4を保存します．
 数学の方程式として読むと不思議ですが，「計算してから上書きする」と読めば理解できます．
 表示される値は4です．演算子の詳しい規則は次回学びます．</p>
 <h3 id="_5">コピーした値は独立している<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -2690,8 +2690,8 @@
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a, b);</span>
 </code></pre></div>
-<p>この結果は <code>20 10</code> です．bを初期化したときに保存したのは，その時点のaの値10です．
-aとbが常に連動するように設定したわけではありません．この性質は，計算結果を保存する場合にも当てはまります．</p>
+<p>この結果は <code>20 10</code> です．<code>b</code>を初期化したときに保存したのは，その時点の<code>a</code>の値10です．
+<code>a</code>と<code>b</code>が常に連動するように設定したわけではありません．この性質は，計算結果を保存する場合にも当てはまります．</p>
 <h2 id="calculation">3．計算の順番を追う<a class="headerlink" href="#calculation" title="Permanent link">&para;</a></h2>
 <h3 id="_6">長方形の面積<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>縦10，横5の長方形の面積を，次のように計算します．Cでは掛け算に <code>*</code> を使います．</p>
@@ -2700,14 +2700,14 @@ aとbが常に連動するように設定したわけではありません．こ
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, area);</span>
 </code></pre></div>
-<p>areaには50が保存され，画面には <code>area=50</code> と表示されます．
-3行目では右辺を計算してからareaを初期化します．変数名を式に書くと，その変数に保存されている値を使います．</p>
+<p><code>area</code>には50が保存され，画面には <code>area=50</code> と表示されます．
+3行目では右辺を計算してから<code>area</code>を初期化します．変数名を式に書くと，その変数に保存されている値を使います．</p>
 <h3 id="_7">元の変数を変えたら，結果はどうなるか<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>続けて，heightだけを12へ変更したとします．</p>
+<p>続けて，<code>height</code>だけを12へ変更したとします．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #F8F8F2">height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height=%d area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, area);</span>
 </code></pre></div>
-<p>表示は <code>height=12 area=50</code> です．areaにはまだ50が残っています．
+<p>表示は <code>height=12 area=50</code> です．<code>area</code>にはまだ50が残っています．
 表計算ソフトの数式のように，縦の長さが変わったら面積も自動で再計算されるわけではありません．
 新しい面積が必要なら，次の文を実行します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #F8F8F2">area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
@@ -2718,9 +2718,9 @@ aとbが常に連動するように設定したわけではありません．こ
 <thead>
 <tr>
 <th>実行した処理</th>
-<th>height</th>
-<th>width</th>
-<th>area</th>
+<th><code>height</code></th>
+<th><code>width</code></th>
+<th><code>area</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2731,13 +2731,13 @@ aとbが常に連動するように設定したわけではありません．こ
 <td>50</td>
 </tr>
 <tr>
-<td>height = 12;</td>
+<td><code>height = 12;</code></td>
 <td>12</td>
 <td>5</td>
 <td>50</td>
 </tr>
 <tr>
-<td>area = height * width;</td>
+<td><code>area = height * width;</code></td>
 <td>12</td>
 <td>5</td>
 <td>60</td>
@@ -2746,7 +2746,7 @@ aとbが常に連動するように設定したわけではありません．こ
 </table>
 <div class="admonition tip">
 <p class="admonition-title">実行前に予測する</p>
-<p>結果が違ったときは，最後のprintfだけでなく，値を設定した行から順に確認します．「その行の実行前に何が入っていて，実行後に何へ変わるか」を記録すると原因を探せます．</p>
+<p>結果が違ったときは，最後の<code>printf</code>だけでなく，値を設定した行から順に確認します．「その行の実行前に何が入っていて，実行後に何へ変わるか」を記録すると原因を探せます．</p>
 </div>
 <h3 id="_8">変数名のルール<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>この講義では，英字・数字・アンダースコアを組み合わせた名前を使います．先頭は数字にできません．
@@ -2761,27 +2761,27 @@ aとbが常に連動するように設定したわけではありません．こ
 </thead>
 <tbody>
 <tr>
-<td>height</td>
+<td><code>height</code></td>
 <td>使える</td>
 <td>何を表すか分かりやすい</td>
 </tr>
 <tr>
-<td>height2</td>
+<td><code>height2</code></td>
 <td>使える</td>
 <td>先頭以外には数字を使える</td>
 </tr>
 <tr>
-<td>total_price</td>
+<td><code>total_price</code></td>
 <td>使える</td>
 <td>アンダースコアを使える</td>
 </tr>
 <tr>
-<td>Height</td>
+<td><code>Height</code></td>
 <td>使える</td>
-<td>heightとは別の名前</td>
+<td><code>height</code>とは別の名前</td>
 </tr>
 <tr>
-<td>2height</td>
+<td><code>2height</code></td>
 <td>使えない</td>
 <td>数字で始まっている</td>
 </tr>
@@ -2791,7 +2791,7 @@ aとbが常に連動するように設定したわけではありません．こ
 <td>-は減算の記号になる</td>
 </tr>
 <tr>
-<td>int，return</td>
+<td><code>int</code>，<code>return</code></td>
 <td>使えない</td>
 <td>予約語である</td>
 </tr>
@@ -2800,66 +2800,66 @@ aとbが常に連動するように設定したわけではありません．こ
 <p>自分で付ける名前では先頭のアンダースコアを避け，型やライブラリの名前と紛らわしい名前も避けましょう．</p>
 <h2 id="types">4．データ型を選ぶ<a class="headerlink" href="#types" title="Permanent link">&para;</a></h2>
 <h3 id="1">整数・小数・1文字<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<p>扱いたい値によって型を選びます．まずは整数ならint，小数を含む計算ならdouble，1文字ならcharを基本とします．</p>
+<p>扱いたい値によって型を選びます．まずは整数なら<code>int</code>，小数を含む計算なら<code>double</code>，1文字なら<code>char</code>を基本とします．</p>
 <table>
 <thead>
 <tr>
 <th>型</th>
 <th>主な用途</th>
 <th>初期化の例</th>
-<th>printfの書式</th>
+<th><code>printf</code>の書式</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>int</td>
+<td><code>int</code></td>
 <td>個数・点数などの整数</td>
-<td>int count = 3;</td>
-<td>%d</td>
+<td><code>int count = 3;</code></td>
+<td><code>%d</code></td>
 </tr>
 <tr>
-<td>unsigned int</td>
+<td><code>unsigned int</code></td>
 <td>負の値を使わない整数</td>
-<td>unsigned int flags = 5u;</td>
-<td>%u</td>
+<td><code>unsigned int flags = 5u;</code></td>
+<td><code>%u</code></td>
 </tr>
 <tr>
-<td>long long</td>
-<td>intより広い範囲を扱う整数</td>
-<td>long long n = 10000000000LL;</td>
-<td>%lld</td>
+<td><code>long long</code></td>
+<td><code>int</code>より広い範囲を扱う整数</td>
+<td><code>long long n = 10000000000LL;</code></td>
+<td><code>%lld</code></td>
 </tr>
 <tr>
-<td>double</td>
+<td><code>double</code></td>
 <td>小数を含む数の近似</td>
-<td>double price = 125.5;</td>
-<td>%f</td>
+<td><code>double price = 125.5;</code></td>
+<td><code>%f</code></td>
 </tr>
 <tr>
-<td>float</td>
-<td>通常はdoubleより少ない精度で表す数</td>
-<td>float rate = 0.5f;</td>
-<td>%f</td>
+<td><code>float</code></td>
+<td>通常は<code>double</code>より少ない精度で表す数</td>
+<td><code>float rate = 0.5f;</code></td>
+<td><code>%f</code></td>
 </tr>
 <tr>
-<td>char</td>
+<td><code>char</code></td>
 <td>1文字，小さな整数</td>
-<td>char grade = 'A';</td>
-<td>%c</td>
+<td><code>char grade = 'A';</code></td>
+<td><code>%c</code></td>
 </tr>
 </tbody>
 </table>
 <p>ソースに直接書いた10や125.5などの値を<strong>リテラル</strong>と呼びます．
-小数のリテラル125.5はdouble型です．floatを表すには0.5fのようにfを付けます．uやLLも型を指定する接尾辞です．</p>
-<p>unsignedは，負数を渡したら自動でエラーにしてくれる仕組みではありません．
-符号付き・符号なしの変換規則があるため，単に「個数だからunsignedにすれば安全」と考えないようにします．今回は小さい個数にintを使います．</p>
+小数のリテラル125.5は<code>double</code>型です．<code>float</code>を表すには<code>0.5f</code>のように<code>f</code>を付けます．<code>u</code>や<code>LL</code>も型を指定する接尾辞です．</p>
+<p><code>unsigned</code>は，負数を渡したら自動でエラーにしてくれる仕組みではありません．
+符号付き・符号なしの変換規則があるため，単に「個数だから<code>unsigned</code>にすれば安全」と考えないようにします．今回は小さい個数に<code>int</code>を使います．</p>
 <h3 id="_9">整数型の大きさと範囲<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>型は無限に大きな値を保存できるわけではありません．
-整数型にはchar，short，int，long，long longなどがあり，実際のサイズは処理系によります．
+整数型には<code>char</code>，<code>short</code>，<code>int</code>，<code>long</code>，<code>long long</code>などがあり，実際のサイズは処理系によります．
 <strong>処理系</strong>とは，コンパイラや実行環境など，プログラムを動かす仕組みのことです．</p>
-<p>多くのWindows環境でintは4バイトですが，C言語がすべての環境で4バイトと定めているわけではありません．
-また「64ビットPCだからlongも必ず8バイト」とは限りません．サイズは後述のsizeofで確かめられます．</p>
-<p><code>&lt;limits.h&gt;</code> をインクルードすると，intの下限 <code>INT_MIN</code> と上限 <code>INT_MAX</code> を表示できます．
+<p>多くのWindows環境で<code>int</code>は4バイトですが，C言語がすべての環境で4バイトと定めているわけではありません．
+また「64ビットPCだから<code>long</code>も必ず8バイト」とは限りません．サイズは後述の<code>sizeof</code>で確かめられます．</p>
+<p><code>&lt;limits.h&gt;</code> をインクルードすると，<code>int</code>の下限 <code>INT_MIN</code> と上限 <code>INT_MAX</code> を表示できます．
 これらは処理系が用意した範囲を表す名前です．自分で宣言する必要はありません．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;int range: %d to %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, INT_MIN, INT_MAX);</span>
 </code></pre></div>
@@ -2868,7 +2868,7 @@ aとbが常に連動するように設定したわけではありません．こ
 <p>符号付き整数で上限を超える計算を行うと，Cでは動作が保証されません．上限に1を足して「必ず負になる」と考えるのは誤りです．範囲を確認する際は，上限・下限を表示するところまでにします．</p>
 </div>
 <h3 id="_10">型のサイズと範囲を比較する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>次は<strong>WindowsのMSVCでの基本的な整数型</strong>の比較です（1バイト＝8ビット）．C17のすべての処理系で同じ値になるという意味ではありません．longは，MSVCでは64ビット用にビルドしても4バイトです．</p>
+<p>次は<strong>WindowsのMSVCでの基本的な整数型</strong>の比較です（1バイト＝8ビット）．C17のすべての処理系で同じ値になるという意味ではありません．<code>long</code>は，MSVCでは64ビット用にビルドしても4バイトです．</p>
 <table>
 <thead>
 <tr>
@@ -2879,48 +2879,48 @@ aとbが常に連動するように設定したわけではありません．こ
 </thead>
 <tbody>
 <tr>
-<td>signed char</td>
+<td><code>signed char</code></td>
 <td style="text-align: right;">1</td>
 <td>−128〜127</td>
 </tr>
 <tr>
-<td>unsigned char</td>
+<td><code>unsigned char</code></td>
 <td style="text-align: right;">1</td>
 <td>0〜255</td>
 </tr>
 <tr>
-<td>short</td>
+<td><code>short</code></td>
 <td style="text-align: right;">2</td>
 <td>−32,768〜32,767</td>
 </tr>
 <tr>
-<td>unsigned short</td>
+<td><code>unsigned short</code></td>
 <td style="text-align: right;">2</td>
 <td>0〜65,535</td>
 </tr>
 <tr>
-<td>int / long</td>
+<td><code>int / long</code></td>
 <td style="text-align: right;">4</td>
 <td>−2,147,483,648〜2,147,483,647</td>
 </tr>
 <tr>
-<td>unsigned int / unsigned long</td>
+<td><code>unsigned int / unsigned long</code></td>
 <td style="text-align: right;">4</td>
 <td>0〜4,294,967,295</td>
 </tr>
 <tr>
-<td>long long</td>
+<td><code>long long</code></td>
 <td style="text-align: right;">8</td>
 <td>−9,223,372,036,854,775,808〜9,223,372,036,854,775,807</td>
 </tr>
 <tr>
-<td>unsigned long long</td>
+<td><code>unsigned long long</code></td>
 <td style="text-align: right;">8</td>
 <td>0〜18,446,744,073,709,551,615</td>
 </tr>
 </tbody>
 </table>
-<p>charのサイズも1バイトですが，単にcharと書いたときの符号の有無は処理系・設定に依存します．上の2種類とは区別してください．
+<p><code>char</code>のサイズも1バイトですが，単に<code>char</code>と書いたときの符号の有無は処理系・設定に依存します．上の2種類とは区別してください．
 8ビットには2の8乗＝256通りの並びがあります．同じ8ビットでも，符号なしなら0〜255，2の補数による符号付きなら−128〜127と解釈します．負数の表現は第3回で学びます．</p>
 <p>浮動小数点数では，<strong>範囲（どれほど大きい・小さい数を表せるか）</strong>と<strong>精度（何桁程度を区別できるか）</strong>を分けて考えます．次もMSVCでの値です．</p>
 <table>
@@ -2935,14 +2935,14 @@ aとbが常に連動するように設定したわけではありません．こ
 </thead>
 <tbody>
 <tr>
-<td>float</td>
+<td><code>float</code></td>
 <td style="text-align: right;">4</td>
 <td>約6〜7桁</td>
 <td>約1.175×10の−38乗</td>
 <td>約3.403×10の38乗</td>
 </tr>
 <tr>
-<td>double</td>
+<td><code>double</code></td>
 <td style="text-align: right;">8</td>
 <td>約15〜16桁</td>
 <td>約2.225×10の−308乗</td>
@@ -2951,9 +2951,9 @@ aとbが常に連動するように設定したわけではありません．こ
 </tbody>
 </table>
 <p>有効桁数は「小数点以下の桁数」ではなく，数全体の意味のある桁数です．正規化数よりも小さい正の値を表す<strong>非正規化数</strong>もありますが，その領域では精度が低下します．0や負数も表せるため，表の最小値は型全体の下限ではありません．</p>
-<p>doubleはfloatより広い範囲と高い精度を持つ一方，1個の変数に使うメモリは2倍です．この講義の通常の小数計算にはdoubleを使い，大量の数値を保存するときには必要な精度と容量を考えて選びます．サイズはsizeof，範囲は整数ならlimits.h，浮動小数点数ならfloat.hのFLT_MAX・DBL_MAXなどで確認できます．</p>
+<p><code>double</code>は<code>float</code>より広い範囲と高い精度を持つ一方，1個の変数に使うメモリは2倍です．この講義の通常の小数計算には<code>double</code>を使い，大量の数値を保存するときには必要な精度と容量を考えて選びます．サイズは<code>sizeof</code>，範囲は整数なら<code>limits.h</code>，浮動小数点数なら<code>float.h</code>の<code>FLT_MAX</code>・<code>DBL_MAX</code>などで確認できます．</p>
 <h3 id="_11">小数は近似として保存される<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>floatやdoubleは<strong>浮動小数点数</strong>を扱う型です．有限のビット数で表すため，すべての小数を厳密に保存できるわけではありません．
+<p><code>float</code>や<code>double</code>は<strong>浮動小数点数</strong>を扱う型です．有限のビット数で表すため，すべての小数を厳密に保存できるわけではありません．
 例えば0.1は，通常の実習環境では内部で近似値になります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0.1</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x);</span>
@@ -2961,40 +2961,40 @@ aとbが常に連動するように設定したわけではありません．こ
 </code></pre></div>
 <p>最初は0.1と表示されますが，桁数を増やすと近似の影響が見える場合があります．
 表示する桁数を増やしても，変数に保存された値の精度が増えるわけではありません．
-doubleを使えばすべての誤差がなくなる，というわけでもありません．</p>
-<h3 id="char1">charで1文字を扱う<a class="headerlink" href="#char1" title="Permanent link">&para;</a></h3>
-<p><code>char grade = 'A';</code> のAは，<strong>シングルクォート</strong>で囲みます．
+<code>double</code>を使えばすべての誤差がなくなる，というわけでもありません．</p>
+<h3 id="char1"><code>char</code>で1文字を扱う<a class="headerlink" href="#char1" title="Permanent link">&para;</a></h3>
+<p><code>char grade = 'A';</code> の<code>A</code>は，<strong>シングルクォート</strong>で囲みます．
 文字列を表す <code>"A"</code> とは異なります．文字列の扱いは第6回で学びます．</p>
-<p>charの値は文字コードに対応する整数としても扱えます．また，単にcharと書いた場合に符号付きか符号なしかは処理系によります．
-小さな整数として符号の有無を指定したい場合は，signed charまたはunsigned charを使います．
-今回の文字の例は，基本的な英数字に限定します．日本語1文字がchar1個に必ず収まるわけではありません．</p>
-<h2 id="output">5．printfで値を表示する<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
+<p><code>char</code>の値は文字コードに対応する整数としても扱えます．また，単に<code>char</code>と書いた場合に符号付きか符号なしかは処理系によります．
+小さな整数として符号の有無を指定したい場合は，<code>signed char</code>または<code>unsigned char</code>を使います．
+今回の文字の例は，基本的な英数字に限定します．日本語1文字が<code>char1</code>個に必ず収まるわけではありません．</p>
+<h2 id="output">5．<code>printf</code>で値を表示する<a class="headerlink" href="#output" title="Permanent link">&para;</a></h2>
 <h3 id="_12">書式と値を対応させる<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p><code>%d</code> は，文字列中のその位置にintの値を表示する指定です．
-printfへ渡す値は，書式文字列の後ろへ，カンマで区切って並べます．</p>
+<p><code>%d</code> は，文字列中のその位置に<code>int</code>の値を表示する指定です．
+<code>printf</code>へ渡す値は，書式文字列の後ろへ，カンマで区切って並べます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height=%d width=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, width);</span>
 </code></pre></div>
-<p>最初の%dにheight，次の%dにwidthが対応します．
-引用符の内側のheight=という部分はそのまま表示される文字列です．外側のheightは変数の値を参照します．</p>
+<p>最初の<code>%d</code>に<code>height</code>，次の<code>%d</code>に<code>width</code>が対応します．
+引用符の内側の<code>height=</code>という部分はそのまま表示される文字列です．外側の<code>height</code>は変数の値を参照します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height);</span>
 </code></pre></div>
-<p>1行目のprintfはheightという6文字，次のprintfは10を表示します．
+<p>1行目の<code>printf</code>は<code>height</code>という6文字，次の<code>printf</code>は10を表示します．
 文字列の中に変数名を書くだけでは，値に置き換わりません．</p>
 <h3 id="_13">小数の表示桁数<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>doubleを表示するときは%fを使い，小数点以下の桁数を指定するときは%.2fのように書きます．</p>
+<p><code>double</code>を表示するときは<code>%f</code>を使い，小数点以下の桁数を指定するときは<code>%.2f</code>のように書きます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> price </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">125.5</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price);</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.2f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price);</span>
 </code></pre></div>
-<p>表示は順に125.500000，125.50です．通常の%fでは小数点以下6桁を表示します．
-%.2fで表示してもpriceに保存された値は変わりません．floatをprintfへ渡す場合はdoubleへ変換されるため，表示には同じ%fを使います．</p>
+<p>表示は順に125.500000，125.50です．通常の<code>%f</code>では小数点以下6桁を表示します．
+<code>%.2f</code>で表示しても<code>price</code>に保存された値は変わりません．<code>float</code>を<code>printf</code>へ渡す場合は<code>double</code>へ変換されるため，表示には同じ<code>%f</code>を使います．</p>
 <div class="admonition warning">
 <p class="admonition-title">書式は型変換の指示ではない</p>
-<p>intを%f，doubleを%dで渡しても，型を変えて表示してくれるわけではありません．型の不一致は未定義動作の原因になります．警告を読んで修正し，誤った書式のまま実行しないでください．</p>
+<p><code>int</code>を<code>%f</code>，<code>double</code>を<code>%d</code>で渡しても，型を変えて表示してくれるわけではありません．型の不一致は未定義動作の原因になります．警告を読んで修正し，誤った書式のまま実行しないでください．</p>
 </div>
-<p>書式と値の個数・順序も合わせます．heightとwidthを逆に渡すような間違いは，警告が出るとは限りません．期待する表示との比較も必要です．</p>
+<p>書式と値の個数・順序も合わせます．<code>height</code>と<code>width</code>を逆に渡すような間違いは，警告が出るとは限りません．期待する表示との比較も必要です．</p>
 <h2 id="memory">6．メモリと変数<a class="headerlink" href="#memory" title="Permanent link">&para;</a></h2>
 <h3 id="_14">値はメモリ上に置かれる<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p><strong>メモリ</strong>は，実行中のプログラムがデータを保持する領域です．
@@ -3002,37 +3002,37 @@ printfへ渡す値は，書式文字列の後ろへ，カンマで区切って�
 その場所を表すものが<strong>アドレス</strong>です．</p>
 <p>通常のWindows環境では1バイトは8ビットです．ビットは0または1を表し，8ビットなら256通りの並びを作れます．
 Cでの1バイトのビット数は <code>CHAR_BIT</code> で確認できます．
-例えばintが4バイトの環境なら，int変数1つのために4バイト分の領域を使います．</p>
+例えば<code>int</code>が4バイトの環境なら，<code>int</code>変数1つのために4バイト分の領域を使います．</p>
 <table>
 <thead>
 <tr>
 <th>観点</th>
 <th>問い</th>
-<th>heightの場合</th>
+<th><code>height</code>の場合</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>値</td>
 <td>何が入っているか</td>
-<td>height</td>
+<td><code>height</code></td>
 </tr>
 <tr>
 <td>サイズ</td>
 <td>何バイトを使うか</td>
-<td>sizeof height</td>
+<td><code>sizeof height</code></td>
 </tr>
 <tr>
 <td>アドレス</td>
 <td>どこにあるか</td>
-<td>&amp;height</td>
+<td><code>&amp;height</code></td>
 </tr>
 </tbody>
 </table>
-<p>変数名heightは，ソースコードの中で対象を指定する名前です．
+<p>変数名<code>height</code>は，ソースコードの中で対象を指定する名前です．
 値10と，メモリ上の場所と，領域の大きさ4バイトは，すべて違う情報です．</p>
 <h3 id="_15">複数バイトを占める変数の図解<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>次はintが4バイトの環境で，heightに10，widthに5を保存する<strong>概念図</strong>です．1行が1バイトを表し，アドレスは説明用の架空の値です．</p>
+<p>次は<code>int</code>が4バイトの環境で，<code>height</code>に10，<code>width</code>に5を保存する<strong>概念図</strong>です．1行が1バイトを表し，アドレスは説明用の架空の値です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>アドレス     1バイトの区画        変数の領域
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>0x1000       ┌────────────┐  ← &amp;height（先頭）
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>             │            │  ┐
@@ -3052,36 +3052,36 @@ Cでの1バイトのビット数は <code>CHAR_BIT</code> で確認できます�
 <a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>             │            │  ┘
 <a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>             └────────────┘
 </code></pre></div>
-<p>heightの値10は，各区画に10を1つずつ保存するのではなく，<strong>4バイト全体で1つの値として表現</strong>されます．&amp;heightはその領域の先頭を指します．個々のバイトへの値の分かれ方は，この図では省略しています．</p>
-<p>0xは<strong>16進数</strong>の表記です．各桁には0〜9とA〜F（小文字も可）を使い，Aは十進数の10，Fは15です．0x1009の次は0x100A，0x100Fの次は0x1010になります．図では1バイトごとにアドレスが1増えています．</p>
+<p><code>height</code>の値10は，各区画に10を1つずつ保存するのではなく，<strong>4バイト全体で1つの値として表現</strong>されます．<code>&amp;height</code>はその領域の先頭を指します．個々のバイトへの値の分かれ方は，この図では省略しています．</p>
+<p><code>0x</code>は<strong>16進数</strong>の表記です．各桁には0〜9と<code>A</code>〜<code>F</code>（小文字も可）を使い，<code>A</code>は十進数の10，<code>F</code>は15です．<code>0x1009</code>の次は<code>0x100A</code>，<code>0x100F</code>の次は<code>0x1010</code>になります．図では1バイトごとにアドレスが1増えています．</p>
 <div class="admonition warning">
 <p class="admonition-title">配置は説明のための一例</p>
-<p>実際に別々の変数が隣接したり，宣言順に並んだりする保証はありません．図の0x1000などを実際のアドレスとして使用しないでください．sizeofは変数自身の大きさであり，隣の変数までの距離を測るものではありません．</p>
+<p>実際に別々の変数が隣接したり，宣言順に並んだりする保証はありません．図の<code>0x1000</code>などを実際のアドレスとして使用しないでください．<code>sizeof</code>は変数自身の大きさであり，隣の変数までの距離を測るものではありません．</p>
 </div>
-<h3 id="sizeof">sizeofでサイズを調べる<a class="headerlink" href="#sizeof" title="Permanent link">&para;</a></h3>
-<p><code>sizeof(int)</code> は型intのサイズ，<code>sizeof height</code> はheightの型のサイズを求めます．
-sizeofの結果は <code>size_t</code> 型なので，printfでは <code>%zu</code> を使います．</p>
+<h3 id="sizeof"><code>sizeof</code>でサイズを調べる<a class="headerlink" href="#sizeof" title="Permanent link">&para;</a></h3>
+<p><code>sizeof(int)</code> は型<code>int</code>のサイズ，<code>sizeof height</code> は<code>height</code>の型のサイズを求めます．
+<code>sizeof</code>の結果は <code>size_t</code> 型なので，<code>printf</code>では <code>%zu</code> を使います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;int: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2">));</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> height);</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;double: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">));</span>
 </code></pre></div>
-<p>heightに10を保存しても100を保存しても，型がintのままならsizeof heightは変わりません．
+<p><code>height</code>に10を保存しても100を保存しても，型が<code>int</code>のままなら<code>sizeof height</code>は変わりません．
 表示に必要な十進数の桁数を数えているのではありません．
-なお，Cではsizeof(char)は常に1です．</p>
-<h3 id="_16">&amp;でアドレスを調べる<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<p>変数名の前に&amp;を付けると，その変数のアドレスを得られます．表示には%pを使います．</p>
+なお，Cでは<code>sizeof(char)</code>は常に1です．</p>
+<h3 id="_16"><code>&amp;</code>でアドレスを調べる<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>変数名の前に<code>&amp;</code>を付けると，その変数のアドレスを得られます．表示には<code>%p</code>を使います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">height);</span>
 </code></pre></div>
-<p><code>(void *)</code> は，%pに合わせて渡す値の型をそろえるために付けています．
+<p><code>(void *)</code> は，<code>%p</code>に合わせて渡す値の型をそろえるために付けています．
 詳しい意味は第8回のポインタで扱います．今回は，この形を使って値と場所を区別できれば十分です．</p>
 <p>表示の具体的な値や形式は環境により異なります．別々の変数が宣言順に並ぶ保証もありません．
 アドレス同士を計算して配置を決めつけたり，見本の数値をソースへ書き込んだりしないでください．</p>
 <div class="admonition tip">
 <p class="admonition-title">値が変わることと，場所が変わることは別</p>
-<p>このmain内でheightへ別の整数を代入しても，同じheightの場所は変わりません．中身を上書きしています．ただし，プログラムを起動し直したときに前回と同じアドレスになる保証はありません．</p>
+<p>この<code>main</code>内で<code>height</code>へ別の整数を代入しても，同じ<code>height</code>の場所は変わりません．中身を上書きしています．ただし，プログラムを起動し直したときに前回と同じアドレスになる保証はありません．</p>
 </div>
 <h2 id="example">7．例題をビルドして確かめる<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
-<p>ここまでの内容を，1つのプログラムで確認します．Variablesプロジェクトのvariables.cを，次の内容にしてください．
+<p>ここまでの内容を，1つのプログラムで確認します．<code>Variables</code>プロジェクトの<code>variables.c</code>を，次の内容にしてください．
 入力後はCtrl+Sで保存し，Ctrl+Shift+Bでビルドします．警告・エラーがないことを確認して，Ctrl+F5で実行します．</p>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">variables.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-2"> 2</a></span>
@@ -3120,19 +3120,19 @@ sizeofの結果は <code>size_t</code> 型なので，printfでは <code>%zu</co
 <a id="__codelineno-18-18" name="__codelineno-18-18"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
 <p><a download="download" href="sample/02/variables.c">サンプルファイルをダウンロード</a></p>
-<p>最初の3行は次のようになります．このコードではheightの変更後にareaを再計算していない点に注意してください．</p>
+<p>最初の3行は次のようになります．このコードでは<code>height</code>の変更後に<code>area</code>を再計算していない点に注意してください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>height=10 width=5 area=50
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>height=12 area=50
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>price=120.50 grade=A
 </code></pre></div>
 <p>続くサイズ・範囲・アドレスの行は，自分の環境で確認してください．
-stdio.hはprintfのため，limits.hはCHAR_BITやINT_MIN・INT_MAXのために読み込んでいます．</p>
+<code>stdio.h</code>は<code>printf</code>のため，<code>limits.h</code>は<code>CHAR_BIT</code>や<code>INT_MIN</code>・<code>INT_MAX</code>のために読み込んでいます．</p>
 <h3 id="1_1">値を1か所変えて確認する<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
 <ol>
-<li>最初のwidthを5から7へ変え，areaがどうなるか予測する．</li>
-<li>保存・ビルド・実行し，最初のareaが70になることを確認する．</li>
-<li>height = 12;の直後にareaの再計算を追加する．</li>
-<li>再び保存・ビルド・実行し，2行目のareaが84になることを確認する．</li>
+<li>最初の<code>width</code>を5から7へ変え，<code>area</code>がどうなるか予測する．</li>
+<li>保存・ビルド・実行し，最初の<code>area</code>が70になることを確認する．</li>
+<li><code>height = 12;</code>の直後に<code>area</code>の再計算を追加する．</li>
+<li>再び保存・ビルド・実行し，2行目の<code>area</code>が84になることを確認する．</li>
 </ol>
 <p>1か所ずつ変更し，予測と結果を記録しましょう．</p>
 <h2 id="errors">8．よくある間違いと確認方法<a class="headerlink" href="#errors" title="Permanent link">&para;</a></h2>
@@ -3146,27 +3146,27 @@ stdio.hはprintfのため，limits.hはCHAR_BITやINT_MIN・INT_MAXのために�
 <tbody>
 <tr>
 <td>変数が宣言されていないといわれる</td>
-<td>使う前に宣言したか．heightとHeightなどの綴りが一致しているか．</td>
+<td>使う前に宣言したか．<code>height</code>と<code>Height</code>などの綴りが一致しているか．</td>
 </tr>
 <tr>
 <td>同じ名前を再定義したといわれる</td>
-<td>値を変えるだけなのに，int heightをもう一度書いていないか．</td>
+<td>値を変えるだけなのに，<code>int height</code>をもう一度書いていないか．</td>
 </tr>
 <tr>
 <td>値が初期化されていないと警告される</td>
 <td>その変数を読む前に，初期化または代入したか．</td>
 </tr>
 <tr>
-<td>printfの型について警告される</td>
+<td><code>printf</code>の型について警告される</td>
 <td>書式と変数の型，値を渡す順序が一致しているか．</td>
 </tr>
 <tr>
 <td>面積が前の値のまま</td>
-<td>元の変数の変更後にareaを再計算したか．</td>
+<td>元の変数の変更後に<code>area</code>を再計算したか．</td>
 </tr>
 <tr>
 <td>小数点以下の見え方が違う</td>
-<td>%fと%.2fなどの指定を確認したか．</td>
+<td><code>%f</code>と<code>%.2f</code>などの指定を確認したか．</td>
 </tr>
 <tr>
 <td>サイズやアドレスが他の人と違う</td>
@@ -3183,10 +3183,10 @@ stdio.hはprintfのため，limits.hはCHAR_BITやINT_MIN・INT_MAXのために�
 <h2 id="_17">確認問題<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <p>次の問いに，自分の言葉で答えてみましょう．</p>
 <ul>
-<li>int height = 10;の型・名前・初期値はどの部分か．</li>
-<li>height = height + 1;では，どちらのheightを先に読むか．</li>
-<li>面積を計算した後，縦の長さだけを変更するとareaはどうなるか．</li>
-<li>%d，%f，%c，%zu，%pは，それぞれ何を表示するために使うか．</li>
+<li><code>int height = 10;</code>の型・名前・初期値はどの部分か．</li>
+<li><code>height = height + 1;</code>では，どちらの<code>height</code>を先に読むか．</li>
+<li>面積を計算した後，縦の長さだけを変更すると<code>area</code>はどうなるか．</li>
+<li><code>%d</code>，<code>%f</code>，<code>%c</code>，<code>%zu</code>，<code>%p</code>は，それぞれ何を表示するために使うか．</li>
 <li>同じ変数に別の値を代入すると，値・サイズ・場所のどれが変わるか．</li>
 </ul>
 <p>次は<a href="ex02.html">第2回の演習</a>に取り組んでください．</p>

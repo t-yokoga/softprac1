@@ -2474,48 +2474,48 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec12.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week12 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week12</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <p>基本課題1〜4で，分割・変更・エラーの切り分け・ヘッダの依存関係を確認します．発展課題は，独立したライブラリ化，並べ替えモジュール，標準ライブラリの使い分けです．基本課題が終わったら取り組んでください．</p>
 <table>
 <thead>
 <tr>
 <th>プロジェクト</th>
-<th>ビルドする.c</th>
+<th>ビルドする<code>.c</code></th>
 <th>ヘッダ</th>
 <th>注意</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>SplitCalc（課題1〜3）</td>
-<td>main.c，calc.c</td>
-<td>calc.h</td>
-<td>mainはmain.cだけ</td>
+<td><code>SplitCalc</code>（課題1〜3）</td>
+<td><code>main.c</code>，<code>calc.c</code></td>
+<td><code>calc.h</code></td>
+<td><code>main</code>は<code>main.c</code>だけ</td>
 </tr>
 <tr>
-<td>VectorCalc（課題4）</td>
-<td>vector_main.c，vector.c，matrix.c</td>
-<td>vector.h，matrix.h</td>
-<td>Calcのmain.cを混ぜない</td>
+<td><code>VectorCalc</code>（課題4）</td>
+<td><code>vector_main.c</code>，<code>vector.c</code>，<code>matrix.c</code></td>
+<td><code>vector.h</code>，<code>matrix.h</code></td>
+<td><code>Calc</code>の<code>main.c</code>を混ぜない</td>
 </tr>
 <tr>
-<td>CalcLib／CalcApp（発展1）</td>
-<td>ライブラリ側calc.c／アプリ側main.c</td>
-<td>calc.h</td>
+<td><code>CalcLib</code>／<code>CalcApp</code>（発展1）</td>
+<td>ライブラリ側<code>calc.c</code>／アプリ側<code>main.c</code></td>
+<td><code>calc.h</code></td>
 <td>別プロジェクト間で参照</td>
 </tr>
 <tr>
-<td>SortModule（発展2）</td>
-<td>sort_main.c，intlib.c</td>
-<td>intlib.h</td>
+<td><code>SortModule</code>（発展2）</td>
+<td><code>sort_main.c</code>，<code>intlib.c</code></td>
+<td><code>intlib.h</code></td>
 <td>引数はIDEで設定</td>
 </tr>
 <tr>
-<td>LibraryCheck（発展3）</td>
-<td>library_check.c</td>
+<td><code>LibraryCheck</code>（発展3）</td>
+<td><code>library_check.c</code></td>
 <td>標準ヘッダのみ</td>
-<td>自作のcalc.cなどは入れない</td>
+<td>自作の<code>calc.c</code>などは入れない</td>
 </tr>
 </tbody>
 </table>
@@ -2524,45 +2524,45 @@
 <p>正常版を保存してから，1項目だけ変更します．エラーが出たら「どの段階か」「どのファイルか」「何が不足・重複したか」を記録し，変更を戻して成功を確認します．複数のエラーを同時に作らず，失敗したまま前回の実行ファイルを動かしません．</p>
 </div>
 <h2 id="1">課題1　分割ビルド<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p>講義の<a href="lec12.html#split">分割手順</a>に従ってSplitCalcを作ります．main.cとcalc.cを同じプロジェクトに入れます．calc.hも保存してください．この回では課題4と発展2も複数の.cを使います．</p>
+<p>講義の<a href="lec12.html#split">分割手順</a>に従って<code>SplitCalc</code>を作ります．<code>main.c</code>と<code>calc.c</code>を同じプロジェクトに入れます．<code>calc.h</code>も保存してください．この回では課題4と発展2も複数の<code>.c</code>を使います．</p>
 <h3 id="_2">手順<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ol>
-<li>3ファイルを読み，main.cだけを見て出力を予測する．</li>
-<li>calc.hの宣言とcalc.cの定義を線で対応させる．</li>
+<li>3ファイルを読み，<code>main.c</code>だけを見て出力を予測する．</li>
+<li><code>calc.h</code>の宣言と<code>calc.c</code>の定義を線で対応させる．</li>
 <li>Visual Studioにファイルを追加してビルドし，警告とエラーを確認する．</li>
 <li>実行結果を予測と比べる．</li>
-<li>calc.cだけを保存し直してビルドした場合と，何も変えずに再ビルドした場合の出力ウィンドウを比べる．タイムスタンプや設定によって表示される処理は異なるので，観察した内容を記録する．</li>
+<li><code>calc.c</code>だけを保存し直してビルドした場合と，何も変えずに再ビルドした場合の出力ウィンドウを比べる．タイムスタンプや設定によって表示される処理は異なるので，観察した内容を記録する．</li>
 </ol>
 <h3 id="_3">考察<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ul>
-<li>なぜmain.cにaddの本体がなくてもコンパイルできるか．</li>
-<li>calc.hを取り込んだだけでcalc.cもビルド対象になるか．</li>
-<li>.objと.exeは同じものか．</li>
-<li>main.cとcalc.cを別々の実行アプリ用プロジェクトにしてよいか．</li>
+<li>なぜ<code>main.c</code>に<code>add</code>の本体がなくてもコンパイルできるか．</li>
+<li><code>calc.h</code>を取り込んだだけで<code>calc.c</code>もビルド対象になるか．</li>
+<li><code>.obj</code>と<code>.exe</code>は同じものか．</li>
+<li><code>main.c</code>と<code>calc.c</code>を別々の実行アプリ用プロジェクトにしてよいか．</li>
 </ul>
 <details class="tip">
 <summary>ファイルが見つからないとき</summary>
-<p>エクスプローラーで実際の拡張子を確認します．calc.h.txtやmain.c.cppになっていないか，同名の別ファイルを編集していないかを調べます．ソリューションエクスプローラーの表示だけで保存場所を判断せず，ファイルのプロパティで実際のパスを確認してください．</p>
+<p>エクスプローラーで実際の拡張子を確認します．<code>calc.h.txt</code>や<code>main.c.cpp</code>になっていないか，同名の別ファイルを編集していないかを調べます．ソリューションエクスプローラーの表示だけで保存場所を判断せず，ファイルのプロパティで実際のパスを確認してください．</p>
 </details>
 <h2 id="2">課題2　関数を追加する<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>subtract</code> というdouble引数2つ・double戻り値の関数を追加し，5.0から2.0を引いた3.0を表示してください．さらに0−0，2−5で確認します．</p>
+<p><code>subtract</code> という<code>double</code>引数2つ・<code>double</code>戻り値の関数を追加し，5.0から2.0を引いた3.0を表示してください．さらに0−0，2−5で確認します．</p>
 <details class="tip">
 <summary>ヒント</summary>
 <p>宣言・定義・呼び出しの3か所を対応させます．</p>
 </details>
 <h3 id="_4">追加課題：失敗を返す割り算<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>次の仕様の関数を追加します．関数名は標準ライブラリのdivと衝突しないように<code>calc_divide</code>とします．</p>
+<p>次の仕様の関数を追加します．関数名は標準ライブラリの<code>div</code>と衝突しないように<code>calc_divide</code>とします．</p>
 <ul>
-<li>引数はdoubleのa，bと，結果を保存するdoubleへのポインタout．</li>
-<li>outは有効なdoubleオブジェクトを指すことを呼び出し側の条件とする．</li>
-<li>bが0.0なら失敗として0を返し，保存先の値を変更しない．</li>
-<li>それ以外はa/bを保存し，成功として1を返す．</li>
+<li>引数は<code>double</code>の<code>a</code>，<code>b</code>と，結果を保存する<code>double</code>へのポインタ<code>out</code>．</li>
+<li><code>out</code>は有効な<code>double</code>オブジェクトを指すことを呼び出し側の条件とする．</li>
+<li><code>b</code>が0.0なら失敗として0を返し，保存先の値を変更しない．</li>
+<li>それ以外は<code>a/b</code>を保存し，成功として1を返す．</li>
 <li>この課題では小さな有限値を使い，浮動小数点の範囲を超える計算は対象にしない．</li>
 </ul>
 <p>第8回の「戻り値で成功・失敗を返し，ポインタで結果を返す」を，別ファイルの関数にします．仕様が公開側の契約に当たることも意識してください．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>0で割ってから調べるのではなく，計算前にbを検査します．失敗時にoutへ書き込まなければ，呼び出し前の値を保てます．宣言・定義・呼び出しの3か所を同時に整えましょう．</p>
+<p>0で割ってから調べるのではなく，計算前に<code>b</code>を検査します．失敗時に<code>out</code>へ書き込まなければ，呼び出し前の値を保てます．宣言・定義・呼び出しの3か所を同時に整えましょう．</p>
 </details>
 <h3 id="_5">検証表<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <table>
@@ -2575,37 +2575,37 @@
 </thead>
 <tbody>
 <tr>
-<td>subtract</td>
+<td><code>subtract</code></td>
 <td>5，2</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>subtract</td>
+<td><code>subtract</code></td>
 <td>0，0</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>subtract</td>
+<td><code>subtract</code></td>
 <td>2，5</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>calc_divide</td>
+<td><code>calc_divide</code></td>
 <td>6，2</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>calc_divide</td>
+<td><code>calc_divide</code></td>
 <td>−6，2</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>calc_divide</td>
+<td><code>calc_divide</code></td>
 <td>0，2</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>calc_divide</td>
+<td><code>calc_divide</code></td>
 <td>6，0</td>
 <td>記入してください</td>
 </tr>
@@ -2613,7 +2613,7 @@
 </table>
 <p>宣言だけを追加しても計算はできません．逆に本体だけを追加しても，呼び出し側へ正しい宣言が伝わりません．表を埋めるだけでなく，変更した3か所を示してください．</p>
 <h2 id="3">課題3　リンクエラーを調べる<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>ソースを残したまま，calc.cのプロパティで実行中の構成の「ビルドから除外」を「はい」にしてリビルドします．エラーを記録し，必ず「いいえ」に戻して再ビルドします．ビルド失敗時に以前の実行ファイルを実行する案内が出ても実行しません．</p>
+<p>ソースを残したまま，<code>calc.c</code>のプロパティで実行中の構成の「ビルドから除外」を「はい」にしてリビルドします．エラーを記録し，必ず「いいえ」に戻して再ビルドします．ビルド失敗時に以前の実行ファイルを実行する案内が出ても実行しません．</p>
 <h3 id="_6">エラーの比較<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>課題1の正常版をコピーして，次を1つずつ試します．エラーメッセージの全文を暗記する必要はありません．最初の原因に近い診断を探し，前処理・コンパイル・リンクを区別しましょう．</p>
 <table>
@@ -2626,22 +2626,22 @@
 </thead>
 <tbody>
 <tr>
-<td>main.cのincludeを存在しないcalc_missing.hにする</td>
+<td><code>main.c</code>の<code>include</code>を存在しない<code>calc_missing.h</code>にする</td>
 <td>自分で予想</td>
-<td>calc.hへ戻す</td>
+<td><code>calc.h</code>へ戻す</td>
 </tr>
 <tr>
-<td>calc.cのaddの戻り値型だけをintにする</td>
+<td><code>calc.c</code>の<code>add</code>の戻り値型だけを<code>int</code>にする</td>
 <td>自分で予想</td>
-<td>doubleへ戻す</td>
+<td><code>double</code>へ戻す</td>
 </tr>
 <tr>
-<td>calc.cをビルドから除外する</td>
+<td><code>calc.c</code>をビルドから除外する</td>
 <td>自分で予想</td>
 <td>除外を「いいえ」へ戻す</td>
 </tr>
 <tr>
-<td>addの本体をmain.cにもコピーする</td>
+<td><code>add</code>の本体を<code>main.c</code>にもコピーする</td>
 <td>自分で予想</td>
 <td>コピーした本体だけを除く</td>
 </tr>
@@ -2650,64 +2650,64 @@
 <h3 id="_7">ビルド記録に残すこと<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>変更箇所，予想，実際の段階，診断の要点，復旧後の成功を1行ずつ記録します．「エラーが消えた」だけでなく，元の出力に戻ったことも確認してください．診断の違いから，ヘッダ検索先を直すべき場面と，リンクする実装を確認すべき場面を区別できるようにします．</p>
 <h2 id="4">課題4　ベクトルと行列を分割する<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>講義7の5ファイルを使い，VectorCalcを作ります．vector_main.c，vector.c，matrix.cをソースとして登録し，vector.hとmatrix.hを同じ実フォルダに保存します．他の課題のmain.cは追加しません．</p>
+<p>講義7の5ファイルを使い，<code>VectorCalc</code>を作ります．<code>vector_main.c</code>，<code>vector.c</code>，<code>matrix.c</code>をソースとして登録し，<code>vector.h</code>と<code>matrix.h</code>を同じ実フォルダに保存します．他の課題の<code>main.c</code>は追加しません．</p>
 <h3 id="_8">手計算して実行する<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <ol>
-<li>x=(1,2)，y=(3,4)，Aの第1行=(1,−1)，第2行=(−1,1)について，2x+yと2Ax+yを計算する．</li>
+<li><code>x=(1,2)</code>，<code>y=(3,4)</code>，<code>A</code>の第1行=(1,−1)，第2行=(−1,1)について，<code>2x+y</code>と2Ax+yを計算する．</li>
 <li>実行し，講義の出力と手計算を比較する．</li>
-<li>Aを単位行列に変更し，2Ax+yが2x+yと一致することを確認する．</li>
-<li>gemvのalphaを0，betaを1に変更し，結果がyになることを確認する．</li>
-<li>入力xとyが関数呼び出し後も変わっていないことを，print_vectorで確認する．</li>
+<li><code>A</code>を単位行列に変更し，2Ax+yが<code>2x+y</code>と一致することを確認する．</li>
+<li><code>gemv</code>の<code>alpha</code>を0，<code>beta</code>を1に変更し，結果が<code>y</code>になることを確認する．</li>
+<li>入力<code>x</code>と<code>y</code>が関数呼び出し後も変わっていないことを，<code>print_vector</code>で確認する．</li>
 </ol>
 <h3 id="_9">インクルードガードを調べる<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>vector_main.cでは，matrix.h経由と直接の2回，vector.hが取り込まれます．正常版を保存し，vector.hのガードの3行（#ifndef，#define，対応する最後の#endif）だけを一時的に外してビルドしてください．本文は変更しません．結果を記録したら，必ず3行を戻します．</p>
+<p><code>vector_main.c</code>では，<code>matrix.h</code>経由と直接の2回，<code>vector.h</code>が取り込まれます．正常版を保存し，<code>vector.h</code>のガードの3行（<code>#ifndef</code>，<code>#define</code>，対応する最後の<code>#endif</code>）だけを一時的に外してビルドしてください．本文は変更しません．結果を記録したら，必ず3行を戻します．</p>
 <h3 id="_10">ヘッダの独立性を確認する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>vector_main.cから直接の<code>#include "vector.h"</code>だけを一時的に外し，ビルドしてください．結果を予測し，matrix.hの内容と関連付けて説明します．確認後は元の表記に戻します．「同じ内容を二度読まない工夫」と「必要な型をヘッダ自身で用意する工夫」を区別して説明してください．</p>
+<p><code>vector_main.c</code>から直接の<code>#include "vector.h"</code>だけを一時的に外し，ビルドしてください．結果を予測し，<code>matrix.h</code>の内容と関連付けて説明します．確認後は元の表記に戻します．「同じ内容を二度読まない工夫」と「必要な型をヘッダ自身で用意する工夫」を区別して説明してください．</p>
 <details class="tip">
 <summary>前処理を詳しく見たい場合</summary>
-<p>講義4.2に従ってvector_main.cの前処理済みファイルを生成し，Vectorの構造体定義を検索します．標準ヘッダの展開などで行数は元の.cより多くなる場合があります．ガードの効果を確認したら/Pの設定を戻し，リビルドしてください．.iを生成しただけでは実行ファイルは更新されません．</p>
+<p>講義4.2に従って<code>vector_main.c</code>の前処理済みファイルを生成し，<code>Vector</code>の構造体定義を検索します．標準ヘッダの展開などで行数は元の<code>.c</code>より多くなる場合があります．ガードの効果を確認したら<code>/P</code>の設定を戻し，リビルドしてください．<code>.i</code>を生成しただけでは実行ファイルは更新されません．</p>
 </details>
 <h2 id="1_1">発展1　静的ライブラリとして使う<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
-<p>元のSplitCalcは残し，別のLibraryDemoソリューションにCalcLibとCalcAppを作って試します．</p>
+<p>元の<code>SplitCalc</code>は残し，別の<code>LibraryDemo</code>ソリューションに<code>CalcLib</code>と<code>CalcApp</code>を作って試します．</p>
 <ol>
-<li>CalcLibを空のC++プロジェクトで作り，「プロパティ → 構成プロパティ → 全般 → 構成の種類」を「スタティック ライブラリ（.lib）」にする．C17・/TCも設定する．</li>
-<li>CalcLibへcalc.cとcalc.hを保存・追加する．main.cは入れない．</li>
-<li>同じソリューションへ空のC++プロジェクトCalcAppを追加し，C17・/TCを設定してmain.cだけを入れる．</li>
-<li>CalcAppの「参照 → 参照の追加」（またはプロジェクト右クリックの同項目）でCalcLibを選ぶ．</li>
-<li>CalcAppの「C/C++ → 全般 → 追加のインクルード ディレクトリ」に，calc.hのあるCalcLibの実フォルダを指定する．既存の設定値は残す．</li>
-<li>両プロジェクトの構成とプラットフォームをそろえ，CalcAppをスタートアッププロジェクトに指定してビルド・実行する．</li>
+<li><code>CalcLib</code>を空のC++プロジェクトで作り，「プロパティ → 構成プロパティ → 全般 → 構成の種類」を「スタティック ライブラリ（<code>.lib</code>）」にする．C17・<code>/TC</code>も設定する．</li>
+<li><code>CalcLib</code>へ<code>calc.c</code>と<code>calc.h</code>を保存・追加する．<code>main.c</code>は入れない．</li>
+<li>同じソリューションへ空のC++プロジェクト<code>CalcApp</code>を追加し，C17・<code>/TC</code>を設定して<code>main.c</code>だけを入れる．</li>
+<li><code>CalcApp</code>の「参照 → 参照の追加」（またはプロジェクト右クリックの同項目）で<code>CalcLib</code>を選ぶ．</li>
+<li><code>CalcApp</code>の「C/C++ → 全般 → 追加のインクルード ディレクトリ」に，<code>calc.h</code>のある<code>CalcLib</code>の実フォルダを指定する．既存の設定値は残す．</li>
+<li>両プロジェクトの構成とプラットフォームをそろえ，<code>CalcApp</code>をスタートアッププロジェクトに指定してビルド・実行する．</li>
 </ol>
 <h3 id="_11">更新の伝わり方<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>まず講義の加算・乗算だけの3ファイルで確認します．その後，課題2のsubtractをCalcLibへ追加し，CalcAppから呼び出します．次の4つを別の作業として説明してください．</p>
+<p>まず講義の加算・乗算だけの3ファイルで確認します．その後，課題2の<code>subtract</code>を<code>CalcLib</code>へ追加し，<code>CalcApp</code>から呼び出します．次の4つを別の作業として説明してください．</p>
 <ol>
-<li>calc.hに宣言を追加して利用側へ見せる．</li>
-<li>calc.cに実装を追加し，CalcLibをビルドして.libを更新する．</li>
-<li>CalcAppの呼び出しをコンパイルする．</li>
-<li>CalcAppを更新後の.libとリンクする．</li>
+<li><code>calc.h</code>に宣言を追加して利用側へ見せる．</li>
+<li><code>calc.c</code>に実装を追加し，<code>CalcLib</code>をビルドして<code>.lib</code>を更新する．</li>
+<li><code>CalcApp</code>の呼び出しをコンパイルする．</li>
+<li><code>CalcApp</code>を更新後の<code>.lib</code>とリンクする．</li>
 </ol>
-<p>Visual Studioのプロジェクト参照が適切なら，必要な順序でこれらが行われます．.libを作り直しただけでは，すでに別の場所へ配布した.exeの内容まで変わりません．</p>
-<h3 id="lib">配布済み.libを使う場合との違い<a class="headerlink" href="#lib" title="Permanent link">&para;</a></h3>
-<p>同じソリューション内にソースのないライブラリは，配布された.hと.libを使います．講義9の表に従い，「追加のインクルード ディレクトリ」「追加のライブラリ ディレクトリ」「追加の依存ファイル」の役割を説明してください．検索先とファイル名は違う設定です．既存の継承設定を消さずに追加します．</p>
-<p>この課題で作るCalcLibは静的ライブラリです．CalcLib.dllを探す必要はありません．ただし，アプリ全体が他のDLLやVisual C++ランタイムに依存しないという意味ではありません．ライブラリを利用するときは，x64等のプラットフォーム，Debug/Release，実行時ライブラリの設定を整えます．</p>
+<p>Visual Studioのプロジェクト参照が適切なら，必要な順序でこれらが行われます．<code>.lib</code>を作り直しただけでは，すでに別の場所へ配布した<code>.exe</code>の内容まで変わりません．</p>
+<h3 id="lib">配布済み<code>.lib</code>を使う場合との違い<a class="headerlink" href="#lib" title="Permanent link">&para;</a></h3>
+<p>同じソリューション内にソースのないライブラリは，配布された<code>.h</code>と<code>.lib</code>を使います．講義9の表に従い，「追加のインクルード ディレクトリ」「追加のライブラリ ディレクトリ」「追加の依存ファイル」の役割を説明してください．検索先とファイル名は違う設定です．既存の継承設定を消さずに追加します．</p>
+<p>この課題で作る<code>CalcLib</code>は静的ライブラリです．<code>CalcLib.dll</code>を探す必要はありません．ただし，アプリ全体が他のDLLやVisual C++ランタイムに依存しないという意味ではありません．ライブラリを利用するときは，x64等のプラットフォーム，Debug/Release，実行時ライブラリの設定を整えます．</p>
 <h2 id="2_1">発展2　並べ替えをモジュールにする<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h2>
-<p>整数配列を昇順にする処理をintlibへ分けます．利用者は比較方法の実装を意識せず，sort_intsを呼び出せるようにします．また，第10回のコマンドライン引数を使い，並べ替える個数を指定します．</p>
+<p>整数配列を昇順にする処理を<code>intlib</code>へ分けます．利用者は比較方法の実装を意識せず，<code>sort_ints</code>を呼び出せるようにします．また，第10回のコマンドライン引数を使い，並べ替える個数を指定します．</p>
 <h3 id="_12">仕様<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <ul>
 <li>データは<code>{7, -2, 7, 0, 3, 9, -8, 1}</code>の8要素で固定する．</li>
-<li>引数は1つ，先頭から処理する個数N（0〜8）とする．</li>
+<li>引数は1つ，先頭から処理する個数<code>N</code>（0〜8）とする．</li>
 <li>引数の不足・過剰，数字がない文字列，末尾の余計な文字，範囲外の数値を拒否する．</li>
-<li>N=0では要素を表示せず，改行だけを表示する．</li>
-<li>intlib.hに公開する宣言，intlib.cに変換と並べ替え，sort_main.cに実行の流れを書く．</li>
-<li>比較関数はintlib.cの中だけで使い，staticにする．</li>
+<li><code>N=0</code>では要素を表示せず，改行だけを表示する．</li>
+<li><code>intlib.h</code>に公開する宣言，<code>intlib.c</code>に変換と並べ替え，<code>sort_main.c</code>に実行の流れを書く．</li>
+<li>比較関数は<code>intlib.c</code>の中だけで使い，<code>static</code>にする．</li>
 </ul>
 <p>課題を再現しやすくするため，最初は乱数ではなく同じ配列を使います．可変長配列は使わず，8要素の固定長配列と個数を分けて扱います．</p>
-<p>intlib.hには容量8を表すINTLIB_CAPACITYと，<code>int parse_count(const char *text, int *out)</code>，<code>void sort_ints(int a[], size_t n)</code>を宣言します．size_tのためstddef.hも取り込みます．parse_countは成功時1を返して個数を保存し，失敗時0を返して保存先を変更しない仕様です．intlib.cで実装し，sort_main.cで引数の検査・呼び出し・表示を行ってください．</p>
+<p><code>intlib.h</code>には容量8を表す<code>INTLIB_CAPACITY</code>と，<code>int parse_count(const char *text, int *out)</code>，<code>void sort_ints(int a[], size_t n)</code>を宣言します．<code>size_t</code>のため<code>stddef.h</code>も取り込みます．<code>parse_count</code>は成功時1を返して個数を保存し，失敗時0を返して保存先を変更しない仕様です．<code>intlib.c</code>で実装し，<code>sort_main.c</code>で引数の検査・呼び出し・表示を行ってください．</p>
 <details class="tip">
 <summary>qsortの比較関数</summary>
-<p>比較関数に渡されるconst void <em>は要素へのポインタです．今回の要素型はintなので，const int </em>として読み出します．qsortには<code>compare_int</code>と関数名を渡します．<code>compare_int(...)</code>と書いてその場で呼び出した結果を渡すのではありません．関数を必要なときに呼んでもらう仕組みをコールバックと呼びます．</p>
+<p>比較関数に渡される<code>const void *</code>は要素へのポインタです．今回の要素型は<code>int</code>なので，<code>const int *</code>として読み出します．<code>qsort</code>には<code>compare_int</code>と関数名を渡します．<code>compare_int(...)</code>と書いてその場で呼び出した結果を渡すのではありません．関数を必要なときに呼んでもらう仕組みをコールバックと呼びます．</p>
 </details>
 <h3 id="_13">引数を設定して検証する<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>Visual StudioのSortModuleの「プロパティ → 構成プロパティ → デバッグ → コマンド引数」に<code>5</code>を設定します．1つの引数として空文字列を試すときは<code>""</code>を設定します．設定対象が実行する構成と一致していることを確かめてください．</p>
+<p>Visual Studioの<code>SortModule</code>の「プロパティ → 構成プロパティ → デバッグ → コマンド引数」に<code>5</code>を設定します．1つの引数として空文字列を試すときは<code>""</code>を設定します．設定対象が実行する構成と一致していることを確かめてください．</p>
 <table>
 <thead>
 <tr>
@@ -2733,7 +2733,7 @@
 <td>記入してください</td>
 </tr>
 <tr>
-<td>指定なし，<code>""</code>，abc，3x</td>
+<td>指定なし，<code>""</code>，<code>abc</code>，<code>3x</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
@@ -2750,16 +2750,16 @@
 </tr>
 </tbody>
 </table>
-<p>さらに，dataの先頭2つをINT_MAX，INT_MINに変え，limits.hを追加してN=2で試してください．小さい方が先になります．単に元の値の差を返す比較関数では危険な理由を説明しましょう．</p>
+<p>さらに，<code>data</code>の先頭2つを<code>INT_MAX</code>，<code>INT_MIN</code>に変え，<code>limits.h</code>を追加して<code>N=2</code>で試してください．小さい方が先になります．単に元の値の差を返す比較関数では危険な理由を説明しましょう．</p>
 <h3 id="_14">設計を説明する<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <ul>
-<li>intlib.hにcompare_intの宣言を置かないのはなぜか．</li>
-<li>sort_main.cがqsortの使い方を知らなくてもよいのはなぜか．</li>
+<li><code>intlib.h</code>に<code>compare_int</code>の宣言を置かないのはなぜか．</li>
+<li><code>sort_main.c</code>が<code>qsort</code>の使い方を知らなくてもよいのはなぜか．</li>
 <li>型の宣言・数値の検査・エラー表示は，それぞれどこにあるか．</li>
-<li>固定配列の容量と有効な個数Nは同じものか．</li>
+<li>固定配列の容量と有効な個数<code>N</code>は同じものか．</li>
 </ul>
 <h2 id="3_1">発展3　標準ライブラリの契約を確かめる<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
-<p>次のプログラムをLibraryCheckで動かします．関数名だけでなく，ヘッダ，入力条件，戻り値の意味を表にまとめてから実行してください．コピー先の容量が十分であることも確認します．</p>
+<p>次のプログラムを<code>LibraryCheck</code>で動かします．関数名だけでなく，ヘッダ，入力条件，戻り値の意味を表にまとめてから実行してください．コピー先の容量が十分であることも確認します．</p>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">library_check.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-0-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-0-2"> 2</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-0-3"> 3</a></span>
@@ -2830,32 +2830,32 @@
 <a id="__codelineno-0-34" name="__codelineno-0-34"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p>ここでの_CRT_SECURE_NO_WARNINGSは，容量が確認できる固定例で標準関数strcpyを学ぶための指定です．危険なコピーを安全にする機能ではありません．一般の入力では終端までの長さとコピー先の容量を必ず調べます．</p>
+<p>ここでの<code>_CRT_SECURE_NO_WARNINGS</code>は，容量が確認できる固定例で標準関数<code>strcpy</code>を学ぶための指定です．危険なコピーを安全にする機能ではありません．一般の入力では終端までの長さとコピー先の容量を必ず調べます．</p>
 <h3 id="_15">追加の観察<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ol>
-<li>先頭でNDEBUGを定義して，assertが無効でもコピーや乱数の処理が同じように実行されることを確認する．定義はassert.hを読むより前に置く．</li>
-<li>assertの式にコピーやrandの呼び出しを入れない理由を説明する．式自体が評価されなくなる設定があることに注意する．</li>
+<li>先頭で<code>NDEBUG</code>を定義して，<code>assert</code>が無効でもコピーや乱数の処理が同じように実行されることを確認する．定義は<code>assert.h</code>を読むより前に置く．</li>
+<li><code>assert</code>の式にコピーや<code>rand</code>の呼び出しを入れない理由を説明する．式自体が評価されなくなる設定があることに注意する．</li>
 <li><code>rand() % 10</code>の値が0〜9になる理由と，完全に均等とは限らない理由を説明する．何回かの実行だけで一様性を証明できるかも考える．</li>
-<li>発展2の配列の初期値を，ループ内の<code>rand() % 1024</code>で用意する形へ変更してよい．srandはループの前に1回だけ呼び，実行前後の配列を表示する．出力そのものではなく，要素数と昇順になったことを確かめる．</li>
+<li>発展2の配列の初期値を，ループ内の<code>rand() % 1024</code>で用意する形へ変更してよい．<code>srand</code>はループの前に1回だけ呼び，実行前後の配列を表示する．出力そのものではなく，要素数と昇順になったことを確かめる．</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">今回は行わない操作</p>
-<p>assertが入力検査の代わりになるか確かめるために，配列の範囲外アクセスを実行してはいけません．また，systemによる外部コマンドの実行は行いません．標準ライブラリに含まれる機能でも，入力条件と作用を理解してから使います．</p>
+<p><code>assert</code>が入力検査の代わりになるか確かめるために，配列の範囲外アクセスを実行してはいけません．また，<code>system</code>による外部コマンドの実行は行いません．標準ライブラリに含まれる機能でも，入力条件と作用を理解してから使います．</p>
 </div>
 <h2 id="_16">確認問題<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <ol>
-<li>「calc.hを追加したのでcalc.cを追加しなくてもよい」は正しいか．</li>
-<li>インクルードガードで，同じ外部関数を2つの.cに定義した問題は解決するか．</li>
-<li>.libの検索先が正しくても，ヘッダが見つからないことはあるか．</li>
-<li>静的ライブラリを更新すれば，配布済みの.exeも自動的に新しくなるか．</li>
-<li>不完全型のVector *を宣言できることと，Vectorの実体を作れることは同じか．</li>
+<li>「<code>calc.h</code>を追加したので<code>calc.c</code>を追加しなくてもよい」は正しいか．</li>
+<li>インクルードガードで，同じ外部関数を2つの<code>.c</code>に定義した問題は解決するか．</li>
+<li><code>.lib</code>の検索先が正しくても，ヘッダが見つからないことはあるか．</li>
+<li>静的ライブラリを更新すれば，配布済みの<code>.exe</code>も自動的に新しくなるか．</li>
+<li>不完全型の<code>Vector *</code>を宣言できることと，<code>Vector</code>の実体を作れることは同じか．</li>
 </ol>
 <h2 id="_17">チェックリスト<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <ul>
 <li>正常な値だけでなく，課題に示された境界の値でも確認した．</li>
 <li>警告を確認し，原因を説明・修正した．</li>
 <li>自分の言葉で，処理の流れと使った型を説明できる．</li>
-<li>1つの実行アプリにmainが1つだけあり，必要な.cがすべてビルド対象になっている．</li>
+<li>1つの実行アプリに<code>main</code>が1つだけあり，必要な<code>.c</code>がすべてビルド対象になっている．</li>
 <li>意図的に作ったエラーと前処理用の設定を元に戻し，最後のビルドが成功した．</li>
 <li>宣言・定義・呼び出しと，コンパイル・リンクの関係を説明できる．</li>
 <li>ヘッダのガード名を使い回さず，必要な型をヘッダ自身で取り込んでいる．</li>

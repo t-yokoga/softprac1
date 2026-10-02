@@ -2342,7 +2342,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec07.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week07 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week07</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">今回の課題と入力方法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -2357,12 +2357,12 @@
 <tr>
 <td>1</td>
 <td>複写・小文字化フィルタ</td>
-<td>入力終了（EOF）</td>
+<td>入力終了（<code>EOF</code>）</td>
 </tr>
 <tr>
 <td>2</td>
 <td>1行の英字数と，全入力のバイト数</td>
-<td>改行またはEOF／EOF</td>
+<td>改行または<code>EOF</code>／<code>EOF</code></td>
 </tr>
 <tr>
 <td>3</td>
@@ -2377,15 +2377,15 @@
 <tr>
 <td>発展</td>
 <td>タイピングの採点</td>
-<td>改行またはEOF</td>
+<td>改行または<code>EOF</code></td>
 </tr>
 </tbody>
 </table>
-<p>起動したコンソールに英数字を入力してEnterを押します．EOFまで読むプログラムでは，Enterだけでは終了しません．通常のWindowsコンソールで新しい行の先頭からCtrl+Z，続けてEnterを押して入力終了を知らせてください．強制停止すると，最後の集計や表示まで実行されない場合があります．</p>
-<p>記録には，キーボードから入力した文字とプログラムが表示した文字を分けて書きます．コンソールに入力文字が映ることは，printfやputcharで表示したこととは別です．ソースを変更するたびに保存・ビルドしてから再実行しましょう．</p>
-<p>この回の対話入力はASCIIの英数字・空白・記号と改行を対象にします．NULバイトや日本語を含む入力は扱いません．大量の入力を試す必要はなく，各課題の上限を守ります．</p>
+<p>起動したコンソールに英数字を入力してEnterを押します．<code>EOF</code>まで読むプログラムでは，Enterだけでは終了しません．通常のWindowsコンソールで新しい行の先頭からCtrl+Z，続けてEnterを押して入力終了を知らせてください．強制停止すると，最後の集計や表示まで実行されない場合があります．</p>
+<p>記録には，キーボードから入力した文字とプログラムが表示した文字を分けて書きます．コンソールに入力文字が映ることは，<code>printf</code>や<code>putchar</code>で表示したこととは別です．ソースを変更するたびに保存・ビルドしてから再実行しましょう．</p>
+<p>この回の対話入力はASCIIの英数字・空白・記号と改行を対象にします．<code>NUL</code>バイトや日本語を含む入力は扱いません．大量の入力を試す必要はなく，各課題の上限を守ります．</p>
 <h2 id="1">課題1　入力をそのまま出力する<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>Echo</code> プロジェクトで講義のecho.cを実行します．abcと入力してEnter，次にXYZと入力してEnterを押し，入力終了を知らせてください．空の入力（最初に終了）でも確認します．</p>
+<p><code>Echo</code> プロジェクトで講義の<code>echo.c</code>を実行します．<code>abc</code>と入力してEnter，次に<code>XYZ</code>と入力してEnterを押し，入力終了を知らせてください．空の入力（最初に終了）でも確認します．</p>
 <details class="tip">
 <summary>ヒント</summary>
 <p>入力待ちの間はプログラムは終わっていません．通常のWindowsコンソールでは，新しい行でCtrl+Z，Enterです．</p>
@@ -2394,29 +2394,29 @@
 <table>
 <thead>
 <tr>
-<th>getcharで読む値</th>
-<th>EOFとの比較</th>
+<th><code>getchar</code>で読む値</th>
+<th><code>EOF</code>との比較</th>
 <th>プログラムの処理</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>'a'</td>
+<td><code>'a'</code></td>
 <td>等しくない</td>
-<td>aを出力</td>
+<td><code>a</code>を出力</td>
 </tr>
 <tr>
-<td>'b'</td>
+<td><code>'b'</code></td>
 <td>等しくない</td>
-<td>bを出力</td>
+<td><code>b</code>を出力</td>
 </tr>
 <tr>
-<td>'c'</td>
+<td><code>'c'</code></td>
 <td>等しくない</td>
-<td>cを出力</td>
+<td><code>c</code>を出力</td>
 </tr>
 <tr>
-<td>'\n'</td>
+<td><code>'\n'</code></td>
 <td>等しくない</td>
 <td>改行を出力</td>
 </tr>
@@ -2426,32 +2426,32 @@
 <td>終了ではない</td>
 </tr>
 <tr>
-<td>EOF</td>
+<td><code>EOF</code></td>
 <td>等しい</td>
 <td>本体へ入らず終了</td>
 </tr>
 </tbody>
 </table>
-<p>次の3つを独立に試します．①最初に入力終了，②Enterだけを押してから入力終了，③abcとXYZの2行を入力してから入力終了．それぞれ出力なし，改行1個，2行の複写になります．「空の入力」と「空行1個の入力」は同じではありません．</p>
+<p>次の3つを独立に試します．①最初に入力終了，②Enterだけを押してから入力終了，③<code>abc</code>と<code>XYZ</code>の2行を入力してから入力終了．それぞれ出力なし，改行1個，2行の複写になります．「空の入力」と「空行1個の入力」は同じではありません．</p>
 <h3 id="_4">改行を見える形で確認する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>echo.cのputcharとその失敗処理の部分を，次の表示へ一時的に置き換えます．</p>
+<p><code>echo.c</code>の<code>putchar</code>とその失敗処理の部分を，次の表示へ一時的に置き換えます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (ch </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\n&#39;</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;new line</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> {</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;character=%c</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, ch);</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>abとEnterならcharacter=a，character=b，new lineの3行です．getcharを3回呼んでいることと，Enterでまとめて文字が届くことを区別します．確認後は元へ戻してください．</p>
-<p>次に，元のputchar(ch)の前に，putchar('/')とその戻り値の確認を加えます．入力abとEnterに対して出力が/a/b/と改行になることを予測してください．スラッシュは入力の各文字の前へ入るため，改行の前にも付く点に注意します．</p>
+<p><code>ab</code>とEnterなら<code>character=a</code>，<code>character=b</code>，new lineの3行です．<code>getchar</code>を3回呼んでいることと，Enterでまとめて文字が届くことを区別します．確認後は元へ戻してください．</p>
+<p>次に，元の<code>putchar(ch)</code>の前に，<code>putchar('/')</code>とその戻り値の確認を加えます．入力<code>ab</code>とEnterに対して出力が<code>/a/b/</code>と改行になることを予測してください．スラッシュは入力の各文字の前へ入るため，改行の前にも付く点に注意します．</p>
 <h3 id="_5">小文字化フィルタを作る<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>別の<code>LowerInput</code>プロジェクトで，ASCIIの英大文字だけを小文字へ変えます．第6回の文字列配列とは異なり，今回は入力を1文字ずつ処理します．</p>
-<p>Hello C17!ならhello c17!，AZaz09ならazaz09です．空白・記号・改行をそのまま残し，EOFは変換対象にしません．2行以上でも働くことを確かめます．</p>
-<p><strong>説明すること</strong>：変換処理をEOFの判定より後に行う理由と，配列へ全入力を保存しなくても処理できる理由を説明してください．</p>
+<p>Hello C17!ならhello c17!，<code>AZaz09</code>なら<code>azaz09</code>です．空白・記号・改行をそのまま残し，<code>EOF</code>は変換対象にしません．2行以上でも働くことを確かめます．</p>
+<p><strong>説明すること</strong>：変換処理を<code>EOF</code>の判定より後に行う理由と，配列へ全入力を保存しなくても処理できる理由を説明してください．</p>
 <h2 id="2">課題2　英字の数を数える<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>LetterCount</code> プロジェクトで，Enterまでの1行に含まれるASCII英字の個数を数えてください．abc 12!なら3，空行なら0，AZazなら4です．この課題の入力は1000バイト以内とします．</p>
+<p><code>LetterCount</code> プロジェクトで，Enterまでの1行に含まれるASCII英字の個数を数えてください．<code>abc 12!</code>なら3，空行なら0，<code>AZaz</code>なら4です．この課題の入力は1000バイト以内とします．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>EOFだけでなく改行でもループを止めます．大文字と小文字の2つの範囲を論理演算でつなぎます．</p>
+<p><code>EOF</code>だけでなく改行でもループを止めます．大文字と小文字の2つの範囲を論理演算でつなぎます．</p>
 </details>
 <h3 id="_6">英字の範囲と停止条件を確かめる<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
@@ -2464,7 +2464,7 @@
 </thead>
 <tbody>
 <tr>
-<td>abc 12!</td>
+<td><code>abc 12!</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>数字・空白・記号は除く</td>
 </tr>
@@ -2474,14 +2474,14 @@
 <td>本体を実行せず改行で終了</td>
 </tr>
 <tr>
-<td>AZaz</td>
+<td><code>AZaz</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>大文字・小文字の両方を数える</td>
 </tr>
 <tr>
-<td>@AZ[</td>
+<td><code>@AZ[</code></td>
 <td style="text-align: right;">記入してください</td>
-<td>Aの前，Zの後は英字ではない</td>
+<td><code>A</code>の前，<code>Z</code>の後は英字ではない</td>
 </tr>
 <tr>
 <td>123!?</td>
@@ -2490,9 +2490,9 @@
 </tr>
 </tbody>
 </table>
-<p>EOFを知らせなくても，このプログラムはEnterで集計を表示します．課題1との違いは，継続条件にch != '\n'が加わっていることです．&amp;&amp;の左側が偽なら右側を評価しない，という短絡評価も確認しましょう．</p>
+<p><code>EOF</code>を知らせなくても，このプログラムはEnterで集計を表示します．課題1との違いは，継続条件に<code>ch != '\n'</code>が加わっていることです．<code>&amp;&amp;</code>の左側が偽なら右側を評価しない，という短絡評価も確認しましょう．</p>
 <h3 id="_7">改行も含めた全入力のバイト数<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>別の<code>ByteCount</code>プロジェクトで次を実行します．入力は改行を含め合計1000バイト以内とし，EOFまで読む方式に変えます．</p>
+<p>別の<code>ByteCount</code>プロジェクトで次を実行します．入力は改行を含め合計1000バイト以内とし，<code>EOF</code>まで読む方式に変えます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">{</span>
@@ -2511,7 +2511,7 @@
 <table>
 <thead>
 <tr>
-<th>入力してからEOF</th>
+<th>入力してから<code>EOF</code></th>
 <th style="text-align: right;">期待する数</th>
 </tr>
 </thead>
@@ -2525,11 +2525,11 @@
 <td style="text-align: right;">記入してください</td>
 </tr>
 <tr>
-<td>abcdとEnter</td>
+<td><code>abcd</code>とEnter</td>
 <td style="text-align: right;">記入してください</td>
 </tr>
 <tr>
-<td>abとEnter，CとEnter</td>
+<td><code>ab</code>とEnter，CとEnter</td>
 <td style="text-align: right;">記入してください</td>
 </tr>
 </tbody>
@@ -2537,14 +2537,14 @@
 <p>ここで数えているのはプログラムが読み取ったバイトで，単語数ではありません．改行も数えます．日本語の見た目の文字数や，改行変換前のファイルサイズを求めるプログラムでもありません．</p>
 <p><strong>説明すること</strong>：英字数を数えるプログラムと，このプログラムの「何を数えるか」「いつ表示するか」をそれぞれ説明してください．</p>
 <h2 id="3">課題3　行の容量<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>LineInput</code> プロジェクトで講義のline.cを実行します．空行，Hello，31個のA，32個のAを入力し，それぞれの結果を記録してください．</p>
+<p><code>LineInput</code> プロジェクトで講義の<code>line.c</code>を実行します．空行，<code>Hello</code>，31個の<code>A</code>，32個の<code>A</code>を入力し，それぞれの結果を記録してください．</p>
 <h3 id="3_1">3つの長さを区別する<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
-<p>HelloとEnterでは，入力として読むのは本文5文字と改行の6文字です．fgetsはさらに終端を付けて保存するので7要素を使います．例題は改行を終端に置き換えてから，本文の長さ5を表示します．</p>
+<p><code>Hello</code>とEnterでは，入力として読むのは本文5文字と改行の6文字です．<code>fgets</code>はさらに終端を付けて保存するので7要素を使います．例題は改行を終端に置き換えてから，本文の長さ5を表示します．</p>
 <table>
 <thead>
 <tr>
 <th>本文</th>
-<th>最初のfgetsの保存内容</th>
+<th>最初の<code>fgets</code>の保存内容</th>
 <th>例題の最終結果</th>
 </tr>
 </thead>
@@ -2552,49 +2552,49 @@
 <tr>
 <td>空行</td>
 <td>改行＋終端</td>
-<td>length=0 text=</td>
+<td><code>length=0 text=</code></td>
 </tr>
 <tr>
-<td>Hello</td>
-<td>Hello＋改行＋終端</td>
-<td>length=5 text=Hello</td>
+<td><code>Hello</code></td>
+<td><code>Hello</code>＋改行＋終端</td>
+<td><code>length=5 text=Hello</code></td>
 </tr>
 <tr>
-<td>Aが30個</td>
-<td>A30個＋改行＋終端</td>
+<td><code>A</code>が30個</td>
+<td><code>A30</code>個＋改行＋終端</td>
 <td>長さ30</td>
 </tr>
 <tr>
-<td>Aが31個</td>
-<td>A31個＋終端</td>
+<td><code>A</code>が31個</td>
+<td><code>A31</code>個＋終端</td>
 <td>後から改行を消費し，長さ31</td>
 </tr>
 <tr>
-<td>Aが32個</td>
-<td>A31個＋終端</td>
-<td>残ったAを検出して超過の診断</td>
+<td><code>A</code>が32個</td>
+<td><code>A31</code>個＋終端</td>
+<td>残った<code>A</code>を検出して超過の診断</td>
 </tr>
 </tbody>
 </table>
-<p>31個と32個を用意するときは，エディタなどで個数を確認してからコンソールへ貼り付けてかまいません．個数があいまいなまま結果だけを比較しないでください．初期のText:は入力案内で，length=...はプログラムが読み取り後に出す結果です．</p>
+<p>31個と32個を用意するときは，エディタなどで個数を確認してからコンソールへ貼り付けてかまいません．個数があいまいなまま結果だけを比較しないでください．初期の<code>Text:</code>は入力案内で，<code>length=...</code>はプログラムが読み取り後に出す結果です．</p>
 <h3 id="_8">入力終了だけを知らせた場合<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>起動後，何も入力せず新しい行でCtrl+Z，Enterを押すと，No line read.と診断します．Enterだけの空行は正常に読めます．「長さ0の文字列を読み取れた」と「行を読み取れなかった」を区別しましょう．</p>
 <h3 id="_9">容量を小さくして仕組みを見る<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>line[32]をline[8]へ変更し，他の容量検査はそのまま残します．本文は最大7文字になります．ABCDEF（6文字），ABCDEFG（7文字），ABCDEFGH（8文字）を入力して，それぞれ長さ6，長さ7，Line too long.になることを確認してください．</p>
-<p>sizeof lineで容量を渡しているため，配列の宣言だけを変えても読み込み上限が追従します．ただし，関数の配列引数に同じ方法をそのまま使えないことは第5回の復習です．</p>
-<p><strong>説明すること</strong>：fgetsで改行が読めなかったとき，追加のgetcharで何を調べているか．extraは何を表し，超過がなければどの値のままか．終了条件まで読み捨てるループが必要な理由を説明してください．</p>
+<p><code>line[32]</code>を<code>line[8]</code>へ変更し，他の容量検査はそのまま残します．本文は最大7文字になります．<code>ABCDEF</code>（6文字），<code>ABCDEFG</code>（7文字），<code>ABCDEFGH</code>（8文字）を入力して，それぞれ長さ6，長さ7，Line too long.になることを確認してください．</p>
+<p><code>sizeof line</code>で容量を渡しているため，配列の宣言だけを変えても読み込み上限が追従します．ただし，関数の配列引数に同じ方法をそのまま使えないことは第5回の復習です．</p>
+<p><strong>説明すること</strong>：<code>fgets</code>で改行が読めなかったとき，追加の<code>getchar</code>で何を調べているか．<code>extra</code>は何を表し，超過がなければどの値のままか．終了条件まで読み捨てるループが必要な理由を説明してください．</p>
 <h2 id="4">課題4　接続関係を説明する<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>プログラムAは小文字化したテキストをstdoutへ出し，処理状況をstderrへ出します．Aのstdoutを，入力バイト数を数えるプログラムBへ接続すると，Bは処理状況も数えるでしょうか．また，Aのstdoutへ入力案内を出すと何が起きますか．実行操作は不要です．</p>
+<p>プログラム<code>A</code>は小文字化したテキストを<code>stdout</code>へ出し，処理状況を<code>stderr</code>へ出します．<code>A</code>の<code>stdout</code>を，入力バイト数を数えるプログラム<code>B</code>へ接続すると，<code>B</code>は処理状況も数えるでしょうか．また，<code>A</code>の<code>stdout</code>へ入力案内を出すと何が起きますか．実行操作は不要です．</p>
 <h3 id="_10">リダイレクトの結果を予測する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>以下はすべて接続図・文章で答える問題で，シェル操作やファイルの上書きは行いません．入力ファイルの内容はABと改行，Aは小文字化フィルタ，Bは改行を含めて数えるプログラムとします．</p>
+<p>以下はすべて接続図・文章で答える問題で，シェル操作やファイルの上書きは行いません．入力ファイルの内容は<code>AB</code>と改行，<code>A</code>は小文字化フィルタ，<code>B</code>は改行を含めて数えるプログラムとします．</p>
 <ol>
-<li>入力ファイルをAのstdinへ接続し，Aのstdoutを画面へつなぐと何が表示されるか．</li>
+<li>入力ファイルを<code>A</code>の<code>stdin</code>へ接続し，<code>A</code>の<code>stdout</code>を画面へつなぐと何が表示されるか．</li>
 <li>同じ出力をファイルへつなぐと，ファイルには何が記録されるか．</li>
 <li>その接続を上書きで2回実行した場合と，最初は上書き，次は追記とした場合で，結果はどう違うか．</li>
-<li>AのstdoutをBのstdinへ接続すると，Bは何と表示するか．</li>
-<li>AがstdoutへReadyと改行を追加してから処理結果を出すと，Bの集計はどう変わるか．</li>
+<li><code>A</code>の<code>stdout</code>を<code>B</code>の<code>stdin</code>へ接続すると，<code>B</code>は何と表示するか．</li>
+<li><code>A</code>が<code>stdout</code>へ<code>Ready</code>と改行を追加してから処理結果を出すと，<code>B</code>の集計はどう変わるか．</li>
 </ol>
-<h3 id="printf">printfの幅と書式を確かめる<a class="headerlink" href="#printf" title="Permanent link">&para;</a></h3>
+<h3 id="printf"><code>printf</code>の幅と書式を確かめる<a class="headerlink" href="#printf" title="Permanent link">&para;</a></h3>
 <p><code>Formats</code>プロジェクトで次を実行します．このプログラムは入力を待ちません．縦棒で囲むことで，追加された空白を見やすくしています．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
@@ -2617,10 +2617,10 @@
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>500 764 1f4
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>5000000000
 </code></pre></div>
-<p>nを123456へ変更すると%5dでも6桁すべてを表示します．表示幅は上限ではないからです．baseの初期値を0764uまたは0x1f4uに変えても同じ500なので，出力は変わりません．bigの書式を%dへ変更する実験は行わず，型に合う%lldを保ちます．</p>
-<p><strong>説明すること</strong>：%.2fと%8.2fの違い，%fと%gの精度指定の意味の違い，長い整数の表示に正しい長さ修飾子が必要な理由を説明してください．</p>
+<p><code>n</code>を123456へ変更すると<code>%5d</code>でも6桁すべてを表示します．表示幅は上限ではないからです．<code>base</code>の初期値を<code>0764u</code>または<code>0x1f4u</code>に変えても同じ500なので，出力は変わりません．<code>big</code>の書式を<code>%d</code>へ変更する実験は行わず，型に合う<code>%lld</code>を保ちます．</p>
+<p><strong>説明すること</strong>：<code>%.2f</code>と<code>%8.2f</code>の違い，<code>%f</code>と<code>%g</code>の精度指定の意味の違い，長い整数の表示に正しい長さ修飾子が必要な理由を説明してください．</p>
 <h2 id="_11">発展　タイピングの採点<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<p><code>Typing</code>プロジェクトで，お手本のThis is a penと入力の<strong>同じ位置の文字</strong>を比較し，一致した数を得点にします．空白も1文字です．入力は1行1000バイト以内とし，改行またはEOFで採点を終えます．お手本は13文字で，14文字目以降の入力は加点しません．</p>
+<p><code>Typing</code>プロジェクトで，お手本のThis is a penと入力の<strong>同じ位置の文字</strong>を比較し，一致した数を得点にします．空白も1文字です．入力は1行1000バイト以内とし，改行または<code>EOF</code>で採点を終えます．お手本は13文字で，14文字目以降の入力は加点しません．</p>
 <p>次の段階を順に考えてください．作成する最終版は，大文字・小文字を区別せず，同じ位置の一致を数える仕様です．</p>
 <table>
 <thead>
@@ -2632,51 +2632,51 @@
 </thead>
 <tbody>
 <tr>
-<td>A</td>
+<td><code>A</code></td>
 <td>空行と完全一致</td>
 <td>空行→0，This is a pen→13</td>
 </tr>
 <tr>
-<td>B</td>
+<td><code>B</code></td>
 <td>途中まで入力</td>
-<td>This→4</td>
+<td><code>This</code>→4</td>
 </tr>
 <tr>
 <td>C</td>
 <td>同じ位置だけを採点</td>
-<td>Txxxxxxxxxp→2</td>
+<td><code>Txxxxxxxxxp</code>→2</td>
 </tr>
 <tr>
-<td>D</td>
+<td><code>D</code></td>
 <td>大文字・小文字を区別しない</td>
 <td>thiS is a Pen→13</td>
 </tr>
 </tbody>
 </table>
-<p>文字を挿入・削除した後に位置を自動で合わせ直す処理ではありません．例えばThi is a penはsが1文字抜けて後ろがずれるため，最初のThiだけの3点です．配列の範囲内かを先に調べてから，お手本を読みます．</p>
+<p>文字を挿入・削除した後に位置を自動で合わせ直す処理ではありません．例えばThi is a penは<code>s</code>が1文字抜けて後ろがずれるため，最初の<code>Thi</code>だけの3点です．配列の範囲内かを先に調べてから，お手本を読みます．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>入力位置positionと得点scoreを別に管理します．入力するたびにpositionは進みますが，scoreは一致した場合だけ増えます．小文字化関数はgetcharの値をintで受け取り，EOFを除いた後に呼びます．</p>
+<p>入力位置<code>position</code>と得点<code>score</code>を別に管理します．入力するたびに<code>position</code>は進みますが，<code>score</code>は一致した場合だけ増えます．小文字化関数は<code>getchar</code>の値を<code>int</code>で受け取り，<code>EOF</code>を除いた後に呼びます．</p>
 </details>
-<p>まずA〜Dのすべての入力で確認します．さらにThis is a pen!でも13点，xxxxxxxxxxxxxなら0点を確認してください．大文字・小文字を区別する版に戻す場合は，比較をch == target[position]へ変えます．</p>
-<p>このプログラムは対話用なので入力案内をstdoutへ表示しています．得点だけを別プログラムへ渡したいなら，案内の出力先を分けるなどの変更が必要です．課題4のストリーム接続と関連付けて考えてください．</p>
+<p>まず<code>A</code>〜<code>D</code>のすべての入力で確認します．さらにThis is a pen!でも13点，<code>xxxxxxxxxxxxx</code>なら0点を確認してください．大文字・小文字を区別する版に戻す場合は，比較を<code>ch == target[position]</code>へ変えます．</p>
+<p>このプログラムは対話用なので入力案内を<code>stdout</code>へ表示しています．得点だけを別プログラムへ渡したいなら，案内の出力先を分けるなどの変更が必要です．課題4のストリーム接続と関連付けて考えてください．</p>
 <h2 id="_12">確認問題<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <ol>
-<li>getcharの戻り値をcharへ先に保存しないのはなぜか．</li>
-<li>'0'，'\0'，'\n'，EOFの役割はそれぞれ何か．</li>
-<li>abcdとEnterは，getcharで何回の読み取りに対応するか．</li>
-<li>getcharを1回呼ぶと，入力した112は整数112になるか．</li>
-<li>fgetsの戻り値を確認する前にstrlenを使ってはいけないのはなぜか．</li>
-<li>char line[32]に保存できる本文の最大長は，この例題では何バイトか．</li>
-<li>printfでdoubleを表示するときと，scanfでdoubleへ読み込むときの書式は何か．</li>
-<li>パイプへ接続されるのは通常どの出力か．stderrはどう扱われるか．</li>
+<li><code>getchar</code>の戻り値を<code>char</code>へ先に保存しないのはなぜか．</li>
+<li><code>'0'</code>，<code>'\0'</code>，<code>'\n'</code>，<code>EOF</code>の役割はそれぞれ何か．</li>
+<li><code>abcd</code>とEnterは，<code>getchar</code>で何回の読み取りに対応するか．</li>
+<li><code>getchar</code>を1回呼ぶと，入力した112は整数112になるか．</li>
+<li><code>fgets</code>の戻り値を確認する前に<code>strlen</code>を使ってはいけないのはなぜか．</li>
+<li><code>char line[32]</code>に保存できる本文の最大長は，この例題では何バイトか．</li>
+<li><code>printf</code>で<code>double</code>を表示するときと，<code>scanf</code>で<code>double</code>へ読み込むときの書式は何か．</li>
+<li>パイプへ接続されるのは通常どの出力か．<code>stderr</code>はどう扱われるか．</li>
 </ol>
 <h2 id="_13">チェックリスト<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <ul>
 <li>正常な値だけでなく，課題に示された境界の値でも確認した．</li>
 <li>警告を確認し，原因を説明・修正した．</li>
 <li>自分の言葉で，処理の流れと使った型を説明できる．</li>
-<li>Enterによる改行，EOFによる終了，強制停止を区別できる．</li>
+<li>Enterによる改行，<code>EOF</code>による終了，強制停止を区別できる．</li>
 <li>入力文字の表示と，プログラム自身の出力を区別して記録した．</li>
 <li>本文の長さ，改行，終端のための容量を別々に数えた．</li>
 </ul>

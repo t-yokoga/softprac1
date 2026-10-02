@@ -2396,7 +2396,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec06.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week06 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week06</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">今回の進め方<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -2426,7 +2426,7 @@
 <tr>
 <td>4</td>
 <td>文字列の比較・連結</td>
-<td>strcmpの符号，終端込みの容量</td>
+<td><code>strcmp</code>の符号，終端込みの容量</td>
 </tr>
 <tr>
 <td>発展</td>
@@ -2436,9 +2436,9 @@
 </tbody>
 </table>
 <p>実行前に，配列の全要素を終端も含めて書き出してください．次に「配列容量」「文字列長」「終端の添字」を記録します．これらを区別してからコードを追うと，範囲外アクセスを防ぎやすくなります．予測と実行結果を比較し，自分の実装を確認しましょう．</p>
-<p>この回の文字列はソース内で用意し，キーボードからは読み込みません．変更するのは指定された初期値・容量・式です．容量検査を削除したり，終端のない配列を%sやstrlenへ渡したりする実験は行いません．コピー元とコピー先は別の配列にします．</p>
+<p>この回の文字列はソース内で用意し，キーボードからは読み込みません．変更するのは指定された初期値・容量・式です．容量検査を削除したり，終端のない配列を<code>%s</code>や<code>strlen</code>へ渡したりする実験は行いません．コピー元とコピー先は別の配列にします．</p>
 <h3 id="_3">ウォームアップ：文字と数値<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>main内で次を実行し，表示される文字と整数を対応させます．stdio.hが必要です．</p>
+<p><code>main</code>内で次を実行し，表示される文字と整数を対応させます．<code>stdio.h</code>が必要です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> c </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;3&#39;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;character=%c code=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, c, c);</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (c </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;0&#39;</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;&amp;</span><span style="color: #F8F8F2"> c </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;9&#39;</span><span style="color: #F8F8F2">) {</span>
@@ -2446,71 +2446,71 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span style="color: #F8F8F2">}</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;last=%c</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&quot;abcd&quot;</span><span style="color: #F8F8F2">[</span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">]);</span>
 </code></pre></div>
-<p>ASCIIではcharacter=3 code=51，digit=3，last=dです．cを'0'，'9'，'A'へ変更し，'A'の場合にはdigitの行を表示しないことを確認します．(int)cというキャストだけでは数字の3にならない理由を説明してください．</p>
+<p>ASCIIでは<code>character=3 code=51</code>，<code>digit=3</code>，<code>last=d</code>です．<code>c</code>を<code>'0'</code>，<code>'9'</code>，<code>'A'</code>へ変更し，<code>'A'</code>の場合には<code>digit</code>の行を表示しないことを確認します．<code>(int)c</code>というキャストだけでは数字の3にならない理由を説明してください．</p>
 <h2 id="1">課題1　長さを数える<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>Length</code> プロジェクトでstrlenを使わず，文字列の長さを数える関数my_lengthを作ります．引数は必ず終端を持つ文字列とします．空文字列，A，Helloで0，1，5を確認してください．</p>
+<p><code>Length</code> プロジェクトで<code>strlen</code>を使わず，文字列の長さを数える関数<code>my_length</code>を作ります．引数は必ず終端を持つ文字列とします．空文字列，<code>A</code>，<code>Hello</code>で0，1，5を確認してください．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>添字を0から増やし，s[i]が'\0'になるまで数えます．</p>
+<p>添字を0から増やし，<code>s[i]</code>が<code>'\0'</code>になるまで数えます．</p>
 </details>
 <h3 id="_4">終端へ到達するまでを追う<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>"Hello"について，nが0，1，2，3，4のときに読む値は'H'，'e'，'l'，'l'，'o'です．それぞれ終端ではないのでnを増やします．n=5で終端を読み，そこで終了して5を返します．空文字列ならn=0の最初の判定で終端なので，本体は1回も実行しません．</p>
+<p><code>"Hello"</code>について，<code>n</code>が0，1，2，3，4のときに読む値は<code>'H'</code>，<code>'e'</code>，<code>'l'</code>，<code>'l'</code>，<code>'o'</code>です．それぞれ終端ではないので<code>n</code>を増やします．<code>n=5</code>で終端を読み，そこで終了して5を返します．空文字列なら<code>n=0</code>の最初の判定で終端なので，本体は1回も実行しません．</p>
 <table>
 <thead>
 <tr>
 <th>文字列</th>
 <th style="text-align: right;">配列に必要な最小容量</th>
-<th style="text-align: right;">my_lengthの結果</th>
+<th style="text-align: right;"><code>my_length</code>の結果</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>""</td>
+<td><code>""</code></td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 </tr>
 <tr>
-<td>"A"</td>
+<td><code>"A"</code></td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr>
-<td>"Hello"</td>
+<td><code>"Hello"</code></td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;">5</td>
 </tr>
 <tr>
-<td>"A B"</td>
+<td><code>"A B"</code></td>
 <td style="text-align: right;">4</td>
 <td style="text-align: right;">3</td>
 </tr>
 </tbody>
 </table>
-<p>文字列中のスペースも1文字に数えます．この関数はstring.hのstrlenとは違う名前にし，標準関数を自分の関数で置き換えないようにしています．size_tの宣言にはstddef.hを使っています．</p>
+<p>文字列中のスペースも1文字に数えます．この関数は<code>string.h</code>の<code>strlen</code>とは違う名前にし，標準関数を自分の関数で置き換えないようにしています．<code>size_t</code>の宣言には<code>stddef.h</code>を使っています．</p>
 <h3 id="_5">配列容量と文字列長を比べる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>次のコードをmain内へ追加します．</p>
+<p>次のコードを<code>main</code>内へ追加します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> text[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;abc&quot;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;length=%zu capacity=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, my_length(text), </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> text);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">text[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;text=%s length=%zu capacity=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span style="color: #F8F8F2">       text, my_length(text), </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> text);</span>
 </code></pre></div>
-<p>char text[] = {'a', 'b', 'c', '\0', 'd', 'e'};の場合もmy_lengthは3です．終端以降を読み進めないことを説明してください．この配列の最後の要素が終端でなくても，読み取り可能な領域内に最初の終端があるため，abcという文字列として扱えます．</p>
+<p><code>char text[] = {'a', 'b', 'c', '\0', 'd', 'e'};</code>の場合も<code>my_length</code>は3です．終端以降を読み進めないことを説明してください．この配列の最後の要素が終端でなくても，読み取り可能な領域内に最初の終端があるため，<code>abc</code>という文字列として扱えます．</p>
 <h3 id="_6">空白を数える関数を追加する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>講義のcount_spacesをmy_lengthと同じファイルでmainより前へ定義し，mainへ次を追加します．</p>
+<p>講義の<code>count_spaces</code>を<code>my_length</code>と同じファイルで<code>main</code>より前へ定義し，<code>main</code>へ次を追加します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;spaces=%zu %zu %zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">       count_spaces(</span><span style="color: #E6DB74">&quot;abc def gh&quot;</span><span style="color: #F8F8F2">),</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #F8F8F2">       count_spaces(</span><span style="color: #E6DB74">&quot;ijk lmn opq rst&quot;</span><span style="color: #F8F8F2">), count_spaces(</span><span style="color: #E6DB74">&quot;&quot;</span><span style="color: #F8F8F2">));</span>
 </code></pre></div>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
-<p><strong>説明すること</strong>：my_lengthの引数に配列容量を渡していないのに終わりを判断できる理由と，終端がない入力を許してはいけない理由を説明してください．</p>
+<p><strong>説明すること</strong>：<code>my_length</code>の引数に配列容量を渡していないのに終わりを判断できる理由と，終端がない入力を許してはいけない理由を説明してください．</p>
 <h2 id="2-ascii">課題2　ASCIIの小文字へ変換<a class="headerlink" href="#2-ascii" title="Permanent link">&para;</a></h2>
 <p><code>Lower</code> プロジェクトで <code>char text[] = "Hello C17!";</code> の英大文字だけを小文字にします．結果はhello c17!です．ASCIIを前提とし，他の文字は変えません．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>'A'以上かつ'Z'以下なら，'a' - 'A'を足します．</p>
+<p><code>'A'</code>以上かつ<code>'Z'</code>以下なら，<code>'a' - 'A'</code>を足します．</p>
 </details>
-<p>空文字列とAZaz09でも試します．これは任意の言語の大文字小文字を変換する処理ではありません．</p>
+<p>空文字列と<code>AZaz09</code>でも試します．これは任意の言語の大文字小文字を変換する処理ではありません．</p>
 <h3 id="_7">変更する文字・しない文字を区別する<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -2522,35 +2522,35 @@
 </thead>
 <tbody>
 <tr>
-<td>"Hello C17!"</td>
+<td><code>"Hello C17!"</code></td>
 <td>記入してください</td>
 <td>大文字だけ変わる</td>
 </tr>
 <tr>
-<td>""</td>
+<td><code>""</code></td>
 <td>記入してください</td>
 <td>本体を0回で終了</td>
 </tr>
 <tr>
-<td>"AZaz09"</td>
+<td><code>"AZaz09"</code></td>
 <td>記入してください</td>
-<td>A・Zの端と，小文字・数字</td>
+<td><code>A</code>・<code>Z</code>の端と，小文字・数字</td>
 </tr>
 <tr>
-<td>"@AZ["</td>
+<td><code>"@AZ["</code></td>
 <td>記入してください</td>
-<td>Aの直前とZの直後は変更しない</td>
+<td><code>A</code>の直前と<code>Z</code>の直後は変更しない</td>
 </tr>
 <tr>
-<td>"A B"</td>
+<td><code>"A B"</code></td>
 <td>記入してください</td>
 <td>スペースは保つ</td>
 </tr>
 </tbody>
 </table>
-<p>条件を使わずにすべての文字へ'a' - 'A'を足すと，数字や記号まで別の値になります．範囲を確認してから変更することが重要です．終端も変更しません．</p>
+<p>条件を使わずにすべての文字へ<code>'a' - 'A'</code>を足すと，数字や記号まで別の値になります．範囲を確認してから変更することが重要です．終端も変更しません．</p>
 <h3 id="1_1">1文字の変換を関数へ分ける<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
-<p>次のlowerをmainの前へ置き，ループ内のif全体をtext[i] = lower(text[i]);に置き換えてください．表のすべての入力で，同じ結果になることを確認します．</p>
+<p>次の<code>lower</code>を<code>main</code>の前へ置き，ループ内の<code>if</code>全体を<code>text[i] = lower(text[i]);</code>に置き換えてください．表のすべての入力で，同じ結果になることを確認します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">lower</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> c)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (c </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;A&#39;</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;&amp;</span><span style="color: #F8F8F2"> c </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;Z&#39;</span><span style="color: #F8F8F2">) {</span>
@@ -2559,24 +2559,24 @@
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> c;</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>lowerの引数cはコピーです．関数内で計算するだけではtextの要素は変わりません．<strong>返された文字をtext[i]へ代入する</strong>ことが必要です．第5回の値渡しと結び付けて説明してください．</p>
+<p><code>lower</code>の引数<code>c</code>はコピーです．関数内で計算するだけでは<code>text</code>の要素は変わりません．<strong>返された文字を<code>text[i]</code>へ代入する</strong>ことが必要です．第5回の値渡しと結び付けて説明してください．</p>
 <h3 id="ascii">補足：ASCIIの印字可能な範囲<a class="headerlink" href="#ascii" title="Permanent link">&para;</a></h3>
-<p>ASCIIの表を確認したい場合は，次のループをmain内で使えます．0〜31と127は制御用なので，この表示からは除いています．</p>
+<p>ASCIIの表を確認したい場合は，次のループを<code>main</code>内で使えます．0〜31と127は制御用なので，この表示からは除いています．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> code </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">32</span><span style="color: #F8F8F2">; code </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">126</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">code) {</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%3d : %c</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, code, code);</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>32はスペースなので，コロンの後ろには目に見える記号がありません．'0'が48，'A'が65，'a'が97であること，それぞれの並びが連続することを確認します．この例はASCIIを前提としており，日本語の文字一覧にはなりません．</p>
+<p>32はスペースなので，コロンの後ろには目に見える記号がありません．<code>'0'</code>が48，<code>'A'</code>が65，<code>'a'</code>が97であること，それぞれの並びが連続することを確認します．この例はASCIIを前提としており，日本語の文字一覧にはなりません．</p>
 <h2 id="3">課題3　変換する順序<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>Average</code> プロジェクトで次をmain内に書き，結果を予測します．</p>
+<p><code>Average</code> プロジェクトで次を<code>main</code>内に書き，結果を予測します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">, count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)(total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count));</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count);</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2">)</span><span style="color: #AE81FF">-3.9</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
 <h3 id="_8">同じ値で式だけを比べる<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>totalを−7，countを2へ変更してください．最初の2行は−3.0，−3.5になります．整数除算は0方向へ小数部を切り捨てるため，−7 / 2は−3です．count=0の実験は行いません．</p>
-<p><strong>説明すること</strong>：(double)(total / count)の外側のキャストで，失われた小数部を戻せないのはなぜか．また，double mean = total / count;でも整数除算になるのはなぜか．右辺を計算する段階と，左辺へ代入する段階に分けて説明します．</p>
+<p><code>total</code>を−7，<code>count</code>を2へ変更してください．最初の2行は−3.0，−3.5になります．整数除算は0方向へ小数部を切り捨てるため，−<code>7 / 2</code>は−3です．<code>count=0</code>の実験は行いません．</p>
+<p><strong>説明すること</strong>：<code>(double)(total / count)</code>の外側のキャストで，失われた小数部を戻せないのはなぜか．また，<code>double mean = total / count;</code>でも整数除算になるのはなぜか．右辺を計算する段階と，左辺へ代入する段階に分けて説明します．</p>
 <h3 id="_9">計算する型を先に広げる<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>次の完全なプログラムへ置き換え，整数拡張，積の型，往復変換を確認します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
@@ -2602,70 +2602,70 @@
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>roundtrip=1
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>unsigned=44
 </code></pre></div>
-<p>授業の8ビットunsigned charでは300を256で割った余りの44になります．unsigned intへのキャストは%uに型を合わせるためです．この符号なしへの変換は，符号付きの計算のオーバーフローとは別の規則です．</p>
-<p>charからintへ移したsavedは元の値を保ち，charへ戻しても同じ文字になります．一方でsmallをintへ戻しても300には戻らず44です．失われた情報が復元されないことを説明してください．</p>
+<p>授業の8ビット<code>unsigned char</code>では300を256で割った余りの44になります．<code>unsigned int</code>へのキャストは<code>%u</code>に型を合わせるためです．この符号なしへの変換は，符号付きの計算のオーバーフローとは別の規則です．</p>
+<p><code>char</code>から<code>int</code>へ移した<code>saved</code>は元の値を保ち，<code>char</code>へ戻しても同じ文字になります．一方で<code>small</code>を<code>int</code>へ戻しても300には戻らず44です．失われた情報が復元されないことを説明してください．</p>
 <h3 id="_10">範囲外の計算は読解だけにする<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>long long square = i * i;へキャストを外すと，MSVCの32ビットintでは50000×50000が範囲を超えます．この形は実行しないでください．(long long)(i * i)も，計算後に変換するので解決しません．iを100へ変える場合は，どの形でも10000が範囲内ですが，それだけで大きな入力にも安全とは判断できません．</p>
+<p><code>long long square = i * i;</code>へキャストを外すと，MSVCの32ビット<code>int</code>では50000×50000が範囲を超えます．この形は実行しないでください．<code>(long long)(i * i)</code>も，計算後に変換するので解決しません．<code>i</code>を100へ変える場合は，どの形でも10000が範囲内ですが，それだけで大きな入力にも安全とは判断できません．</p>
 <h3 id="_11">符号の異なる比較を読む<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>int i = -10;とunsigned int u = 10u;でi &lt; uが偽になる理由を，講義の変換規則に従って説明してください．uがINT_MAX以下であると確認できる場合に限り，i &lt; (int)uという比較が使えます．「警告が出たらとにかくキャストする」という直し方は避けます．</p>
+<p><code>int i = -10;</code>と<code>unsigned int u = 10u;</code>で<code>i &lt; u</code>が偽になる理由を，講義の変換規則に従って説明してください．<code>u</code>が<code>INT_MAX</code>以下であると確認できる場合に限り，<code>i &lt; (int)u</code>という比較が使えます．「警告が出たらとにかくキャストする」という直し方は避けます．</p>
 <h2 id="4">課題4　比較してから連結する<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p><code>CompareJoin</code> プロジェクトで，"hoge"と"fuga"を比較し，十分な容量がある場合だけ連結します．比較はstrcmpの戻り値の符号だけを使い，連結は終端を含めたループで行います．</p>
+<p><code>CompareJoin</code> プロジェクトで，<code>"hoge"</code>と<code>"fuga"</code>を比較し，十分な容量がある場合だけ連結します．比較は<code>strcmp</code>の戻り値の符号だけを使い，連結は終端を含めたループで行います．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>strcpyやstrcatを実行する代わりに，自分で容量を確認します．現在の長さをused，追加分をaddedとし，残り容量にaddedと終端の1バイトが収まるか判定します．コピー先は最初から終端を持つ文字列です．</p>
+<p><code>strcpy</code>や<code>strcat</code>を実行する代わりに，自分で容量を確認します．現在の長さを<code>used</code>，追加分を<code>added</code>とし，残り容量に<code>added</code>と終端の1バイトが収まるか判定します．コピー先は最初から終端を持つ文字列です．</p>
 </details>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>after
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>text=hogefuga length=8 capacity=10
 </code></pre></div>
-<p>ASCIIでは最初のhがfより後なのでafterです．strcmpが返す具体的な正の数は出力条件に使いません．</p>
+<p>ASCIIでは最初の<code>h</code>が<code>f</code>より後なので<code>after</code>です．<code>strcmp</code>が返す具体的な正の数は出力条件に使いません．</p>
 <h3 id="_12">容量の境界を確認する<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>textの容量だけを10から9，8へ変えます．文字列の初期値と容量検査は残します．</p>
+<p><code>text</code>の容量だけを10から9，8へ変えます．文字列の初期値と容量検査は残します．</p>
 <table>
 <thead>
 <tr>
 <th style="text-align: right;">容量</th>
 <th>連結できるか</th>
 <th>最後の文字列</th>
-<th style="text-align: right;">strlen</th>
+<th style="text-align: right;"><code>strlen</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: right;">10</td>
 <td>できる</td>
-<td>hogefuga</td>
+<td><code>hogefuga</code></td>
 <td style="text-align: right;">8</td>
 </tr>
 <tr>
 <td style="text-align: right;">9</td>
 <td>できる（終端込みでぴったり）</td>
-<td>hogefuga</td>
+<td><code>hogefuga</code></td>
 <td style="text-align: right;">8</td>
 </tr>
 <tr>
 <td style="text-align: right;">8</td>
 <td>できない</td>
-<td>hoge</td>
+<td><code>hoge</code></td>
 <td style="text-align: right;">4</td>
 </tr>
 </tbody>
 </table>
-<p>容量8ではafterの次にnot enough spaceを表示します．書き込みを始める前に容量を確認しているので，元のhogeが保たれます．この演習では容量は5以上にし，初期文字列hogeの終端が必ず入るようにします．</p>
+<p>容量8では<code>after</code>の次にnot enough spaceを表示します．書き込みを始める前に容量を確認しているので，元の<code>hoge</code>が保たれます．この演習では容量は5以上にし，初期文字列<code>hoge</code>の終端が必ず入るようにします．</p>
 <h3 id="_13">比較の条件を変える<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>容量を10へ戻し，suffixを"hoge"へ変えると最初の行はequal，連結後はhogehogeです．suffixが"z"ならbefore，連結後はhogezです．空文字列""ならafterですが，連結してもhogeのままです．</p>
-<p><strong>説明すること</strong>：比較が文字列の長さでは決まらない理由，i &lt;= addedの等号が必要な理由，配列容量が連結後も変わらない理由を説明してください．</p>
+<p>容量を10へ戻し，<code>suffix</code>を<code>"hoge"</code>へ変えると最初の行は<code>equal</code>，連結後は<code>hogehoge</code>です．<code>suffix</code>が<code>"z"</code>なら<code>before</code>，連結後は<code>hogez</code>です．空文字列<code>""</code>なら<code>after</code>ですが，連結しても<code>hoge</code>のままです．</p>
+<p><strong>説明すること</strong>：比較が文字列の長さでは決まらない理由，<code>i &lt;= added</code>の等号が必要な理由，配列容量が連結後も変わらない理由を説明してください．</p>
 <h2 id="_14">発展　容量の境界<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
-<p>講義のstrings.cでcopyの容量を4，3に変更し，catをコピーできるか予測してください．条件式は残します．</p>
-<p>copy[4]でもwordの容量は16のままです．表示のcapacityはsizeof wordなので16です．どの配列の大きさを表示しているかも確認しましょう．copy[3]では最初の表示がCatと，空のcopyになります．copyへ部分的にcatを書いてから終端を書けなくなるのではなく，コピー自体を行わないため安全です．</p>
+<p>講義の<code>strings.c</code>で<code>copy</code>の容量を4，3に変更し，<code>cat</code>をコピーできるか予測してください．条件式は残します．</p>
+<p><code>copy[4]</code>でも<code>word</code>の容量は16のままです．表示の<code>capacity</code>は<code>sizeof word</code>なので16です．どの配列の大きさを表示しているかも確認しましょう．<code>copy[3]</code>では最初の表示が<code>Cat</code>と，空の<code>copy</code>になります．<code>copy</code>へ部分的に<code>cat</code>を書いてから終端を書けなくなるのではなく，コピー自体を行わないため安全です．</p>
 <h2 id="_15">確認問題<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <ol>
-<li>0，'0'，'\0'，"0"，"\0"，""はそれぞれ何を表すか．</li>
-<li>char s[10] = "abc";のsizeofとstrlenの結果はいくつか．</li>
-<li>s[1] = '\0';を実行すると，表示・長さ・容量はどうなるか．</li>
-<li>strcmp(a, b)を−1と比較してはいけないのはなぜか．</li>
-<li>strcpyで5文字のhelloをコピーする場合，最小容量はいくつか．</li>
-<li>strlenとsizeofの結果を表示する書式は何か．</li>
-<li>floatをintへ変換する処理は，どの場面で暗黙に起こり得るか．</li>
+<li>0，<code>'0'</code>，<code>'\0'</code>，<code>"0"</code>，<code>"\0"</code>，<code>""</code>はそれぞれ何を表すか．</li>
+<li><code>char s[10] = "abc";</code>の<code>sizeof</code>と<code>strlen</code>の結果はいくつか．</li>
+<li><code>s[1] = '\0';</code>を実行すると，表示・長さ・容量はどうなるか．</li>
+<li><code>strcmp(a, b)</code>を−1と比較してはいけないのはなぜか．</li>
+<li><code>strcpy</code>で5文字の<code>hello</code>をコピーする場合，最小容量はいくつか．</li>
+<li><code>strlen</code>と<code>sizeof</code>の結果を表示する書式は何か．</li>
+<li><code>float</code>を<code>int</code>へ変換する処理は，どの場面で暗黙に起こり得るか．</li>
 <li>キャストを式の外側へ付ければ，計算中の整数オーバーフローを防げるか．</li>
 </ol>
 <h2 id="_16">チェックリスト<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>

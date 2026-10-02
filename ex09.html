@@ -2474,7 +2474,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec09.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week09 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week09</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">今回の進め方<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -2509,71 +2509,71 @@
 <tr>
 <td>発展</td>
 <td>長さの違う行と型の整理</td>
-<td>int **とint (*)[3]</td>
+<td><code>int **</code>と<code>int (*)[3]</code></td>
 </tr>
 </tbody>
 </table>
 <p>今回の入力はソース中の初期値です．数値や添字を変更するたびに再ビルドします．範囲外アクセスや文字列リテラルへの書き込みを試して，異常終了することを確認する課題ではありません．危険な例は型と図を使って説明してください．</p>
-<p>最初は「矢印を何段たどるか」と「どの変数が変わるか」を紙に書きます．アドレスの数値を記録する代わりに，p == &amp;a[1]のような比較で，意図した要素を指しているかを調べることもできます．この方法なら実行ごとにアドレスが変わっても確認できます．</p>
+<p>最初は「矢印を何段たどるか」と「どの変数が変わるか」を紙に書きます．アドレスの数値を記録する代わりに，<code>p == &amp;a[1]</code>のような比較で，意図した要素を指しているかを調べることもできます．この方法なら実行ごとにアドレスが変わっても確認できます．</p>
 <h2 id="1">課題1　見つからない場合<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>FindMax</code> プロジェクトでdouble_pointer.cを実行します．find_maxへ渡すnを0にしたとき，answerと戻り値はどうなるでしょうか．空の配列は宣言せず，元の配列とn=0を渡します．</p>
+<p><code>FindMax</code> プロジェクトで<code>double_pointer.c</code>を実行します．<code>find_max</code>へ渡す<code>n</code>を0にしたとき，<code>answer</code>と戻り値はどうなるでしょうか．空の配列は宣言せず，元の配列と<code>n=0</code>を渡します．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>*answerを読むのは成功したときだけです．</p>
+<p><code>*answer</code>を読むのは成功したときだけです．</p>
 </details>
 <h3 id="_3">検索範囲と同点の扱い<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>元の配列は{7, 12, 4}です．nを変えたら，検索に使われる要素を先に囲んでください．プログラム末尾のa[1]の表示は，検索結果の表示とは別です．</p>
+<p>元の配列は{7, 12, 4}です．<code>n</code>を変えたら，検索に使われる要素を先に囲んでください．プログラム末尾の<code>a[1]</code>の表示は，検索結果の表示とは別です．</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: right;">n</th>
+<th style="text-align: right;"><code>n</code></th>
 <th>成功・失敗</th>
 <th>検索結果</th>
-<th>*answer = 99;の影響</th>
+<th><code>*answer = 99;</code>の影響</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align: right;">3</td>
 <td>成功</td>
-<td>a[1]の12</td>
-<td>a[1]が99</td>
+<td><code>a[1]</code>の12</td>
+<td><code>a[1]</code>が99</td>
 </tr>
 <tr>
 <td style="text-align: right;">1</td>
 <td>成功</td>
-<td>a[0]の7</td>
-<td>a[0]が99，a[1]は12</td>
+<td><code>a[0]</code>の7</td>
+<td><code>a[0]</code>が99，<code>a[1]</code>は12</td>
 </tr>
 <tr>
 <td style="text-align: right;">0</td>
 <td>失敗</td>
-<td>answerはNULL</td>
+<td><code>answer</code>は<code>NULL</code></td>
 <td>代入を実行しない</td>
 </tr>
 <tr>
 <td style="text-align: right;">−1</td>
 <td>失敗</td>
-<td>answerはNULL</td>
+<td><code>answer</code>は<code>NULL</code></td>
 <td>代入を実行しない</td>
 </tr>
 </tbody>
 </table>
-<p>n=4は実際の要素数を超えるので試しません．find_maxはnが実際の配列長以下かどうかを自動では判定できません．負のnを失敗として扱えることと，大きすぎるnが安全であることは別です．</p>
-<p>次にn=3へ戻し，配列を{12, 12, 4}へ変更します．選ばれるのはa[0]です．if本体でprintf("first=%d\n", answer == &amp;a[0]);を追加し，1になることを確認してください．条件を&gt;=へ変更するとa[1]になり，この比較は0です．変更後は条件を&gt;へ戻します．</p>
-<p><strong>説明すること</strong>：*out = best;を*out = &amp;a[0];に変えたら何が起こるでしょうか．探索で求めたbestを使わず，常に先頭要素を返すことになります．コンパイルが通るだけでは，仕様どおりとは限りません．</p>
+<p><code>n=4</code>は実際の要素数を超えるので試しません．<code>find_max</code>は<code>n</code>が実際の配列長以下かどうかを自動では判定できません．負の<code>n</code>を失敗として扱えることと，大きすぎる<code>n</code>が安全であることは別です．</p>
+<p>次に<code>n=3</code>へ戻し，配列を{12, 12, 4}へ変更します．選ばれるのは<code>a[0]</code>です．<code>if</code>本体で<code>printf("first=%d\n", answer == &amp;a[0]);</code>を追加し，1になることを確認してください．条件を<code>&gt;=</code>へ変更すると<code>a[1]</code>になり，この比較は0です．変更後は条件を<code>&gt;</code>へ戻します．</p>
+<p><strong>説明すること</strong>：<code>*out = best;</code>を<code>*out = &amp;a[0];</code>に変えたら何が起こるでしょうか．探索で求めた<code>best</code>を使わず，常に先頭要素を返すことになります．コンパイルが通るだけでは，仕様どおりとは限りません．</p>
 <h3 id="_4">失敗時に古い結果を残さない<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>mainでanswerを最初に&amp;a[1]として，n=0で呼んでください．この関数は先に*out = NULL;を実行するので，以前のアドレスが残らずNULLになります．これはこの関数が採用した仕様です．一般に，失敗した関数が出力先をどう扱うかは，関数ごとに確認する必要があります．</p>
-<p>out自体へNULLを渡す実験はしません．有効なポインタ変数のアドレスを渡す契約と，出力結果としてNULLを受け取ることは違います．&amp;answerはポインタ変数の場所，answerは検索結果の場所です．</p>
+<p><code>main</code>で<code>answer</code>を最初に<code>&amp;a[1]</code>として，<code>n=0</code>で呼んでください．この関数は先に<code>*out = NULL;</code>を実行するので，以前のアドレスが残らず<code>NULL</code>になります．これはこの関数が採用した仕様です．一般に，失敗した関数が出力先をどう扱うかは，関数ごとに確認する必要があります．</p>
+<p><code>out</code>自体へ<code>NULL</code>を渡す実験はしません．有効なポインタ変数のアドレスを渡す契約と，出力結果として<code>NULL</code>を受け取ることは違います．<code>&amp;answer</code>はポインタ変数の場所，<code>answer</code>は検索結果の場所です．</p>
 <h3 id="_5">値を返す版と，場所を返す版<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p><code>ReturnMaximum</code>という別プロジェクトで比較します．max_valueはn&gt;=1だけに対応し，max_pointerはn&lt;=0ならNULLを返します．値を返す版にも無条件にn=0を渡さないでください．</p>
+<p><code>ReturnMaximum</code>という別プロジェクトで比較します．<code>max_value</code>は<code>n&gt;=1</code>だけに対応し，<code>max_pointer</code>は<code>n&lt;=0</code>なら<code>NULL</code>を返します．値を返す版にも無条件に<code>n=0</code>を渡さないでください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>before=12 12
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>after=12 99
 </code></pre></div>
-<p>savedが12のままである理由を説明してください．savedは最大値を求めた時点のコピーです．一方foundは元の配列の要素を指しているので，*foundの変更はaへ反映されます．関数内のbestという変数自体のアドレスを返しているわけではありません．</p>
-<p>配列を{-7, -12, -4}へ変更するとbeforeは−4と−4，afterは−4と99です．最大候補を0から始めない理由も説明しましょう．場所を返す版だけのnを0に変更した場合は何も表示されません．値を返す版のn=3はそのままにして，比較する条件を混同しないようにします．</p>
+<p><code>saved</code>が12のままである理由を説明してください．<code>saved</code>は最大値を求めた時点のコピーです．一方<code>found</code>は元の配列の要素を指しているので，<code>*found</code>の変更は<code>a</code>へ反映されます．関数内の<code>best</code>という変数自体のアドレスを返しているわけではありません．</p>
+<p>配列を{-7, -12, -4}へ変更すると<code>before</code>は−4と−4，<code>after</code>は−4と99です．最大候補を0から始めない理由も説明しましょう．場所を返す版だけの<code>n</code>を0に変更した場合は何も表示されません．値を返す版の<code>n=3</code>はそのままにして，比較する条件を混同しないようにします．</p>
 <h3 id="_6">二重ポインタの代入を追う<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>次の断片をmain内で使い，実行前に各行の結果を予測してください．必要なヘッダはstdio.hです．</p>
+<p>次の断片を<code>main</code>内で使い，実行前に各行の結果を予測してください．必要なヘッダは<code>stdio.h</code>です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">, y </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">30</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">x;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">**</span><span style="color: #F8F8F2">pp </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">p;</span>
@@ -2584,10 +2584,10 @@
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d %d %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x, y, p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">y);</span>
 </code></pre></div>
 <h2 id="2">課題2　表示順を変更する<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>Names</code> プロジェクトでconst char *配列にTokyo，Osaka，Nagoyaを入れ，最初と最後のポインタを交換して表示してください．文字列の内容はコピーしません．</p>
+<p><code>Names</code> プロジェクトで<code>const char *</code>配列に<code>Tokyo</code>，<code>Osaka</code>，<code>Nagoya</code>を入れ，最初と最後のポインタを交換して表示してください．文字列の内容はコピーしません．</p>
 <p>表示順を予測し，各文字列の長さが異なっていてもポインタを交換できる理由を説明してください．</p>
 <h3 id="_7">関数へ分ける<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>交換部分を<code>void swap_names(const char *names[], int i, int j)</code>という関数へ移し，mainからswap_names(names, 0, 2);と呼びます．関数はmainより前に自分で定義してください．iとjは0〜2という条件です．mainに元の交換処理を残さないようにします．関数の仮引数をconst char **namesと書いた場合との関係も説明してください．</p>
+<p>交換部分を<code>void swap_names(const char *names[], int i, int j)</code>という関数へ移し，<code>main</code>から<code>swap_names(names, 0, 2);</code>と呼びます．関数は<code>main</code>より前に自分で定義してください．<code>i</code>と<code>j</code>は0〜2という条件です．<code>main</code>に元の交換処理を残さないようにします．関数の仮引数を<code>const char **names</code>と書いた場合との関係も説明してください．</p>
 <table>
 <thead>
 <tr>
@@ -2597,23 +2597,23 @@
 </thead>
 <tbody>
 <tr>
-<td>swap_names(names, 0, 2);</td>
+<td><code>swap_names(names, 0, 2);</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>swap_names(names, 1, 1);</td>
+<td><code>swap_names(names, 1, 1);</code></td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>swap_names(names, 0, 2);を2回</td>
+<td><code>swap_names(names, 0, 2);</code>を2回</td>
 <td>記入してください</td>
 </tr>
 </tbody>
 </table>
 <p>各ケースは初期状態から別々に試します．文字列の長さを求める処理が不要なのは，文字を移動せず，固定サイズのポインタ値を交換しているからです．</p>
 <h3 id="_8">表示と書き換えを区別する<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>printf("%s-city\n", names[i]);へ変更するとNagoya-cityなどと表示できます．これは文字列本体へ-cityを追加したのではありません．別のprintf("%s\n", names[i]);では元の文字列が表示されます．strlen(names[i])にも-cityの長さは加わりません．</p>
-<p>文字を変更したい場合は，次のように変更可能な配列を用意します．同じmainへ追加する場合は，既存の変数名との重複に注意してください．</p>
+<p><code>printf("%s-city\n", names[i]);</code>へ変更すると<code>Nagoya-city</code>などと表示できます．これは文字列本体へ<code>-city</code>を追加したのではありません．別の<code>printf("%s\n", names[i]);</code>では元の文字列が表示されます．<code>strlen(names[i])</code>にも<code>-city</code>の長さは加わりません．</p>
+<p>文字を変更したい場合は，次のように変更可能な配列を用意します．同じ<code>main</code>へ追加する場合は，既存の変数名との重複に注意してください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> city0[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;Tokyo&quot;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> city1[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;Osaka&quot;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">editable[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {city0, city1};</span>
@@ -2621,16 +2621,16 @@
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s %s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, city0, editable[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">]);</span>
 </code></pre></div>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
-<p><strong>禁止する実験</strong>：names[0][0]を変更するためにconstを外す，キャストして文字列リテラルへ書き込む，文字列の長さより先を%sで表示する，といった操作は実行しません．</p>
+<p><strong>禁止する実験</strong>：<code>names[0][0]</code>を変更するために<code>const</code>を外す，キャストして文字列リテラルへ書き込む，文字列の長さより先を<code>%s</code>で表示する，といった操作は実行しません．</p>
 <h2 id="3">課題3　行ごとの平均<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>MatrixMean</code> プロジェクトでmatrix.cをもとに，2行3列の行ごとの平均を計算する関数を作ります．行の値は0〜100とし，列数は3に固定します．</p>
+<p><code>MatrixMean</code> プロジェクトで<code>matrix.c</code>をもとに，2行3列の行ごとの平均を計算する関数を作ります．行の値は0〜100とし，列数は3に固定します．</p>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
 <h3 id="_9">入力を変えて確かめる<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>配列の2行</th>
-<th style="text-align: right;">rows</th>
+<th style="text-align: right;"><code>rows</code></th>
 <th>出力</th>
 </tr>
 </thead>
@@ -2657,10 +2657,10 @@
 </tr>
 </tbody>
 </table>
-<p>この課題ではrowsは0〜2とします．rows=3を渡すと存在しない3行目へ進むので，試しません．(double)totalをtotalに変えると整数除算になり，小数部分が失われます．表示桁数を増やしても，除算で失った情報は戻りません．</p>
+<p>この課題では<code>rows</code>は0〜2とします．<code>rows=3</code>を渡すと存在しない3行目へ進むので，試しません．<code>(double)total</code>を<code>total</code>に変えると整数除算になり，小数部分が失われます．表示桁数を増やしても，除算で失った情報は戻りません．</p>
 <h3 id="_10">配列へのポインタで表す<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>関数の宣言をvoid print_means(int (*a)[COLS], int rows)に変え，出力が変わらないことを確認します．括弧を落としてint *a[COLS]とすると，仮引数はint **となり，別の型です．この形へ変えたまま警告を無視して実行してはいけません．</p>
-<p>mainで次の式を確認します．sizeofの結果を表示するなら%zuを使います．数値は処理系に依存するため，まずsizeof(int)を使う式で説明してください．</p>
+<p>関数の宣言を<code>void print_means(int (*a)[COLS], int rows)</code>に変え，出力が変わらないことを確認します．括弧を落として<code>int *a[COLS]</code>とすると，仮引数は<code>int **</code>となり，別の型です．この形へ変えたまま警告を無視して実行してはいけません．</p>
+<p><code>main</code>で次の式を確認します．<code>sizeof</code>の結果を表示するなら<code>%zu</code>を使います．数値は処理系に依存するため，まず<code>sizeof(int)</code>を使う式で説明してください．</p>
 <table>
 <thead>
 <tr>
@@ -2670,32 +2670,32 @@
 </thead>
 <tbody>
 <tr>
-<td>sizeof a</td>
-<td>2 * COLS * sizeof(int)</td>
+<td><code>sizeof a</code></td>
+<td><code>2 * COLS * sizeof(int)</code></td>
 </tr>
 <tr>
-<td>sizeof a[0]</td>
-<td>COLS * sizeof(int)</td>
+<td><code>sizeof a[0]</code></td>
+<td><code>COLS * sizeof(int)</code></td>
 </tr>
 <tr>
-<td>sizeof a / sizeof a[0]</td>
+<td><code>sizeof a / sizeof a[0]</code></td>
 <td>行数2</td>
 </tr>
 <tr>
-<td>sizeof a[0] / sizeof a[0][0]</td>
+<td><code>sizeof a[0] / sizeof a[0][0]</code></td>
 <td>列数3</td>
 </tr>
 </tbody>
 </table>
-<p>これらはmainの実際の配列に対する結果です．関数内の仮引数aにsizeof a / sizeof a[0]を適用して，行数を調べてはいけません．関数に渡ったaはポインタだからです．</p>
+<p>これらは<code>main</code>の実際の配列に対する結果です．関数内の仮引数<code>a</code>に<code>sizeof a / sizeof a[0]</code>を適用して，行数を調べてはいけません．関数に渡った<code>a</code>はポインタだからです．</p>
 <h3 id="_11">行平均と全体平均<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>この例の全体平均は3.5です．行平均2.0と5.0の平均でも一致しますが，それは行の要素数が同じだからです．行の長さが異なる場合に行平均を単純に平均すると，全要素の平均にはなりません．発展課題では，長さの違う行を使ってこの点も考えます．</p>
-<p>全体平均を返す関数を追加する場合は，rows&gt;=1を条件にし，doubleで合計してsum / ((double)rows * COLS)を返せます．rows=0のときに0で割らないよう，仕様を決めてから書きます．行平均を表示する関数がrows=0で何もしないことと，平均値を返す関数の空入力の扱いは同じではありません．</p>
+<p>全体平均を返す関数を追加する場合は，<code>rows&gt;=1</code>を条件にし，<code>double</code>で合計して<code>sum / ((double)rows * COLS)</code>を返せます．<code>rows=0</code>のときに0で割らないよう，仕様を決めてから書きます．行平均を表示する関数が<code>rows=0</code>で何もしないことと，平均値を返す関数の空入力の扱いは同じではありません．</p>
 <h2 id="4">課題4　二次元配列の行を交換する<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p><code>SwapRows</code>プロジェクトを作り，3行9列の文字配列でtoyama，ishikawa，fukuiを保存します．2行目と3行目を交換してください．この課題では行のアドレスを入れ替えるのではなく，9個のcharを交換します．</p>
+<p><code>SwapRows</code>プロジェクトを作り，3行9列の文字配列で<code>toyama</code>，<code>ishikawa</code>，<code>fukui</code>を保存します．2行目と3行目を交換してください．この課題では行のアドレスを入れ替えるのではなく，9個の<code>char</code>を交換します．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>行は配列なので，names[i] = names[j];とは書けません．列cを0〜WIDTH−1まで進め，各文字を一時変数で交換します．終端や初期化で0になった残りの要素も含めて交換します．</p>
+<p>行は配列なので，<code>names[i] = names[j];</code>とは書けません．列<code>c</code>を0〜<code>WIDTH</code>−1まで進め，各文字を一時変数で交換します．終端や初期化で0になった残りの要素も含めて交換します．</p>
 </details>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
 <h3 id="_12">交換前後の内容を描く<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
@@ -2710,35 +2710,35 @@
 <tbody>
 <tr>
 <td>0</td>
-<td>t o y a m a 0 0 0</td>
-<td>t o y a m a 0 0 0</td>
+<td><code>t o y a m a 0 0 0</code></td>
+<td><code>t o y a m a 0 0 0</code></td>
 </tr>
 <tr>
 <td>1</td>
-<td>i s h i k a w a 0</td>
-<td>f u k u i 0 0 0 0</td>
+<td><code>i s h i k a w a 0</code></td>
+<td><code>f u k u i 0 0 0 0</code></td>
 </tr>
 <tr>
 <td>2</td>
-<td>f u k u i 0 0 0 0</td>
-<td>i s h i k a w a 0</td>
+<td><code>f u k u i 0 0 0 0</code></td>
+<td><code>i s h i k a w a 0</code></td>
 </tr>
 </tbody>
 </table>
-<p>表の0は文字'0'ではなく，値0のcharです．行の開始位置は変わっていません．その位置に保存されている内容が変わっています．課題2では文字列本体を動かさず，配列中のポインタを変えました．図でこの違いを説明してください．</p>
+<p>表の0は文字<code>'0'</code>ではなく，値0の<code>char</code>です．行の開始位置は変わっていません．その位置に保存されている内容が変わっています．課題2では文字列本体を動かさず，配列中のポインタを変えました．図でこの違いを説明してください．</p>
 <h3 id="_13">終端も交換する理由<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>短いfukuiの5文字だけをishikawaの先頭へ上書きしても，直後に終端を書かなければ余分な文字が表示されます．また片方の文字列の終端までしか交換しないと，長い方の残りを正しく移せません．本課題では固定幅全体を交換することで，長さが違う場合も扱います．</p>
-<p>swap_rows(names, 1, 1);なら内容は変わりません．swap_rows(names, 1, 2);を2回実行すると元へ戻ります．初期値のfukuiを空文字列""へ変更しても，1回の交換後は2行目が空行，3行目がishikawaになります．各ケースを別々に確認してください．</p>
-<p><strong>比較すること</strong>：ポインタ版は文字列の長さに関係なく一定個数のポインタ代入で交換できます．行交換版はWIDTH回の反復が必要です．一方，二次元配列は本体を連続した固定幅の領域として確保できます．どちらも同じ目的に使えますが，データ構造と操作の費用が異なります．</p>
+<p>短い<code>fukui</code>の5文字だけを<code>ishikawa</code>の先頭へ上書きしても，直後に終端を書かなければ余分な文字が表示されます．また片方の文字列の終端までしか交換しないと，長い方の残りを正しく移せません．本課題では固定幅全体を交換することで，長さが違う場合も扱います．</p>
+<p><code>swap_rows(names, 1, 1);</code>なら内容は変わりません．<code>swap_rows(names, 1, 2);</code>を2回実行すると元へ戻ります．初期値の<code>fukui</code>を空文字列<code>""</code>へ変更しても，1回の交換後は2行目が空行，3行目が<code>ishikawa</code>になります．各ケースを別々に確認してください．</p>
+<p><strong>比較すること</strong>：ポインタ版は文字列の長さに関係なく一定個数のポインタ代入で交換できます．行交換版は<code>WIDTH</code>回の反復が必要です．一方，二次元配列は本体を連続した固定幅の領域として確保できます．どちらも同じ目的に使えますが，データ構造と操作の費用が異なります．</p>
 <h2 id="1_1">発展1　長さが異なる行を扱う<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
 <p><code>RaggedRows</code>プロジェクトでは，3要素の行と2要素の行をポインタ配列へまとめます．配列本体と，先頭を集めた配列と，長さを保存した配列の3種類を区別してください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>row0 sum=6
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>row1 sum=9
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>original=40
 </code></pre></div>
-<p>ここではポインタ配列をint **で指せます．二次元配列int a[2][3]をint **で指すのとは違います．p[1]の場所には実際にint *が保存されています．ポインタ配列を用意しただけではrow0やrow1の内容はコピーされません．そのためp[1][0]の変更はrow1[0]にも反映されます．</p>
+<p>ここではポインタ配列を<code>int **</code>で指せます．二次元配列<code>int a[2][3]</code>を<code>int **</code>で指すのとは違います．<code>p[1]</code>の場所には実際に<code>int *</code>が保存されています．ポインタ配列を用意しただけでは<code>row0</code>や<code>row1</code>の内容はコピーされません．そのため<code>p[1][0]</code>の変更は<code>row1[0]</code>にも反映されます．</p>
 <h3 id="_14">長さも一緒に交換する<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p>rows[0]とrows[1]を交換する場合は，lengths[0]とlengths[1]も交換します．ポインタだけを交換すると，2要素の行を長さ3として読んでしまいます．不一致のまま実行するのではなく，どの添字が範囲外になるかを図で確認してください．</p>
+<p><code>rows[0]</code>と<code>rows[1]</code>を交換する場合は，<code>lengths[0]</code>と<code>lengths[1]</code>も交換します．ポインタだけを交換すると，2要素の行を長さ3として読んでしまいます．不一致のまま実行するのではなく，どの添字が範囲外になるかを図で確認してください．</p>
 <p>反復処理の前に次の断片を追加します．両方の交換を一組として扱います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">temp_row </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> rows[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">];</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #F8F8F2">rows[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> rows[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">];</span>
@@ -2748,16 +2748,16 @@
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span style="color: #F8F8F2">lengths[</span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> temp_length;</span>
 </code></pre></div>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
-<p>交換前の全要素の平均は15 / 5 = 3.0です．行平均2.0と4.5を単純に平均した3.25とは一致しません．要素数が異なる場合は，各行の合計と個数を集計してから割ります．</p>
+<p>交換前の全要素の平均は<code>15 / 5 = 3.0</code>です．行平均2.0と4.5を単純に平均した3.25とは一致しません．要素数が異なる場合は，各行の合計と個数を集計してから割ります．</p>
 <h3 id="_15">二重ポインタの別の使い方<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>次の例では，pが指すのはポインタ変数1個です．pを進めて別のポインタがあるかのように使いません．</p>
+<p>次の例では，<code>p</code>が指すのはポインタ変数1個です．<code>p</code>を進めて別のポインタがあるかのように使いません．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">animal </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;dog&quot;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">**</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">animal;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p);</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, animal);</span>
 </code></pre></div>
-<p>dog，catと表示します．変更したのはanimalが指す場所であり，dogという文字列そのものではありません．次の例は，各ポインタが1文字だけを指します．</p>
+<p><code>dog</code>，<code>cat</code>と表示します．変更したのは<code>animal</code>が指す場所であり，<code>dog</code>という文字列そのものではありません．次の例は，各ポインタが1文字だけを指します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> first </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;a&#39;</span><span style="color: #F8F8F2">, second </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;b&#39;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">letters[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">first, </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">second};</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">**</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> letters;</span>
@@ -2767,9 +2767,9 @@
 </code></pre></div>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
 <h2 id="2_1">発展2　型の説明<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h2>
-<p><code>int a[2][3];</code> と <code>int *rows[2];</code> のsizeofは何を数えるでしょうか．実際の数値だけでなく式で答えてください．</p>
+<p><code>int a[2][3];</code> と <code>int *rows[2];</code> の<code>sizeof</code>は何を数えるでしょうか．実際の数値だけでなく式で答えてください．</p>
 <h3 id="_16">アドレスが似ていても型は違う<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<p>int a[2][3] = {{1, 2, 3}, {4, 5, 6}};を宣言したとして，次の型を書いてください．sizeofや&amp;で配列が変換されない場合と，通常の式で変換される場合を区別します．</p>
+<p><code>int a[2][3] = {{1, 2, 3}, {4, 5, 6}};</code>を宣言したとして，次の型を書いてください．<code>sizeof</code>や<code>&amp;</code>で配列が変換されない場合と，通常の式で変換される場合を区別します．</p>
 <table>
 <thead>
 <tr>
@@ -2779,41 +2779,41 @@
 </thead>
 <tbody>
 <tr>
-<td>a + 0</td>
+<td><code>a + 0</code></td>
 <td>何を1単位とするポインタか</td>
 </tr>
 <tr>
-<td>a[0] + 0</td>
+<td><code>a[0] + 0</code></td>
 <td>何を1単位とするポインタか</td>
 </tr>
 <tr>
-<td>&amp;a</td>
+<td><code>&amp;a</code></td>
 <td>配列全体を指す型</td>
 </tr>
 <tr>
-<td>&amp;a[0]</td>
+<td><code>&amp;a[0]</code></td>
 <td>1行を指す型</td>
 </tr>
 <tr>
-<td>&amp;a[0][0]</td>
+<td><code>&amp;a[0][0]</code></td>
 <td>整数1個を指す型</td>
 </tr>
 </tbody>
 </table>
-<p>さらにint (*q)[3] = a;に対する&amp;qはint (**)[3]です．配列のアドレス&amp;aとは別物で，qというポインタ変数自身を指しています．分からなくなったら，変数の宣言を先に読み，「その変数の型へのポインタ」を考えてください．</p>
+<p>さらに<code>int (*q)[3] = a;</code>に対する<code>&amp;q</code>は<code>int (**)[3]</code>です．配列のアドレス<code>&amp;a</code>とは別物で，<code>q</code>というポインタ変数自身を指しています．分からなくなったら，変数の宣言を先に読み，「その変数の型へのポインタ」を考えてください．</p>
 <h3 id="_17">連続性と範囲<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
-<p>int *p = &amp;a[0][0];としてp[0]〜p[5]を走査する方法は使いません．最初の行の範囲を越えてしまうためです．二次元配列ではa[r][c]を使います．一次元として扱う課題ならint flat[6] = {1, 2, 3, 4, 5, 6};を最初から宣言します．幅3の行列として読むならflat[r * 3 + c]を使えます．</p>
+<p><code>int *p = &amp;a[0][0];</code>として<code>p[0]</code>〜<code>p[5]</code>を走査する方法は使いません．最初の行の範囲を越えてしまうためです．二次元配列では<code>a[r][c]</code>を使います．一次元として扱う課題なら<code>int flat[6] = {1, 2, 3, 4, 5, 6};</code>を最初から宣言します．幅3の行列として読むなら<code>flat[r * 3 + c]</code>を使えます．</p>
 <p>「メモリ上で隣にある」「同じアドレスのように表示される」「正しい型で範囲内にアクセスできる」は同じ意味ではありません．実行して期待値になったことだけで，型や境界の誤りを正当化しないようにしましょう．</p>
 <h2 id="_18">確認問題<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
 <ol>
-<li>int *pを関数内から変更するには，何を渡すか．</li>
-<li>**pp = 10;と*pp = &x;では何が変わるか．</li>
-<li>find_maxで最大値が2個あると，どちらを選ぶか．</li>
+<li><code>int *p</code>を関数内から変更するには，何を渡すか．</li>
+<li><code>**pp = 10;</code>と<code>*pp = &amp;x;</code>では何が変わるか．</li>
+<li><code>find_max</code>で最大値が2個あると，どちらを選ぶか．</li>
 <li>ポインタ配列を交換すると，文字列本体は移動するか．</li>
-<li>char *names[]とchar names[][9]は何を保存するか．</li>
+<li><code>char *names[]</code>と<code>char names[][9]</code>は何を保存するか．</li>
 <li>二次元配列の関数引数で列数が必要なのはなぜか．</li>
 <li>ポインタ配列の行を交換する際，長さも交換する理由は何か．</li>
-<li>int **へキャストすれば二次元配列を渡せるか．</li>
+<li><code>int **</code>へキャストすれば二次元配列を渡せるか．</li>
 </ol>
 <h2 id="_19">チェックリスト<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <ul>

@@ -2390,7 +2390,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec08.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week08 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week08</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">今回の進め方<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -2404,7 +2404,7 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>ポインタとswap</td>
+<td>ポインタと<code>swap</code></td>
 <td>指す先の変更と値の変更</td>
 </tr>
 <tr>
@@ -2420,7 +2420,7 @@
 <tr>
 <td>4</td>
 <td>配列・文字列の走査</td>
-<td>1つ先，差，const</td>
+<td>1つ先，差，<code>const</code></td>
 </tr>
 <tr>
 <td>発展</td>
@@ -2430,18 +2430,18 @@
 </tbody>
 </table>
 <p>各実験では，最初に変数を箱，ポインタを矢印で描きます．アドレスは実行のたびに異なり得るため，数値の暗記ではなく「どの変数を指すか」を記録してください．ポインタを使う前に，初期化・型・範囲・寿命を確認します．</p>
-<p>未初期化ポインタ，NULLの間接参照，配列の範囲外アクセス，寿命が終わった変数へのアクセスは実行しません．「エラーになるか試す」のではなく，なぜ有効な対象を指していないかを説明します．</p>
-<h2 id="1-swap">課題1　swapを追う<a class="headerlink" href="#1-swap" title="Permanent link">&para;</a></h2>
-<p><code>Swap</code> プロジェクトで講義のpointers.cを実行し，x，y，p，<em>pの関係を図にしてください．</em>p = 5の後とswapの後で，pが指す変数は変わるでしょうか．xとyを同じ値にした場合も試します．</p>
+<p>未初期化ポインタ，<code>NULL</code>の間接参照，配列の範囲外アクセス，寿命が終わった変数へのアクセスは実行しません．「エラーになるか試す」のではなく，なぜ有効な対象を指していないかを説明します．</p>
+<h2 id="1-swap">課題1　<code>swap</code>を追う<a class="headerlink" href="#1-swap" title="Permanent link">&para;</a></h2>
+<p><code>Swap</code> プロジェクトで講義の<code>pointers.c</code>を実行し，<code>x</code>，<code>y</code>，<code>p</code>，<code>*p</code>の関係を図にしてください．<code>*p = 5</code>の後と<code>swap</code>の後で，<code>p</code>が指す変数は変わるでしょうか．<code>x</code>と<code>y</code>を同じ値にした場合も試します．</p>
 <h3 id="_3">代入ごとの状態を記録する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>時点</th>
-<th style="text-align: right;">x</th>
-<th style="text-align: right;">y</th>
-<th>pの指す先</th>
-<th style="text-align: right;">*p</th>
+<th style="text-align: right;"><code>x</code></th>
+<th style="text-align: right;"><code>y</code></th>
+<th><code>p</code>の指す先</th>
+<th style="text-align: right;"><code>*p</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2449,29 +2449,29 @@
 <td>宣言・初期化の後</td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">8</td>
-<td>x</td>
+<td><code>x</code></td>
 <td style="text-align: right;">3</td>
 </tr>
 <tr>
-<td>*p = 5の後</td>
+<td><code>*p = 5</code>の後</td>
 <td style="text-align: right;">5</td>
 <td style="text-align: right;">8</td>
-<td>x</td>
+<td><code>x</code></td>
 <td style="text-align: right;">5</td>
 </tr>
 <tr>
-<td>swap(&amp;x, &amp;y)の後</td>
+<td><code>swap(&amp;x, &amp;y)</code>の後</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">5</td>
-<td>x</td>
+<td><code>x</code></td>
 <td style="text-align: right;">8</td>
 </tr>
 </tbody>
 </table>
-<p>例題のyの初期値を5へ変更すれば，swap直前のxとyは両方5になります．両方の初期値だけを同じにしても，その後の*p = 5が片方を変える点に注意してください．</p>
-<p>printfで確認するとき，pと&amp;xは(void <em>)へ変換して%p，xと</em>pは%dで表示します．&amp;pも表示すると，pが指す場所とp自身が置かれた場所を区別できます．アドレスの具体値が見本と違っても，それだけでは間違いではありません．</p>
+<p>例題の<code>y</code>の初期値を5へ変更すれば，<code>swap</code>直前の<code>x</code>と<code>y</code>は両方5になります．両方の初期値だけを同じにしても，その後の<code>*p = 5</code>が片方を変える点に注意してください．</p>
+<p><code>printf</code>で確認するとき，<code>p</code>と<code>&amp;x</code>は<code>(void *)</code>へ変換して<code>%p</code>，<code>x</code>と<code>*p</code>は<code>%d</code>で表示します．<code>&amp;p</code>も表示すると，<code>p</code>が指す場所と<code>p</code>自身が置かれた場所を区別できます．アドレスの具体値が見本と違っても，それだけでは間違いではありません．</p>
 <h3 id="_4">ポインタのコピーを比較する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>main内の独立した実験として，次を上から追ってください．</p>
+<p><code>main</code>内の独立した実験として，次を上から追ってください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">a;</span>
@@ -2482,9 +2482,9 @@
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;a=%d b=%d p_is_b=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a, b, p </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">b);</span>
 </code></pre></div>
-<p><strong>説明すること</strong>：swap内で<em>a = </em>bをa = bへ変えても交換にならないのはなぜか．どの変数の箱が書き換わるかを図で示してください．</p>
+<p><strong>説明すること</strong>：<code>swap</code>内で<code>*a = *b</code>を<code>a = b</code>へ変えても交換にならないのはなぜか．どの変数の箱が書き換わるかを図で示してください．</p>
 <h3 id="_5">配列要素も交換する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>doubleの配列{1.0, 5.0, 3.0, 4.0, 2.0, 6.0}を考えます．添字1と4を交換すれば昇順になります．既存のint版とは別に，次のdouble版をmainの前へ定義してください．</p>
+<p><code>double</code>の配列{1.0, 5.0, 3.0, 4.0, 2.0, 6.0}を考えます．添字1と4を交換すれば昇順になります．既存の<code>int</code>版とは別に，次の<code>double</code>版を<code>main</code>の前へ定義してください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">swap_double</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b)</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> temp </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a;</span>
@@ -2492,13 +2492,13 @@
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> temp;</span>
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>呼び出しはswap_double(&amp;a[1], &amp;a[4]);またはswap_double(a + 1, a + 4);です．2通りを別々に初期配列へ試し，どちらも1.0，2.0，3.0，4.0，5.0，6.0になることを確認します．両方を連続で呼ぶと2回交換して元に戻るので，実験を分けます．</p>
-<p>swap_double(a[1], a[4]);では値を渡しており，ポインタ引数の型に合いません．double a，double bという値引数へ変えても，コピーが交換されるだけです．呼び出し元の要素の<strong>場所</strong>が必要な理由を説明してください．これは特定の配列を1回交換する問題であり，一般的な並べ替えアルゴリズムではありません．</p>
+<p>呼び出しは<code>swap_double(&amp;a[1], &amp;a[4]);</code>または<code>swap_double(a + 1, a + 4);</code>です．2通りを別々に初期配列へ試し，どちらも1.0，2.0，3.0，4.0，5.0，6.0になることを確認します．両方を連続で呼ぶと2回交換して元に戻るので，実験を分けます．</p>
+<p><code>swap_double(a[1], a[4]);</code>では値を渡しており，ポインタ引数の型に合いません．<code>double a</code>，<code>double b</code>という値引数へ変えても，コピーが交換されるだけです．呼び出し元の要素の<strong>場所</strong>が必要な理由を説明してください．これは特定の配列を1回交換する問題であり，一般的な並べ替えアルゴリズムではありません．</p>
 <h2 id="2">課題2　最小値と最大値を返す<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>MinMax</code> プロジェクトで，配列{7, -2, 9, 0}から最小値-2と最大値9を得ます．戻り値はvoidとし，2つの出力先ポインタに書き込む関数を作ってください．nは1以上で，aから少なくともn要素を読めるものとします．出力先は互いに異なる有効なintを指し，入力配列の要素とも重ならないものとします．</p>
+<p><code>MinMax</code> プロジェクトで，配列{7, -2, 9, 0}から最小値-2と最大値9を得ます．戻り値は<code>void</code>とし，2つの出力先ポインタに書き込む関数を作ってください．<code>n</code>は1以上で，<code>a</code>から少なくとも<code>n</code>要素を読めるものとします．出力先は互いに異なる有効な<code>int</code>を指し，入力配列の要素とも重ならないものとします．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>最初の要素で両候補を初期化します．呼び出し元から&amp;lowと&amp;highを渡します．</p>
+<p>最初の要素で両候補を初期化します．呼び出し元から<code>&amp;low</code>と<code>&amp;high</code>を渡します．</p>
 </details>
 <p>配列{5}でも両方が5になることを確認します．</p>
 <h3 id="_6">候補の変化を追跡する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -2506,8 +2506,8 @@
 <thead>
 <tr>
 <th>読み終えた要素</th>
-<th style="text-align: right;">*low</th>
-<th style="text-align: right;">*high</th>
+<th style="text-align: right;"><code>*low</code></th>
+<th style="text-align: right;"><code>*high</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2533,12 +2533,12 @@
 </tr>
 </tbody>
 </table>
-<p>mainのlow，highは，関数が書き込んだ後に初めて読みます．関数へ渡すのは未初期化の値そのものではなく，&amp;lowと&amp;highです．一方，n=0では最初のa[0]を読めるという約束を満たせないので，この関数には渡しません．</p>
+<p><code>main</code>の<code>low</code>，<code>high</code>は，関数が書き込んだ後に初めて読みます．関数へ渡すのは未初期化の値そのものではなく，<code>&amp;low</code>と<code>&amp;high</code>です．一方，<code>n=0</code>では最初の<code>a[0]</code>を読めるという約束を満たせないので，この関数には渡しません．</p>
 <table>
 <thead>
 <tr>
 <th>配列</th>
-<th style="text-align: right;">n</th>
+<th style="text-align: right;"><code>n</code></th>
 <th>期待する最小値・最大値</th>
 </tr>
 </thead>
@@ -2565,80 +2565,80 @@
 </tr>
 </tbody>
 </table>
-<p>要素数を変更したら，呼び出しのnも合わせます．全部が負の配列であっても，最大値を0から始めずa[0]から始めるので正しい結果になります．</p>
-<p><strong>説明すること</strong>：lowとhighへ同じアドレスを渡すと2つの結果を同時に保持できない理由を説明してください．また，入力配列の要素を出力先にすると，読み取り途中のデータを変更してしまう可能性があります．この課題ではそのような重なりを禁止します．</p>
+<p>要素数を変更したら，呼び出しの<code>n</code>も合わせます．全部が負の配列であっても，最大値を0から始めず<code>a[0]</code>から始めるので正しい結果になります．</p>
+<p><strong>説明すること</strong>：<code>low</code>と<code>high</code>へ同じアドレスを渡すと2つの結果を同時に保持できない理由を説明してください．また，入力配列の要素を出力先にすると，読み取り途中のデータを変更してしまう可能性があります．この課題ではそのような重なりを禁止します．</p>
 <h2 id="3">課題3　安全な文字列コピー<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>CopyText</code> プロジェクトで，コピー先の容量不足なら0，成功なら1を返す関数copy_textを作ります．入力は終端のある文字列，入力と出力の領域は重ならず，dstはcapacity要素の書き込み可能な配列とします．不足時はdstを変更しません．</p>
+<p><code>CopyText</code> プロジェクトで，コピー先の容量不足なら0，成功なら1を返す関数<code>copy_text</code>を作ります．入力は終端のある文字列，入力と出力の領域は重ならず，<code>dst</code>は<code>capacity</code>要素の書き込み可能な配列とします．不足時は<code>dst</code>を変更しません．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>strlen(src)を先に求めます．長さが容量以上なら終端が入りません．</p>
+<p><code>strlen(src)</code>を先に求めます．長さが容量以上なら終端が入りません．</p>
 </details>
 <p>関数の形は<code>int copy_text(char *dst, size_t capacity, const char *src)</code>とします．必要な標準ヘッダをインクルードしてください．下表の結果を予測し，関数に配列の長さが自動で伝わらないことを説明してください．</p>
 <h3 id="_7">容量と変更の有無を確認する<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>outの宣言</th>
-<th>src</th>
+<th><code>out</code>の宣言</th>
+<th><code>src</code></th>
 <th style="text-align: right;">戻り値</th>
-<th>呼び出し後のout</th>
+<th>呼び出し後の<code>out</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>char out[4] = "";</td>
-<td>"cat"</td>
+<td><code>char out[4] = "";</code></td>
+<td><code>"cat"</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>char out[3] = "";</td>
-<td>"cat"</td>
+<td><code>char out[3] = "";</code></td>
+<td><code>"cat"</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>char out[1] = "";</td>
-<td>""</td>
+<td><code>char out[1] = "";</code></td>
+<td><code>""</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>記入してください</td>
 </tr>
 <tr>
-<td>char out[4] = "old";</td>
-<td>"cats"</td>
+<td><code>char out[4] = "old";</code></td>
+<td><code>"cats"</code></td>
 <td style="text-align: right;">記入してください</td>
 <td>記入してください</td>
 </tr>
 </tbody>
 </table>
-<p>容量が足りない場合は，書き込みを始める前にreturn 0;で戻ります．途中まで上書きしてから失敗する設計ではありません．容量4のoutへ"cat"をコピーする場合，書く添字は0，1，2，3の4つで，最後の3には終端が入ります．</p>
+<p>容量が足りない場合は，書き込みを始める前に<code>return 0;</code>で戻ります．途中まで上書きしてから失敗する設計ではありません．容量4の<code>out</code>へ<code>"cat"</code>をコピーする場合，書く添字は0，1，2，3の4つで，最後の3には終端が入ります．</p>
 <h3 id="_8">添字なしのポインタ版へ変える<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>コピー処理を，添字を使わずポインタを進めるwhileループで書き直してください．strlenと容量検査はそのまま残します．終端文字のコピーも必要です．上の表のすべてのケースで添字版と同じ結果になることを確認し，空文字列での動作も説明してください．</p>
+<p>コピー処理を，添字を使わずポインタを進める<code>while</code>ループで書き直してください．<code>strlen</code>と容量検査はそのまま残します．終端文字のコピーも必要です．上の表のすべてのケースで添字版と同じ結果になることを確認し，空文字列での動作も説明してください．</p>
 <h3 id="_9">さらに短い表記を読む<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>容量検査の後のコピーは，次のようにも書けます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">while</span><span style="color: #F8F8F2"> ((</span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">dst</span><span style="color: #FF4689">++</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">src</span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">) </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>後置++の意味を確認し，代入・判定・更新を順に説明してください．終了時に各ポインタがどこを指すかも図示します．配列の範囲外を間接参照する実験は行いません．</p>
-<p>char out[] = "aaaaaaaaaa";へ"hoge"をコピーした場合，配列の各要素はどうなるでしょうか．%sでの表示と，配列内に残る文字を区別して説明してください．</p>
+<p>後置<code>++</code>の意味を確認し，代入・判定・更新を順に説明してください．終了時に各ポインタがどこを指すかも図示します．配列の範囲外を間接参照する実験は行いません．</p>
+<p><code>char out[] = "aaaaaaaaaa";</code>へ<code>"hoge"</code>をコピーした場合，配列の各要素はどうなるでしょうか．<code>%s</code>での表示と，配列内に残る文字を区別して説明してください．</p>
 <h2 id="4">課題4　ポインタで配列・文字列を走査する<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p><code>PointerWalk</code>プロジェクトで，配列の合計を添字版とポインタ版の両方で，文字列長をポインタ版で求めます．<code>enum { COUNT = 5 };</code>，<code>int a[COUNT] = {2, 4, 6, 3, 5};</code>，文字列<code>"cat"</code>を使います．位置の比較には<code>int *p = a + 1;</code>と<code>int *q = a + 3;</code>を使い，差q - p，比較p &lt; q，p == qを表示します．文字列長を求める関数名はpointer_lengthとしてください．</p>
+<p><code>PointerWalk</code>プロジェクトで，配列の合計を添字版とポインタ版の両方で，文字列長をポインタ版で求めます．<code>enum { COUNT = 5 };</code>，<code>int a[COUNT] = {2, 4, 6, 3, 5};</code>，文字列<code>"cat"</code>を使います．位置の比較には<code>int *p = a + 1;</code>と<code>int *q = a + 3;</code>を使い，差<code>q - p</code>，比較<code>p &lt; q</code>，<code>p == q</code>を表示します．文字列長を求める関数名は<code>pointer_length</code>としてください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sum=20 20
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>distance=2 before=1 equal=0
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>length=3
 </code></pre></div>
 <h3 id="_10">終了時の位置を説明する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>合計のポインタ版で本体が実行されるとき，pはa[0]〜a[4]のどれかを指しています．a + COUNTへ進むと条件が偽になるため，1つ先を読むことはありません．条件をp &lt;= a + COUNTへ変えると範囲外を読むので，その変更は実行せず理由だけ説明します．</p>
-<p>q - pとp - qの値および単位を答えてください．qをa + 1へ変えた場合の差と比較結果も予測してください．</p>
+<p>合計のポインタ版で本体が実行されるとき，<code>p</code>は<code>a[0]</code>〜<code>a[4]</code>のどれかを指しています．<code>a + COUNT</code>へ進むと条件が偽になるため，1つ先を読むことはありません．条件を<code>p &lt;= a + COUNT</code>へ変えると範囲外を読むので，その変更は実行せず理由だけ説明します．</p>
+<p><code>q - p</code>と<code>p - q</code>の値および単位を答えてください．<code>q</code>を<code>a + 1</code>へ変えた場合の差と比較結果も予測してください．</p>
 <h3 id="_11">値と終端を変えて確認する<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>配列を{0, 0, 0, 0, 0}，{1, 2, 3, 4, 5}へ変え，合計を予測してください．pointer_lengthの入力を""，"A"，"Hello"に変えた場合も，実行前にポインタが何回進むかを数えてください．</p>
-<p>const char *sなのに++sができる理由を，講義のconstの表を使って説明します．sが指す文字の変更は許されませんが，sというポインタの移動は禁止されていません．</p>
+<p>配列を{0, 0, 0, 0, 0}，{1, 2, 3, 4, 5}へ変え，合計を予測してください．<code>pointer_length</code>の入力を<code>""</code>，<code>"A"</code>，<code>"Hello"</code>に変えた場合も，実行前にポインタが何回進むかを数えてください．</p>
+<p><code>const char *s</code>なのに<code>++s</code>ができる理由を，講義の<code>const</code>の表を使って説明します．<code>s</code>が指す文字の変更は許されませんが，<code>s</code>というポインタの移動は禁止されていません．</p>
 <h3 id="_12">関数から配列を書き換える<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>講義のset_oneをmainより前へ追加し，合計する前にset_one(a, COUNT);を呼びます．元の配列の全要素が1になり，添字版・ポインタ版とも合計は5になります．set_oneの仮引数をint a[]としても同じです．コピーされたのは配列そのものではなく先頭を指す値なので，変更が呼び出し元に残ります．</p>
-<p><strong>説明すること</strong>：sizeof aとsizeof pの違い，配列aをa++で進められない理由，関数の配列引数へ要素数を別に渡す理由を整理してください．</p>
+<p>講義の<code>set_one</code>を<code>main</code>より前へ追加し，合計する前に<code>set_one(a, COUNT);</code>を呼びます．元の配列の全要素が1になり，添字版・ポインタ版とも合計は5になります．<code>set_one</code>の仮引数を<code>int a[]</code>としても同じです．コピーされたのは配列そのものではなく先頭を指す値なので，変更が呼び出し元に残ります．</p>
+<p><strong>説明すること</strong>：<code>sizeof a</code>と<code>sizeof p</code>の違い，配列<code>a</code>を<code>a++</code>で進められない理由，関数の配列引数へ要素数を別に渡す理由を整理してください．</p>
 <h2 id="_13">発展　複数の結果と場所を返す<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <h3 id="_14">整数部と小数部を分ける<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p><code>Decompose</code>プロジェクトで，−100〜100の有限なdoubleを整数部と小数部へ分けます．戻り値はvoidで，longとdoubleの2つの出力先へ書き込みます．</p>
+<p><code>Decompose</code>プロジェクトで，−100〜100の有限な<code>double</code>を整数部と小数部へ分けます．戻り値は<code>void</code>で，<code>long</code>と<code>double</code>の2つの出力先へ書き込みます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">decompose</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> x, </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">whole, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">fraction)</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #F8F8F2">{</span>
@@ -2658,8 +2658,8 @@
 <thead>
 <tr>
 <th>入力</th>
-<th style="text-align: right;">whole</th>
-<th style="text-align: right;">fractionの表示</th>
+<th style="text-align: right;"><code>whole</code></th>
+<th style="text-align: right;"><code>fraction</code>の表示</th>
 </tr>
 </thead>
 <tbody>
@@ -2686,9 +2686,9 @@
 </tbody>
 </table>
 <p>整数部への変換は四捨五入ではありません．小数部は浮動小数点数の近似なので，ここでは小数点以下2桁に整えて表示しています．</p>
-<p>long wholeとdouble fractionという値引数で同じ代入をした場合，呼び出し元の値が変わらない理由を説明してください．この比較を試す場合も呼び出し元を0へ初期化し，未初期化の値を渡さないようにします．</p>
+<p><code>long whole</code>と<code>double fraction</code>という値引数で同じ代入をした場合，呼び出し元の値が変わらない理由を説明してください．この比較を試す場合も呼び出し元を0へ初期化し，未初期化の値を渡さないようにします．</p>
 <h3 id="_15">小さい値の場所を返す<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>講義のmin_pointerをmainの前へ定義して，main内で次を実行します．</p>
+<p>講義の<code>min_pointer</code>を<code>main</code>の前へ定義して，<code>main</code>内で次を実行します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">9</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> y </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> min_pointer(</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">x, </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">y);</span>
@@ -2696,18 +2696,18 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span style="color: #FF4689">*</span><span style="color: #F8F8F2">result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;x=%d y=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x, y);</span>
 </code></pre></div>
-<p>表示を予測してください．xとyの初期値を逆にした場合，同じ値にした場合も調べます．返されたポインタを関数から戻った後にも使える理由を，変数の寿命から説明してください．</p>
-<p>これに対して，関数内のint local = 10;のアドレスを返す関数は，戻った時点でlocalの寿命が終わっています．「その値を表示してみる」実験はしません．場所を返してよい対象の寿命を，関数から戻る前・戻った後の2段階で図示してください．</p>
+<p>表示を予測してください．<code>x</code>と<code>y</code>の初期値を逆にした場合，同じ値にした場合も調べます．返されたポインタを関数から戻った後にも使える理由を，変数の寿命から説明してください．</p>
+<p>これに対して，関数内の<code>int local = 10;</code>のアドレスを返す関数は，戻った時点で<code>local</code>の寿命が終わっています．「その値を表示してみる」実験はしません．場所を返してよい対象の寿命を，関数から戻る前・戻った後の2段階で図示してください．</p>
 <h2 id="_16">確認問題<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
 <ol>
-<li>int *p, q;でポインタはどちらか．</li>
-<li>p = qと<em>p = </em>qはそれぞれ何をコピーするか．</li>
-<li>int a = 10;，int <em>p = &a;で，</em>&amp;a，<em>&amp;p，&amp;</em>pは何を表すか．&amp;*aは正しいか．</li>
-<li>(<em>p)++と</em>p++は何が違うか．</li>
-<li>5要素の配列aについて，a + 5を作ることと*(a + 5)を読むことは同じか．</li>
-<li>const int <em>pとint </em>const pは何を禁止するか．</li>
-<li>pが非NULLなら，常に安全に*pを読めるか．</li>
-<li>char buffer[] = "cat";とconst char *word = "cat";は何を保存するか．</li>
+<li><code>int *p, q;</code>でポインタはどちらか．</li>
+<li><code>p = q</code>と<code>*p = *q</code>はそれぞれ何をコピーするか．</li>
+<li><code>int a = 10;</code>，<code>int *p = &amp;a;</code>で，<code>*&amp;a</code>，<code>*&amp;p</code>，<code>&amp;*p</code>は何を表すか．<code>&amp;*a</code>は正しいか．</li>
+<li><code>(*p)++</code>と<code>*p++</code>は何が違うか．</li>
+<li>5要素の配列<code>a</code>について，<code>a + 5</code>を作ることと<code>*(a + 5)</code>を読むことは同じか．</li>
+<li><code>const int *p</code>と<code>int *const p</code>は何を禁止するか．</li>
+<li><code>p</code>が非<code>NULL</code>なら，常に安全に<code>*p</code>を読めるか．</li>
+<li><code>char buffer[] = "cat";</code>と<code>const char *word = "cat";</code>は何を保存するか．</li>
 </ol>
 <h2 id="_17">チェックリスト<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <ul>

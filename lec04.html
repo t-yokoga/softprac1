@@ -2462,13 +2462,13 @@
 <h2 id="_1">到達目標<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
 <li>条件に応じて実行する文を選べる．</li>
-<li>for・while・do-whileの実行順を説明できる．</li>
+<li><code>for</code>・<code>while</code>・<code>do-while</code>の実行順を説明できる．</li>
 <li>境界値と停止条件を用いて処理を検証できる．</li>
 </ul>
 <h2 id="1">1　順次・分岐・反復<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <p>文を上から実行する<strong>順次</strong>，条件で経路を選ぶ<strong>分岐</strong>，同じ処理を繰り返す<strong>反復</strong>を組み合わせてアルゴリズムを記述します．入力を固定した短いプログラムで流れを確かめ，入力操作は第7回で学びます．</p>
 <h3 id="_2">前回とのつながり<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>第3回ではscore &gt;= 60という式から0または1を求めました．今回はその結果を使い，実際に実行する処理を切り替えます．また，sum += iのような更新を繰り返し，1回の計算では求められない合計や表を作ります．<strong>条件式を書くこと</strong>と，<strong>条件に従って処理を進めること</strong>を結び付ける回です．</p>
+<p>第3回では<code>score &gt;= 60</code>という式から0または1を求めました．今回はその結果を使い，実際に実行する処理を切り替えます．また，<code>sum += i</code>のような更新を繰り返し，1回の計算では求められない合計や表を作ります．<strong>条件式を書くこと</strong>と，<strong>条件に従って処理を進めること</strong>を結び付ける回です．</p>
 <table>
 <thead>
 <tr>
@@ -2496,11 +2496,11 @@
 </tbody>
 </table>
 <h3 id="environment">作業の準備<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
-<p>作業場所はPL1の下のweek04です．<a href="lec01.html#hello">第1回の手順</a>で空のプロジェクトを作り，拡張子.cのソースを追加します．Cとしてコンパイル，C17，警告レベル4を確認してください．この回もVisual Studio内で編集・ビルド・実行し，端末へのコマンド入力は行いません．</p>
-<p>短いコード片はmainの中に置き，printfを使うファイルにはstdio.hをインクルードします．1つのプロジェクトに複数のmainを入れないでください．まず出力を予測し，保存→Ctrl+Shift+Bでビルド→Ctrl+F5で実行の順に確認します．</p>
+<p>作業場所は<code>PL1</code>の下の<code>week04</code>です．<a href="lec01.html#hello">第1回の手順</a>で空のプロジェクトを作り，拡張子<code>.c</code>のソースを追加します．Cとしてコンパイル，C17，警告レベル4を確認してください．この回もVisual Studio内で編集・ビルド・実行し，端末へのコマンド入力は行いません．</p>
+<p>短いコード片は<code>main</code>の中に置き，<code>printf</code>を使うファイルには<code>stdio.h</code>をインクルードします．1つのプロジェクトに複数の<code>main</code>を入れないでください．まず出力を予測し，保存→Ctrl+Shift+Bでビルド→Ctrl+F5で実行の順に確認します．</p>
 <h3 id="_3">ブロックで処理をまとめる<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>複数の文を{と}でまとめると，制御文の本体として1つのまとまりにできます．ブロック内で宣言した変数は，そのブロックの外では使えません．例えばifの中でだけ必要な一時変数は，その中に宣言できます．一方，分岐後にも使う結果は分岐前に宣言します．変数のスコープは第5回で詳しく扱います．</p>
-<h2 id="2-ifelse">2　ifとelse<a class="headerlink" href="#2-ifelse" title="Permanent link">&para;</a></h2>
+<p>複数の文を<code>{</code>と<code>}</code>でまとめると，制御文の本体として1つのまとまりにできます．ブロック内で宣言した変数は，そのブロックの外では使えません．例えば<code>if</code>の中でだけ必要な一時変数は，その中に宣言できます．一方，分岐後にも使う結果は分岐前に宣言します．変数のスコープは第5回で詳しく扱います．</p>
+<h2 id="2-ifelse">2　<code>if</code>と<code>else</code><a class="headerlink" href="#2-ifelse" title="Permanent link">&para;</a></h2>
 <h3 id="_4">条件に応じて片方だけを実行する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (score </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">60</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;pass</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
@@ -2508,8 +2508,8 @@
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;retry</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>条件が真なら最初のブロック，偽ならelseのブロックを実行します．elseは省略できます．複数の区分には <code>else if</code> を使い，上から最初に真になった1つを実行します．</p>
-<p>実行の流れは「条件判定→選ばれたブロック→分岐の後の文」です．elseがなければ，偽のときは本体を飛ばして先へ進みます．どちらの経路を通っても，その後の文には進みます．</p>
+<p>条件が真なら最初のブロック，偽なら<code>else</code>のブロックを実行します．<code>else</code>は省略できます．複数の区分には <code>else if</code> を使い，上から最初に真になった1つを実行します．</p>
+<p>実行の流れは「条件判定→選ばれたブロック→分岐の後の文」です．<code>else</code>がなければ，偽のときは本体を飛ばして先へ進みます．どちらの経路を通っても，その後の文には進みます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;even</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
@@ -2518,9 +2518,9 @@
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span style="color: #F8F8F2">}</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;done</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
-<p>nが10ならevenとdone，11ならoddとdoneを表示します．%による余りの判定と，実行される経路を対応させましょう．</p>
+<p><code>n</code>が10なら<code>even</code>と<code>done</code>，11なら<code>odd</code>と<code>done</code>を表示します．<code>%</code>による余りの判定と，実行される経路を対応させましょう．</p>
 <h3 id="1_1">真は1だけではない<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
-<p>Cの条件では<strong>0が偽，0以外が真</strong>です．if (3)やif (-1)も真の経路へ進みます．比較演算の結果は0か1ですが，条件に置ける値が0と1に限定されるわけではありません．</p>
+<p>Cの条件では<strong>0が偽，0以外が真</strong>です．<code>if (3)</code>や<code>if (-1)</code>も真の経路へ進みます．比較演算の結果は0か1ですが，条件に置ける値が0と1に限定されるわけではありません．</p>
 <table>
 <thead>
 <tr>
@@ -2531,20 +2531,20 @@
 </thead>
 <tbody>
 <tr>
-<td>if (flag)</td>
-<td>if (flag != 0)</td>
+<td><code>if (flag)</code></td>
+<td><code>if (flag != 0)</code></td>
 <td>フラグが立っている</td>
 </tr>
 <tr>
-<td>if (!flag)</td>
-<td>if (flag == 0)</td>
+<td><code>if (!flag)</code></td>
+<td><code>if (flag == 0)</code></td>
 <td>フラグが立っていない</td>
 </tr>
 </tbody>
 </table>
-<p>flagが2でもif (flag)は真ですが，if (flag == 1)は偽です．短く書くことより，どの値を真とするかを明確にしましょう．また，if (flag = 1)は比較ではなく代入で，flagを書き換えてしまいます．</p>
+<p><code>flag</code>が2でも<code>if (flag)</code>は真ですが，<code>if (flag == 1)</code>は偽です．短く書くことより，どの値を真とするかを明確にしましょう．また，<code>if (flag = 1)</code>は比較ではなく代入で，<code>flag</code>を書き換えてしまいます．</p>
 <h3 id="_5">複数の条件を上から調べる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>例えば90点以上をA，60点以上をBにするときは，先に90点以上を調べます．先に60点以上を調べると，95点もそこで該当してしまいます．範囲外の値があり得るときは，0〜100かどうかも先に検査します．</p>
+<p>例えば90点以上を<code>A</code>，60点以上を<code>B</code>にするときは，先に90点以上を調べます．先に60点以上を調べると，95点もそこで該当してしまいます．範囲外の値があり得るときは，0〜100かどうかも先に検査します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (score </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> score </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">100</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;invalid</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (score </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">90</span><span style="color: #F8F8F2">) {</span>
@@ -2555,9 +2555,9 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;C</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>scoreが75なら範囲外ではなく，90以上でもなく，60以上なのでBです．最後のelseは，それまでの条件がすべて偽だった場合です．別々のifを並べると各条件を独立に調べるため，複数の本体が実行されることがあります．「どれか1つ」を選ぶelse ifと区別してください．</p>
-<h3 id="if">ifを入れ子にする<a class="headerlink" href="#if" title="Permanent link">&para;</a></h3>
-<p>ブロック内にさらにifを書くこともできます．次は，flagが0ならresultを−1にし，そうでなければ2つの値の小さい方を選ぶ例です．</p>
+<p><code>score</code>が75なら範囲外ではなく，90以上でもなく，60以上なので<code>B</code>です．最後の<code>else</code>は，それまでの条件がすべて偽だった場合です．別々の<code>if</code>を並べると各条件を独立に調べるため，複数の本体が実行されることがあります．「どれか1つ」を選ぶ<code>else if</code>と区別してください．</p>
+<h3 id="if"><code>if</code>を入れ子にする<a class="headerlink" href="#if" title="Permanent link">&para;</a></h3>
+<p>ブロック内にさらに<code>if</code>を書くこともできます．次は，<code>flag</code>が0なら<code>result</code>を−1にし，そうでなければ2つの値の小さい方を選ぶ例です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> flag </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> val1 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> val2 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
@@ -2573,15 +2573,15 @@
 <a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span style="color: #F8F8F2">}</span>
 <a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;result=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result);</span>
 </code></pre></div>
-<p>表示はresult=2です．resultはどの経路でも代入されてから使われます．flagが0の経路でも，プログラム自体が終了するのではなく，最後のprintfへ進みます．</p>
-<p>文法上，本体が1文なら波括弧を省略でき，同じ行に書くこともできます．ただし，その後に文を追加したときの間違いを防ぐため，この講義では常に波括弧を付けます．波括弧がない場合，elseは対応の決まっていない最も近いifに結び付きます．字下げだけでは対応を変えられません．開き波括弧を次の行に置くスタイルもありますが，ファイル内で統一してください．</p>
+<p>表示は<code>result=2</code>です．<code>result</code>はどの経路でも代入されてから使われます．<code>flag</code>が0の経路でも，プログラム自体が終了するのではなく，最後の<code>printf</code>へ進みます．</p>
+<p>文法上，本体が1文なら波括弧を省略でき，同じ行に書くこともできます．ただし，その後に文を追加したときの間違いを防ぐため，この講義では常に波括弧を付けます．波括弧がない場合，<code>else</code>は対応の決まっていない最も近い<code>if</code>に結び付きます．字下げだけでは対応を変えられません．開き波括弧を次の行に置くスタイルもありますが，ファイル内で統一してください．</p>
 <div class="admonition warning">
 <p class="admonition-title">末尾のセミコロンに注意</p>
-<p>if (条件); のセミコロンは何もしない文です．その後のブロックは条件と無関係になります．本体が1文でも波括弧を付け，インデントを整えましょう．</p>
+<p><code>if (</code>条件); のセミコロンは何もしない文です．その後のブロックは条件と無関係になります．本体が1文でも波括弧を付け，インデントを整えましょう．</p>
 </div>
-<h2 id="3-for">3　for：回数を管理する<a class="headerlink" href="#3-for" title="Permanent link">&para;</a></h2>
+<h2 id="3-for">3　<code>for</code>：回数を管理する<a class="headerlink" href="#3-for" title="Permanent link">&para;</a></h2>
 <h3 id="_6">初期化・条件・更新の役割<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>forはfor (初期化; 継続条件; 更新)という形です．3つの部分の区切りはコンマではなくセミコロンです．条件は「終了する条件」ではなく，<strong>続ける条件</strong>であることに注意しましょう．</p>
+<p><code>for</code>は<code>for (</code>初期化<code>;</code> 継続条件<code>;</code> 更新)という形です．3つの部分の区切りはコンマではなくセミコロンです．条件は「終了する条件」ではなく，<strong>続ける条件</strong>であることに注意しましょう．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> sum </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #F8F8F2">    sum </span><span style="color: #FF4689">+=</span><span style="color: #F8F8F2"> i;</span>
@@ -2591,9 +2591,9 @@
 <table>
 <thead>
 <tr>
-<th>本体を実行するときのi</th>
-<th>実行前のsum</th>
-<th>実行後のsum</th>
+<th>本体を実行するときの<code>i</code></th>
+<th>実行前の<code>sum</code></th>
+<th>実行後の<code>sum</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2614,14 +2614,14 @@
 </tr>
 </tbody>
 </table>
-<p>更新後にiは4になり，条件が偽になります．<code>i &lt; 3</code> と <code>i &lt;= 3</code> では回数が1回違います．累積用のsumはループの<strong>前</strong>で初期化します．</p>
-<p>初期化は最初に1回だけ行います．更新は本体の後です．最初の条件が偽なら，本体も更新も実行しません．sumを本体内で毎回0に戻すと，それまでの合計が消えるため，累積になりません．</p>
-<h3 id="n">N回の反復とカウンタの範囲<a class="headerlink" href="#n" title="Permanent link">&para;</a></h3>
+<p>更新後に<code>i</code>は4になり，条件が偽になります．<code>i &lt; 3</code> と <code>i &lt;= 3</code> では回数が1回違います．累積用の<code>sum</code>はループの<strong>前</strong>で初期化します．</p>
+<p>初期化は最初に1回だけ行います．更新は本体の後です．最初の条件が偽なら，本体も更新も実行しません．<code>sum</code>を本体内で毎回0に戻すと，それまでの合計が消えるため，累積になりません．</p>
+<h3 id="n"><code>N</code>回の反復とカウンタの範囲<a class="headerlink" href="#n" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, i);</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>これは0，1，2，3，4の5回です．0から始めてi &lt; Nとする形を基本にすると，第5回の配列にもつながります．forの初期化部分で宣言したiは，そのforの外では使えません．この書き方はC99以降で使え，授業のC17でも利用できます．forの前でint i;と宣言する書き方もありますが，必要な範囲を狭くするのが基本です．</p>
+<p>これは0，1，2，3，4の5回です．0から始めて<code>i &lt; N</code>とする形を基本にすると，第5回の配列にもつながります．<code>for</code>の初期化部分で宣言した<code>i</code>は，その<code>for</code>の外では使えません．この書き方はC99以降で使え，授業のC17でも利用できます．<code>for</code>の前で<code>int i;</code>と宣言する書き方もありますが，必要な範囲を狭くするのが基本です．</p>
 <table>
 <thead>
 <tr>
@@ -2634,61 +2634,61 @@
 </thead>
 <tbody>
 <tr>
-<td>int i = 0</td>
-<td>i &lt; 5</td>
-<td>++i</td>
-<td>i</td>
+<td><code>int i = 0</code></td>
+<td><code>i &lt; 5</code></td>
+<td><code>++i</code></td>
+<td><code>i</code></td>
 <td>0，1，2，3，4</td>
 </tr>
 <tr>
-<td>int i = 0</td>
-<td>i &lt;= 4</td>
-<td>++i</td>
-<td>i</td>
+<td><code>int i = 0</code></td>
+<td><code>i &lt;= 4</code></td>
+<td><code>++i</code></td>
+<td><code>i</code></td>
 <td>0，1，2，3，4</td>
 </tr>
 <tr>
-<td>int i = 1</td>
-<td>i &lt; 6</td>
-<td>++i</td>
-<td>i - 1</td>
+<td><code>int i = 1</code></td>
+<td><code>i &lt; 6</code></td>
+<td><code>++i</code></td>
+<td><code>i - 1</code></td>
 <td>0，1，2，3，4</td>
 </tr>
 <tr>
-<td>int i = 5</td>
-<td>i &gt; 0</td>
-<td>--i</td>
-<td>5 - i</td>
+<td><code>int i = 5</code></td>
+<td><code>i &gt; 0</code></td>
+<td><code>--i</code></td>
+<td><code>5 - i</code></td>
 <td>0，1，2，3，4</td>
 </tr>
 </tbody>
 </table>
-<p>同じ表示でもカウンタの値は異なります．まずは基本形で書き，必要に応じて減らす反復などへ変更しましょう．更新部分で結果の値を使わず，intのiを1増やすだけなら，++iとi++はどちらも同じ反復になります．第3回の「式の値も使う場合」と区別します．</p>
-<h2 id="4-whiledo-while">4　whileとdo-while<a class="headerlink" href="#4-whiledo-while" title="Permanent link">&para;</a></h2>
-<h3 id="while">条件を先に調べるwhile<a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
+<p>同じ表示でもカウンタの値は異なります．まずは基本形で書き，必要に応じて減らす反復などへ変更しましょう．更新部分で結果の値を使わず，<code>int</code>の<code>i</code>を1増やすだけなら，<code>++i</code>と<code>i++</code>はどちらも同じ反復になります．第3回の「式の値も使う場合」と区別します．</p>
+<h2 id="4-whiledo-while">4　<code>while</code>と<code>do-while</code><a class="headerlink" href="#4-whiledo-while" title="Permanent link">&para;</a></h2>
+<h3 id="while">条件を先に調べる<code>while</code><a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #66D9EF">while</span><span style="color: #F8F8F2"> (i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, i);</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i;</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>forの基本例と同じく0〜4を表示します．whileでは，初期化を手前に，更新を本体に自分で書きます．回数があらかじめ分かる処理にはfor，状態がある条件を満たす間の処理にはwhileが読みやすいことが多くあります．</p>
-<p>continueを含まない基本的なforは，「初期化; while (継続条件) { 本体; 更新; }」と読み替えられます．ただし，変数の有効範囲やcontinueの移動先まで自動的に同じになるわけではありません．書き換えた後も更新が行われるか確認します．</p>
-<h3 id="do-while">条件を後で調べるdo-while<a class="headerlink" href="#do-while" title="Permanent link">&para;</a></h3>
-<p><code>while (条件) { 本体 }</code> は先に条件を調べるため，0回で終わる場合があります．<code>do { 本体 } while (条件);</code> はあとで判定するため，必ず1回は実行します．do-whileの末尾のセミコロンは必要です．</p>
+<p><code>for</code>の基本例と同じく0〜4を表示します．<code>while</code>では，初期化を手前に，更新を本体に自分で書きます．回数があらかじめ分かる処理には<code>for</code>，状態がある条件を満たす間の処理には<code>while</code>が読みやすいことが多くあります．</p>
+<p><code>continue</code>を含まない基本的な<code>for</code>は，「初期化<code>; while (</code>継続条件) { 本体<code>;</code> 更新; }」と読み替えられます．ただし，変数の有効範囲や<code>continue</code>の移動先まで自動的に同じになるわけではありません．書き換えた後も更新が行われるか確認します．</p>
+<h3 id="do-while">条件を後で調べる<code>do-while</code><a class="headerlink" href="#do-while" title="Permanent link">&para;</a></h3>
+<p><code>while (条件) { 本体 }</code> は先に条件を調べるため，0回で終わる場合があります．<code>do { 本体 } while (条件);</code> はあとで判定するため，必ず1回は実行します．<code>do-while</code>の末尾のセミコロンは必要です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">do</span><span style="color: #F8F8F2"> {</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, n);</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">--</span><span style="color: #F8F8F2">n;</span>
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">while</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
-<p>nを0にすると，このdo-whileは0を1回表示します．同じ本体のwhileなら実行しません．ループでは「何が変化し，いつ条件が偽になるか」を説明できるようにします．</p>
+<p><code>n</code>を0にすると，この<code>do-while</code>は0を1回表示します．同じ本体の<code>while</code>なら実行しません．ループでは「何が変化し，いつ条件が偽になるか」を説明できるようにします．</p>
 <table>
 <thead>
 <tr>
-<th>開始時のn</th>
-<th>while (n &gt; 0)の表示</th>
-<th>do-whileの表示</th>
+<th>開始時の<code>n</code></th>
+<th><code>while (n &gt; 0)</code>の表示</th>
+<th><code>do-while</code>の表示</th>
 </tr>
 </thead>
 <tbody>
@@ -2709,9 +2709,9 @@
 </tr>
 </tbody>
 </table>
-<p>whileの条件の直後に余分なセミコロンを書くと，本体が空の反復になります．一方，do-whileの末尾にはセミコロンが必要です．位置と意味をセットで確認しましょう．</p>
+<p><code>while</code>の条件の直後に余分なセミコロンを書くと，本体が空の反復になります．一方，<code>do-while</code>の末尾にはセミコロンが必要です．位置と意味をセットで確認しましょう．</p>
 <h3 id="_7">無限ループと停止条件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>while (1)は条件が常に真，for (;;)は継続条件を省略した形で，どちらも途中で抜けなければ繰り返し続けます．入力待ちなどで意図的に使う場合もありますが，更新忘れによって意図せず無限ループになることもあります．</p>
+<p><code>while (1)</code>は条件が常に真，<code>for (;;)</code>は継続条件を省略した形で，どちらも途中で抜けなければ繰り返し続けます．入力待ちなどで意図的に使う場合もありますが，更新忘れによって意図せず無限ループになることもあります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (;;) {</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, count);</span>
@@ -2721,11 +2721,11 @@
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span style="color: #F8F8F2">    }</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>この例は次節のbreakによって0，1，2を表示して終了します．for (;;)をwhile (1)に変えても同じです．無限に動くプログラムを試す必要はありません．止まらないときは，Visual Studioでデバッグ実行中なら「デバッグの停止」，デバッグなしの実行なら実行中のコンソールウィンドウを閉じて中断し，条件と更新を確認してください．</p>
-<p>待機のため一定時間処理を休止する機能もありますが，sleepのような関数はC17の標準ライブラリの機能ではなく，OSにより使い方が異なります．この回では待機用の関数を使わず，有限回の例で制御を学びます．</p>
-<h2 id="5-breakcontinueswitch">5　break・continue・switch<a class="headerlink" href="#5-breakcontinueswitch" title="Permanent link">&para;</a></h2>
-<h3 id="breakcontinue">反復を終えるbreakと，残りを飛ばすcontinue<a class="headerlink" href="#breakcontinue" title="Permanent link">&para;</a></h3>
-<p><code>break;</code> は最も内側のループまたはswitchを抜けます．<code>continue;</code> は現在のループの残りを飛ばし，次の反復へ進みます．forでは更新式へ，whileでは条件判定へ進みます．whileで更新を飛ばすと無限ループになる場合があります．</p>
+<p>この例は次節の<code>break</code>によって0，1，2を表示して終了します．<code>for (;;)</code>を<code>while (1)</code>に変えても同じです．無限に動くプログラムを試す必要はありません．止まらないときは，Visual Studioでデバッグ実行中なら「デバッグの停止」，デバッグなしの実行なら実行中のコンソールウィンドウを閉じて中断し，条件と更新を確認してください．</p>
+<p>待機のため一定時間処理を休止する機能もありますが，<code>sleep</code>のような関数はC17の標準ライブラリの機能ではなく，OSにより使い方が異なります．この回では待機用の関数を使わず，有限回の例で制御を学びます．</p>
+<h2 id="5-breakcontinueswitch">5　<code>break</code>・<code>continue</code>・<code>switch</code><a class="headerlink" href="#5-breakcontinueswitch" title="Permanent link">&para;</a></h2>
+<h3 id="breakcontinue">反復を終える<code>break</code>と，残りを飛ばす<code>continue</code><a class="headerlink" href="#breakcontinue" title="Permanent link">&para;</a></h3>
+<p><code>break;</code> は最も内側のループまたは<code>switch</code>を抜けます．<code>continue;</code> は現在のループの残りを飛ばし，次の反復へ進みます．<code>for</code>では更新式へ，<code>while</code>では条件判定へ進みます．<code>while</code>で更新を飛ばすと無限ループになる場合があります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; n </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">n) {</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">break</span><span style="color: #F8F8F2">;</span>
@@ -2733,10 +2733,10 @@
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, n);</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>breakなら0，1，2を表示し，3でforの外へ進みます．breakをcontinueに変えると0，1，2，4を表示します．3のときはprintfだけを飛ばし，++nを行って次の条件判定へ進むからです．do-whileのcontinueも末尾の条件判定へ進みます．</p>
-<p>continueは「次の反復を丸ごと飛ばす」のではなく，<strong>現在の反復の残りを飛ばす</strong>命令です．whileで更新がcontinueの後にあると，その更新が実行されず同じ値のまま条件へ戻ることがあります．</p>
-<h3 id="switch">整数の値で分けるswitch<a class="headerlink" href="#switch" title="Permanent link">&para;</a></h3>
-<p>整数の値で場合分けするときはswitchも使えます．</p>
+<p><code>break</code>なら0，1，2を表示し，3で<code>for</code>の外へ進みます．<code>break</code>を<code>continue</code>に変えると0，1，2，4を表示します．3のときは<code>printf</code>だけを飛ばし，<code>++n</code>を行って次の条件判定へ進むからです．<code>do-while</code>の<code>continue</code>も末尾の条件判定へ進みます．</p>
+<p><code>continue</code>は「次の反復を丸ごと飛ばす」のではなく，<strong>現在の反復の残りを飛ばす</strong>命令です．<code>while</code>で更新が<code>continue</code>の後にあると，その更新が実行されず同じ値のまま条件へ戻ることがあります．</p>
+<h3 id="switch">整数の値で分ける<code>switch</code><a class="headerlink" href="#switch" title="Permanent link">&para;</a></h3>
+<p>整数の値で場合分けするときは<code>switch</code>も使えます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">switch</span><span style="color: #F8F8F2"> (menu) {</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #66D9EF">case</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">:</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;start</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
@@ -2749,9 +2749,9 @@
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">break</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>caseは定数で指定します．breakがないと次のcase側の文も実行されます（フォールスルー）．範囲を比べる処理にはifが自然です．</p>
-<p>switchは式の値に一致するcaseへ移り，そこから文を順に実行します．caseを通過するたびに条件を再判定するわけではありません．defaultはどのcaseにも一致しない場合の移動先で，省略すると一致しない場合は何もせずswitchの後へ進みます．caseの値は重複できません．小数や文字列ではなく，整数型の値（charを含む）で場合分けします．</p>
-<p>複数の値に同じ処理を割り当てる場合は，caseを続けて書けます．</p>
+<p><code>case</code>は定数で指定します．<code>break</code>がないと次の<code>case</code>側の文も実行されます（フォールスルー）．範囲を比べる処理には<code>if</code>が自然です．</p>
+<p><code>switch</code>は式の値に一致する<code>case</code>へ移り，そこから文を順に実行します．<code>case</code>を通過するたびに条件を再判定するわけではありません．<code>default</code>はどの<code>case</code>にも一致しない場合の移動先で，省略すると一致しない場合は何もせず<code>switch</code>の後へ進みます．<code>case</code>の値は重複できません．小数や文字列ではなく，整数型の値（<code>char</code>を含む）で場合分けします．</p>
+<p>複数の値に同じ処理を割り当てる場合は，<code>case</code>を続けて書けます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">switch</span><span style="color: #F8F8F2"> (school_year) {</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #66D9EF">case</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">:</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span style="color: #66D9EF">case</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">:</span>
@@ -2766,9 +2766,9 @@
 <a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">break</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>この例は「school_year == 1 || school_year == 2ならlower years，そうでなく3か4ならupper years，それ以外ならinvalid」というif・else if・elseでも書けます．caseの共有は意図的ですが，処理の後のbreakの付け忘れとは区別してください．ループ内のswitchにあるbreakはswitchだけを抜け，外側のループは続きます．</p>
-<h3 id="goto">補足：ラベルへ移動するgoto<a class="headerlink" href="#goto" title="Permanent link">&para;</a></h3>
-<p>gotoは同じ関数内のラベルへ移動する文です．次は読み方を知るための例です．</p>
+<p>この例は「<code>school_year == 1</code> || <code>school_year == 2</code>ならlower years，そうでなく3か4ならupper years，それ以外なら<code>invalid</code>」という<code>if</code>・<code>else if</code>・<code>else</code>でも書けます．<code>case</code>の共有は意図的ですが，処理の後の<code>break</code>の付け忘れとは区別してください．ループ内の<code>switch</code>にある<code>break</code>は<code>switch</code>だけを抜け，外側のループは続きます．</p>
+<h3 id="goto">補足：ラベルへ移動する<code>goto</code><a class="headerlink" href="#goto" title="Permanent link">&para;</a></h3>
+<p><code>goto</code>は同じ関数内のラベルへ移動する文です．次は読み方を知るための例です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; n </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">n) {</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (n </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">goto</span><span style="color: #F8F8F2"> done;</span>
@@ -2778,7 +2778,7 @@
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span style="color: #F8F8F2">done:</span>
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;done</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
-<p>表示は0，1，2，doneです．done:が移動先のラベルで，goto done;がジャンプです．この例ならbreakで同じ目的を達成できます．gotoは読み手が処理を追いにくくなるため，この回の課題では使用せず，順次・分岐・反復で書きます．Cには後処理をまとめる用途などもあるため，言語機能そのものが常に誤りというわけではありません．</p>
+<p>表示は0，1，2，<code>done</code>です．<code>done:</code>が移動先のラベルで，<code>goto done;</code>がジャンプです．この例なら<code>break</code>で同じ目的を達成できます．<code>goto</code>は読み手が処理を追いにくくなるため，この回の課題では使用せず，順次・分岐・反復で書きます．Cには後処理をまとめる用途などもあるため，言語機能そのものが常に誤りというわけではありません．</p>
 <h2 id="6-2">6　例：判定・合計・2の累乗<a class="headerlink" href="#6-2" title="Permanent link">&para;</a></h2>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">control.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-2"> 2</a></span>
@@ -2828,7 +2828,7 @@
 <a id="__codelineno-13-23" name="__codelineno-13-23"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-13-24" name="__codelineno-13-24"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/04/control.c">control.c</a></p>
+<p><a download="download" href="sample/04/control.c"><code>control.c</code></a></p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>pass
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sum=55
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>1 2 4 8 16 32 64
@@ -2846,24 +2846,24 @@
 <tbody>
 <tr>
 <td>合否の分岐</td>
-<td>scoreは75</td>
-<td>範囲外ではなく，60以上なのでpassだけを表示</td>
+<td><code>score</code>は75</td>
+<td>範囲外ではなく，60以上なので<code>pass</code>だけを表示</td>
 </tr>
 <tr>
-<td>合計のfor</td>
-<td>sumは0，iは1から</td>
-<td>1〜10を加算し，iが11になると条件が偽．sumは55</td>
+<td>合計の<code>for</code></td>
+<td><code>sum</code>は0，<code>i</code>は1から</td>
+<td>1〜10を加算し，<code>i</code>が11になると条件が偽．<code>sum</code>は55</td>
 </tr>
 <tr>
-<td>累乗のwhile</td>
-<td>powerは1</td>
+<td>累乗の<code>while</code></td>
+<td><code>power</code>は1</td>
 <td>表示後に2倍．64の次は128となり，100未満ではないので終了</td>
 </tr>
 </tbody>
 </table>
-<p>この3つは順次実行されます．ifの条件が偽になった場合でも，その後にあるforやwhileが丸ごと省略されるわけではありません．どの文がどの波括弧に囲まれているかを確認してください．</p>
-<p>最初はscoreだけを59へ変え，retryになることを確かめます．次に60でpass，−1と101でinvalidになることを確認します．その間，sumと累乗の表示は変わりません．別の部分へ影響しないことも大切な確認です．</p>
-<p>続いて，合計の条件i &lt;= 10をi &lt; 10へ変える前に，何が加算されなくなるか予想してください．10を加えないので合計は45です．条件式の1文字の違いが，最後に実行する本体を変えます．確認したら元の条件へ戻しましょう．</p>
+<p>この3つは順次実行されます．<code>if</code>の条件が偽になった場合でも，その後にある<code>for</code>や<code>while</code>が丸ごと省略されるわけではありません．どの文がどの波括弧に囲まれているかを確認してください．</p>
+<p>最初は<code>score</code>だけを59へ変え，<code>retry</code>になることを確かめます．次に60で<code>pass</code>，−1と101で<code>invalid</code>になることを確認します．その間，<code>sum</code>と累乗の表示は変わりません．別の部分へ影響しないことも大切な確認です．</p>
+<p>続いて，合計の条件<code>i &lt;= 10</code>を<code>i &lt; 10</code>へ変える前に，何が加算されなくなるか予想してください．10を加えないので合計は45です．条件式の1文字の違いが，最後に実行する本体を変えます．確認したら元の条件へ戻しましょう．</p>
 <h2 id="7">7　二重ループとテスト<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
 <p>ループの中にループを書くと，行と列の処理を表せます．外側が1回進むたびに，内側が最初から最後まで動きます．3行4列なら本体は12回です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
@@ -2872,7 +2872,7 @@
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span style="color: #F8F8F2">    }</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>表示される(i, j)は(0, 0)，(0, 1)，(0, 2)，(0, 3)，次に(1, 0)〜(1, 3)，最後に(2, 0)〜(2, 3)です．外側が進むたびに，内側の初期化でjが0へ戻ります．内側のループのbreakは内側だけを抜けます．continueも最も内側のループの次の反復へ進みます．</p>
+<p>表示される<code>(i, j)</code>は(0, 0)，(0, 1)，(0, 2)，(0, 3)，次に(1, 0)〜(1, 3)，最後に(2, 0)〜(2, 3)です．外側が進むたびに，内側の初期化で<code>j</code>が0へ戻ります．内側のループの<code>break</code>は内側だけを抜けます．<code>continue</code>も最も内側のループの次の反復へ進みます．</p>
 <p>表を表示するとき，値の表示は内側，行末の改行は内側のループが終わった後に置きます．改行を内側へ入れると1要素ずつ別の行になります．逆に両方のループの外へ置くと，全要素が1行に並びます．</p>
 <p>条件分岐は境界の直前・境界・直後を試します．繰り返しは0回・1回・複数回になる値を試します．Visual Studioで止まらなくなったら，デバッグ実行中は「デバッグの停止」で中断し，更新と条件を見直してください．</p>
 <table>
@@ -2886,42 +2886,42 @@
 <tbody>
 <tr>
 <td>どの値でも同じ側へ進む</td>
-<td>=と==の取り違え，if直後の;</td>
+<td><code>=</code>と<code>==</code>の取り違え，<code>if</code>直後の<code>;</code></td>
 <td>条件式と警告</td>
 </tr>
 <tr>
 <td>端の値だけ結果が違う</td>
-<td>&lt;と&lt;=の取り違え</td>
+<td><code>&lt;</code>と<code>&lt;=</code>の取り違え</td>
 <td>境界の前後と境界そのもの</td>
 </tr>
 <tr>
 <td>1回多く表示される</td>
-<td>0始まりなのに&lt;=を使用</td>
+<td>0始まりなのに<code>&lt;=</code>を使用</td>
 <td>最初と最後のカウンタ値</td>
 </tr>
 <tr>
 <td>合計が最後の値になる</td>
-<td>sumを本体内で0に戻している</td>
+<td><code>sum</code>を本体内で0に戻している</td>
 <td>累積変数の初期化位置</td>
 </tr>
 <tr>
 <td>終了しない</td>
-<td>更新忘れ，continueで更新を飛ばした</td>
+<td>更新忘れ，<code>continue</code>で更新を飛ばした</td>
 <td>条件へ戻るまでの全経路</td>
 </tr>
 <tr>
-<td>switchで余分な表示が出る</td>
-<td>breakの付け忘れ</td>
-<td>caseから実行される文の順序</td>
+<td><code>switch</code>で余分な表示が出る</td>
+<td><code>break</code>の付け忘れ</td>
+<td><code>case</code>から実行される文の順序</td>
 </tr>
 </tbody>
 </table>
 <p>Visual Studioで処理を追う場合は，調べたい実行文の行にブレークポイントを置き，デバッグ実行で停止させます．ステップオーバーで1文ずつ進み，ローカル変数の値と次に進む経路を確認できます．出力だけが合うことと，処理の流れを説明できることの両方を目指しましょう．</p>
 <h2 id="_8">確認問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <ol>
-<li>ifの条件の直後にセミコロンを付けると何が起きるか．</li>
-<li>whileとdo-whileで実行回数が違うのはどんな場合か．</li>
-<li>二重ループ内のbreakはどのループを抜けるか．</li>
+<li><code>if</code>の条件の直後にセミコロンを付けると何が起きるか．</li>
+<li><code>while</code>と<code>do-while</code>で実行回数が違うのはどんな場合か．</li>
+<li>二重ループ内の<code>break</code>はどのループを抜けるか．</li>
 </ol>
 <p><a class="md-button md-button--primary" href="ex04.html">演習へ</a>
 <a href="index.html">全体の目次</a></p>

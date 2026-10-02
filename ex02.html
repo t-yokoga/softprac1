@@ -2262,7 +2262,7 @@
 
 <h1 id="2">第2回　演習<a class="headerlink" href="#2" title="Permanent link">&para;</a></h1>
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
-<p><a href="lec02.html">第2回の講義</a>を読み，variables.cをビルド・実行できることを確認してから取り組んでください．
+<p><a href="lec02.html">第2回の講義</a>を読み，<code>variables.c</code>をビルド・実行できることを確認してから取り組んでください．
 今回は，変数に値を保存し，計算・代入・表示を行います．
 ソースを書き換える前と実行する前に，どの変数の値が変わるかを予測しましょう．</p>
 <h2 id="_1">演習の進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -2272,7 +2272,7 @@
 <div class="admonition note">
 <p class="admonition-title">作業場所と記録</p>
 <p><a href="lec02.html#environment">講義で用意した</a> <code>PL1\week02</code> を作業場所にします．
-課題ごとにソースと実行結果を保存し，memo.txtなどに予測・結果・理由を記録してください．
+課題ごとにソースと実行結果を保存し，<code>memo.txt</code>などに予測・結果・理由を記録してください．
 提出先や締切は，授業時に案内します．</p>
 </div>
 <table>
@@ -2288,60 +2288,60 @@
 <tr>
 <td>1</td>
 <td>長方形の面積と再計算</td>
-<td>Rectangle</td>
-<td>rectangle.c</td>
+<td><code>Rectangle</code></td>
+<td><code>rectangle.c</code></td>
 </tr>
 <tr>
 <td>2</td>
 <td>型と表示の対応</td>
-<td>Profile</td>
-<td>profile.c</td>
+<td><code>Profile</code></td>
+<td><code>profile.c</code></td>
 </tr>
 <tr>
 <td>3</td>
 <td>値のコピーと交換</td>
-<td>Exchange</td>
-<td>exchange.c</td>
+<td><code>Exchange</code></td>
+<td><code>exchange.c</code></td>
 </tr>
 <tr>
 <td>4</td>
 <td>値・サイズ・場所の観察</td>
-<td>Observe</td>
-<td>observe.c</td>
+<td><code>Observe</code></td>
+<td><code>observe.c</code></td>
 </tr>
 <tr>
 <td>5</td>
 <td>発展：小数を使った計算</td>
-<td>Temperature</td>
-<td>temperature.c</td>
+<td><code>Temperature</code></td>
+<td><code>temperature.c</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="_2">各プログラムに共通の手順<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><a href="lec01.html#hello">第1回の手順</a>に従い，<strong>1課題につき1つの空のプロジェクト</strong>を作ります．
-場所はweek02とし，ソリューションとプロジェクトを同じディレクトリに配置します．</p>
+場所は<code>week02</code>とし，ソリューションとプロジェクトを同じディレクトリに配置します．</p>
 <ol>
-<li>表の名前の.cファイルを「ソース ファイル」に追加する．</li>
-<li>Cコードとしてコンパイル（/TC），C17，警告レベル4を設定する．</li>
+<li>表の名前の<code>.c</code>ファイルを「ソース ファイル」に追加する．</li>
+<li>Cコードとしてコンパイル（<code>/TC</code>），C17，警告レベル4を設定する．</li>
 <li>コードを入力し，Ctrl+Sで保存する．</li>
 <li>Ctrl+Shift+Bでビルドし，警告・エラーを確認する．</li>
 <li>成功したらCtrl+F5で実行し，予測した結果と比較する．</li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">別々のmainを同じプロジェクトに入れない</p>
-<p>各課題のプログラムは，それぞれmainを持つ独立したプログラムです．
-講義のvariables.cを入れたまま別のプログラムを追加すると，mainが重複します．課題ごとにプロジェクトを分けてください．</p>
+<p>各課題のプログラムは，それぞれ<code>main</code>を持つ独立したプログラムです．
+講義の<code>variables.c</code>を入れたまま別のプログラムを追加すると，<code>main</code>が重複します．課題ごとにプロジェクトを分けてください．</p>
 </div>
 <h2 id="1">課題1　長方形の面積と再計算<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">変数を変更した後に，面積を求め直す</p>
-<p>Rectangleプロジェクトにrectangle.cを作り，次の処理を行ってください．</p>
+<p><code>Rectangle</code>プロジェクトに<code>rectangle.c</code>を作り，次の処理を行ってください．</p>
 <ol>
-<li>int型のheightを7，widthを4で初期化する．</li>
-<li>areaへ縦と横の積を保存し，表示する．</li>
-<li>widthへ6を代入する．</li>
-<li><strong>再計算する前</strong>のareaを表示する．</li>
-<li>areaを計算し直し，表示する．</li>
+<li><code>int</code>型の<code>height</code>を7，<code>width</code>を4で初期化する．</li>
+<li><code>area</code>へ縦と横の積を保存し，表示する．</li>
+<li><code>width</code>へ6を代入する．</li>
+<li><strong>再計算する前</strong>の<code>area</code>を表示する．</li>
+<li><code>area</code>を計算し直し，表示する．</li>
 </ol>
 <p>期待する表示は次の3行です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>first=28
@@ -2351,73 +2351,73 @@
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>宣言・初期化ではint area = height * width;と書きます．
-同じareaへもう一度値を保存するときにはintを付けず，area = height * width;と書きます．
-widthへの代入だけではareaは変わりません．</p>
+<p>宣言・初期化では<code>int area = height * width;</code>と書きます．
+同じ<code>area</code>へもう一度値を保存するときには<code>int</code>を付けず，<code>area = height * width;</code>と書きます．
+<code>width</code>への代入だけでは<code>area</code>は変わりません．</p>
 </details>
 <h3 id="_3">値を変えて確かめる<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>途中の <code>width = 6;</code> の6を，0，1に変えて確認します．最初のwidth = 4は変更しません．
+<p>途中の <code>width = 6;</code> の6を，0，1に変えて確認します．最初の<code>width = 4</code>は変更しません．
 実行前に，3行すべての出力を予測してください．</p>
-<p><strong>説明すること</strong>：areaに保存しているのは計算式そのものですか，その時点の計算結果ですか．</p>
+<p><strong>説明すること</strong>：<code>area</code>に保存しているのは計算式そのものですか，その時点の計算結果ですか．</p>
 <h2 id="2_1">課題2　型と表示の対応<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">整数・小数・1文字を使い分ける</p>
-<p>Profileプロジェクトにprofile.cを作り，個数3をintのcount，単価125.5をdoubleのprice，区分Bをcharのgradeへ保存してください．
-countとpriceの積をdoubleのtotalに保存し，次のように表示します．</p>
+<p><code>Profile</code>プロジェクトに<code>profile.c</code>を作り，個数3を<code>int</code>の<code>count</code>，単価125.5を<code>double</code>の<code>price</code>，区分<code>B</code>を<code>char</code>の<code>grade</code>へ保存してください．
+<code>count</code>と<code>price</code>の積を<code>double</code>の<code>total</code>に保存し，次のように表示します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>count=3 price=125.50 grade=B
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>total=376.50
 </code></pre></div>
-<p>計算済みの表示文字列を直接書かず，変数をprintfに渡してください．</p>
+<p>計算済みの表示文字列を直接書かず，変数を<code>printf</code>に渡してください．</p>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>intは%d，doubleは%f，1文字は%cで表示します．
-単価と合計は小数点以下2桁にするため%.2fを使います．区分の初期値は'B'です．
-整数とdoubleの積はdoubleになります．型変換は第6回で詳しく扱います．</p>
+<p><code>int</code>は<code>%d</code>，<code>double</code>は<code>%f</code>，1文字は<code>%c</code>で表示します．
+単価と合計は小数点以下2桁にするため<code>%.2f</code>を使います．区分の初期値は<code>'B'</code>です．
+整数と<code>double</code>の積は<code>double</code>になります．型変換は第6回で詳しく扱います．</p>
 </details>
 <h3 id="_4">表示方法を変えてみる<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
-<li>priceを表示する%.2fだけを%fへ変更して実行する．</li>
+<li><code>price</code>を表示する<code>%.2f</code>だけを<code>%f</code>へ変更して実行する．</li>
 <li>125.500000と表示されることを確認する．</li>
-<li>countを0へ変え，totalが0.00になることを確認する．</li>
+<li><code>count</code>を0へ変え，<code>total</code>が0.00になることを確認する．</li>
 <li>最後に最初の設定へ戻して保存する．</li>
 </ol>
-<p><strong>説明すること</strong>：%.2fを%fへ変えると，priceに保存された値も変わりますか．</p>
+<p><strong>説明すること</strong>：<code>%.2f</code>を<code>%f</code>へ変えると，<code>price</code>に保存された値も変わりますか．</p>
 <div class="admonition warning">
 <p class="admonition-title">型と違う書式で試さない</p>
-<p>priceに%d，countに%fを対応させて実験しないでください．書式と型の不一致は実行前に修正します．</p>
+<p><code>price</code>に<code>%d</code>，<code>count</code>に<code>%f</code>を対応させて実験しないでください．書式と型の不一致は実行前に修正します．</p>
 </div>
 <h2 id="3">課題3　値のコピーと交換<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">上書きで値を失わないようにする</p>
-<p>Exchangeプロジェクトにexchange.cを作ります．intのaを10，bを20で初期化し，最後にaが20，bが10になるように値を交換してください．
+<p><code>Exchange</code>プロジェクトに<code>exchange.c</code>を作ります．<code>int</code>の<code>a</code>を10，<code>b</code>を20で初期化し，最後に<code>a</code>が20，<code>b</code>が10になるように値を交換してください．
 交換前と交換後を，次のように表示します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>before: a=10 b=20
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>after: a=20 b=10
 </code></pre></div>
-<p>次の2文だけでは正しく交換できません．まず，それぞれの文の実行後のaとbを紙に書いてください．</p>
+<p>次の2文だけでは正しく交換できません．まず，それぞれの文の実行後の<code>a</code>と<code>b</code>を紙に書いてください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #F8F8F2">a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> b;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> a;</span>
 </code></pre></div>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>a = b;を実行した時点で，aにあった10は失われます．
-もう1つint型の変数tempを用意して，元のaの値を保存しておきます．</p>
+<p><code>a = b;</code>を実行した時点で，<code>a</code>にあった10は失われます．
+もう1つ<code>int</code>型の変数<code>temp</code>を用意して，元の<code>a</code>の値を保存しておきます．</p>
 </details>
 <h3 id="_5">別の値でも確認する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>初期値をa = -3，b = 8とした場合，a = 5，b = 5とした場合でも確認します．
-<strong>記録すること</strong>：一時変数を使わない2文の結果と，tempを使った結果の違いを書いてください．</p>
+<p>初期値を<code>a = -3</code>，<code>b = 8</code>とした場合，<code>a = 5</code>，<code>b = 5</code>とした場合でも確認します．
+<strong>記録すること</strong>：一時変数を使わない2文の結果と，<code>temp</code>を使った結果の違いを書いてください．</p>
 <h2 id="4">課題4　値・サイズ・場所の観察<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">同じ変数を，3つの観点から観察する</p>
-<p>Observeプロジェクトにobserve.cを作り，intのvalueを10で初期化します．値・サイズ・アドレスを表示し，99を代入して再び表示してください．どの項目が変わるか予測します．
-最後にchar，int，long，long long，doubleのサイズも表示します．</p>
+<p><code>Observe</code>プロジェクトに<code>observe.c</code>を作り，<code>int</code>の<code>value</code>を10で初期化します．値・サイズ・アドレスを表示し，99を代入して再び表示してください．どの項目が変わるか予測します．
+最後に<code>char</code>，<code>int</code>，<code>long</code>，<code>long long</code>，<code>double</code>のサイズも表示します．</p>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>valueの値には%d，sizeofの結果には%zu，アドレスには%pを使います．
-アドレスを渡す部分は(void *)&amp;valueと書きます．その詳しい意味は第8回で学びます．</p>
+<p><code>value</code>の値には<code>%d</code>，<code>sizeof</code>の結果には<code>%zu</code>，アドレスには<code>%p</code>を使います．
+アドレスを渡す部分は<code>(void *)&amp;value</code>と書きます．その詳しい意味は第8回で学びます．</p>
 </details>
 <h3 id="_6">観察表を作る<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
@@ -2431,19 +2431,19 @@ countとpriceの積をdoubleのtotalに保存し，次のように表示しま�
 </thead>
 <tbody>
 <tr>
-<td>valueの値</td>
+<td><code>value</code>の値</td>
 <td>10</td>
 <td>記入してください</td>
 <td>自分で記入</td>
 </tr>
 <tr>
-<td>sizeof value</td>
+<td><code>sizeof value</code></td>
 <td>自分の結果</td>
 <td>記入してください</td>
 <td>自分で記入</td>
 </tr>
 <tr>
-<td>&amp;valueの表示</td>
+<td><code>&amp;value</code>の表示</td>
 <td>自分の結果</td>
 <td>記入してください</td>
 <td>自分で記入</td>
@@ -2451,40 +2451,40 @@ countとpriceの積をdoubleのtotalに保存し，次のように表示しま�
 </tbody>
 </table>
 <p>表を埋め，型ごとのサイズも記録します．起動し直した際のアドレスは前回と同じとは限りません．</p>
-<p><strong>説明すること</strong>：1000を保存するとsizeof valueも変わりますか．また「64ビットPCならすべての変数が8バイト」は正しいでしょうか．</p>
+<p><strong>説明すること</strong>：1000を保存すると<code>sizeof value</code>も変わりますか．また「64ビットPCならすべての変数が8バイト」は正しいでしょうか．</p>
 <h2 id="5">課題5　発展：小数を使った計算<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">摂氏から華氏へ変換する</p>
-<p>Temperatureプロジェクトにtemperature.cを作り，摂氏celsiusから華氏fahrenheitを求めてください．
+<p><code>Temperature</code>プロジェクトに<code>temperature.c</code>を作り，摂氏<code>celsius</code>から華氏<code>fahrenheit</code>を求めてください．
 変換式は <code>fahrenheit = celsius * 9.0 / 5.0 + 32.0</code> です．
-両方をdoubleで保存し，celsius = 25.0のとき次のように表示します．</p>
+両方を<code>double</code>で保存し，<code>celsius = 25.0</code>のとき次のように表示します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Celsius=25.0 Fahrenheit=77.0
 </code></pre></div>
-<p>掛け算は*，割り算は/です．小数の計算に9.0や5.0を使います．</p>
+<p>掛け算は<code>*</code>，割り算は<code>/</code>です．小数の計算に9.0や5.0を使います．</p>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>表示は小数点以下1桁なので%.1fです．fahrenheitの値を77.0と直接書くのではなく，celsiusから計算します．</p>
+<p>表示は小数点以下1桁なので<code>%.1f</code>です．<code>fahrenheit</code>の値を77.0と直接書くのではなく，<code>celsius</code>から計算します．</p>
 </details>
 <h3 id="_7">値を変えて確かめる<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>celsiusの初期値を0.0，100.0，-40.0に変更して，それぞれ32.0，212.0，-40.0になることを確認します．
-celsiusを計算後に変更した場合には再計算が必要です．課題1との共通点を説明してください．</p>
+<p><code>celsius</code>の初期値を0.0，100.0，-40.0に変更して，それぞれ32.0，212.0，-40.0になることを確認します．
+<code>celsius</code>を計算後に変更した場合には再計算が必要です．課題1との共通点を説明してください．</p>
 <h2 id="_8">確認問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>次の問いに，コードや実行結果をもとに答えてください．</p>
 <ol>
-<li>int count = 3;とcount = 5;では，どちらが宣言と初期化を行うか．</li>
-<li>int a = 10; int b = a;の後にaを20へ変えると，bはどうなるか．</li>
-<li>heightを変更しただけで，前に計算したareaが自動で更新されるか．</li>
-<li>doubleの値を%dへ渡せば，整数に変換して表示されるか．</li>
-<li>char型の1文字の初期値に使うのは'A'と"A"のどちらか．</li>
-<li>sizeofで得られるのは，値・サイズ・アドレスのどれか．</li>
+<li><code>int count = 3;</code>と<code>count = 5;</code>では，どちらが宣言と初期化を行うか．</li>
+<li><code>int a = 10; int b = a;</code>の後に<code>a</code>を20へ変えると，<code>b</code>はどうなるか．</li>
+<li><code>height</code>を変更しただけで，前に計算した<code>area</code>が自動で更新されるか．</li>
+<li><code>double</code>の値を<code>%d</code>へ渡せば，整数に変換して表示されるか．</li>
+<li><code>char</code>型の1文字の初期値に使うのは<code>'A'</code>と<code>"A"</code>のどちらか．</li>
+<li><code>sizeof</code>で得られるのは，値・サイズ・アドレスのどれか．</li>
 <li>未初期化の変数が一度0と表示されたら，いつでも0だと考えてよいか．</li>
-<li>同じ実行中にint変数の値を変えると，サイズとアドレスも変わるか．</li>
+<li>同じ実行中に<code>int</code>変数の値を変えると，サイズとアドレスも変わるか．</li>
 </ol>
 <h2 id="_9">チェックリスト<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
 <li>課題1〜4のプロジェクトとソースを保存した．</li>
-<li>警告・エラーを確認し，型とprintfの書式を合わせた．</li>
+<li>警告・エラーを確認し，型と<code>printf</code>の書式を合わせた．</li>
 <li>課題1の再計算前と再計算後の違いを説明できる．</li>
 <li>課題2の書式を変えた結果と，変数の値そのものを区別できる．</li>
 <li>課題3で，なぜ元の値を一時変数へ保存するのか説明できる．</li>

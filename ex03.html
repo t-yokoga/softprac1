@@ -2262,17 +2262,17 @@
 
 <h1 id="3">第3回　演習<a class="headerlink" href="#3" title="Permanent link">&para;</a></h1>
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
-<p><a href="lec03.html">第3回の講義</a>を読み，operators.cをビルド・実行できることを確認してから取り組んでください．
+<p><a href="lec03.html">第3回の講義</a>を読み，<code>operators.c</code>をビルド・実行できることを確認してから取り組んでください．
 今回は，計算結果を予測してから実行し，値の更新や条件式の意味を説明します．
 答えの数値が合うだけでなく，<strong>どの型で，どの演算を行った結果か</strong>を確認しましょう．</p>
 <h2 id="_1">演習の進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>課題1〜4を順に進め，最後に確認問題に答えてください．課題5はビット演算を使う発展課題です．
-入力はソースコードに直接書きます．if文・繰り返し・キーボードからの入力は使いません．
-条件式の結果は，%dで0または1として表示します．</p>
+入力はソースコードに直接書きます．<code>if</code>文・繰り返し・キーボードからの入力は使いません．
+条件式の結果は，<code>%d</code>で0または1として表示します．</p>
 <div class="admonition note">
 <p class="admonition-title">作業場所と記録</p>
 <p><a href="lec03.html#environment">講義で用意した</a> <code>PL1\week03</code> を作業場所とし，ソースと実行結果を保存してください．
-memo.txtなどに「変更した値・予測・実行結果・理由」を記録します．提出先や締切は，授業時に案内します．</p>
+<code>memo.txt</code>などに「変更した値・予測・実行結果・理由」を記録します．提出先や締切は，授業時に案内します．</p>
 </div>
 <table>
 <thead>
@@ -2287,55 +2287,55 @@ memo.txtなどに「変更した値・予測・実行結果・理由」を記録
 <tr>
 <td>1</td>
 <td>秒を分と秒へ分解する</td>
-<td>TimeParts</td>
-<td>time_parts.c</td>
+<td><code>TimeParts</code></td>
+<td><code>time_parts.c</code></td>
 </tr>
 <tr>
 <td>2</td>
 <td>前置・後置と複合代入</td>
-<td>Update</td>
-<td>update.c</td>
+<td><code>Update</code></td>
+<td><code>update.c</code></td>
 </tr>
 <tr>
 <td>3</td>
 <td>範囲の判定と短絡評価</td>
-<td>Conditions</td>
-<td>conditions.c</td>
+<td><code>Conditions</code></td>
+<td><code>conditions.c</code></td>
 </tr>
 <tr>
 <td>4</td>
 <td>うるう年の条件式</td>
-<td>Leap</td>
-<td>leap.c</td>
+<td><code>Leap</code></td>
+<td><code>leap.c</code></td>
 </tr>
 <tr>
 <td>5</td>
 <td>発展：権限フラグ</td>
-<td>Flags</td>
-<td>flags.c</td>
+<td><code>Flags</code></td>
+<td><code>flags.c</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="_2">各プログラムに共通の手順<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p><a href="lec01.html#hello">第1回の手順</a>と同じく，課題ごとに別の空のC++／Windowsプロジェクトを作ります．</p>
 <ol>
-<li>保存場所をweek03にし，ソリューションとプロジェクトを同じディレクトリに配置する．</li>
-<li>表の名前の.cファイルを追加する．</li>
-<li>Cコードとしてコンパイル（/TC），C17，警告レベル4を設定する．</li>
+<li>保存場所を<code>week03</code>にし，ソリューションとプロジェクトを同じディレクトリに配置する．</li>
+<li>表の名前の<code>.c</code>ファイルを追加する．</li>
+<li>Cコードとしてコンパイル（<code>/TC</code>），C17，警告レベル4を設定する．</li>
 <li>編集後にCtrl+Sで保存し，Ctrl+Shift+Bでビルドする．</li>
 <li>警告・エラーを確認し，成功したらCtrl+F5で実行する．</li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">mainの重複と，危険な実験を避ける</p>
-<p>独立したmainを持つファイルを同じプロジェクトへまとめて追加しないでください．
+<p>独立した<code>main</code>を持つファイルを同じプロジェクトへまとめて追加しないでください．
 また，0による整数除算・範囲外のシフト・同じ変数を順序不明のまま複数回更新する式は，実行して結果を試す対象ではありません．</p>
 </div>
 <h2 id="1">課題1　秒を分と秒へ分解する<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">整数の商と余りを使う</p>
-<p>TimePartsプロジェクトにtime_parts.cを作り，int型のsecondsを3671で初期化します．
-整数の除算と剰余を使い，分をminutes，残りの秒をrestへ保存してください．
-さらに，secondsを60.0で割った値をdoubleのdecimal_minutesへ保存して表示します．</p>
+<p><code>TimeParts</code>プロジェクトに<code>time_parts.c</code>を作り，<code>int</code>型の<code>seconds</code>を3671で初期化します．
+整数の除算と剰余を使い，分を<code>minutes</code>，残りの秒を<code>rest</code>へ保存してください．
+さらに，<code>seconds</code>を60.0で割った値を<code>double</code>の<code>decimal_minutes</code>へ保存して表示します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>61 min 11 sec
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>decimal minutes=61.18
 </code></pre></div>
@@ -2343,80 +2343,80 @@ memo.txtなどに「変更した値・予測・実行結果・理由」を記録
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>minutesはseconds / 60，restはseconds % 60です．
-doubleへ保存する場合も，右辺が整数同士の除算なら小数部分は失われます．小数の分には60.0を使ってください．</p>
+<p><code>minutes</code>は<code>seconds / 60</code>，<code>rest</code>は<code>seconds % 60</code>です．
+<code>double</code>へ保存する場合も，右辺が整数同士の除算なら小数部分は失われます．小数の分には60.0を使ってください．</p>
 </details>
 <h3 id="_3">境界の値を試す<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>secondsの初期値を0，59，60，61へ変更してください．
+<p><code>seconds</code>の初期値を0，59，60，61へ変更してください．
 特に60秒の前後で，分と秒の値がどう変わるか予測します．</p>
-<p><strong>説明すること</strong>：seconds = 61のとき，decimal_minutesの右辺をseconds / 60へ変更すると，なぜ1.00になるのでしょうか．
-除算とdoubleへの保存の順序を説明し，確認後は60.0へ戻してください．</p>
+<p><strong>説明すること</strong>：<code>seconds = 61</code>のとき，<code>decimal_minutes</code>の右辺を<code>seconds / 60</code>へ変更すると，なぜ1.00になるのでしょうか．
+除算と<code>double</code>への保存の順序を説明し，確認後は60.0へ戻してください．</p>
 <h2 id="2">課題2　前置・後置と複合代入<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">値が変わる順番を追う</p>
-<p>Updateプロジェクトにupdate.cを作り，次の処理を順に行います．</p>
+<p><code>Update</code>プロジェクトに<code>update.c</code>を作り，次の処理を順に行います．</p>
 <ol>
-<li>intのxを5で初期化する．</li>
-<li>x++の式の値を，intのbeforeへ保存する．</li>
-<li>++xの式の値を，intのafterへ保存する．</li>
-<li>before，after，xを表示する．</li>
-<li>xへ3を加算して保存し，さらに2倍して保存する．</li>
-<li>最終的なxを表示する．</li>
+<li><code>int</code>の<code>x</code>を5で初期化する．</li>
+<li><code>x++</code>の式の値を，<code>int</code>の<code>before</code>へ保存する．</li>
+<li><code>++x</code>の式の値を，<code>int</code>の<code>after</code>へ保存する．</li>
+<li><code>before</code>，<code>after</code>，<code>x</code>を表示する．</li>
+<li><code>x</code>へ3を加算して保存し，さらに2倍して保存する．</li>
+<li>最終的な<code>x</code>を表示する．</li>
 </ol>
-<p>実行前に，各段階のx，before，afterの値を表に書いてください．</p>
+<p>実行前に，各段階の<code>x</code>，<code>before</code>，<code>after</code>の値を表に書いてください．</p>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>x++は増加前の値を式の値にし，++xは増加後の値を式の値にします．
-どちらも次の文へ進む前にはxを1増やしています．後半では+=と*=を使います．</p>
+<p><code>x++</code>は増加前の値を式の値にし，<code>++x</code>は増加後の値を式の値にします．
+どちらも次の文へ進む前には<code>x</code>を1増やしています．後半では+=と*=を使います．</p>
 </details>
 <h3 id="_4">書き方を変えて比較する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>後半のx += 3;とx *= 2;を，それぞれ通常の代入の形へ書き換え，同じ結果になることを確認してください．
-次に，最初のxを0と-2へ変更して試します．</p>
-<p><strong>説明すること</strong>：x *= 2;とx += 3;の順番を逆にすると，最終値は同じでしょうか．
-初期値5の場合，前置・後置の処理後のxは7です．そこから2倍して3を足すと17になり，元の20とは異なります．</p>
+<p>後半の<code>x += 3;</code>と<code>x *= 2;</code>を，それぞれ通常の代入の形へ書き換え，同じ結果になることを確認してください．
+次に，最初の<code>x</code>を0と-2へ変更して試します．</p>
+<p><strong>説明すること</strong>：<code>x *= 2;</code>と<code>x += 3;</code>の順番を逆にすると，最終値は同じでしょうか．
+初期値5の場合，前置・後置の処理後の<code>x</code>は7です．そこから2倍して3を足すと17になり，元の20とは異なります．</p>
 <div class="admonition warning">
 <p class="admonition-title">短くまとめない</p>
-<p>beforeへの代入，afterへの代入，printfは別々の文のままにします．
-printfの複数の引数にx++や++xをまとめて渡すと，順序が保証されず，未定義動作の原因になります．</p>
+<p><code>before</code>への代入，<code>after</code>への代入，<code>printf</code>は別々の文のままにします．
+<code>printf</code>の複数の引数に<code>x++</code>や<code>++x</code>をまとめて渡すと，順序が保証されず，未定義動作の原因になります．</p>
 </div>
 <h2 id="3_1">課題3　範囲の判定と短絡評価<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">条件の結果を0か1で表示する</p>
-<p>Conditionsプロジェクトにconditions.cを作ります．scoreはintで，最初の値は75です．
+<p><code>Conditions</code>プロジェクトに<code>conditions.c</code>を作ります．<code>score</code>は<code>int</code>で，最初の値は75です．
 次の2つの条件を別々の変数へ保存します．</p>
 <ul>
-<li>valid：scoreが0以上100以下なら1，それ以外なら0．</li>
-<li>invalid：scoreが0未満または100より大きければ1，それ以外なら0．</li>
+<li><code>valid</code>：<code>score</code>が0以上100以下なら1，それ以外なら0．</li>
+<li><code>invalid</code>：<code>score</code>が0未満または100より大きければ1，それ以外なら0．</li>
 </ul>
-<p>さらにintのnを12，dを0とし，「dが0でなく，整数除算n / dが2より大きい」という条件をlargeへ保存します．
-dが0のときには，除算を行わない書き方にしてください．</p>
+<p>さらに<code>int</code>の<code>n</code>を12，<code>d</code>を0とし，「<code>d</code>が0でなく，整数除算<code>n / d</code>が2より大きい」という条件を<code>large</code>へ保存します．
+<code>d</code>が0のときには，除算を行わない書き方にしてください．</p>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>範囲内は2つの比較を&amp;&amp;で，範囲外は2つの比較を||でつなぎます．
-除算を含む条件は，d != 0を&amp;&amp;の左側へ置きます．</p>
+<p>範囲内は2つの比較を<code>&amp;&amp;</code>で，範囲外は2つの比較を||でつなぎます．
+除算を含む条件は，<code>d != 0</code>を<code>&amp;&amp;</code>の左側へ置きます．</p>
 </details>
 <h3 id="_5">条件の境界を試す<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>scoreを-1，0，100，101に変えてください．次にscoreを75へ戻し，dを3，6に変えます．
+<p><code>score</code>を-1，0，100，101に変えてください．次に<code>score</code>を75へ戻し，<code>d</code>を3，6に変えます．
 変更は1項目ずつ行い，どの表示に影響するかも確認します．</p>
 <p><strong>説明すること</strong>：<code>0 &lt;= score &lt;= 100</code> が正しい範囲判定にならない理由を，最初の比較の結果を使って説明してください．
-また，dが0のまま&amp;&amp;を&amp;に置き換えると，短絡評価がなくなるため危険です．この変更は実行しません．</p>
+また，<code>d</code>が0のまま<code>&amp;&amp;</code>を<code>&amp;</code>に置き換えると，短絡評価がなくなるため危険です．この変更は実行しません．</p>
 <h2 id="4">課題4　うるう年の条件式<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">日本語の条件を式へ分解する</p>
-<p>Leapプロジェクトにleap.cを作り，グレゴリオ暦のうるう年の規則を条件式で表してください．
+<p><code>Leap</code>プロジェクトに<code>leap.c</code>を作り，グレゴリオ暦のうるう年の規則を条件式で表してください．
 この課題では年を正の整数として与え，次の規則だけを扱います．</p>
 <ul>
 <li>4で割り切れ，かつ100では割り切れない年は，うるう年である．</li>
 <li>それとは別に，400で割り切れる年も，うるう年である．</li>
 </ul>
-<p>yearを2000で初期化し，うるう年なら1，そうでなければ0をleapに保存して表示します．
+<p><code>year</code>を2000で初期化し，うるう年なら1，そうでなければ0を<code>leap</code>に保存して表示します．
 まず「4で割り切れる」などの3つの条件を，個別に書き出してください．</p>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>割り切れるとは，%で求めた余りが0であることです．
+<p>割り切れるとは，<code>%</code>で求めた余りが0であることです．
 2つ目の規則は，1つ目の規則と「または」で結びます．最後は1つの条件式にできます．</p>
 </details>
 <h3 id="_6">例外を含む年で確認する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -2426,7 +2426,7 @@ dが0のときには，除算を行わない書き方にしてください．</p
 <h2 id="5">課題5　発展：権限フラグ<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <div class="admonition question">
 <p class="admonition-title">対象のビットだけ変更する</p>
-<p>Flagsプロジェクトにflags.cを作ります．unsigned intのflagsの下位3ビットを，次の意味で使います．</p>
+<p><code>Flags</code>プロジェクトに<code>flags.c</code>を作ります．<code>unsigned int</code>の<code>flags</code>の下位3ビットを，次の意味で使います．</p>
 <table>
 <thead>
 <tr>
@@ -2439,44 +2439,44 @@ dが0のときには，除算を行わない書き方にしてください．</p
 <tr>
 <td>0</td>
 <td>読む権限</td>
-<td>1u &lt;&lt; 0</td>
+<td><code>1u &lt;&lt; 0</code></td>
 </tr>
 <tr>
 <td>1</td>
 <td>書く権限</td>
-<td>1u &lt;&lt; 1</td>
+<td><code>1u &lt;&lt; 1</code></td>
 </tr>
 <tr>
 <td>2</td>
 <td>実行する権限</td>
-<td>1u &lt;&lt; 2</td>
+<td><code>1u &lt;&lt; 2</code></td>
 </tr>
 </tbody>
 </table>
-<p>初期値は1u（読む権限だけ）です．書く権限を追加し，読む権限を外し，実行する権限を反転します．
-各段階のflagsを十進数で表示し，最後に実行する権限の有無を0か1で表示してください．</p>
+<p>初期値は<code>1u</code>（読む権限だけ）です．書く権限を追加し，読む権限を外し，実行する権限を反転します．
+各段階の<code>flags</code>を十進数で表示し，最後に実行する権限の有無を0か1で表示してください．</p>
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>セットはOR，クリアは反転したマスクとのAND，反転はXORです．
-権限を調べる式では(flags &amp; mask)全体を括弧で囲み，0と比較します．</p>
+<p>セットは<code>OR</code>，クリアは反転したマスクとの<code>AND</code>，反転は<code>XOR</code>です．
+権限を調べる式では<code>(flags &amp; mask)</code>全体を括弧で囲み，0と比較します．</p>
 </details>
 <h3 id="_7">ビット列で確かめる<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>下位3ビットを書き出すと，001 → 011 → 010 → 110です．
-最初のflagsを0uと7uに変え，同じ処理を順に実行してください．</p>
-<p><strong>説明すること</strong>：同じ権限を2回セットしても，ORならほかのビットへ影響しません．
-加算を代わりに使うとどうなるか，1u + 1uと1u | 1uを比較して説明してください．</p>
+最初の<code>flags</code>を<code>0u</code>と<code>7u</code>に変え，同じ処理を順に実行してください．</p>
+<p><strong>説明すること</strong>：同じ権限を2回セットしても，<code>OR</code>ならほかのビットへ影響しません．
+加算を代わりに使うとどうなるか，<code>1u + 1u</code>と<code>1u</code> | <code>1u</code>を比較して説明してください．</p>
 <h2 id="_8">確認問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>次の問いに，実行結果や値の追跡表をもとに答えてください．</p>
 <ol>
 <li>式と式文の違いは何か．複合文には何を使うか．</li>
-<li>7 / 2と7 / 2.0の結果は，なぜ異なるか．</li>
-<li>double x = 7 / 2;で，失われた小数部分は代入時に戻るか．</li>
-<li>x++と++xは，式の値として何を使うか．</li>
-<li>=と==は，それぞれ何を行うか．</li>
-<li>&amp;&amp;の左側が偽のとき，右側は評価されるか．</li>
-<li>4u &amp; 2uと4u &amp;&amp; 2uの結果は同じか．</li>
-<li>flagsの対象ビットを0にするとき，なぜ反転したマスクを使うか．</li>
+<li><code>7 / 2</code>と<code>7 / 2.0</code>の結果は，なぜ異なるか．</li>
+<li><code>double x = 7 / 2;</code>で，失われた小数部分は代入時に戻るか．</li>
+<li><code>x++</code>と<code>++x</code>は，式の値として何を使うか．</li>
+<li><code>=</code>と<code>==</code>は，それぞれ何を行うか．</li>
+<li><code>&amp;&amp;</code>の左側が偽のとき，右側は評価されるか．</li>
+<li><code>4u &amp; 2u</code>と<code>4u &amp;&amp; 2u</code>の結果は同じか．</li>
+<li><code>flags</code>の対象ビットを0にするとき，なぜ反転したマスクを使うか．</li>
 </ol>
 <h2 id="_9">チェックリスト<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2485,7 +2485,7 @@ dが0のときには，除算を行わない書き方にしてください．</p
 <li>前置・後置の式の値と，変数の更新後の値を区別できる．</li>
 <li>範囲の境界と，うるう年の例外にあたる値を試した．</li>
 <li>短絡評価が0による除算を防ぐ理由を説明できる．</li>
-<li>ビット演算ではunsigned intを使い，0と1の列で結果を確認できる．</li>
+<li>ビット演算では<code>unsigned int</code>を使い，0と1の列で結果を確認できる．</li>
 </ul>
 <p>次回は<strong>制御構造</strong>を学びます．今回の条件式を使って，実行する処理を選んだり，同じ処理を繰り返したりします．</p>
 <div class="lesson-links">

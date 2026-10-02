@@ -2618,9 +2618,9 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec13.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week13 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week13</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
-<p>基本課題1〜4では，確保・初期化・利用・解放を追跡します．発展課題ではcallocとrealloc，静的記憶期間，第12回から続く不透明な構造体を扱います．</p>
+<p>基本課題1〜4では，確保・初期化・利用・解放を追跡します．発展課題では<code>calloc</code>と<code>realloc</code>，静的記憶期間，第12回から続く不透明な構造体を扱います．</p>
 <table>
 <thead>
 <tr>
@@ -2631,35 +2631,35 @@
 </thead>
 <tbody>
 <tr>
-<td>Dynamic</td>
-<td>講義のdynamic.c</td>
+<td><code>Dynamic</code></td>
+<td>講義の<code>dynamic.c</code></td>
 <td>入力検査，必要量の確保，逆順</td>
 </tr>
 <tr>
-<td>NewPoint</td>
+<td><code>NewPoint</code></td>
 <td>課題3の1ファイル</td>
 <td>所有権の移動，複合リテラル，失敗時の分岐</td>
 </tr>
 <tr>
-<td>GrowArray</td>
+<td><code>GrowArray</code></td>
 <td>発展1の1ファイル</td>
-<td>callocとrealloc，保持部分と追加部分</td>
+<td><code>calloc</code>と<code>realloc</code>，保持部分と追加部分</td>
 </tr>
 <tr>
-<td>StorageCount</td>
+<td><code>StorageCount</code></td>
 <td>発展2の1ファイル</td>
-<td>自動変数とstatic変数</td>
+<td>自動変数と<code>static</code>変数</td>
 </tr>
 <tr>
-<td>DynamicVector</td>
-<td>講義のvector_main.c，vector.c，vector.h</td>
+<td><code>DynamicVector</code></td>
+<td>講義の<code>vector_main.c</code>，<code>vector.c</code>，<code>vector.h</code></td>
 <td>分割，途中失敗，解放API</td>
 </tr>
 </tbody>
 </table>
 <p>課題4の誤ったコードは実行しません．課題3以降の失敗試験も，巨大な領域を要求するのではなく，確保関数の戻り値を試験用に変えて行います．</p>
 <h2 id="1">課題1　動的配列<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>Dynamic</code> プロジェクトでdynamic.cを実行します．起動引数1，5，1000で確認し，0，-1，1001，abc，引数なしを拒否することを確かめます．</p>
+<p><code>Dynamic</code> プロジェクトで<code>dynamic.c</code>を実行します．起動引数1，5，1000で確認し，0，-1，1001，<code>abc</code>，引数なしを拒否することを確かめます．</p>
 <h3 id="_2">準備と予測<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>Visual Studioの「プロパティ → 構成プロパティ → デバッグ → コマンド引数」で個数を設定します．引数には実行ファイル名を含めず，まず<code>5</code>だけを入力します．設定対象の構成が，実行するDebug/x64等の構成と一致していることを確かめてください．</p>
 <p>実行前に，ソース内へ次の6つの役割を示すコメントを付けます．コメントによって処理の順番が読み取れるようにしてください．</p>
@@ -2702,14 +2702,14 @@
 <td>確保前に終了</td>
 </tr>
 <tr>
-<td>abc，3x，空引数<code>""</code></td>
+<td><code>abc</code>，<code>3x</code>，空引数<code>""</code></td>
 <td>記入してください</td>
 <td>未変換・余計な文字</td>
 </tr>
 <tr>
 <td>999999999999999999999999</td>
 <td>記入してください</td>
-<td>strtolのERANGE</td>
+<td><code>strtol</code>の<code>ERANGE</code></td>
 </tr>
 <tr>
 <td>指定なし，5 6</td>
@@ -2720,26 +2720,26 @@
 </table>
 <p>エラー時には正常時の合計が表示されないことも確認します．「何も表示されずに落ちた」と「診断を出して意図的に終了した」は別です．</p>
 <h3 id="_4">確保量を説明する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>n=5のとき，sizeof <em>valuesが4であると仮定すると必要量は20バイトです．実際のsizeof </em>valuesを%zuで表示して確認してもかまいません．sizeof valuesが同じ値になるとは限らないことを説明してください．</p>
+<p><code>n=5</code>のとき，<code>sizeof *values</code>が4であると仮定すると必要量は20バイトです．実際の<code>sizeof *values</code>を<code>%zu</code>で表示して確認してもかまいません．<code>sizeof values</code>が同じ値になるとは限らないことを説明してください．</p>
 <details class="tip">
 <summary>ポインタと配列を混同しない</summary>
-<p><code>values</code>の型はint *です．ポインタ自身のsizeofを何で割っても，mallocへ渡した個数は復元できません．nを保持すること自体が配列を安全に使うための情報管理です．診断の追加ではアドレスは<code>%p</code>と<code>(void *)values</code>，サイズは<code>%zu</code>を使い，環境依存の数値を固定の正解にしません．</p>
+<p><code>values</code>の型は<code>int *</code>です．ポインタ自身の<code>sizeof</code>を何で割っても，<code>malloc</code>へ渡した個数は復元できません．<code>n</code>を保持すること自体が配列を安全に使うための情報管理です．診断の追加ではアドレスは<code>%p</code>と<code>(void *)values</code>，サイズは<code>%zu</code>を使い，環境依存の数値を固定の正解にしません．</p>
 </details>
 <h3 id="_5">追跡表を作る<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>n=3で，各反復のi，代入後のvalues[i]，加算後のsumを書き出します．最後の要素の添字は3ではなく2です．なぜ<code>i &lt;= n</code>ではなく<code>i &lt; n</code>なのかを，確保した領域の図で説明してください．</p>
+<p><code>n=3</code>で，各反復の<code>i</code>，代入後の<code>values[i]</code>，加算後の<code>sum</code>を書き出します．最後の要素の添字は3ではなく2です．なぜ<code>i &lt;= n</code>ではなく<code>i &lt; n</code>なのかを，確保した領域の図で説明してください．</p>
 <h2 id="2">課題2　配列を逆順にする<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>課題1の配列の初期化後，freeより前に逆順に並べ替える処理を追加します．n=5なら5 4 3 2 1です．1，2，5で確認してください．</p>
+<p>課題1の配列の初期化後，<code>free</code>より前に逆順に並べ替える処理を追加します．<code>n=5</code>なら5 4 3 2 1です．1，2，5で確認してください．</p>
 <details class="tip">
 <summary>ヒント</summary>
 <p>先頭と末尾から組にし，半分まで交換します．</p>
 </details>
-<p>sumやmeanは順序を変えても変わりません．奇数個の中央要素を交換しなくてよい理由を説明します．</p>
+<p><code>sum</code>や<code>mean</code>は順序を変えても変わりません．奇数個の中央要素を交換しなくてよい理由を説明します．</p>
 <h3 id="_6">変更する場所<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>初期化と集計のループを終え，sumとmeanを表示した後，free(values)より前に自分で作成した逆順処理を追加します．mallocする回数は増やさず，確保した同じ領域を使って並べ替えます．</p>
+<p>初期化と集計のループを終え，<code>sum</code>と<code>mean</code>を表示した後，<code>free(values)</code>より前に自分で作成した逆順処理を追加します．<code>malloc</code>する回数は増やさず，確保した同じ領域を使って並べ替えます．</p>
 <table>
 <thead>
 <tr>
-<th>n</th>
+<th><code>n</code></th>
 <th>交換する添字の組</th>
 <th>表示される逆順</th>
 </tr>
@@ -2764,26 +2764,26 @@
 </table>
 <h3 id="_7">考察<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <ul>
-<li>n/2が整数の除算であることは，反復回数にどう影響するか．</li>
+<li><code>n/2</code>が整数の除算であることは，反復回数にどう影響するか．</li>
 <li>全要素について交換すると，なぜ元の順序へ戻るか．</li>
-<li>作業用のtempにfreeが不要なのはなぜか．</li>
-<li>逆順後もvaluesが確保領域の先頭を指していることは，解放にどう役立つか．</li>
+<li>作業用の<code>temp</code>に<code>free</code>が不要なのはなぜか．</li>
+<li>逆順後も<code>values</code>が確保領域の先頭を指していることは，解放にどう役立つか．</li>
 </ul>
 <h3 id="_8">追加：独立したコピー<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>元の配列を残したい場合は，別の領域を確保してコピーする必要があります．<code>int *copy = values;</code>ではポインタをコピーするだけなので，copyを通して逆順にすると元の配列も変わります．</p>
-<p>初期化後に別のint配列copyを動的確保し，要素をコピーする処理を自分で作成してください．copyだけを逆順にし，両方を表示します．確保失敗時には先に確保していたvaluesを解放して終了し，成功時は最後に両方の領域を解放します．この課題ではnのサイズ検査はすでに済んでいます．</p>
+<p>元の配列を残したい場合は，別の領域を確保してコピーする必要があります．<code>int *copy = values;</code>ではポインタをコピーするだけなので，<code>copy</code>を通して逆順にすると元の配列も変わります．</p>
+<p>初期化後に別の<code>int</code>配列<code>copy</code>を動的確保し，要素をコピーする処理を自分で作成してください．<code>copy</code>だけを逆順にし，両方を表示します．確保失敗時には先に確保していた<code>values</code>を解放して終了し，成功時は最後に両方の領域を解放します．この課題では<code>n</code>のサイズ検査はすでに済んでいます．</p>
 <h2 id="3">課題3　構造体を確保する関数<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>NewPoint</code> プロジェクトでPointを動的確保して返す関数を作ります．成功時の所有者は呼び出し元です．</p>
-<p>Pointはdouble型のxとyを持つ構造体とします．<code>Point *new_point(double x, double y)</code>を実装し，mainで(3.0, 4.0)を生成してください．確保失敗を検査し，成功時だけ両メンバを表示して解放します．stdio.hとstdlib.hを取り込みます．</p>
+<p><code>NewPoint</code> プロジェクトで<code>Point</code>を動的確保して返す関数を作ります．成功時の所有者は呼び出し元です．</p>
+<p><code>Point</code>は<code>double</code>型の<code>x</code>と<code>y</code>を持つ構造体とします．<code>Point *new_point(double x, double y)</code>を実装し，<code>main</code>で(3.0, 4.0)を生成してください．確保失敗を検査し，成功時だけ両メンバを表示して解放します．<code>stdio.h</code>と<code>stdlib.h</code>を取り込みます．</p>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
 <h3 id="_9">関数の契約を書く<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>new_pointの前へ，「成功なら初期化済みのPointを返し，呼び出し元がfreeする．失敗ならNULLを返す」というコメントを追加してください．関数名だけから解放責任を推測させないことが大切です．</p>
+<p><code>new_point</code>の前へ，「成功なら初期化済みの<code>Point</code>を返し，呼び出し元が<code>free</code>する．失敗なら<code>NULL</code>を返す」というコメントを追加してください．関数名だけから解放責任を推測させないことが大切です．</p>
 <table>
 <thead>
 <tr>
 <th>場面</th>
-<th>new_point内のp</th>
-<th>動的なPoint本体</th>
+<th><code>new_point</code>内の<code>p</code></th>
+<th>動的な<code>Point</code>本体</th>
 </tr>
 </thead>
 <tbody>
@@ -2795,25 +2795,25 @@
 <tr>
 <td>メンバへの代入後</td>
 <td>本体を指す</td>
-<td>x，yが有効</td>
+<td><code>x</code>，<code>y</code>が有効</td>
 </tr>
 <tr>
-<td>return後</td>
+<td><code>return</code>後</td>
 <td>局所変数としての寿命は終了</td>
-<td>呼び出し元のpから使える</td>
+<td>呼び出し元の<code>p</code>から使える</td>
 </tr>
 <tr>
-<td>mainのfree後</td>
+<td><code>main</code>の<code>free</code>後</td>
 <td>関数はすでに終了</td>
 <td>寿命が終了し，再参照しない</td>
 </tr>
 </tbody>
 </table>
 <h3 id="_10">複合リテラルで初期化する<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p><code>p-&gt;x = x; p-&gt;y = y;</code>の2文を，<code>*p = (Point){.x = x, .y = y};</code>へ置き換えても同じ出力になることを確認してください．NULL判定は削除しません．左辺をpにしてしまうと，ポインタに構造体を代入する型の誤りになります．</p>
-<p>値を(0,0)，(−2,5)へ変更して，すべてのメンバが初期化されることを確認します．この例では構造体内にさらに動的なメンバがないため，Point本体へのfreeだけで後始末が終わります．</p>
+<p><code>p-&gt;x = x; p-&gt;y = y;</code>の2文を，<code>*p = (Point){.x = x, .y = y};</code>へ置き換えても同じ出力になることを確認してください．<code>NULL</code>判定は削除しません．左辺を<code>p</code>にしてしまうと，ポインタに構造体を代入する型の誤りになります．</p>
+<p>値を(0,0)，(−2,5)へ変更して，すべてのメンバが初期化されることを確認します．この例では構造体内にさらに動的なメンバがないため，<code>Point</code>本体への<code>free</code>だけで後始末が終わります．</p>
 <h3 id="_11">失敗を模擬する<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>実際のメモリ不足を起こす代わりに，試験用の小さな関数をnew_pointより前へ追加します．正常版を残した別プロジェクトかコピーで行い，完了したら試験設定を戻してください．</p>
+<p>実際のメモリ不足を起こす代わりに，試験用の小さな関数を<code>new_point</code>より前へ追加します．正常版を残した別プロジェクトかコピーで行い，完了したら試験設定を戻してください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">point_allocate</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> bytes)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> simulate_failure </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
@@ -2823,12 +2823,12 @@
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> malloc(bytes);</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>new_pointのmalloc呼び出しだけを<code>point_allocate(sizeof *p)</code>へ変更します．simulate_failure=0なら正常出力，1なら<code>allocation failed</code>という診断で終了するはずです．エラーを出した後でp-&gt;xへアクセスしないことを，ソースとステップ実行の両方で確認します．</p>
-<p>この関数はerrnoを設定しません．NULLを見て失敗を判定できることが重要です．本物のmallocの資源管理やOSの診断まで模擬したわけではありません．</p>
+<p><code>new_point</code>の<code>malloc</code>呼び出しだけを<code>point_allocate(sizeof *p)</code>へ変更します．<code>simulate_failure=0</code>なら正常出力，1なら<code>allocation failed</code>という診断で終了するはずです．エラーを出した後で<code>p-&gt;x</code>へアクセスしないことを，ソースとステップ実行の両方で確認します．</p>
+<p>この関数は<code>errno</code>を設定しません．<code>NULL</code>を見て失敗を判定できることが重要です．本物の<code>malloc</code>の資源管理やOSの診断まで模擬したわけではありません．</p>
 <h3 id="_12">戻り方を比較する<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>Pointを値として返す，呼び出し元のPoint <em>へ書き込む，mallocしたPoint </em>を返す，という3つの方法を比較してください．1個の小さなPointを作るだけなら動的確保が必須ではありません．必要な寿命，失敗の可能性，解放責任が違います．</p>
+<p><code>Point</code>を値として返す，呼び出し元の<code>Point *</code>へ書き込む，<code>malloc</code>した<code>Point *</code>を返す，という3つの方法を比較してください．1個の小さな<code>Point</code>を作るだけなら動的確保が必須ではありません．必要な寿命，失敗の可能性，解放責任が違います．</p>
 <h2 id="4">課題4　コードレビュー<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>次は実行せず，問題を指摘してください．aはmallocで確保に成功したポインタとします．</p>
+<p>次は実行せず，問題を指摘してください．<code>a</code>は<code>malloc</code>で確保に成功したポインタとします．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> a;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">free(a);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> NULL;</span>
@@ -2847,7 +2847,7 @@
 <tbody>
 <tr>
 <td><code>int *p; free(p);</code></td>
-<td>pにどの値が入っているか</td>
+<td><code>p</code>にどの値が入っているか</td>
 </tr>
 <tr>
 <td><code>int a[3]; free(a);</code></td>
@@ -2871,22 +2871,22 @@
 </tr>
 <tr>
 <td><code>malloc(n * sizeof p)</code></td>
-<td>p自身と要素のどちらの大きさか</td>
+<td><code>p</code>自身と要素のどちらの大きさか</td>
 </tr>
 </tbody>
 </table>
 <h3 id="_14">所有者を図にする<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
-<p>「mainが配列を確保し，表示関数が借りて表示し，mainが解放する」場合を矢印で描きます．次に「生成関数が確保し，mainへ所有権を渡す」場合を描きます．関数に渡しただけで自動的に解放責任が移るわけではないことを説明してください．</p>
+<p>「<code>main</code>が配列を確保し，表示関数が借りて表示し，<code>main</code>が解放する」場合を矢印で描きます．次に「生成関数が確保し，<code>main</code>へ所有権を渡す」場合を描きます．関数に渡しただけで自動的に解放責任が移るわけではないことを説明してください．</p>
 <details class="tip">
 <summary>レビューで確認する順序</summary>
-<p>まず各malloc/calloc/reallocの成功で生きている領域を数えます．次にすべてのreturnや失敗分岐をたどり，誰が解放するかを確認します．最後に別名ポインタが残る場所と，解放・再確保後の参照を探します．正常入力で1回動いただけでは，これらの不具合をすべて見つけることはできません．</p>
+<p>まず各<code>malloc/calloc/realloc</code>の成功で生きている領域を数えます．次にすべての<code>return</code>や失敗分岐をたどり，誰が解放するかを確認します．最後に別名ポインタが残る場所と，解放・再確保後の参照を探します．正常入力で1回動いただけでは，これらの不具合をすべて見つけることはできません．</p>
 </details>
-<h2 id="1-callocrealloc">発展1　callocとreallocで配列を拡張する<a class="headerlink" href="#1-callocrealloc" title="Permanent link">&para;</a></h2>
-<p>GrowArrayプロジェクトを作ります．最初の3要素をcallocし，0であることを確認してから1，2，3を代入します．その後5要素へ拡張し，増えた要素を4，5で初期化します．</p>
+<h2 id="1-callocrealloc">発展1　<code>calloc</code>と<code>realloc</code>で配列を拡張する<a class="headerlink" href="#1-callocrealloc" title="Permanent link">&para;</a></h2>
+<p><code>GrowArray</code>プロジェクトを作ります．最初の3要素を<code>calloc</code>し，0であることを確認してから1，2，3を代入します．その後5要素へ拡張し，増えた要素を4，5で初期化します．</p>
 <h3 id="_15">仕様<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ul>
-<li>calloc・reallocの両方で失敗を検査する．</li>
-<li>reallocの前に新しい個数とバイト数を検査する．</li>
+<li><code>calloc</code>・<code>realloc</code>の両方で失敗を検査する．</li>
+<li><code>realloc</code>の前に新しい個数とバイト数を検査する．</li>
 <li>失敗時は元の領域を解放して終了する．</li>
 <li>成功時は返されたポインタだけを以後使用する．</li>
 <li>新しい部分は読む前に代入する．</li>
@@ -2894,14 +2894,14 @@
 </ul>
 <details class="tip">
 <summary>実装前に考える</summary>
-<p>old_nは元の個数，new_nは変更後の個数です．reallocが成功するまでは，元の領域を管理しているpを上書きしません．初期化が必要なのはold_nからnew_n−1までです．縮小した場合には増分がないので，そのループは実行されません．</p>
+<p><code>old_n</code>は元の個数，<code>new_n</code>は変更後の個数です．<code>realloc</code>が成功するまでは，元の領域を管理している<code>p</code>を上書きしません．初期化が必要なのは<code>old_n</code>から<code>new_n</code>−1までです．縮小した場合には増分がないので，そのループは実行されません．</p>
 </details>
 <h3 id="_16">境界を調べる<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>old_n</th>
-<th>new_n</th>
+<th><code>old_n</code></th>
+<th><code>new_n</code></th>
 <th>確認すること</th>
 </tr>
 </thead>
@@ -2943,9 +2943,9 @@
 </tr>
 </tbody>
 </table>
-<p>realloc後のp[3]が，拡張時と縮小時でどう違うかを説明してください．new_n=1でp[3]を読んで確かめてはいけません．</p>
-<h3 id="realloc">reallocの失敗を模擬する<a class="headerlink" href="#realloc" title="Permanent link">&para;</a></h3>
-<p>次の関数をmainより前へ追加し，reallocの呼び出しをtry_resizeへ置き換えます．課題3の失敗模擬と同じ考え方ですが，<strong>失敗したとき元の領域が残る</strong>点が違います．</p>
+<p><code>realloc</code>後の<code>p[3]</code>が，拡張時と縮小時でどう違うかを説明してください．<code>new_n=1</code>で<code>p[3]</code>を読んで確かめてはいけません．</p>
+<h3 id="realloc"><code>realloc</code>の失敗を模擬する<a class="headerlink" href="#realloc" title="Permanent link">&para;</a></h3>
+<p>次の関数を<code>main</code>より前へ追加し，<code>realloc</code>の呼び出しを<code>try_resize</code>へ置き換えます．課題3の失敗模擬と同じ考え方ですが，<strong>失敗したとき元の領域が残る</strong>点が違います．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">try_resize</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">old, </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> bytes)</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> simulate_failure </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
@@ -2955,9 +2955,9 @@
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> realloc(old, bytes);</span>
 <a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>NULL分岐でfreeする直前に，p[0]を表示すれば1のままであることを確認できます．この参照は再確保が<strong>失敗した経路だけ</strong>で行います．試験後は元の関数呼び出しへ戻してください．</p>
-<h2 id="2-static">発展2　static変数の寿命を確かめる<a class="headerlink" href="#2-static" title="Permanent link">&para;</a></h2>
-<p>次のコードをStorageCountで実行します．ヒープを使わずに値が保持される仕組みを確認し，mallocとの違いを説明します．</p>
+<p><code>NULL</code>分岐で<code>free</code>する直前に，<code>p[0]</code>を表示すれば1のままであることを確認できます．この参照は再確保が<strong>失敗した経路だけ</strong>で行います．試験後は元の関数呼び出しへ戻してください．</p>
+<h2 id="2-static">発展2　<code>static</code>変数の寿命を確かめる<a class="headerlink" href="#2-static" title="Permanent link">&para;</a></h2>
+<p>次のコードを<code>StorageCount</code>で実行します．ヒープを使わずに値が保持される仕組みを確認し，<code>malloc</code>との違いを説明します．</p>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">count.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-2"> 2</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-3-3"> 3</a></span>
@@ -2994,7 +2994,7 @@
 <table>
 <thead>
 <tr>
-<th>next_count内の書き方</th>
+<th><code>next_count</code>内の書き方</th>
 <th>予測する出力</th>
 </tr>
 </thead>
@@ -3013,9 +3013,9 @@
 </tr>
 </tbody>
 </table>
-<p>関数の前のstaticは内部リンケージを表し，関数内のcountのstaticは局所的な名前のまま静的記憶期間を与えています．役割を分けて説明してください．countへfreeを使わない理由も述べましょう．</p>
+<p>関数の前の<code>static</code>は内部リンケージを表し，関数内の<code>count</code>の<code>static</code>は局所的な名前のまま静的記憶期間を与えています．役割を分けて説明してください．<code>count</code>へ<code>free</code>を使わない理由も述べましょう．</p>
 <h3 id="12">第12回との接続：共有変数の宣言<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>以下の3ファイルを別のSharedCountプロジェクトに作る場合を考えます．実装側と利用側が同じヘッダを読みます．</p>
+<p>以下の3ファイルを別の<code>SharedCount</code>プロジェクトに作る場合を考えます．実装側と利用側が同じヘッダを読みます．</p>
 <div class="highlight" style="background: #272822"><span class="filename">counter.h（断片）</span><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #959077">#ifndef PL1_COUNTER_H</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #959077">#define PL1_COUNTER_H</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #66D9EF">extern</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total;</span>
@@ -3029,23 +3029,23 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">total;</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>main側ではcounter.hとstdio.hを取り込み，add_countを2回呼んだ後にtotalを表示します．期待する値は2です．次の変更は1つずつ試し，必ず正常な状態へ戻してください．</p>
+<p><code>main</code>側では<code>counter.h</code>と<code>stdio.h</code>を取り込み，<code>add_count</code>を2回呼んだ後に<code>total</code>を表示します．期待する値は2です．次の変更は1つずつ試し，必ず正常な状態へ戻してください．</p>
 <ol>
-<li>counter.cの<code>int total = 0;</code>だけを外す．</li>
-<li>定義を元に戻し，さらにmain側にも同じ定義を書く．</li>
+<li><code>counter.c</code>の<code>int total = 0;</code>だけを外す．</li>
+<li>定義を元に戻し，さらに<code>main</code>側にも同じ定義を書く．</li>
 </ol>
-<h2 id="3-vector">発展3　不透明なVectorの生成と解放<a class="headerlink" href="#3-vector" title="Permanent link">&para;</a></h2>
-<p>講義8の3ファイルをDynamicVectorへ保存します．この課題ではvector_main.cとvector.cの両方を同じプロジェクトへ追加します．第12回の同名ファイルとは内容が異なるため，コピー先のフォルダを分けてください．</p>
+<h2 id="3-vector">発展3　不透明な<code>Vector</code>の生成と解放<a class="headerlink" href="#3-vector" title="Permanent link">&para;</a></h2>
+<p>講義8の3ファイルを<code>DynamicVector</code>へ保存します．この課題では<code>vector_main.c</code>と<code>vector.c</code>の両方を同じプロジェクトへ追加します．第12回の同名ファイルとは内容が異なるため，コピー先のフォルダを分けてください．</p>
 <h3 id="_17">正常時の流れ<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <ol>
-<li>headerには構造体のメンバがないことを確認する．</li>
-<li>2x+yを手計算し，出力<code>result=5.0 8.0</code>を予測する．</li>
-<li>x，y，resultについて，生成した関数と解放した場所を対応させる．</li>
-<li>vector_destroyに渡すのがxではなく&amp;xである理由を説明する．</li>
-<li>解放後のx，y，resultがNULLになることを，変数ウォッチで確認する．メンバの参照はしない．</li>
+<li><code>header</code>には構造体のメンバがないことを確認する．</li>
+<li><code>2x+y</code>を手計算し，出力<code>result=5.0 8.0</code>を予測する．</li>
+<li><code>x</code>，<code>y</code>，<code>result</code>について，生成した関数と解放した場所を対応させる．</li>
+<li><code>vector_destroy</code>に渡すのが<code>x</code>ではなく<code>&amp;x</code>である理由を説明する．</li>
+<li>解放後の<code>x</code>，<code>y</code>，<code>result</code>が<code>NULL</code>になることを，変数ウォッチで確認する．メンバの参照はしない．</li>
 </ol>
 <h3 id="_18">途中で失敗した場合<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
-<p>vector.cのvector_createで使用するmallocを，次の試験用関数へ置き換えます．関数はvector_createより前に追加します．番号を0，1，2，3に変え，それぞれ新しく実行します．</p>
+<p><code>vector.c</code>の<code>vector_create</code>で使用する<code>malloc</code>を，次の試験用関数へ置き換えます．関数は<code>vector_create</code>より前に追加します．番号を0，1，2，3に変え，それぞれ新しく実行します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">vector_allocate</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> bytes)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">static</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> calls </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
@@ -3060,7 +3060,7 @@
 <table>
 <thead>
 <tr>
-<th>fail_on_call</th>
+<th><code>fail_on_call</code></th>
 <th>確保できる領域</th>
 <th>後始末の予測</th>
 </tr>
@@ -3088,29 +3088,29 @@
 </tr>
 </tbody>
 </table>
-<p>fail_on_call=0はこの3回の呼び出しで失敗させない設定です．OSの空きメモリが十分な通常の実行を前提とします．試験関数のstatic変数は実行中の呼び出し回数を保持しますが，プログラムを起動し直せば初期状態から始まります．</p>
+<p><code>fail_on_call=0</code>はこの3回の呼び出しで失敗させない設定です．OSの空きメモリが十分な通常の実行を前提とします．試験関数の<code>static</code>変数は実行中の呼び出し回数を保持しますが，プログラムを起動し直せば初期状態から始まります．</p>
 <details class="tip">
 <summary>デバッガで見る場所</summary>
-<p>cleanupの行とvector_destroyにブレークポイントを置きます．Vector *<em>pを受けた関数の</em>pがNULLか，有効な所有対象かを確認します．解放した本体へウォッチからアクセスし続けないでください．最後まで進んだ後，正常版の呼び出しへ戻してビルドします．</p>
+<p><code>cleanup</code>の行と<code>vector_destroy</code>にブレークポイントを置きます．<code>Vector **p</code>を受けた関数の<code>*p</code>が<code>NULL</code>か，有効な所有対象かを確認します．解放した本体へウォッチからアクセスし続けないでください．最後まで進んだ後，正常版の呼び出しへ戻してビルドします．</p>
 </details>
 <h3 id="_19">添字と保存先の検査<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
-<p>正常版で，resultが有効な間に次の断片を追加します．0と1は有効な添字，2は範囲外です．outの初期値99が失敗時に保たれることを確認します．</p>
+<p>正常版で，<code>result</code>が有効な間に次の断片を追加します．0と1は有効な添字，2は範囲外です．<code>out</code>の初期値99が失敗時に保たれることを確認します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> out </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">99.0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> ok </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> vector_get(result, </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">, </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">out);</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;ok=%d out=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, ok, out);</span>
 </code></pre></div>
 <p>実行前に結果を予測し，実行後に結果とその理由を記録してください．</p>
 <h3 id="_20">二重ポインタの意味<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
-<p>すべての後始末の後，さらに<code>vector_destroy(&amp;x);</code>を呼んでも，xはNULLなので何もしません．ただし，解放前に別のポインタへxをコピーしていた場合，そのコピーは自動ではNULLになりません．このAPIは<strong>すべての二重解放を防ぐ魔法ではない</strong>ことを説明してください．</p>
+<p>すべての後始末の後，さらに<code>vector_destroy(&amp;x);</code>を呼んでも，<code>x</code>は<code>NULL</code>なので何もしません．ただし，解放前に別のポインタへ<code>x</code>をコピーしていた場合，そのコピーは自動では<code>NULL</code>になりません．このAPIは<strong>すべての二重解放を防ぐ魔法ではない</strong>ことを説明してください．</p>
 <h3 id="_21">さらに考える：動的なメンバ<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
-<p>Vectorの配列メンバは本体に含まれるので，この例は本体へのfreeで完了します．もし<code>double *v;</code>へ変え，vの配列も別に確保したなら，生成の途中失敗と解放順に何を追加する必要があるでしょうか．</p>
+<p><code>Vector</code>の配列メンバは本体に含まれるので，この例は本体への<code>free</code>で完了します．もし<code>double *v;</code>へ変え，<code>v</code>の配列も別に確保したなら，生成の途中失敗と解放順に何を追加する必要があるでしょうか．</p>
 <h2 id="_22">確認問題<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h2>
 <ol>
 <li>ポインタ変数が局所変数なら，指す領域も必ずスタックにあるか．</li>
-<li>callocした整数配列とmallocした整数配列を，代入前に同じように表示してよいか．</li>
-<li>freeの後にp=NULLとしたら，q=pで以前に作った別名もNULLになるか．</li>
-<li>realloc失敗後の元の配列と，成功後の古い要素ポインタは同じ扱いか．</li>
-<li>動的な配列を含む構造体の本体だけをfreeすれば，配列も自動で解放されるか．</li>
+<li><code>calloc</code>した整数配列と<code>malloc</code>した整数配列を，代入前に同じように表示してよいか．</li>
+<li><code>free</code>の後に<code>p=NULL</code>としたら，<code>q=p</code>で以前に作った別名も<code>NULL</code>になるか．</li>
+<li><code>realloc</code>失敗後の元の配列と，成功後の古い要素ポインタは同じ扱いか．</li>
+<li>動的な配列を含む構造体の本体だけを<code>free</code>すれば，配列も自動で解放されるか．</li>
 <li>エラー処理があることを確認するのに，実際にメモリを使い切る必要があるか．</li>
 </ol>
 <h2 id="_23">チェックリスト<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
@@ -3119,8 +3119,8 @@
 <li>警告を確認し，原因を説明・修正した．</li>
 <li>自分の言葉で，処理の流れと使った型を説明できる．</li>
 <li>確保した各領域の所有者を1つに決め，途中失敗の経路でも解放した．</li>
-<li>ポインタのsizeofと要素のsizeofを区別し，積を計算する前に検査した．</li>
-<li>realloc成功後には古い参照を使わず，追加部分を初期化した．</li>
+<li>ポインタの<code>sizeof</code>と要素の<code>sizeof</code>を区別し，積を計算する前に検査した．</li>
+<li><code>realloc</code>成功後には古い参照を使わず，追加部分を初期化した．</li>
 <li>未初期化領域の読み取り，解放後の使用，巨大な確保実験を行っていない．</li>
 <li>試験用の失敗設定を戻し，最後に正常版のビルド・実行を確認した．</li>
 </ul>

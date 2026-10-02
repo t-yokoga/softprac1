@@ -2336,7 +2336,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec04.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week04 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week04</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">今回の課題<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <table>
@@ -2350,12 +2350,12 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>if・else ifによる料金分類</td>
+<td><code>if</code>・<code>else if</code>による料金分類</td>
 <td>条件の順序と境界</td>
 </tr>
 <tr>
 <td>2</td>
-<td>forとwhileによる合計</td>
+<td><code>for</code>と<code>while</code>による合計</td>
 <td>初期化・条件・更新</td>
 </tr>
 <tr>
@@ -2365,12 +2365,12 @@
 </tr>
 <tr>
 <td>4</td>
-<td>2の累乗とdo-while</td>
+<td>2の累乗と<code>do-while</code></td>
 <td>回数ではなく値で継続を決める</td>
 </tr>
 <tr>
 <td>発展</td>
-<td>break・continue・switch</td>
+<td><code>break</code>・<code>continue</code>・<code>switch</code></td>
 <td>移動先とフォールスルー</td>
 </tr>
 </tbody>
@@ -2378,7 +2378,7 @@
 <p>基本課題1〜4を順に進め，発展は基本が終わってから取り組んでください．入力関数は使わず，ソース内の初期値を変えて確認します．各課題では「動いた」だけで終えず，<strong>どの条件が真になり，何回本体を実行したか</strong>を説明します．</p>
 <h3 id="_3">各プログラムに共通の手順<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <ol>
-<li>プロジェクトを作り，.cファイルを1つ追加する．</li>
+<li>プロジェクトを作り，<code>.c</code>ファイルを1つ追加する．</li>
 <li>入力に相当する固定値と，予想する表示を書く．</li>
 <li>条件式と更新を紙上で追い，停止することを確認する．</li>
 <li>保存・ビルド後に実行し，表示と予想を比較する．</li>
@@ -2387,12 +2387,12 @@
 </ol>
 <p>記録は「変更した値／予想／実行結果／そうなる理由」の4項目に分けると整理しやすくなります．実行が止まらなければ中断して確認してください．整数の範囲を超えるまでループを伸ばす実験は行いません．</p>
 <h2 id="1">課題1　料金を分類する<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>Fee</code> プロジェクトでageを固定値として宣言し，0〜5歳は0，6〜17歳は500，18歳以上は1000を表示してください．負の年齢はinvalidと表示します．-1，0，5，6，17，18で確認してください．</p>
-<p>初期値はage = 17とします．表示するのは料金の数値だけで，最後に改行します．年齢の不正値を最初に除き，残った値を小さい区分から分類しましょう．次の表は「どれか1行だけ」に該当するように読みます．</p>
+<p><code>Fee</code> プロジェクトで<code>age</code>を固定値として宣言し，0〜5歳は0，6〜17歳は500，18歳以上は1000を表示してください．負の年齢は<code>invalid</code>と表示します．-1，0，5，6，17，18で確認してください．</p>
+<p>初期値は<code>age = 17</code>とします．表示するのは料金の数値だけで，最後に改行します．年齢の不正値を最初に除き，残った値を小さい区分から分類しましょう．次の表は「どれか1行だけ」に該当するように読みます．</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: right;">age</th>
+<th style="text-align: right;"><code>age</code></th>
 <th>期待する表示</th>
 <th>調べる境界</th>
 </tr>
@@ -2432,28 +2432,28 @@
 </table>
 <details class="tip">
 <summary>ヒント</summary>
-<p>小さい区分からelse ifで調べます．</p>
+<p>小さい区分から<code>else if</code>で調べます．</p>
 </details>
 <h3 id="_4">条件の順序を確かめる<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>age &lt;= 17をage &lt;= 5より前に置くと，ageが5のときどうなるでしょうか．変更前に予想し，実行後は正しい順序に戻してください．また，else ifを別々のifへ変えると，複数の表示が出る場合があります．条件が独立になることを図や言葉で説明してください．</p>
-<p><strong>説明すること</strong>：負の年齢の検査を省くと，−1はどの区分に入るか．また，18歳以上を最後のelseだけで表せるのはなぜか．</p>
+<p><code>age &lt;= 17</code>を<code>age &lt;= 5</code>より前に置くと，<code>age</code>が5のときどうなるでしょうか．変更前に予想し，実行後は正しい順序に戻してください．また，<code>else if</code>を別々の<code>if</code>へ変えると，複数の表示が出る場合があります．条件が独立になることを図や言葉で説明してください．</p>
+<p><strong>説明すること</strong>：負の年齢の検査を省くと，−1はどの区分に入るか．また，18歳以上を最後の<code>else</code>だけで表せるのはなぜか．</p>
 <h2 id="2">課題2　偶数の合計<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>EvenSum</code> プロジェクトで，1からnまでの偶数の合計をfor文で求めます．nは0〜100の固定値とし，n=10なら30を表示してください．0，1，2，100でも確認します．</p>
-<p>n=10のときは2＋4＋6＋8＋10＝30です．合計用のsumとカウンタのiは役割が異なります．sumはそれまでの結果を保存し，iは現在調べている数を表します．</p>
+<p><code>EvenSum</code> プロジェクトで，1から<code>n</code>までの偶数の合計を<code>for</code>文で求めます．<code>n</code>は0〜100の固定値とし，<code>n=10</code>なら30を表示してください．0，1，2，100でも確認します．</p>
+<p><code>n=10</code>のときは2＋4＋6＋8＋10＝30です．合計用の<code>sum</code>とカウンタの<code>i</code>は役割が異なります．<code>sum</code>はそれまでの結果を保存し，<code>i</code>は現在調べている数を表します．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>sumを0にし，ループ内でiが2で割り切れるときだけ加算します．</p>
+<p><code>sum</code>を0にし，ループ内で<code>i</code>が2で割り切れるときだけ加算します．</p>
 </details>
-<p>0，1，2，100の期待値は順に0，0，2，2550です．同じ処理をwhileでも書き，結果を比較してください．</p>
+<p>0，1，2，100の期待値は順に0，0，2，2550です．同じ処理を<code>while</code>でも書き，結果を比較してください．</p>
 <h3 id="_5">値を追跡する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>n=4として，紙上で次の表を埋めてから実行してください．</p>
+<p><code>n=4</code>として，紙上で次の表を埋めてから実行してください．</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: right;">本体に入るときのi</th>
+<th style="text-align: right;">本体に入るときの<code>i</code></th>
 <th>偶数か</th>
-<th style="text-align: right;">加算前のsum</th>
-<th style="text-align: right;">加算後のsum</th>
+<th style="text-align: right;">加算前の<code>sum</code></th>
+<th style="text-align: right;">加算後の<code>sum</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2483,23 +2483,23 @@
 </tr>
 </tbody>
 </table>
-<h3 id="while">whileへ書き換える<a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
-<p>forの初期化をループの前へ，更新を本体の最後へ移します．以下で元のfor全体を置き換え，n=0，1，2，10，100で同じ結果になることを確認してください．sumの初期化と最後のprintfはそのまま残します．</p>
-<p><strong>説明すること</strong>：n=0では条件判定と本体はそれぞれ何回行われるか．sum = 0を本体の中へ移してはいけないのはなぜか．</p>
-<p>余裕があれば，iを2から始めて2ずつ増やすforへ変更します．偶数だけを通るため，偶奇判定のifは不要です．出力は同じでも，本体の実行回数が違うことを確かめましょう．</p>
+<h3 id="while"><code>while</code>へ書き換える<a class="headerlink" href="#while" title="Permanent link">&para;</a></h3>
+<p><code>for</code>の初期化をループの前へ，更新を本体の最後へ移します．以下で元の<code>for</code>全体を置き換え，<code>n=0</code>，1，2，10，100で同じ結果になることを確認してください．<code>sum</code>の初期化と最後の<code>printf</code>はそのまま残します．</p>
+<p><strong>説明すること</strong>：<code>n=0</code>では条件判定と本体はそれぞれ何回行われるか．<code>sum = 0</code>を本体の中へ移してはいけないのはなぜか．</p>
+<p>余裕があれば，<code>i</code>を2から始めて2ずつ増やす<code>for</code>へ変更します．偶数だけを通るため，偶奇判定の<code>if</code>は不要です．出力は同じでも，本体の実行回数が違うことを確かめましょう．</p>
 <h2 id="3">課題3　小さな掛け算表<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
 <p><code>Table</code> プロジェクトで1〜3の掛け算表を表示します．外側を行，内側を列にします．</p>
-<p>rowを1〜3，colを1〜3として，row * colを表示します．列の間には半角スペースを1つ入れ，各数値は%2dで表示します．行の最後に余分な区切りのスペースは付けず，改行を1回入れます．</p>
+<p><code>row</code>を1〜3，<code>col</code>を1〜3として，<code>row * col</code>を表示します．列の間には半角スペースを1つ入れ，各数値は<code>%2d</code>で表示します．行の最後に余分な区切りのスペースは付けず，改行を1回入れます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a> 1  2  3
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> 2  4  6
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> 3  6  9
 </code></pre></div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>%2dは最低2文字幅で整数を表示します．改行は内側のループが終わった後です．</p>
+<p><code>%2d</code>は最低2文字幅で整数を表示します．改行は内側のループが終わった後です．</p>
 </details>
 <h3 id="_6">外側と内側の関係を確認する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>rowが1の間に，colは1，2，3を通ります．rowが2になったらcolは再び1から始まります．組(row, col)の順を9組書き出してください．rowを更新する前に，内側の条件が偽になるまで実行する点に注意します．</p>
+<p><code>row</code>が1の間に，<code>col</code>は1，2，3を通ります．<code>row</code>が2になったら<code>col</code>は再び1から始まります．組<code>(row, col)</code>の順を9組書き出してください．<code>row</code>を更新する前に，内側の条件が偽になるまで実行する点に注意します．</p>
 <p>次に，列の上限と列間の判定を3から4へ変更し，3行4列の表を作ります．行の上限は変更しません．本体の表示回数は何回になるでしょうか．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a> 1  2  3  4
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> 2  4  6  8
@@ -2507,20 +2507,20 @@
 </code></pre></div>
 <p><strong>説明すること</strong>：改行を内側のループへ移したときと，外側のループより後へ移したとき，表の形はどう変わるか．予想してから1か所ずつ変更し，確認後は元へ戻してください．</p>
 <h2 id="4-1002">課題4　100未満の2の累乗<a class="headerlink" href="#4-1002" title="Permanent link">&para;</a></h2>
-<p><code>Powers</code> プロジェクトで，1から始めて値を2倍しながら，100未満の2の累乗を表示してください．for版とwhile版を順に作成します．数字の後ろにはコンマと半角スペースを入れ，最後に改行を1回だけ表示します．この課題では最後の64の後ろにも区切りを付けます．</p>
+<p><code>Powers</code> プロジェクトで，1から始めて値を2倍しながら，100未満の2の累乗を表示してください．<code>for</code>版と<code>while</code>版を順に作成します．数字の後ろにはコンマと半角スペースを入れ，最後に改行を1回だけ表示します．この課題では最後の64の後ろにも区切りを付けます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>1, 2, 4, 8, 16, 32, 64, 
 </code></pre></div>
-<p>変数limitを100とします．本体の中で毎回改行せず，改行用のprintfはループの後に置きます．入力ではなく値の初期化だけで条件を変更できるようにしましょう．</p>
+<p>変数<code>limit</code>を100とします．本体の中で毎回改行せず，改行用の<code>printf</code>はループの後に置きます．入力ではなく値の初期化だけで条件を変更できるようにしましょう．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>カウンタを1ずつ増やす必要はありません．初期値は1，継続条件はpower &lt; limit，更新はpower *= 2です．powerが128になったら条件が偽になります．</p>
+<p>カウンタを1ずつ増やす必要はありません．初期値は1，継続条件は<code>power &lt; limit</code>，更新は<code>power *= 2</code>です．<code>power</code>が128になったら条件が偽になります．</p>
 </details>
 <h3 id="_7">境界を確かめる<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>limitを次の値へ変更し，両方の版で確認してください．この課題のlimitは1〜100に限定し，むやみに上限を大きくしてはいけません．条件を満たさなくなる直前の更新でも，計算結果が型の範囲に収まる必要があります．</p>
+<p><code>limit</code>を次の値へ変更し，両方の版で確認してください．この課題の<code>limit</code>は1〜100に限定し，むやみに上限を大きくしてはいけません．条件を満たさなくなる直前の更新でも，計算結果が型の範囲に収まる必要があります．</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: right;">limit</th>
+<th style="text-align: right;"><code>limit</code></th>
 <th>表示する数</th>
 <th style="text-align: right;">本体の回数</th>
 </tr>
@@ -2553,38 +2553,38 @@
 </tr>
 </tbody>
 </table>
-<p><strong>説明すること</strong>：powerが64のとき，本体と更新の後にどの値で条件を調べるか．また，&lt;を&lt;=へ変更するとlimit=64の表示がどう変わるか．</p>
-<h3 id="do-while">do-whileとの違いを確認する<a class="headerlink" href="#do-while" title="Permanent link">&para;</a></h3>
-<p>while版のwhile全体を次の部分に置き換えてください．その前にあるpowerの初期化と，その後の改行は残します．limit=1と100の結果を予測します．</p>
+<p><strong>説明すること</strong>：<code>power</code>が64のとき，本体と更新の後にどの値で条件を調べるか．また，<code>&lt;</code>を<code>&lt;=</code>へ変更すると<code>limit=64</code>の表示がどう変わるか．</p>
+<h3 id="do-while"><code>do-while</code>との違いを確認する<a class="headerlink" href="#do-while" title="Permanent link">&para;</a></h3>
+<p><code>while</code>版の<code>while</code>全体を次の部分に置き換えてください．その前にある<code>power</code>の初期化と，その後の改行は残します．<code>limit=1</code>と100の結果を予測します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">do</span><span style="color: #F8F8F2"> {</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d, &quot;</span><span style="color: #F8F8F2">, power);</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    power </span><span style="color: #FF4689">*=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">while</span><span style="color: #F8F8F2"> (power </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> limit);</span>
 </code></pre></div>
-<h2 id="breakcontinueswitch">発展　break・continue・switchを追跡する<a class="headerlink" href="#breakcontinueswitch" title="Permanent link">&para;</a></h2>
+<h2 id="breakcontinueswitch">発展　<code>break</code>・<code>continue</code>・<code>switch</code>を追跡する<a class="headerlink" href="#breakcontinueswitch" title="Permanent link">&para;</a></h2>
 <h3 id="_8">途中で飛ばす処理<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p>次の断片をmain内で実行する前に表示順を答えてください．</p>
+<p>次の断片を<code>main</code>内で実行する前に表示順を答えてください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">6</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (i </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">) { </span><span style="color: #66D9EF">continue</span><span style="color: #F8F8F2">; }</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (i </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2">) { </span><span style="color: #66D9EF">break</span><span style="color: #F8F8F2">; }</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, i);</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>次に，i == 4の部分のbreakをcontinueへ変更します．表示は0，1，3，5になります．どちらの場合もi == 2のcontinueからはforの更新へ進むことを説明してください．</p>
-<h3 id="switchif">switchとifを比較する<a class="headerlink" href="#switchif" title="Permanent link">&para;</a></h3>
-<p><code>YearGroup</code> プロジェクトで，school_yearが1か2ならlower years，3か4ならupper years，それ以外ならinvalidと表示します．次の例を読み，school_yearを0〜5まで変えて実行してください．</p>
-<p>同じ処理をif・else if・elseで書き換え，結果を比較します．case 1とcase 2の間に処理がない理由と，printfの後にbreakがある理由を別々に説明してください．</p>
-<p>switch版で最初のbreakだけを外すと，school_year=2でlower yearsの後にupper yearsも表示されます．これはcase 3の条件に一致したからではなく，次の文へ実行が続いたためです．予想と照合したらbreakを戻してください．</p>
+<p>次に，<code>i == 4</code>の部分の<code>break</code>を<code>continue</code>へ変更します．表示は0，1，3，5になります．どちらの場合も<code>i == 2</code>の<code>continue</code>からは<code>for</code>の更新へ進むことを説明してください．</p>
+<h3 id="switchif"><code>switch</code>と<code>if</code>を比較する<a class="headerlink" href="#switchif" title="Permanent link">&para;</a></h3>
+<p><code>YearGroup</code> プロジェクトで，<code>school_year</code>が1か2ならlower years，3か4ならupper years，それ以外なら<code>invalid</code>と表示します．次の例を読み，<code>school_year</code>を0〜5まで変えて実行してください．</p>
+<p>同じ処理を<code>if</code>・<code>else if</code>・<code>else</code>で書き換え，結果を比較します．<code>case 1</code>と<code>case 2</code>の間に処理がない理由と，<code>printf</code>の後に<code>break</code>がある理由を別々に説明してください．</p>
+<p><code>switch</code>版で最初の<code>break</code>だけを外すと，<code>school_year=2</code>でlower yearsの後にupper yearsも表示されます．これは<code>case 3</code>の条件に一致したからではなく，次の文へ実行が続いたためです．予想と照合したら<code>break</code>を戻してください．</p>
 <h2 id="_9">確認問題<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ol>
-<li>if (3)は真・偽のどちらの経路へ進むか．</li>
-<li>flagが−1の場合，if (flag)，if (!flag)，if (flag == 1)はそれぞれ真か偽か．</li>
-<li>for (int i = 0; i &lt; 3; ++i)の本体と条件判定はそれぞれ何回か．</li>
-<li>whileとdo-whileの本体の実行回数が異なるのは，どのような開始条件か．</li>
-<li>forのcontinueはどこへ進むか．whileではどうか．</li>
-<li>3行4列の二重ループで，内側が毎回1回目にbreakしたら，本体は合計何回か．</li>
-<li>switchのdefaultがなく，一致するcaseもないとき，どこへ進むか．</li>
-<li>講義のgotoの例でgoto done;をbreak;に置き換えても同じ表示になるのはなぜか．</li>
+<li><code>if (3)</code>は真・偽のどちらの経路へ進むか．</li>
+<li><code>flag</code>が−1の場合，<code>if (flag)</code>，<code>if (!flag)</code>，<code>if (flag == 1)</code>はそれぞれ真か偽か．</li>
+<li><code>for (int i = 0; i &lt; 3; ++i)</code>の本体と条件判定はそれぞれ何回か．</li>
+<li><code>while</code>と<code>do-while</code>の本体の実行回数が異なるのは，どのような開始条件か．</li>
+<li><code>for</code>の<code>continue</code>はどこへ進むか．<code>while</code>ではどうか．</li>
+<li>3行4列の二重ループで，内側が毎回1回目に<code>break</code>したら，本体は合計何回か．</li>
+<li><code>switch</code>の<code>default</code>がなく，一致する<code>case</code>もないとき，どこへ進むか．</li>
+<li>講義の<code>goto</code>の例で<code>goto done;</code>を<code>break;</code>に置き換えても同じ表示になるのはなぜか．</li>
 </ol>
 <h2 id="_10">チェックリスト<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2592,7 +2592,7 @@
 <li>警告を確認し，原因を説明・修正した．</li>
 <li>自分の言葉で，処理の流れと使った型を説明できる．</li>
 <li>0回・1回・複数回の反復を区別して説明できる．</li>
-<li>breakとcontinue，switchのcaseとifの条件を混同していない．</li>
+<li><code>break</code>と<code>continue</code>，<code>switch</code>の<code>case</code>と<code>if</code>の条件を混同していない．</li>
 </ul>
 <p><a href="lec04.html">講義に戻る</a> ／ <a href="index.html">全体の目次</a></p>
 

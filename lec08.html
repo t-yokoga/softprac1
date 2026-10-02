@@ -1331,7 +1331,7 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      宣言のと，式のを区別する
+      宣言の*と，式の*を区別する
     </span>
   </a>
   
@@ -2209,7 +2209,7 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      宣言のと，式のを区別する
+      宣言の*と，式の*を区別する
     </span>
   </a>
   
@@ -2443,10 +2443,10 @@
 </ul>
 <h2 id="1">1　場所を値として持つ<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="environment">前回までとのつながりと準備<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
-<p>第2回では&amp;でアドレスを表示し，第5回では関数へ配列を渡し，第7回ではscanfへ変数のアドレスを渡す意味に触れました．今回はそれらをポインタという仕組みで説明します．<strong>変数の値・変数の場所・場所を保存する変数</strong>を区別することが出発点です．</p>
-<p>作業場所はPL1の下のweek08です．Visual Studioで空のプロジェクトを作り，.cファイルを追加します．<a href="lec01.html#hello">第1回</a>と同じC17・Cとしてコンパイル・警告レベル4を使います．短いコード片はmain内へ，関数の定義はmainの外へ置きます．ポインタの初期化を省略せず，指す先を図にしてから実行してください．</p>
+<p>第2回では<code>&amp;</code>でアドレスを表示し，第5回では関数へ配列を渡し，第7回では<code>scanf</code>へ変数のアドレスを渡す意味に触れました．今回はそれらをポインタという仕組みで説明します．<strong>変数の値・変数の場所・場所を保存する変数</strong>を区別することが出発点です．</p>
+<p>作業場所は<code>PL1</code>の下の<code>week08</code>です．Visual Studioで空のプロジェクトを作り，<code>.c</code>ファイルを追加します．<a href="lec01.html#hello">第1回</a>と同じC17・Cとしてコンパイル・警告レベル4を使います．短いコード片は<code>main</code>内へ，関数の定義は<code>main</code>の外へ置きます．ポインタの初期化を省略せず，指す先を図にしてから実行してください．</p>
 <p>この回では，すでに存在する変数・配列だけを指します．自分でメモリを確保する処理は第13回です．アドレスの具体値は環境や実行ごとに変わるので，見本の数値をソースへ書き込む必要はありません．</p>
-<p>第2回で使った <code>&amp;x</code> はxのアドレスです．<strong>ポインタ</strong>は対象を指すための値で，ポインタ変数に保存できます．</p>
+<p>第2回で使った <code>&amp;x</code> は<code>x</code>のアドレスです．<strong>ポインタ</strong>は対象を指すための値で，ポインタ変数に保存できます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">x;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">;</span>
@@ -2460,31 +2460,31 @@
 </thead>
 <tbody>
 <tr>
-<td>x</td>
-<td>xに保存された整数20</td>
+<td><code>x</code></td>
+<td><code>x</code>に保存された整数20</td>
 </tr>
 <tr>
-<td>&amp;x</td>
-<td>xのアドレス</td>
+<td><code>&amp;x</code></td>
+<td><code>x</code>のアドレス</td>
 </tr>
 <tr>
-<td>p</td>
-<td>pに保存された，xを指すポインタ</td>
+<td><code>p</code></td>
+<td><code>p</code>に保存された，<code>x</code>を指すポインタ</td>
 </tr>
 <tr>
-<td>*p</td>
-<td>pが指す先のint．この例ではx</td>
+<td><code>*p</code></td>
+<td><code>p</code>が指す先の<code>int</code>．この例では<code>x</code></td>
 </tr>
 <tr>
-<td>&amp;p</td>
-<td>ポインタ変数p自身のアドレス</td>
+<td><code>&amp;p</code></td>
+<td>ポインタ変数<code>p</code>自身のアドレス</td>
 </tr>
 </tbody>
 </table>
-<p>宣言の <code>int *p</code> は型を表し，式の <code>*p</code> は<strong>間接参照</strong>を表します．<code>*p = 20;</code> はp自体ではなく，指す先を書き換えます．<code>p = &amp;y;</code> はpの指す先を切り替えます．</p>
+<p>宣言の <code>int *p</code> は型を表し，式の <code>*p</code> は<strong>間接参照</strong>を表します．<code>*p = 20;</code> は<code>p</code>自体ではなく，指す先を書き換えます．<code>p = &amp;y;</code> は<code>p</code>の指す先を切り替えます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>p（xを指す値を保存） ──→ x（20を保存）
 </code></pre></div>
-<p>ポインタの型は指す対象の型と合わせます．intへのポインタでdoubleを書き換えるようなことはしません．アドレス表示は <code>printf("%p\n", (void *)p);</code> です．</p>
+<p>ポインタの型は指す対象の型と合わせます．<code>int</code>へのポインタで<code>double</code>を書き換えるようなことはしません．アドレス表示は <code>printf("%p\n", (void *)p);</code> です．</p>
 <h3 id="_2">ポインタ自身にも保存場所がある<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>変数pの領域                         変数xの領域
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>┌───────────────────┐              ┌─────────────┐
@@ -2497,11 +2497,11 @@
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;x=%d *p=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x, </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p);</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;pointer=%zu object=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> p, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> x);</span>
 </code></pre></div>
-<p>pと&amp;xは同じ対象を指す値ですが，&amp;pはポインタ変数自身の場所です．sizeof pはポインタのサイズ，sizeof xはintのサイズです．MSVCのx64向けビルドでは通常8バイトと4バイトですが，32ビット向けなどでは異なります．<strong>サイズだけから型を判定することはできません</strong>．宣言を読んで確認してください．</p>
-<h3 id="_3">宣言の<em>と，式の</em>を区別する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>int <em>p = &x;は，intを指すポインタpを宣言し，&amp;xで初期化する文です．「</em>pへ&amp;xを代入する」という処理ではありません．int *p;の後にp = &x;と書いても同じ対象を指せますが，間に未初期化のpを使わないようにします．</p>
-<p>int<em> pという空白の置き方でも同じ意味です．ただしint </em>p, q;ではpだけがポインタで，qはintです．両方をポインタにするならint <em>p, </em>q;と書きます．この講義では混同を避けるため，基本的に1行ずつ宣言します．</p>
-<p>double d = 3.0;を指すならdouble *dp = &d;です．型が合わないときに，キャストで診断を消して無理にアクセスしてはいけません．ポインタの型は，指す値の読み書きや，後で学ぶ「次の要素」への移動単位に関係します．</p>
+<p><code>p</code>と<code>&amp;x</code>は同じ対象を指す値ですが，<code>&amp;p</code>はポインタ変数自身の場所です．<code>sizeof p</code>はポインタのサイズ，<code>sizeof x</code>は<code>int</code>のサイズです．MSVCのx64向けビルドでは通常8バイトと4バイトですが，32ビット向けなどでは異なります．<strong>サイズだけから型を判定することはできません</strong>．宣言を読んで確認してください．</p>
+<h3 id="_3">宣言の<code>*</code>と，式の<code>*</code>を区別する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><code>int *p = &amp;x;</code>は，<code>int</code>を指すポインタ<code>p</code>を宣言し，<code>&amp;x</code>で初期化する文です．「<code>*p</code>へ<code>&amp;x</code>を代入する」という処理ではありません．<code>int *p;</code>の後に<code>p = &amp;x;</code>と書いても同じ対象を指せますが，間に未初期化の<code>p</code>を使わないようにします．</p>
+<p><code>int* p</code>という空白の置き方でも同じ意味です．ただし<code>int *p, q;</code>では<code>p</code>だけがポインタで，<code>q</code>は<code>int</code>です．両方をポインタにするなら<code>int *p, *q;</code>と書きます．この講義では混同を避けるため，基本的に1行ずつ宣言します．</p>
+<p><code>double d = 3.0;</code>を指すなら<code>double *dp = &amp;d;</code>です．型が合わないときに，キャストで診断を消して無理にアクセスしてはいけません．ポインタの型は，指す値の読み書きや，後で学ぶ「次の要素」への移動単位に関係します．</p>
 <h3 id="_4">ポインタのコピーと値のコピー<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
@@ -2512,50 +2512,50 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span style="color: #F8F8F2">q </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">b;</span>
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d %d %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a, </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">p, </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">q);</span>
 </code></pre></div>
-<p>最初は13 13 13です．q = pではaそのものを複製せず，aを指す値をコピーするので，pとqは同じaを指します．次にq = &amp;bとすると，qだけがbを指し，13 13 3となります．pはaを指したままです．</p>
-<p>次の表は，毎回a=10，b=3，p=&amp;a，q=&amp;bから独立に実行した場合です．</p>
+<p>最初は13 13 13です．<code>q = p</code>では<code>a</code>そのものを複製せず，<code>a</code>を指す値をコピーするので，<code>p</code>と<code>q</code>は同じ<code>a</code>を指します．次に<code>q = &amp;b</code>とすると，<code>q</code>だけが<code>b</code>を指し，13 13 3となります．<code>p</code>は<code>a</code>を指したままです．</p>
+<p>次の表は，毎回<code>a=10</code>，<code>b=3</code>，<code>p=&amp;a</code>，<code>q=&amp;b</code>から独立に実行した場合です．</p>
 <table>
 <thead>
 <tr>
 <th>操作</th>
-<th style="text-align: right;">a</th>
-<th style="text-align: right;">b</th>
-<th>pの指す先</th>
-<th>qの指す先</th>
+<th style="text-align: right;"><code>a</code></th>
+<th style="text-align: right;"><code>b</code></th>
+<th><code>p</code>の指す先</th>
+<th><code>q</code>の指す先</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>p = q;</td>
+<td><code>p = q;</code></td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">3</td>
-<td>b</td>
-<td>b</td>
+<td><code>b</code></td>
+<td><code>b</code></td>
 </tr>
 <tr>
-<td><em>p = </em>q;</td>
+<td><code>*p = *q;</code></td>
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">3</td>
-<td>a</td>
-<td>b</td>
+<td><code>a</code></td>
+<td><code>b</code></td>
 </tr>
 </tbody>
 </table>
-<p><strong>p = qは矢印の変更，<em>p = </em>qは矢印の先の値の変更</strong>です．この2つを図で説明できるようにしてください．</p>
-<h3 id="_5">&amp;と*を組み合わせる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>int a = 10;，int <em>p = &a;の場合，</em>&amp;aはa，<em>&amp;pはpを表します．&amp;</em>pはpと同じポインタ値です．一方，&amp;*aは整数aへ間接参照を適用しようとするため正しい式ではありません．</p>
-<p><em>&amp;pはpという変数を表すので，</em>&amp;p = &b;と代入すればpの指す先を変えられます．&amp;<em>pはアドレス値であり，&amp;</em>p = &b;とは代入できません．同じアドレスとして表示されても，代入先にできる式かどうかは別です．通常はp = &b;のように簡潔に書きます．</p>
+<p><strong><code>p = q</code>は矢印の変更，<code>*p = *q</code>は矢印の先の値の変更</strong>です．この2つを図で説明できるようにしてください．</p>
+<h3 id="_5"><code>&amp;</code>と<code>*</code>を組み合わせる<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><code>int a = 10;</code>，<code>int *p = &amp;a;</code>の場合，<code>*&amp;a</code>は<code>a</code>，<code>*&amp;p</code>は<code>p</code>を表します．<code>&amp;*p</code>は<code>p</code>と同じポインタ値です．一方，<code>&amp;*a</code>は整数<code>a</code>へ間接参照を適用しようとするため正しい式ではありません．</p>
+<p><code>*&amp;p</code>は<code>p</code>という変数を表すので，<code>*&amp;p = &amp;b;</code>と代入すれば<code>p</code>の指す先を変えられます．<code>&amp;*p</code>はアドレス値であり，<code>&amp;*p = &amp;b;</code>とは代入できません．同じアドレスとして表示されても，代入先にできる式かどうかは別です．通常は<code>p = &amp;b;</code>のように簡潔に書きます．</p>
 <h3 id="_6">値を増やすのか，ポインタを進めるのか<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>有効なintを指すpに対して++<em>pと(</em>p)++は，どちらも指す先の値を1増やします．式の値を使う場合の前置・後置の違いは第3回と同じです．</p>
-<p>一方，<em>p++は</em>(p++)と解釈され，p自体を次の要素へ進めます．移動前の要素を表す式になります．安全に進めるには配列内などの範囲条件を守る必要があります．単独の変数で先へ進めて値を読む実験はせず，後の配列の節で扱います．</p>
+<p>有効な<code>int</code>を指す<code>p</code>に対して<code>++*p</code>と<code>(*p)++</code>は，どちらも指す先の値を1増やします．式の値を使う場合の前置・後置の違いは第3回と同じです．</p>
+<p>一方，<code>*p++</code>は<code>*(p++)</code>と解釈され，<code>p</code>自体を次の要素へ進めます．移動前の要素を表す式になります．安全に進めるには配列内などの範囲条件を守る必要があります．単独の変数で先へ進めて値を読む実験はせず，後の配列の節で扱います．</p>
 <h2 id="2">2　関数で呼び出し元を書き換える<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>int引数の値を変更しても呼び出し元に影響しなかったのは，値のコピーだったからです．ポインタを渡す場合も<strong>ポインタの値のコピー</strong>ですが，コピーしたポインタが同じ対象を指すので，対象を変更できます．</p>
-<p><code>swap(&amp;x, &amp;y)</code> では，swap内のaがxを，bがyを指します．一時変数を使って <code>*a</code> と <code>*b</code> を交換します．一時変数なしに上書きすると元の値を失います．</p>
+<p><code>int</code>引数の値を変更しても呼び出し元に影響しなかったのは，値のコピーだったからです．ポインタを渡す場合も<strong>ポインタの値のコピー</strong>ですが，コピーしたポインタが同じ対象を指すので，対象を変更できます．</p>
+<p><code>swap(&amp;x, &amp;y)</code> では，<code>swap</code>内の<code>a</code>が<code>x</code>を，<code>b</code>が<code>y</code>を指します．一時変数を使って <code>*a</code> と <code>*b</code> を交換します．一時変数なしに上書きすると元の値を失います．</p>
 <div class="admonition note">
 <p class="admonition-title">関数の契約</p>
-<p>この回のswapは，aとbが有効なintを指していることを呼び出し側の責任とします．NULLや寿命の終わった変数のアドレスは渡しません．ポインタ引数なら何でも渡せるわけではありません．</p>
+<p>この回の<code>swap</code>は，<code>a</code>と<code>b</code>が有効な<code>int</code>を指していることを呼び出し側の責任とします．<code>NULL</code>や寿命の終わった変数のアドレスは渡しません．ポインタ引数なら何でも渡せるわけではありません．</p>
 </div>
-<h3 id="swap3">swapの3つの代入<a class="headerlink" href="#swap3" title="Permanent link">&para;</a></h3>
+<h3 id="swap3"><code>swap</code>の3つの代入<a class="headerlink" href="#swap3" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">swap</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a, </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b)</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> temp </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a;</span>
@@ -2563,7 +2563,7 @@
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> temp;</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>呼び出し元のxが5，yが8なら，tempへ5を退避し，xへ8を書き，最後にyへ5を書きます．tempは局所変数ですが，aとbが指す対象は呼び出し元のxとyです．a = b;と書いても局所的なポインタ値が変わるだけで，交換にはなりません．</p>
+<p>呼び出し元の<code>x</code>が5，<code>y</code>が8なら，<code>temp</code>へ5を退避し，<code>x</code>へ8を書き，最後に<code>y</code>へ5を書きます．<code>temp</code>は局所変数ですが，<code>a</code>と<code>b</code>が指す対象は呼び出し元の<code>x</code>と<code>y</code>です．<code>a = b;</code>と書いても局所的なポインタ値が変わるだけで，交換にはなりません．</p>
 <h3 id="_7">複数の出力をポインタで受け取る<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">decompose</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> x, </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">whole, </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">fraction)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #F8F8F2">{</span>
@@ -2571,9 +2571,9 @@
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">fraction </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">whole;</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>mainでlong n;，double f;を用意してdecompose(3.14, &amp;n, &amp;f);と呼ぶと，nは3，fは約0.14になります．戻り値はvoidですが，2つの出力先へ値を書き込めます．この例のxは有限で−100〜100とし，longへの変換が範囲内になるようにします．出力先は有効なlongとdoubleを指す必要があります．</p>
+<p><code>main</code>で<code>long n;</code>，<code>double f;</code>を用意して<code>decompose(3.14, &amp;n, &amp;f);</code>と呼ぶと，<code>n</code>は3，<code>f</code>は約0.14になります．戻り値は<code>void</code>ですが，2つの出力先へ値を書き込めます．この例の<code>x</code>は有限で−100〜100とし，<code>long</code>への変換が範囲内になるようにします．出力先は有効な<code>long</code>と<code>double</code>を指す必要があります．</p>
 <p>負の−3.14なら整数部は−3，小数部は約−0.14です．キャストは0方向へ小数部を切り捨てるので，床関数のように−4へ変わるわけではありません．</p>
-<p>引数をlong whole，double fractionへ変えると，変更できるのはコピーだけです．比較するときも，呼び出し元のnとfを先に0へ初期化し，未初期化の値を渡してはいけません．関数から複数情報を返す方法はこれだけではなく，第11回では構造体にまとめる方法も扱います．</p>
+<p>引数を<code>long whole</code>，<code>double fraction</code>へ変えると，変更できるのはコピーだけです．比較するときも，呼び出し元の<code>n</code>と<code>f</code>を先に0へ初期化し，未初期化の値を渡してはいけません．関数から複数情報を返す方法はこれだけではなく，第11回では構造体にまとめる方法も扱います．</p>
 <h3 id="_8">ポインタを戻り値にする<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #A6E22E">min_pointer</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a, </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">b)</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #F8F8F2">{</span>
@@ -2583,11 +2583,11 @@
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> b;</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>int x = 9, y = 3;としてint <em>result = min_pointer(&amp;x, &amp;y);と呼ぶと，resultはyを指します．返しているのは値3ではなく，その値がある場所です．</em>result = 0;と書けばyが0になります．等しい場合はこの実装ではb側を返します．返した対象が呼び出し後も生きていることが必要です．</p>
+<p><code>int x = 9, y = 3;</code>として<code>int *result = min_pointer(&amp;x, &amp;y);</code>と呼ぶと，<code>result</code>は<code>y</code>を指します．返しているのは値3ではなく，その値がある場所です．<code>*result = 0;</code>と書けば<code>y</code>が0になります．等しい場合はこの実装では<code>b</code>側を返します．返した対象が呼び出し後も生きていることが必要です．</p>
 <p>ポインタ引数そのものを関数内で別の場所へ変更しても，呼び出し元のポインタ変数は変わりません．その変数を変更する方法は，次回の二重ポインタで学びます．</p>
 <h2 id="3">3　配列とポインタ<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p>多くの式で配列名は先頭要素へのポインタに変換されます．<code>int *p = values;</code> は <code>&amp;values[0]</code> を保存します．<code>p + 1</code> は「1バイト先」ではなく「次のint要素」を指します．<code>values[i]</code> と <code>*(values + i)</code> は同じ要素を表します．</p>
-<p>配列自体とポインタ変数は同じものではありません．配列そのもののsizeofは全要素分ですが，ポインタのsizeofはポインタ自身のサイズです．関数引数の <code>int a[]</code> は <code>int *a</code> として扱われ，長さは保持しません．</p>
+<p>多くの式で配列名は先頭要素へのポインタに変換されます．<code>int *p = values;</code> は <code>&amp;values[0]</code> を保存します．<code>p + 1</code> は「1バイト先」ではなく「次の<code>int</code>要素」を指します．<code>values[i]</code> と <code>*(values + i)</code> は同じ要素を表します．</p>
+<p>配列自体とポインタ変数は同じものではありません．配列そのものの<code>sizeof</code>は全要素分ですが，ポインタの<code>sizeof</code>はポインタ自身のサイズです．関数引数の <code>int a[]</code> は <code>int *a</code> として扱われ，長さは保持しません．</p>
 <p>ポインタ演算は同じ配列内，または最後の要素の1つ先までに限ります．1つ先のポインタはループの終了判定に使えますが，<strong>間接参照はできません</strong>．別々の変数へのポインタを引き算して距離を調べることもしません．</p>
 <h3 id="_9">次の要素へ進む単位<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> values[</span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">30</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">40</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">50</span><span style="color: #F8F8F2">};</span>
@@ -2601,10 +2601,10 @@
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>          ↑               ↑                       ↑
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>          p               q = p + 2                values + 5
 </code></pre></div>
-<p>intが4バイトなら，qはpから2要素，つまり8バイト先を指します．p + 2という式だけではp自身は変わりません．p += 2;や++pはpを更新します．doubleならdoubleのサイズ，charなら1バイトが1要素分です．同じ配列内なら--pや整数の減算で戻ることもできますが，先頭より前へ進んではいけません．</p>
+<p><code>int</code>が4バイトなら，<code>q</code>は<code>p</code>から2要素，つまり8バイト先を指します．<code>p + 2</code>という式だけでは<code>p</code>自身は変わりません．<code>p += 2;</code>や<code>++p</code>は<code>p</code>を更新します．<code>double</code>なら<code>double</code>のサイズ，<code>char</code>なら1バイトが1要素分です．同じ配列内なら<code>--p</code>や整数の減算で戻ることもできますが，先頭より前へ進んではいけません．</p>
 <h3 id="_10">差と比較は同じ配列で行う<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>q - pはバイト数ではなく，要素数の差2です．ポインタの差の型はstddef.hで宣言されるptrdiff_tで，表示には%tdを使います．例えばprintf("distance=%td\n", q - p);と書けます．</p>
-<p>同じ配列内ではp &lt; qは真，p == qは偽です．同じ配列の1つ先のポインタも，終了判定や差の計算に使えます．無関係な配列や変数の間で大小比較・引き算をして並びを推測してはいけません．また，ポインタ同士を足す演算や，ポインタを2倍する演算はありません．</p>
+<p><code>q - p</code>はバイト数ではなく，要素数の差2です．ポインタの差の型は<code>stddef.h</code>で宣言される<code>ptrdiff_t</code>で，表示には<code>%td</code>を使います．例えば<code>printf("distance=%td\n", q - p);</code>と書けます．</p>
+<p>同じ配列内では<code>p &lt; q</code>は真，<code>p == q</code>は偽です．同じ配列の1つ先のポインタも，終了判定や差の計算に使えます．無関係な配列や変数の間で大小比較・引き算をして並びを推測してはいけません．また，ポインタ同士を足す演算や，ポインタを2倍する演算はありません．</p>
 <h3 id="_11">添字による走査とポインタによる走査<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">enum</span><span style="color: #F8F8F2"> { COUNT </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2"> };</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a[COUNT] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">6</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">};</span>
@@ -2618,30 +2618,30 @@
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span style="color: #F8F8F2">}</span>
 <a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, sum_index, sum_pointer);</span>
 </code></pre></div>
-<p>どちらも20になります．前者は添字を，後者は指す場所を更新します．最後の要素を読んだ後，pがa + COUNTに到達すると条件が偽になり，本体では読まれません．&amp;a[COUNT]も1つ先を表せますが，a[COUNT]の値を読むことはできません．1つ先よりさらに先のポインタを作ることも避けます．</p>
-<p>要素数を名前でまとめる方法には#define COUNT 5もあります．これはコンパイルに先立つ前処理で，COUNTというトークンを5へ置き換える指定で，変数を作る宣言ではありません．この講義では既習のenumによる整数定数を基本にします．どちらもサイズとループの上限に同じ名前を使い，修正漏れを防ぎます．</p>
+<p>どちらも20になります．前者は添字を，後者は指す場所を更新します．最後の要素を読んだ後，<code>p</code>が<code>a + COUNT</code>に到達すると条件が偽になり，本体では読まれません．<code>&amp;a[COUNT]</code>も1つ先を表せますが，<code>a[COUNT]</code>の値を読むことはできません．1つ先よりさらに先のポインタを作ることも避けます．</p>
+<p>要素数を名前でまとめる方法には<code>#define COUNT 5</code>もあります．これはコンパイルに先立つ前処理で，<code>COUNT</code>というトークンを5へ置き換える指定で，変数を作る宣言ではありません．この講義では既習の<code>enum</code>による整数定数を基本にします．どちらもサイズとループの上限に同じ名前を使い，修正漏れを防ぎます．</p>
 <h3 id="_12">配列とポインタは同一ではない<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th>操作</th>
-<th>配列a</th>
-<th>ポインタ変数p</th>
+<th>配列<code>a</code></th>
+<th>ポインタ変数<code>p</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>要素にアクセス</td>
-<td>a[i]</td>
-<td>有効な範囲ならp[i]</td>
+<td><code>a[i]</code></td>
+<td>有効な範囲なら<code>p[i]</code></td>
 </tr>
 <tr>
 <td>指す先を変更</td>
-<td>a = pやa++は不可</td>
-<td>p = a，++pなどが可能</td>
+<td><code>a = p</code>や<code>a++</code>は不可</td>
+<td><code>p = a</code>，<code>++p</code>などが可能</td>
 </tr>
 <tr>
-<td>sizeof</td>
+<td><code>sizeof</code></td>
 <td>配列全体のサイズ</td>
 <td>ポインタ自身のサイズ</td>
 </tr>
@@ -2652,10 +2652,10 @@
 </tr>
 </tbody>
 </table>
-<p>p[i]も<em>(p + i)と同じです．pが配列の途中を指しているなら，p[0]はその途中の要素になります．また，a[2]は</em>(a + 2)，*(2 + a)，2[a]とも同じ意味になりますが，後ろの2つは読みにくいため通常のコードでは使いません．</p>
-<p>配列名が先頭要素へのポインタへ変換されるのは，多くの式での規則です．sizeof aや&amp;aなどは例外です．&amp;aは配列全体を指すポインタで，先頭要素を指す&amp;a[0]とは型が異なります．詳しい扱いは第9回で整理します．</p>
+<p><code>p[i]</code>も<code>*(p + i)</code>と同じです．<code>p</code>が配列の途中を指しているなら，<code>p[0]</code>はその途中の要素になります．また，<code>a[2]</code>は<code>*(a + 2)</code>，<code>*(2 + a)</code>，<code>2[a]</code>とも同じ意味になりますが，後ろの2つは読みにくいため通常のコードでは使いません．</p>
+<p>配列名が先頭要素へのポインタへ変換されるのは，多くの式での規則です．<code>sizeof a</code>や<code>&amp;a</code>などは例外です．<code>&amp;a</code>は配列全体を指すポインタで，先頭要素を指す<code>&amp;a[0]</code>とは型が異なります．詳しい扱いは第9回で整理します．</p>
 <h3 id="_13">関数に渡すときの配列表記<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>仮引数のint a[]とint *aは，どちらもintへのポインタとして扱われます．配列全体の複製ではなく先頭を指す値を渡すため，大きな配列でも引数として全要素をコピーする必要はありません．ただし，関数が全要素を走査する時間までなくなるわけではありません．</p>
+<p>仮引数の<code>int a[]</code>と<code>int *a</code>は，どちらも<code>int</code>へのポインタとして扱われます．配列全体の複製ではなく先頭を指す値を渡すため，大きな配列でも引数として全要素をコピーする必要はありません．ただし，関数が全要素を走査する時間までなくなるわけではありません．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">set_one</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">a, </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n)</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> n; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
@@ -2663,51 +2663,51 @@
 <a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span style="color: #F8F8F2">    }</span>
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>mainのint a[] = {2, 3, 4};へset_one(a, 3);を実行すると，元の要素が{1, 1, 1}へ変わります．仮引数をint a[]へ書き換えても同じです．読み取り専用ならconst int *aを使います．どちらの仮引数表記でもsizeof aはポインタのサイズなので，長さは別に渡します．</p>
-<h2 id="4-const">4　文字列とconst<a class="headerlink" href="#4-const" title="Permanent link">&para;</a></h2>
+<p><code>main</code>の<code>int a[] = {2, 3, 4};</code>へ<code>set_one(a, 3);</code>を実行すると，元の要素が{1, 1, 1}へ変わります．仮引数を<code>int a[]</code>へ書き換えても同じです．読み取り専用なら<code>const int *a</code>を使います．どちらの仮引数表記でも<code>sizeof a</code>はポインタのサイズなので，長さは別に渡します．</p>
+<h2 id="4-const">4　文字列と<code>const</code><a class="headerlink" href="#4-const" title="Permanent link">&para;</a></h2>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> buffer[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">word </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
 </code></pre></div>
-<p>bufferは書き換え可能な配列です．wordは文字列リテラルを指します．リテラルを書き換えてはいけないため，<code>const char *</code> を使います．</p>
-<p><code>const int *p</code> はpを通して対象を書き換えない，<code>int *const p</code> はpの指す先を変更しない，という違いがあります．読み取り専用の配列を受ける関数では前者を使います．</p>
+<p><code>buffer</code>は書き換え可能な配列です．<code>word</code>は文字列リテラルを指します．リテラルを書き換えてはいけないため，<code>const char *</code> を使います．</p>
+<p><code>const int *p</code> は<code>p</code>を通して対象を書き換えない，<code>int *const p</code> は<code>p</code>の指す先を変更しない，という違いがあります．読み取り専用の配列を受ける関数では前者を使います．</p>
 <h3 id="_14">配列の初期化とリテラルへのポインタ<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>bufferという配列： [ &#39;c&#39; ][ &#39;a&#39; ][ &#39;t&#39; ][ &#39;\0&#39; ]  ← 要素を変更できる
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>wordという変数：  [ ポインタ値 ] ──→ &quot;cat&quot;のリテラル ← 変更不可
 </code></pre></div>
-<p>buffer[0] = 'C';は可能です．word = "dog";も可能で，wordが別のリテラルを指すようになります．しかしbuffer = "dog";という配列への代入はできず，word[0]の書き換えもできません．word = NULL;はポインタ値の変更として可能ですが，その後%sへ渡すことはできません．</p>
-<p>同じ内容の文字列リテラルが，処理系によって同じ領域を共有する場合もあります．別々になる場合もあるため，ポインタの==で内容の一致を判定してはいけません．リテラルが共有されるかどうかにかかわらず，リテラルの変更は未定義動作です．読み取り専用領域にあるから必ず同じエラーが出る，という保証もありません．</p>
+<p><code>buffer[0] = 'C';</code>は可能です．<code>word = "dog";</code>も可能で，<code>word</code>が別のリテラルを指すようになります．しかし<code>buffer = "dog";</code>という配列への代入はできず，<code>word[0]</code>の書き換えもできません．<code>word = NULL;</code>はポインタ値の変更として可能ですが，その後<code>%s</code>へ渡すことはできません．</p>
+<p>同じ内容の文字列リテラルが，処理系によって同じ領域を共有する場合もあります．別々になる場合もあるため，ポインタの<code>==</code>で内容の一致を判定してはいけません．リテラルが共有されるかどうかにかかわらず，リテラルの変更は未定義動作です．読み取り専用領域にあるから必ず同じエラーが出る，という保証もありません．</p>
 <table>
 <thead>
 <tr>
 <th>宣言</th>
-<th>pの指す先の変更</th>
-<th>pを通した要素の変更</th>
+<th><code>p</code>の指す先の変更</th>
+<th><code>p</code>を通した要素の変更</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>int *p</td>
+<td><code>int *p</code></td>
 <td>可能</td>
 <td>可能</td>
 </tr>
 <tr>
-<td>const int *p</td>
+<td><code>const int *p</code></td>
 <td>可能</td>
 <td>不可</td>
 </tr>
 <tr>
-<td>int *const p</td>
+<td><code>int *const p</code></td>
 <td>不可</td>
 <td>可能</td>
 </tr>
 <tr>
-<td>const int *const p</td>
+<td><code>const int *const p</code></td>
 <td>不可</td>
 <td>不可</td>
 </tr>
 </tbody>
 </table>
-<p>const int *pは，対象が他の経路からも絶対に変わらないという意味ではありません．変更可能なint xを指しているなら，x = 20;による更新は可能です．このポインタを通して書かない，という制約です．</p>
+<p><code>const int *p</code>は，対象が他の経路からも絶対に変わらないという意味ではありません．変更可能な<code>int x</code>を指しているなら，<code>x = 20;</code>による更新は可能です．このポインタを通して書かない，という制約です．</p>
 <h3 id="_15">ポインタで文字列長を求める<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">pointer_length</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">s)</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span style="color: #F8F8F2">{</span>
@@ -2718,21 +2718,21 @@
 <a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2">)(s </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> start);</span>
 <a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>const char <em>なので</em>sを書き換えることはできませんが，sを進めることはできます．"abc"ならsは3回進み，終端を指して止まります．差は3です．終端が読み取り可能な同じ配列内にあり，差がptrdiff_tで表せる長さであることを前提にします．授業では短い文字列だけを使います．</p>
-<p><em>s != '\0'は</em>sとも書けます．終端の値は0だからです．カウンタを増やすforの版，whileで進めた回数を数える版，ポインタの差を使う版は，同じ終端までの走査を別の形で書いたものです．</p>
+<p><code>const char *</code>なので<code>*s</code>を書き換えることはできませんが，<code>s</code>を進めることはできます．<code>"abc"</code>なら<code>s</code>は3回進み，終端を指して止まります．差は3です．終端が読み取り可能な同じ配列内にあり，差が<code>ptrdiff_t</code>で表せる長さであることを前提にします．授業では短い文字列だけを使います．</p>
+<p><code>*s != '\0'</code>は<code>*s</code>とも書けます．終端の値は0だからです．カウンタを増やす<code>for</code>の版，<code>while</code>で進めた回数を数える版，ポインタの差を使う版は，同じ終端までの走査を別の形で書いたものです．</p>
 <h3 id="_16">コピーの代入式を読む<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
-<p>コピー先に十分な容量があり，コピー元が終端を持ち，両者が重ならないとき，次のループで終端も含めてコピーできます．dstとsrcは，それぞれ書き込み先・読み取り元を指す有効なポインタとします．</p>
+<p>コピー先に十分な容量があり，コピー元が終端を持ち，両者が重ならないとき，次のループで終端も含めてコピーできます．<code>dst</code>と<code>src</code>は，それぞれ書き込み先・読み取り元を指す有効なポインタとします．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span style="color: #66D9EF">while</span><span style="color: #F8F8F2"> ((</span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">dst </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">src) </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">dst;</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span style="color: #F8F8F2">    </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">src;</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>まず1文字を代入し，その<strong>代入した値</strong>が終端かどうかを調べます．終端もコピーしてから条件が偽になるため，最後の0はコピー先へ入ります．単にwhile (*src)の本体で非0の文字だけをコピーする形では，別途終端を書き込む処理が必要です．</p>
-<p>短くwhile ((<em>dst++ = </em>src++) != '\0') { }とも書けます．<em>dst++は</em>(dst++)なので，移動前の要素に代入して両ポインタを進めます．この形では終端をコピーした後にも1つ進みます．今回は読めることを目標にし，実装は容量検査を先に行う明確なループを基本にします．コピーで上書きするのは終端までなので，その後ろに古い文字が残っていても，表示は新しい終端で止まります．</p>
-<h2 id="5-null">5　NULLと寿命<a class="headerlink" href="#5-null" title="Permanent link">&para;</a></h2>
-<p>NULLは「対象を指していない」ことを表すヌルポインタ定数です．<code>int *p = NULL;</code> と初期化できますが，そのまま <code>*p</code> を読んだり書いたりしてはいけません．文字列の終端'\0'とは役割が違います．</p>
+<p>まず1文字を代入し，その<strong>代入した値</strong>が終端かどうかを調べます．終端もコピーしてから条件が偽になるため，最後の0はコピー先へ入ります．単に<code>while (*src)</code>の本体で非0の文字だけをコピーする形では，別途終端を書き込む処理が必要です．</p>
+<p>短く<code>while ((*dst++ = *src++) != '\0') { }</code>とも書けます．<code>*dst++</code>は<code>*(dst++)</code>なので，移動前の要素に代入して両ポインタを進めます．この形では終端をコピーした後にも1つ進みます．今回は読めることを目標にし，実装は容量検査を先に行う明確なループを基本にします．コピーで上書きするのは終端までなので，その後ろに古い文字が残っていても，表示は新しい終端で止まります．</p>
+<h2 id="5-null">5　<code>NULL</code>と寿命<a class="headerlink" href="#5-null" title="Permanent link">&para;</a></h2>
+<p><code>NULL</code>は「対象を指していない」ことを表すヌルポインタ定数です．<code>int *p = NULL;</code> と初期化できますが，そのまま <code>*p</code> を読んだり書いたりしてはいけません．文字列の終端<code>'\0'</code>とは役割が違います．</p>
 <p>関数内の通常の局所変数のアドレスを返すと，関数終了後には対象の寿命が終わっています．そのポインタを使ってはいけません．「アドレスが表示できる」「前の値が残って見える」は有効な領域である証拠ではありません．</p>
-<p>NULLはstdio.hやstddef.hなどで利用できます．p == NULLは!pとも書けますが，非NULLなら必ず有効なポインタ，ということではありません．NULLの表示形式や内部表現がすべての環境で同じとは限らず，通常の整数のアドレス計算に置き換えてはいけません．</p>
+<p><code>NULL</code>は<code>stdio.h</code>や<code>stddef.h</code>などで利用できます．<code>p == NULL</code>は<code>!p</code>とも書けますが，非<code>NULL</code>なら必ず有効なポインタ，ということではありません．<code>NULL</code>の表示形式や内部表現がすべての環境で同じとは限らず，通常の整数のアドレス計算に置き換えてはいけません．</p>
 <table>
 <thead>
 <tr>
@@ -2743,14 +2743,14 @@
 </thead>
 <tbody>
 <tr>
-<td>未初期化のint *pを使う</td>
+<td>未初期化の<code>int *p</code>を使う</td>
 <td>有効な対象が定まっていない</td>
-<td>宣言時に有効なアドレスかNULLを入れる</td>
+<td>宣言時に有効なアドレスか<code>NULL</code>を入れる</td>
 </tr>
 <tr>
-<td>NULLを間接参照する</td>
+<td><code>NULL</code>を間接参照する</td>
 <td>指す対象がない</td>
-<td>NULLかどうかを判定し，参照しない</td>
+<td><code>NULL</code>かどうかを判定し，参照しない</td>
 </tr>
 <tr>
 <td>局所変数のアドレスを返す</td>
@@ -2765,7 +2765,7 @@
 <tr>
 <td>リテラルを書き換える</td>
 <td>言語仕様で変更不可</td>
-<td>変更するならchar配列へコピー</td>
+<td>変更するなら<code>char</code>配列へコピー</td>
 </tr>
 </tbody>
 </table>
@@ -2827,18 +2827,18 @@
 <a id="__codelineno-16-27" name="__codelineno-16-27"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-16-28" name="__codelineno-16-28"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
-<p><a download="download" href="sample/08/pointers.c">pointers.c</a></p>
+<p><a download="download" href="sample/08/pointers.c"><code>pointers.c</code></a></p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>x=8 y=5
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>sum=60
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>c at
 </code></pre></div>
-<p>最後のword + 1は，元の文字列の2文字目を指します．そこから終端まで表示するのでatになります．</p>
-<p>例題の前半ではpの値は変わらず，指す先のxが3→5→8へ変わります．交換の一時変数tempが保持するのはアドレスではなく，元の整数5です．中盤のsum_arrayは配列のコピーを作らず，3要素を読み取って60を返します．constなのでこの関数を通して値を変えることはありません．</p>
-<p>最後の*wordは1文字なので%c，word + 1は終端まで続く文字列の開始位置なので%sに渡します．同じポインタに関係する式でも，式が文字の値なのか，文字列を指すポインタなのかで書式が異なります．</p>
-<p>演習では，まず紙に変数の箱とポインタの矢印を書き，代入ごとに箱の中身と矢印のどちらが変わるか記録してください．Visual Studioのデバッガでpと*pを確認する場合も，有効な対象を指していることを先に確かめます．</p>
+<p>最後の<code>word + 1</code>は，元の文字列の2文字目を指します．そこから終端まで表示するので<code>at</code>になります．</p>
+<p>例題の前半では<code>p</code>の値は変わらず，指す先の<code>x</code>が3→5→8へ変わります．交換の一時変数<code>temp</code>が保持するのはアドレスではなく，元の整数5です．中盤の<code>sum_array</code>は配列のコピーを作らず，3要素を読み取って60を返します．<code>const</code>なのでこの関数を通して値を変えることはありません．</p>
+<p>最後の<code>*word</code>は1文字なので<code>%c</code>，<code>word + 1</code>は終端まで続く文字列の開始位置なので<code>%s</code>に渡します．同じポインタに関係する式でも，式が文字の値なのか，文字列を指すポインタなのかで書式が異なります．</p>
+<p>演習では，まず紙に変数の箱とポインタの矢印を書き，代入ごとに箱の中身と矢印のどちらが変わるか記録してください．Visual Studioのデバッガで<code>p</code>と<code>*p</code>を確認する場合も，有効な対象を指していることを先に確かめます．</p>
 <h2 id="_17">確認問題<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
 <ol>
-<li>pへの代入と*pへの代入は何が違うか．</li>
+<li><code>p</code>への代入と<code>*p</code>への代入は何が違うか．</li>
 <li>ポインタを渡す関数も値渡しと呼べるのはなぜか．</li>
 <li>配列の1つ先のポインタを作ることと，そこを読むことは同じか．</li>
 </ol>

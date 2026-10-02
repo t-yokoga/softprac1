@@ -2456,7 +2456,7 @@
 <p>解答・解説は授業で別途提示します．このページには問題とヒントを掲載しています．</p>
 <p><a href="lec10.html">講義</a>を読んでから取り組んでください．出力と処理の流れを予測しましょう．</p>
 <h2 id="_1">準備と進め方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>作業場所は PL1\week10 です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，mainを持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
+<p>作業場所は <code>PL1\week10</code> です．<a href="lec01.html#hello">第1回</a>と同じ設定（Cとしてコンパイル，C17，警告レベル4）で，課題ごとに別の空のプロジェクトを作ります．特に指定がなければ，<code>main</code>を持つソースは1プロジェクトに1つです．保存後にCtrl+Shift+Bでビルドし，Ctrl+F5で実行します．</p>
 <p>各課題で，ソース，試した値，予測，実行結果，結果の説明を残してください．提出先や締切は，授業時に案内します．</p>
 <h3 id="_2">作業フォルダを分ける<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>すべてのプロジェクトで作業ディレクトリを<code>$(ProjectDir)</code>にします．ファイルへ書く課題は，そのプロジェクトの練習用フォルダだけで実行してください．別の資料や元のデータを出力先に指定しません．ソースに書いたファイル名と，エクスプローラーで確認するファイル名を照合します．</p>
@@ -2472,7 +2472,7 @@
 <tr>
 <td>1</td>
 <td>文字・行単位で読む</td>
-<td>input.txt</td>
+<td><code>input.txt</code></td>
 </tr>
 <tr>
 <td>2</td>
@@ -2482,35 +2482,35 @@
 <tr>
 <td>3</td>
 <td>バイト列を保存する</td>
-<td>bytes.binを上書き</td>
+<td><code>bytes.bin</code>を上書き</td>
 </tr>
 <tr>
 <td>4</td>
 <td>テキストを書く・追記する</td>
-<td>scores.txtを上書き，追記</td>
+<td><code>scores.txt</code>を上書き，追記</td>
 </tr>
 <tr>
 <td>発展1</td>
 <td>同じ数値を2形式で往復</td>
-<td>numbers.txt，numbers.binを上書き</td>
+<td><code>numbers.txt</code>，<code>numbers.bin</code>を上書き</td>
 </tr>
 <tr>
 <td>発展2</td>
 <td>二乗の一覧を書いて検索</td>
-<td>新しいsquares.txtを作成</td>
+<td>新しい<code>squares.txt</code>を作成</td>
 </tr>
 </tbody>
 </table>
 <p>ファイルの上書きはプログラムを実行した時点で起きます．ビルドしただけでは起きません．既にある出力ファイルが前回の結果なのか，今回の結果なのか，更新日時や内容を確認してください．失敗時にできた途中までのファイルを，完成した結果として扱わないようにします．</p>
 <h2 id="1">課題1　ファイルを読む<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>ReadText</code> プロジェクトでread_text.cを使います．<a href="lec10.html#arguments">講義の設定</a>でinput.txtを引数にし，次の2行を入れたファイルを読んでください．</p>
+<p><code>ReadText</code> プロジェクトで<code>read_text.c</code>を使います．<a href="lec10.html#arguments">講義の設定</a>で<code>input.txt</code>を引数にし，次の2行を入れたファイルを読んでください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Hello
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>File
 </code></pre></div>
 <p>空ファイル，最後に改行のないファイル，存在しない名前，引数なしでも試します．</p>
 <h3 id="_3">保存場所を確認する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>input.txtはASCII文字だけを使い，UTF-8のBOMなしで保存します．エディタで作成したら，.vcxprojのあるフォルダへ保存してください．拡張子を非表示にしている場合はinput.txt.txtとなっていないか，ファイルのプロパティでも確認します．</p>
-<p>入力を表示するプログラムの実行には「コマンド引数」欄へinput.txtだけを書きます．ReadText.exeという名前は付けません．引数を変えてもソースは変更しません．</p>
+<p><code>input.txt</code>はASCII文字だけを使い，UTF-8のBOMなしで保存します．エディタで作成したら，<code>.vcxproj</code>のあるフォルダへ保存してください．拡張子を非表示にしている場合は<code>input.txt.txt</code>となっていないか，ファイルのプロパティでも確認します．</p>
+<p>入力を表示するプログラムの実行には「コマンド引数」欄へ<code>input.txt</code>だけを書きます．<code>ReadText.exe</code>という名前は付けません．引数を変えてもソースは変更しません．</p>
 <table>
 <thead>
 <tr>
@@ -2521,24 +2521,24 @@
 </thead>
 <tbody>
 <tr>
-<td>HelloとFileの2行</td>
+<td><code>Hello</code>と<code>File</code>の2行</td>
 <td>記入してください</td>
 <td>1文字ずつ最後まで読む</td>
 </tr>
 <tr>
 <td>空ファイル</td>
 <td>記入してください</td>
-<td>EOFは必ずしもエラーではない</td>
+<td><code>EOF</code>は必ずしもエラーではない</td>
 </tr>
 <tr>
-<td>最後のFileの後に改行なし</td>
+<td>最後の<code>File</code>の後に改行なし</td>
 <td>記入してください</td>
 <td>改行を前提にしていない</td>
 </tr>
 <tr>
-<td>missing.txt</td>
+<td><code>missing.txt</code></td>
 <td>記入してください</td>
-<td>存在しないファイルはrで作られない</td>
+<td>存在しないファイルは<code>r</code>で作られない</td>
 </tr>
 <tr>
 <td>引数欄を空にする</td>
@@ -2546,17 +2546,17 @@
 <td>ファイル名を受け取れない</td>
 </tr>
 <tr>
-<td>引数欄を""にする</td>
+<td>引数欄を<code>""</code>にする</td>
 <td>記入してください</td>
 <td>空のファイル名を拒否する</td>
 </tr>
 </tbody>
 </table>
 <h3 id="_4">空白を含むファイル名<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>input.txtをコピーしてmy input.txtという練習ファイルを作ります．引数欄を<code>"my input.txt"</code>とすると1個のファイル名として渡せます．引用符なしの<code>my input.txt</code>は2個の追加引数なので，このプログラムは引数の個数が違うと判断します．</p>
-<p>うまくいかない場合は，まず短いinput.txtに戻して動作を確認します．同時に内容・名前・作業ディレクトリのすべてを変えると，どれが原因だったか分からなくなります．</p>
+<p><code>input.txt</code>をコピーして<code>my input.txt</code>という練習ファイルを作ります．引数欄を<code>"my input.txt"</code>とすると1個のファイル名として渡せます．引用符なしの<code>my input.txt</code>は2個の追加引数なので，このプログラムは引数の個数が違うと判断します．</p>
+<p>うまくいかない場合は，まず短い<code>input.txt</code>に戻して動作を確認します．同時に内容・名前・作業ディレクトリのすべてを変えると，どれが原因だったか分からなくなります．</p>
 <h3 id="_5">行の長さを表示する<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>別の<code>LineLengths</code>プロジェクトで<a href="sample/10/line_lengths.c">講義のline_lengths.c</a>を使います．引数欄へinput.txtを指定し，同じ入力を読ませてください．HelloとFileなら5，4と表示されます．</p>
+<p>別の<code>LineLengths</code>プロジェクトで<a href="sample/10/line_lengths.c"><code>講義のline_lengths.c</code></a>を使います．引数欄へ<code>input.txt</code>を指定し，同じ入力を読ませてください．<code>Hello</code>と<code>File</code>なら5，4と表示されます．</p>
 <table>
 <thead>
 <tr>
@@ -2567,12 +2567,12 @@
 </thead>
 <tbody>
 <tr>
-<td>ABC</td>
+<td><code>ABC</code></td>
 <td>あり</td>
 <td style="text-align: right;">記入してください</td>
 </tr>
 <tr>
-<td>ABC</td>
+<td><code>ABC</code></td>
 <td>なし</td>
 <td style="text-align: right;">記入してください</td>
 </tr>
@@ -2582,21 +2582,21 @@
 <td style="text-align: right;">記入してください</td>
 </tr>
 <tr>
-<td>Aを31個</td>
+<td><code>A</code>を31個</td>
 <td>あり・なし</td>
 <td style="text-align: right;">記入してください</td>
 </tr>
 <tr>
-<td>Aを32個</td>
+<td><code>A</code>を32個</td>
 <td>あり・なし</td>
 <td style="text-align: right;">記入してください</td>
 </tr>
 </tbody>
 </table>
-<p>空ファイルは長さ0の行があるのではなく，行がないため出力しません．31文字で改行がない場合も，1文字を追加で調べてEOFを確認できます．32文字の行を2行として数えないことを確認してください．入力の上限を超えた後は処理を続けず，閉じて終了する仕様です．</p>
-<p><strong>説明すること</strong>：strlen(line)から常に1を引くと，改行のないABCの長さが2になってしまいます．改行を実際に読み取ったかどうかを調べる必要があります．</p>
+<p>空ファイルは長さ0の行があるのではなく，行がないため出力しません．31文字で改行がない場合も，1文字を追加で調べて<code>EOF</code>を確認できます．32文字の行を2行として数えないことを確認してください．入力の上限を超えた後は処理を続けず，閉じて終了する仕様です．</p>
+<p><strong>説明すること</strong>：<code>strlen(line)</code>から常に1を引くと，改行のない<code>ABC</code>の長さが2になってしまいます．改行を実際に読み取ったかどうかを調べる必要があります．</p>
 <h2 id="2">課題2　数値引数の検査<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p><code>ParseNumber</code> プロジェクトでparse_number.cを使います．「コマンド引数」を42，0，100，101，-1，12x，非常に長い整数に順に変更してください．</p>
+<p><code>ParseNumber</code> プロジェクトで<code>parse_number.c</code>を使います．「コマンド引数」を42，0，100，101，-1，<code>12x</code>，非常に長い整数に順に変更してください．</p>
 <details class="tip">
 <summary>ヒント</summary>
 <p>起動ごとに引数を変えます．文字列は必ず数値として正しいとは限りません．</p>
@@ -2627,22 +2627,22 @@
 <td>先頭の符号は許す</td>
 </tr>
 <tr>
-<td>" 42"</td>
+<td><code>" 42"</code></td>
 <td>記入してください</td>
-<td>先頭の空白はstrtolが読み飛ばす</td>
+<td>先頭の空白は<code>strtol</code>が読み飛ばす</td>
 </tr>
 <tr>
-<td>"42 "</td>
+<td><code>"42 "</code></td>
 <td>記入してください</td>
 <td>末尾の空白はこのコードでは拒否</td>
 </tr>
 <tr>
-<td>12x</td>
+<td><code>12x</code></td>
 <td>記入してください</td>
 <td>途中までの12だけで成功にしない</td>
 </tr>
 <tr>
-<td>abc</td>
+<td><code>abc</code></td>
 <td>記入してください</td>
 <td>数字を読めない</td>
 </tr>
@@ -2653,9 +2653,9 @@
 </tr>
 </tbody>
 </table>
-<p>極端に長い整数は<code>999999999999999999999999999999</code>などを使います．Windowsと他の環境でlongのサイズが同じとは限らないので，「10桁なら必ず範囲外」のようには判断しません．</p>
+<p>極端に長い整数は<code>999999999999999999999999999999</code>などを使います．Windowsと他の環境で<code>long</code>のサイズが同じとは限らないので，「10桁なら必ず範囲外」のようには判断しません．</p>
 <h3 id="_7">複数の数値を合計するなら<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>parse_number.cを基に，追加引数を最大10個，各数値を0〜100とする合計を考えてください．合計は最大1000なので，この条件では範囲内です．配列を作らず，1つ変換するたびにlongの合計へ加えられます．mainの検査・変換部分を次の断片へ置き換えます．必要なヘッダは元のままです．</p>
+<p><code>parse_number.c</code>を基に，追加引数を最大10個，各数値を0〜100とする合計を考えてください．合計は最大1000なので，この条件では範囲内です．配列を作らず，1つ変換するたびに<code>long</code>の合計へ加えられます．<code>main</code>の検査・変換部分を次の断片へ置き換えます．必要なヘッダは元のままです．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (argc </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> argc </span><span style="color: #FF4689">&gt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">11</span><span style="color: #F8F8F2">) {</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">    fprintf(stderr, </span><span style="color: #E6DB74">&quot;expected 1 to 10 integers</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
@@ -2674,23 +2674,23 @@
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span style="color: #F8F8F2">}</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%ld</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, total);</span>
 </code></pre></div>
-<p>12 23 34なら69，0 100なら100です．12 x 34なら合計を表示せず失敗します．元の最後のprintfでvalueを表示する部分は残さず，この断片の後はreturn 0;で終了します．</p>
+<p>12 23 34なら69，0 100なら100です．<code>12 x 34</code>なら合計を表示せず失敗します．元の最後の<code>printf</code>で<code>value</code>を表示する部分は残さず，この断片の後は<code>return 0;</code>で終了します．</p>
 <h3 id="_8">引数を表示して文字列を探す<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p><code>Arguments</code>プロジェクトでは数値変換をせず，受け取った文字列を表示します．toyama，ishikawa，fukuiのどれかがあれば，最後にhokuriku!を1回だけ表示します．</p>
-<p>引数欄を<code>nagano ishikawa</code>にするとarg1=nagano，arg2=ishikawa，hokuriku!の3行です．<code>fukui ishikawa</code>でもhokuriku!は1回だけです．引数なしなら何も表示しません．大文字を含むToyamaはtoyamaと一致しません．文字列の比較で==を使わない理由も説明してください．</p>
+<p><code>Arguments</code>プロジェクトでは数値変換をせず，受け取った文字列を表示します．<code>toyama</code>，<code>ishikawa</code>，<code>fukui</code>のどれかがあれば，最後に<code>hokuriku!</code>を1回だけ表示します．</p>
+<p>引数欄を<code>nagano ishikawa</code>にすると<code>arg1=nagano</code>，<code>arg2=ishikawa</code>，<code>hokuriku!</code>の3行です．<code>fukui ishikawa</code>でも<code>hokuriku!</code>は1回だけです．引数なしなら何も表示しません．大文字を含む<code>Toyama</code>は<code>toyama</code>と一致しません．文字列の比較で<code>==</code>を使わない理由も説明してください．</p>
 <h2 id="3">課題3　バイト列を保存する<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>Binary</code> プロジェクトでbinary.cを使います．専用のプロジェクトフォルダを作業ディレクトリにし，bytes.binが4バイトになることをエクスプローラーのプロパティで確認してください．繰り返し実行すると同名ファイルを上書きします．</p>
+<p><code>Binary</code> プロジェクトで<code>binary.c</code>を使います．専用のプロジェクトフォルダを作業ディレクトリにし，<code>bytes.bin</code>が4バイトになることをエクスプローラーのプロパティで確認してください．繰り返し実行すると同名ファイルを上書きします．</p>
 <h3 id="_9">読み取った個数だけを使う<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>bufferは16要素ですが，4バイトの入力を読んだ後に使用できるデータは最初の4個です．残り12個を表示してはいけません．nの値が4であることをprintfで追加表示して確かめても構いません．size=1なので，この例では戻り値がバイト数と一致します．</p>
-<p>ファイルが16バイトより大きければ，1回のfreadでは全部読めません．このサンプルのdataをむやみに増やさず，今回は4〜5バイトに限定します．同じ関数名でも「ファイル全体を読み終えた」とは限りません．</p>
+<p><code>buffer</code>は16要素ですが，4バイトの入力を読んだ後に使用できるデータは最初の4個です．残り12個を表示してはいけません．<code>n</code>の値が4であることを<code>printf</code>で追加表示して確かめても構いません．<code>size=1</code>なので，この例では戻り値がバイト数と一致します．</p>
+<p>ファイルが16バイトより大きければ，1回の<code>fread</code>では全部読めません．このサンプルの<code>data</code>をむやみに増やさず，今回は4〜5バイトに限定します．同じ関数名でも「ファイル全体を読み終えた」とは限りません．</p>
 <h3 id="utf-8">UTF-8をバイトとして観察する<a class="headerlink" href="#utf-8" title="Permanent link">&para;</a></h3>
-<p>dataを次の4バイトに置き換えます．この例はソースに日本語を直接書かずに，UTF-8の「あ」とLFを表します．</p>
+<p><code>data</code>を次の4バイトに置き換えます．この例はソースに日本語を直接書かずに，UTF-8の「あ」とLFを表します．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> data[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0xE3</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">0x81</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">0x82</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">0x0A</span><span style="color: #F8F8F2">};</span>
 </code></pre></div>
 <p>表示はE3 81 82 0A，保存されたファイルは4バイトです．画面上で「あ」と表示できるかどうかではなく，読み書きしたバイトが一致することを確認します．UTF-8のBOMを付けるなら先頭にEF BB BFが増えますが，この課題の形式には付けません．</p>
 <h3 id="_10">バイト順を調べる<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>講義のunsigned shortの観察用断片を別のmainで実行します．まずsizeof valueを%zuで表示し，次に1バイトずつの16進数を見ます．通常のVisual Studio x64ではサイズ2，値1は01 00です．値を0x1234へ変更すると34 12になります．</p>
-<p>先のバイトが0x34だからといって，数値が0x3412に変わったわけではありません．メモリへ保存する順序の違いです．1バイトを2進数表示する場合は，次の断片で00000001を確認できます．</p>
+<p>講義の<code>unsigned short</code>の観察用断片を別の<code>main</code>で実行します．まず<code>sizeof value</code>を<code>%zu</code>で表示し，次に1バイトずつの16進数を見ます．通常のVisual Studio x64ではサイズ2，値1は01 00です．値を<code>0x1234</code>へ変更すると34 12になります．</p>
+<p>先のバイトが<code>0x34</code>だからといって，数値が<code>0x3412</code>に変わったわけではありません．メモリへ保存する順序の違いです．1バイトを2進数表示する場合は，次の断片で00000001を確認できます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> byte </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> bit </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">; bit </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">--</span><span style="color: #F8F8F2">bit) {</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    putchar((byte </span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2"> (</span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&lt;&lt;</span><span style="color: #F8F8F2"> bit)) </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">?</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;1&#39;</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">:</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;0&#39;</span><span style="color: #F8F8F2">);</span>
@@ -2698,11 +2698,11 @@
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span style="color: #F8F8F2">putchar(</span><span style="color: #E6DB74">&#39;\n&#39;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
 <h2 id="4">課題4　テキストを書き出す<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p><code>WriteText</code> プロジェクトで，scores.txtへ72，85，60を1行ずつ書きます．出力先は練習用フォルダです．</p>
+<p><code>WriteText</code> プロジェクトで，<code>scores.txt</code>へ72，85，60を1行ずつ書きます．出力先は練習用フォルダです．</p>
 <p>作成したファイルを課題1で読み返してください．Windowsの改行変換があるため，バイナリで保存した場合とバイト数が異なることがあります．</p>
 <h3 id="_11">上書きと追記を比較する<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>最初はwで実行します．3行のscores.txtを確認したら，同じ条件でもう1回実行します．再び同じ3行になり，6行にはなりません．開く時点で以前の内容を消すためです．</p>
-<p>次に，fopenのモードだけをaへ変えます．既に3行ある状態で1回実行すると，その後ろに72，85，60の3行が加わり，6行になります．もう1回実行すれば9行です．ファイルがない場合，aは新しく作ります．この実験はscores.txtだけを対象にしてください．</p>
+<p>最初は<code>w</code>で実行します．3行の<code>scores.txt</code>を確認したら，同じ条件でもう1回実行します．再び同じ3行になり，6行にはなりません．開く時点で以前の内容を消すためです．</p>
+<p>次に，<code>fopen</code>のモードだけを<code>a</code>へ変えます．既に3行ある状態で1回実行すると，その後ろに72，85，60の3行が加わり，6行になります．もう1回実行すれば9行です．ファイルがない場合，<code>a</code>は新しく作ります．この実験は<code>scores.txt</code>だけを対象にしてください．</p>
 <table>
 <thead>
 <tr>
@@ -2713,47 +2713,47 @@
 </thead>
 <tbody>
 <tr>
-<td>w</td>
+<td><code>w</code></td>
 <td>今回の3行だけになる</td>
 <td>以前の内容を消す</td>
 </tr>
 <tr>
-<td>a</td>
+<td><code>a</code></td>
 <td>以前の3行と今回の3行で6行</td>
 <td>繰り返すたびに増える</td>
 </tr>
 <tr>
-<td>wx</td>
+<td><code>wx</code></td>
 <td>開くのに失敗</td>
 <td>既存ファイルを保護する</td>
 </tr>
 </tbody>
 </table>
-<p>wxは「新しいファイルだけを作る」指定です．発展課題では，指定された出力名を誤って上書きしないために使います．失敗しても自動でwへ変更せず，別の未使用ファイル名を指定します．</p>
-<p><strong>説明すること</strong>：fprintfが成功していても，なぜfcloseの戻り値を調べるのでしょうか．メモリ上に保留していた出力が，閉じる際に書き込まれて失敗する可能性があるためです．</p>
+<p><code>wx</code>は「新しいファイルだけを作る」指定です．発展課題では，指定された出力名を誤って上書きしないために使います．失敗しても自動で<code>w</code>へ変更せず，別の未使用ファイル名を指定します．</p>
+<p><strong>説明すること</strong>：<code>fprintf</code>が成功していても，なぜ<code>fclose</code>の戻り値を調べるのでしょうか．メモリ上に保留していた出力が，閉じる際に書き込まれて失敗する可能性があるためです．</p>
 <h2 id="1_1">発展1　数値をテキスト・バイナリで往復する<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h2>
-<p><code>NumberFormats</code>プロジェクトでは，3つのdoubleを両方の形式で保存して読み戻します．numbers.txtとnumbers.binだけを作る練習用フォルダで実行してください．毎回上書きするので，入力として別のファイルを指定する課題ではありません．</p>
-<p>テキストは最初の行に3，次の3行に数値を書きます．バイナリは1バイトの個数3に続けて，doubleを3個保存します．バイナリ側は同じ処理系での読み戻し専用です．</p>
+<p><code>NumberFormats</code>プロジェクトでは，3つの<code>double</code>を両方の形式で保存して読み戻します．<code>numbers.txt</code>と<code>numbers.bin</code>だけを作る練習用フォルダで実行してください．毎回上書きするので，入力として別のファイルを指定する課題ではありません．</p>
+<p>テキストは最初の行に3，次の3行に数値を書きます．バイナリは1バイトの個数3に続けて，<code>double</code>を3個保存します．バイナリ側は同じ処理系での読み戻し専用です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>text=0.50 1.25 -2.00
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>binary=0.50 1.25 -2.00
 </code></pre></div>
 <h3 id="_12">サイズと精度の見方<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p>numbers.binは1 + 3 * sizeof(double)バイトです．通常のVisual Studioでdoubleが8バイトなら25バイトです．numbers.txtは文字数と改行方式で変わります．この例のWindowsの通常のCRLFでは22バイト，LFでは18バイトとなり，小さな例ではテキストの方が小さくなります．</p>
-<p>data[0]を0.125にし，最後の2行の表示書式だけ%.3fへ変えてください．保存の書式は%.2fのままにします．テキスト側は小数点以下2桁へ丸められるので0.125とは一致せず，バイナリ側は0.125を保ちます．丸めの境界でどちら側になるかより，保存時に桁が失われた点に注目します．</p>
-<p>ここでのfscanfは，この実行で自分が生成した小さな数値を読むためのものです．任意の外部ファイルに対する厳密な検査器ではありません．入力を自動作成する部分を外して利用するなら，数値の範囲，余分なデータ，バイト表現の妥当性なども検証する必要があります．外部テキストの検査例は次の課題を参照してください．</p>
+<p><code>numbers.bin</code>は<code>1 + 3 * sizeof(double)</code>バイトです．通常のVisual Studioで<code>double</code>が8バイトなら25バイトです．<code>numbers.txt</code>は文字数と改行方式で変わります．この例のWindowsの通常のCRLFでは22バイト，LFでは18バイトとなり，小さな例ではテキストの方が小さくなります．</p>
+<p><code>data[0]</code>を0.125にし，最後の2行の表示書式だけ<code>%.3f</code>へ変えてください．保存の書式は<code>%.2f</code>のままにします．テキスト側は小数点以下2桁へ丸められるので0.125とは一致せず，バイナリ側は0.125を保ちます．丸めの境界でどちら側になるかより，保存時に桁が失われた点に注目します．</p>
+<p>ここでの<code>fscanf</code>は，この実行で自分が生成した小さな数値を読むためのものです．任意の外部ファイルに対する厳密な検査器ではありません．入力を自動作成する部分を外して利用するなら，数値の範囲，余分なデータ，バイト表現の妥当性なども検証する必要があります．外部テキストの検査例は次の課題を参照してください．</p>
 <p>大量データで時間を測る場合，画面への出力，ディスクのキャッシュ，測定回数が結果へ影響します．この小さな課題の実行時間だけで一般的な速度差を結論付けません．</p>
 <h2 id="2_1">発展2　二乗の一覧を書き出して検索する<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h2>
-<p>2つのプログラムを別プロジェクトで作ります．第1のプログラムは個数Nと新しいファイル名，第2はそのファイル名と検索する整数を引数にします．Nは0〜100，検索値と保存する値は0〜9801に限定します．99の二乗が9801なので，この条件では計算のオーバーフローを避けられます．</p>
-<h3 id="writesquares">書く側：WriteSquares<a class="headerlink" href="#writesquares" title="Permanent link">&para;</a></h3>
-<p>引数欄を<code>4 squares.txt</code>にします．出力先が既にあれば失敗するwxを使います．再実行するときはsquares2.txtなど未使用の名前を指定してください．</p>
-<p>正常終了したらファイルを開き，4，0，1，4，9の5行になっていることを確認します．N=0なら最初の0の行だけです．N=100ならヘッダを含めて101行で，最後は9801になります．</p>
-<h3 id="checkvalue">読む側：CheckValue<a class="headerlink" href="#checkvalue" title="Permanent link">&para;</a></h3>
-<p>作業ディレクトリはこのプロジェクト自身のフォルダです．WriteSquaresで作ったsquares.txtをここへコピーしてから，引数欄へ<code>squares.txt 9</code>と入力します．同じ相対パスでも，プロジェクトが違えば探す場所が変わることに注意してください．</p>
-<p>ファイルの形式はASCII・NULなし・1行1整数・各行30バイト以内とします．値の前後の空白は許しますが，空行，個数不足，余分な行，範囲外の値は拒否します．最後の行に改行がなくても受け付けます．</p>
-<p>9ならfound，12ならnot foundです．個数を先に読んでも，その個数の行が本当にあるかは別に確認します．見つかった直後にreturnせず，後続の行も検証してから結果を表示しています．</p>
-<p>このプログラムは保存された数列から値を検索するものです．各値が本当に0，1，4，9という順の二乗になっているかまでは検査しません．例えばN=2で5，6を持つ正しい形式のファイルも受け付けます．「ファイル形式の検査」と「値が特定の計算結果かの検査」を区別します．</p>
+<p>2つのプログラムを別プロジェクトで作ります．第1のプログラムは個数<code>N</code>と新しいファイル名，第2はそのファイル名と検索する整数を引数にします．<code>N</code>は0〜100，検索値と保存する値は0〜9801に限定します．99の二乗が9801なので，この条件では計算のオーバーフローを避けられます．</p>
+<h3 id="writesquares">書く側：<code>WriteSquares</code><a class="headerlink" href="#writesquares" title="Permanent link">&para;</a></h3>
+<p>引数欄を<code>4 squares.txt</code>にします．出力先が既にあれば失敗する<code>wx</code>を使います．再実行するときは<code>squares2.txt</code>など未使用の名前を指定してください．</p>
+<p>正常終了したらファイルを開き，4，0，1，4，9の5行になっていることを確認します．<code>N=0</code>なら最初の0の行だけです．<code>N=100</code>ならヘッダを含めて101行で，最後は9801になります．</p>
+<h3 id="checkvalue">読む側：<code>CheckValue</code><a class="headerlink" href="#checkvalue" title="Permanent link">&para;</a></h3>
+<p>作業ディレクトリはこのプロジェクト自身のフォルダです．<code>WriteSquares</code>で作った<code>squares.txt</code>をここへコピーしてから，引数欄へ<code>squares.txt 9</code>と入力します．同じ相対パスでも，プロジェクトが違えば探す場所が変わることに注意してください．</p>
+<p>ファイルの形式はASCII・<code>NUL</code>なし・1行1整数・各行30バイト以内とします．値の前後の空白は許しますが，空行，個数不足，余分な行，範囲外の値は拒否します．最後の行に改行がなくても受け付けます．</p>
+<p>9なら<code>found</code>，12ならnot foundです．個数を先に読んでも，その個数の行が本当にあるかは別に確認します．見つかった直後に<code>return</code>せず，後続の行も検証してから結果を表示しています．</p>
+<p>このプログラムは保存された数列から値を検索するものです．各値が本当に0，1，4，9という順の二乗になっているかまでは検査しません．例えば<code>N=2</code>で5，6を持つ正しい形式のファイルも受け付けます．「ファイル形式の検査」と「値が特定の計算結果かの検査」を区別します．</p>
 <h3 id="_13">異常なデータも別ファイルで確認する<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
-<p>正常なsquares.txtは残し，コピーへ変更を加えてbad.txtなどの名前で試してください．</p>
+<p>正常な<code>squares.txt</code>は残し，コピーへ変更を加えて<code>bad.txt</code>などの名前で試してください．</p>
 <table>
 <thead>
 <tr>
@@ -2767,7 +2767,7 @@
 <td>記入してください</td>
 </tr>
 <tr>
-<td>値の1行をabcへ変更</td>
+<td>値の1行を<code>abc</code>へ変更</td>
 <td>記入してください</td>
 </tr>
 <tr>
@@ -2792,17 +2792,17 @@
 </tr>
 </tbody>
 </table>
-<p>read_valueが失敗したときは，その呼び出しで得られなかった値を読みません．数値を集めるだけなら固定長配列に保存する方法もありますが，検索だけなら1個ずつ比較できるため，本課題では全体を配列に保存していません．</p>
+<p><code>read_value</code>が失敗したときは，その呼び出しで得られなかった値を読みません．数値を集めるだけなら固定長配列に保存する方法もありますが，検索だけなら1個ずつ比較できるため，本課題では全体を配列に保存していません．</p>
 <h2 id="_14">確認問題<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <ol>
-<li>ファイルを開くことに失敗した後，fclose(NULL)で後始末してよいか．</li>
-<li>最後に改行がない行の長さを，strlenから必ず1を引いて求めてよいか．</li>
-<li>argcが正しくても引数の内容を調べる理由は何か．</li>
-<li>freadの戻り値3は，必ず3バイト読んだという意味か．</li>
+<li>ファイルを開くことに失敗した後，<code>fclose(NULL)</code>で後始末してよいか．</li>
+<li>最後に改行がない行の長さを，<code>strlen</code>から必ず1を引いて求めてよいか．</li>
+<li><code>argc</code>が正しくても引数の内容を調べる理由は何か．</li>
+<li><code>fread</code>の戻り値3は，必ず3バイト読んだという意味か．</li>
 <li>ファイルの拡張子を変えるとテキストとバイナリが変換されるか．</li>
 <li>UTF-8の「あ」のバイト数と見た目の文字数は同じか．</li>
 <li>読んだ個数をそのまま配列の長さとして信用してよいか．</li>
-<li>値を見つけても，CheckValueが最後まで読むのはなぜか．</li>
+<li>値を見つけても，<code>CheckValue</code>が最後まで読むのはなぜか．</li>
 </ol>
 <h2 id="_15">チェックリスト<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <ul>
