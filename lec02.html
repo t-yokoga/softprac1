@@ -2598,12 +2598,24 @@
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;Hello, world!</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
 <p>今回は<code>main</code>内に変数を用意し，その値を<code>printf</code>へ渡します．<code>main</code>や<code>#include</code>の基本の形，保存・ビルド・実行の順序は前回と同じです．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span style="color: #F8F8F2">    </span><span style="color: #959077">// ここにコードを追加する</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">コードの一部とプログラム全体を区別する</p>
+<p>以降に示す<code>int height = 10;</code>などの短い断片は，それだけで実行できるプログラムではありません．上の<code>main</code>の<code>{ }</code>内で，対応する行を置き換えて試します．同じ宣言を重ねて追加しないでください．後半の<a href="#example">「例題をビルドして確かめる」</a>の完全なサンプルを試すときは，<code>variables.c</code>の内容全体を置き換えます．<code>main</code>を2つ並べて追加しないようにしましょう．</p>
+</div>
 <h3 id="2_1">第2回の作業場所<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <p>エクスプローラーで，前回の<code>PL1</code>フォルダの中に <code>week02</code> を作成してください．
 第1回のファイルはそのまま残し，第2回のプログラムを別に管理します．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PL1/
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── week01/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>└── week02/
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PL1/
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── week01/
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>└── week02/
 </code></pre></div>
 <ol>
 <li>Visual StudioでC++／Windowsの「空のプロジェクト」を作成する．</li>
@@ -2621,7 +2633,7 @@
 <h2 id="variables">2．変数に値を保存する<a class="headerlink" href="#variables" title="Permanent link">&para;</a></h2>
 <h3 id="_2">変数の名前・型・値<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>次の1行を見てください．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
 </code></pre></div>
 <table>
 <thead>
@@ -2661,13 +2673,13 @@
 <h3 id="_3">宣言・初期化・代入を区別する<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>変数の型と名前を知らせることを<strong>宣言</strong>といいます．宣言と同時に最初の値を与えることが<strong>初期化</strong>です．
 既にある変数に値を保存することを<strong>代入</strong>と呼びます．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;   </span><span style="color: #959077">// 宣言と初期化</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;      </span><span style="color: #959077">// 既にある変数への代入</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;   </span><span style="color: #959077">// 宣言と初期化</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #F8F8F2">height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;      </span><span style="color: #959077">// 既にある変数への代入</span>
 </code></pre></div>
 <p>宣言と代入を分けて書くこともできます．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> width;       </span><span style="color: #959077">// この段階では，まだ値を使わない</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #F8F8F2">width </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;       </span><span style="color: #959077">// 値を設定する</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, width);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> width;       </span><span style="color: #959077">// この段階では，まだ値を使わない</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">width </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;       </span><span style="color: #959077">// 値を設定する</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, width);</span>
 </code></pre></div>
 <p>この講義では，可能な限り宣言時に初期化します．使う直前まで値が決まらない場合も，読む前には必ず値を設定します．</p>
 <div class="admonition warning">
@@ -2677,41 +2689,41 @@
 <h3 id="_4">代入は右辺から左辺へ<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p><code>height = 12;</code> は「<code>height</code>と12が等しい」という主張ではなく，「右辺の12を左辺の<code>height</code>へ保存する」操作です．
 <code>12 = height;</code> とは書けません．値を保存できる変数を左辺に置きます．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, count);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #F8F8F2">count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, count);</span>
 </code></pre></div>
 <p>2行目では，まず右辺の<code>count</code>の現在値3に1を足して4を求め，その後で左辺の<code>count</code>へ4を保存します．
 数学の方程式として読むと不思議ですが，「計算してから上書きする」と読めば理解できます．
 表示される値は4です．演算子の詳しい規則は次回学びます．</p>
 <h3 id="_5">コピーした値は独立している<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> a;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a, b);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> a;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #F8F8F2">a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a, b);</span>
 </code></pre></div>
 <p>この結果は <code>20 10</code> です．<code>b</code>を初期化したときに保存したのは，その時点の<code>a</code>の値10です．
 <code>a</code>と<code>b</code>が常に連動するように設定したわけではありません．この性質は，計算結果を保存する場合にも当てはまります．</p>
 <h2 id="calculation">3．計算の順番を追う<a class="headerlink" href="#calculation" title="Permanent link">&para;</a></h2>
 <h3 id="_6">長方形の面積<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>縦10，横5の長方形の面積を，次のように計算します．Cでは掛け算に <code>*</code> を使います．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> width </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, area);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> width </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, area);</span>
 </code></pre></div>
 <p><code>area</code>には50が保存され，画面には <code>area=50</code> と表示されます．
 3行目では右辺を計算してから<code>area</code>を初期化します．変数名を式に書くと，その変数に保存されている値を使います．</p>
 <h3 id="_7">元の変数を変えたら，結果はどうなるか<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>続けて，<code>height</code>だけを12へ変更したとします．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #F8F8F2">height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height=%d area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, area);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #F8F8F2">height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height=%d area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, area);</span>
 </code></pre></div>
 <p>表示は <code>height=12 area=50</code> です．<code>area</code>にはまだ50が残っています．
 表計算ソフトの数式のように，縦の長さが変わったら面積も自動で再計算されるわけではありません．
 新しい面積が必要なら，次の文を実行します．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #F8F8F2">area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, area);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #F8F8F2">area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, area);</span>
 </code></pre></div>
 <p>今度は60です．各段階の値を表にすると，変化を追いやすくなります．</p>
 <table>
@@ -2861,7 +2873,7 @@
 また「64ビットPCだから<code>long</code>も必ず8バイト」とは限りません．サイズは後述の<code>sizeof</code>で確かめられます．</p>
 <p><code>&lt;limits.h&gt;</code> をインクルードすると，<code>int</code>の下限 <code>INT_MIN</code> と上限 <code>INT_MAX</code> を表示できます．
 これらは処理系が用意した範囲を表す名前です．自分で宣言する必要はありません．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;int range: %d to %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, INT_MIN, INT_MAX);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;int range: %d to %d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, INT_MIN, INT_MAX);</span>
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">範囲を超える計算を試さない</p>
@@ -2955,9 +2967,9 @@
 <h3 id="_11">小数は近似として保存される<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p><code>float</code>や<code>double</code>は<strong>浮動小数点数</strong>を扱う型です．有限のビット数で表すため，すべての小数を厳密に保存できるわけではありません．
 例えば0.1は，通常の実習環境では内部で近似値になります．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0.1</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x);</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.17f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0.1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x);</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.17f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, x);</span>
 </code></pre></div>
 <p>最初は0.1と表示されますが，桁数を増やすと近似の影響が見える場合があります．
 表示する桁数を増やしても，変数に保存された値の精度が増えるわけではありません．
@@ -2972,21 +2984,21 @@
 <h3 id="_12">書式と値を対応させる<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p><code>%d</code> は，文字列中のその位置に<code>int</code>の値を表示する指定です．
 <code>printf</code>へ渡す値は，書式文字列の後ろへ，カンマで区切って並べます．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height=%d width=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, width);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height=%d width=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, width);</span>
 </code></pre></div>
 <p>最初の<code>%d</code>に<code>height</code>，次の<code>%d</code>に<code>width</code>が対応します．
 引用符の内側の<code>height=</code>という部分はそのまま表示される文字列です．外側の<code>height</code>は変数の値を参照します．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height);</span>
 </code></pre></div>
 <p>1行目の<code>printf</code>は<code>height</code>という6文字，次の<code>printf</code>は10を表示します．
 文字列の中に変数名を書くだけでは，値に置き換わりません．</p>
 <h3 id="_13">小数の表示桁数<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p><code>double</code>を表示するときは<code>%f</code>を使い，小数点以下の桁数を指定するときは<code>%.2f</code>のように書きます．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> price </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">125.5</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price);</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.2f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> price </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">125.5</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price);</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.2f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price);</span>
 </code></pre></div>
 <p>表示は順に125.500000，125.50です．通常の<code>%f</code>では小数点以下6桁を表示します．
 <code>%.2f</code>で表示しても<code>price</code>に保存された値は変わりません．<code>float</code>を<code>printf</code>へ渡す場合は<code>double</code>へ変換されるため，表示には同じ<code>%f</code>を使います．</p>
@@ -3033,24 +3045,24 @@ Cでの1バイトのビット数は <code>CHAR_BIT</code> で確認できます�
 値10と，メモリ上の場所と，領域の大きさ4バイトは，すべて違う情報です．</p>
 <h3 id="_15">複数バイトを占める変数の図解<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>次は<code>int</code>が4バイトの環境で，<code>height</code>に10，<code>width</code>に5を保存する<strong>概念図</strong>です．1行が1バイトを表し，アドレスは説明用の架空の値です．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>アドレス     1バイトの区画        変数の領域
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>0x1000       ┌────────────┐  ← &amp;height（先頭）
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>             │            │  ┐
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>0x1001       ├────────────┤  │
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>             │            │  │ height：4バイトで値10を保存
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>0x1002       ├────────────┤  │
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>             │            │  │
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>0x1003       ├────────────┤  │
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>             │            │  ┘
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>0x1004       ├────────────┤  ← &amp;width（先頭）
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>             │            │  ┐
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>0x1005       ├────────────┤  │
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>             │            │  │ width：4バイトで値5を保存
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>0x1006       ├────────────┤  │
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>             │            │  │
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>0x1007       ├────────────┤  │
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>             │            │  ┘
-<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>             └────────────┘
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>アドレス     1バイトの区画        変数の領域
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>0x1000       ┌────────────┐  ← &amp;height（先頭）
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>             │            │  ┐
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>0x1001       ├────────────┤  │
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>             │            │  │ height：4バイトで値10を保存
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>0x1002       ├────────────┤  │
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>             │            │  │
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>0x1003       ├────────────┤  │
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>             │            │  ┘
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>0x1004       ├────────────┤  ← &amp;width（先頭）
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>             │            │  ┐
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>0x1005       ├────────────┤  │
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>             │            │  │ width：4バイトで値5を保存
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>0x1006       ├────────────┤  │
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>             │            │  │
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>0x1007       ├────────────┤  │
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>             │            │  ┘
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>             └────────────┘
 </code></pre></div>
 <p><code>height</code>の値10は，各区画に10を1つずつ保存するのではなく，<strong>4バイト全体で1つの値として表現</strong>されます．<code>&amp;height</code>はその領域の先頭を指します．個々のバイトへの値の分かれ方は，この図では省略しています．</p>
 <p><code>0x</code>は<strong>16進数</strong>の表記です．各桁には0〜9と<code>A</code>〜<code>F</code>（小文字も可）を使い，<code>A</code>は十進数の10，<code>F</code>は15です．<code>0x1009</code>の次は<code>0x100A</code>，<code>0x100F</code>の次は<code>0x1010</code>になります．図では1バイトごとにアドレスが1増えています．</p>
@@ -3061,16 +3073,16 @@ Cでの1バイトのビット数は <code>CHAR_BIT</code> で確認できます�
 <h3 id="sizeof"><code>sizeof</code>でサイズを調べる<a class="headerlink" href="#sizeof" title="Permanent link">&para;</a></h3>
 <p><code>sizeof(int)</code> は型<code>int</code>のサイズ，<code>sizeof height</code> は<code>height</code>の型のサイズを求めます．
 <code>sizeof</code>の結果は <code>size_t</code> 型なので，<code>printf</code>では <code>%zu</code> を使います．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;int: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2">));</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> height);</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;double: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">));</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;int: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2">));</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> height);</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;double: %zu bytes</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">));</span>
 </code></pre></div>
 <p><code>height</code>に10を保存しても100を保存しても，型が<code>int</code>のままなら<code>sizeof height</code>は変わりません．
 表示に必要な十進数の桁数を数えているのではありません．
 なお，Cでは<code>sizeof(char)</code>は常に1です．</p>
 <h3 id="_16"><code>&amp;</code>でアドレスを調べる<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <p>変数名の前に<code>&amp;</code>を付けると，その変数のアドレスを得られます．表示には<code>%p</code>を使います．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">height);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;height address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">height);</span>
 </code></pre></div>
 <p><code>(void *)</code> は，<code>%p</code>に合わせて渡す値の型をそろえるために付けています．
 詳しい意味は第8回のポインタで扱います．今回は，この形を使って値と場所を区別できれば十分です．</p>
@@ -3083,47 +3095,47 @@ Cでの1バイトのビット数は <code>CHAR_BIT</code> で確認できます�
 <h2 id="example">7．例題をビルドして確かめる<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <p>ここまでの内容を，1つのプログラムで確認します．<code>Variables</code>プロジェクトの<code>variables.c</code>を，次の内容にしてください．
 入力後はCtrl+Sで保存し，Ctrl+Shift+Bでビルドします．警告・エラーがないことを確認して，Ctrl+F5で実行します．</p>
-<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">variables.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-1"> 1</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-2"> 2</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-3"> 3</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-4"> 4</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-5"> 5</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-6"> 6</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-7"> 7</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-8"> 8</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-9"> 9</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-10">10</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-11">11</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-12">12</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-13">13</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-14">14</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-15">15</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-16">16</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-17">17</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-18-18">18</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;limits.h&gt;</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span style="color: #F8F8F2">{</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> width </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> price </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">120.5</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> grade </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;A&#39;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;height=%d width=%d area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, width, area);</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11"></a><span style="color: #F8F8F2">    height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-18-12" name="__codelineno-18-12"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;height=%d area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, area);</span>
-<a id="__codelineno-18-13" name="__codelineno-18-13"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;price=%.2f grade=%c</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price, grade);</span>
-<a id="__codelineno-18-14" name="__codelineno-18-14"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;sizeof(int)=%zu sizeof(double)=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2">), </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">));</span>
-<a id="__codelineno-18-15" name="__codelineno-18-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;CHAR_BIT=%d INT_MIN=%d INT_MAX=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, CHAR_BIT, INT_MIN, INT_MAX);</span>
-<a id="__codelineno-18-16" name="__codelineno-18-16"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;height address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">height);</span>
-<a id="__codelineno-18-17" name="__codelineno-18-17"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-18-18" name="__codelineno-18-18"></a><span style="color: #F8F8F2">}</span>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">variables.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-19-18">18</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;limits.h&gt;</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> width </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> area </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> height </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> width;</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> price </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">120.5</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> grade </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;A&#39;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;height=%d width=%d area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, width, area);</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11"></a><span style="color: #F8F8F2">    height </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;height=%d area=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, height, area);</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;price=%.2f grade=%c</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, price, grade);</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;sizeof(int)=%zu sizeof(double)=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2">), </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">));</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;CHAR_BIT=%d INT_MIN=%d INT_MAX=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, CHAR_BIT, INT_MIN, INT_MAX);</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;height address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">height);</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
 <p><a download="download" href="sample/02/variables.c">サンプルファイルをダウンロード</a></p>
 <p>最初の3行は次のようになります．このコードでは<code>height</code>の変更後に<code>area</code>を再計算していない点に注意してください．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>height=10 width=5 area=50
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>height=12 area=50
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>price=120.50 grade=A
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>height=10 width=5 area=50
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>height=12 area=50
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>price=120.50 grade=A
 </code></pre></div>
 <p>続くサイズ・範囲・アドレスの行は，自分の環境で確認してください．
 <code>stdio.h</code>は<code>printf</code>のため，<code>limits.h</code>は<code>CHAR_BIT</code>や<code>INT_MIN</code>・<code>INT_MAX</code>のために読み込んでいます．</p>
