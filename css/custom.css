@@ -37,6 +37,18 @@
 .md-typeset .build-flow .arrow { font-size: .65rem; text-align: center; color: #5c6c89; }
 .md-typeset .build-flow .arrow b { display: block; font-size: 1.2rem; }
 .md-typeset .source-note { margin-top: 2.5rem; font-size: .68rem; color: #64718a; }
+.md-typeset .bit-operations { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 14px; margin: 1.2em 0; }
+.md-typeset .bit-operation { min-width: 0; padding: 14px; border: 1px solid #cbded0; border-radius: 8px; background: #fafcfb; break-inside: avoid; }
+.md-typeset .bit-operation h4 { margin: 0; color: #254b35; font-size: .9rem; }
+.md-typeset .bit-operation p { margin: .6em 0; font-size: .7rem; }
+.md-typeset .bit-grid { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 4px; font-size: .75rem; }
+.md-typeset .bit-grid th, .md-typeset .bit-grid td { padding: 6px 0; text-align: center; }
+.md-typeset .bit-grid th:first-child { width: 30%; font-size: .6rem; white-space: nowrap; }
+.md-typeset .bit-grid thead th { color: #59675e; font-weight: normal; }
+.md-typeset .bit-grid td { border: 1px solid #d5dfd8; border-radius: 4px; background: white; font-family: var(--md-code-font); }
+.md-typeset .bit-grid td.bit-one { background: #dcefe0; color: #194e2c; border-color: #88b496; font-weight: 700; }
+.md-typeset .bit-grid .bit-result th, .md-typeset .bit-grid .bit-result td { border-top: 3px solid #388e3c; }
+.md-typeset .bit-operation .bit-equation { text-align: center; margin-bottom: 0; }
 @media(max-width: 600px) {
   .md-typeset .build-flow { grid-template-columns: 1fr; gap: .3rem; }
   .md-typeset .build-flow .arrow b { transform: rotate(90deg); }

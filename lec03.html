@@ -2724,7 +2724,7 @@
 </tr>
 </tbody>
 </table>
-<p><code>-x</code> のように1つの値へ付ける-は，符号を反転する演算子です．
+<p><code>-x</code> のように1つの値へ付ける<code>-</code>は，符号を反転する演算子です．
 計算結果も型の表現範囲に収まる必要があります．符号付き整数の上限を超える計算などは行いません．</p>
 <h3 id="_6">整数同士の割り算<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p><code>7 / 2</code> は，両方が整数なので結果も整数です．小数部分は<strong>0の方向へ切り捨て</strong>られます．
@@ -2753,14 +2753,14 @@
 </table>
 <p>次の例は，代入先が<code>double</code>でも3.5にはなりません．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result);</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result); </span><span style="color: #959077">// 3.0</span>
 </code></pre></div>
-<p>まず右辺が整数で計算されて3になり，その3が<code>double</code>へ変換されて保存されます．表示は3.0です．
-小数を含む計算にするには，<strong>割る前に</strong>一方を浮動小数点数にします．</p>
+<p>まず右辺が整数で計算されて3になり，その3が<code>double</code>へ変換されて保存されます．表示は3.0です．</p>
+<p>整数と小数の計算結果は小数となります．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result);</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result); </span><span style="color: #959077">// 3.5</span>
 </code></pre></div>
-<p>この表示は3.5です．代入先の型だけでなく，<strong>計算するときのオペランドの型</strong>を見る習慣を付けましょう．</p>
+<p>この表示は3.5です．代入先の型だけでなく，<strong>計算するときのオペランドの型</strong>にも注意しましょう．</p>
 <h3 id="_7">剰余を使う<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p><code>%</code>は整数の割り算の余りを求めます．例えば3671秒を分と秒に分けるなら，分は<code>3671 / 60</code>，残りの秒は<code>3671 % 60</code>です．
 結果は61分11秒です．</p>
@@ -2890,7 +2890,7 @@
 </tr>
 </tbody>
 </table>
-<p>比較の結果は<code>int</code>の0（偽）または1（真）です．その結果を変数へ保存したり，<code>%d</code>で表示したりできます．</p>
+<p>比較の結果は<code>int</code>型の値である0（偽）または1（真）です．その結果を変数へ保存したり，<code>%d</code>で表示したりできます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> score </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">75</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> pass </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> score </span><span style="color: #FF4689">&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">60</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;pass=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, pass);</span>
@@ -2911,22 +2911,22 @@
 <tbody>
 <tr>
 <td><code>&amp;&amp;</code></td>
-<td>かつ（<code>AND</code>）</td>
+<td>かつ（AND）</td>
 <td>両方が真</td>
 </tr>
 <tr>
 <td><code>&#124;&#124;</code></td>
-<td>または（<code>OR</code>）</td>
+<td>または（OR）</td>
 <td>少なくとも一方が真</td>
 </tr>
 <tr>
 <td><code>!</code></td>
-<td>否定（<code>NOT</code>）</td>
+<td>否定（NOT）</td>
 <td>元の条件が偽</td>
 </tr>
 </tbody>
 </table>
-<p>条件としては<strong>0が偽，0以外が真</strong>です．したがって<code>!0</code>は1，<code>!5</code>は0です．
+<p>条件を論理値として評価する場合，<strong>0が偽，0以外が真</strong>です．したがって<code>!0</code>は1，<code>!5</code>は0です．
 論理演算の結果は0または1へそろえられます．</p>
 <table>
 <thead>
@@ -2935,6 +2935,7 @@
 <th><code>B</code></th>
 <th><code>A &amp;&amp; B</code></th>
 <th><code>A &#124;&#124; B</code></th>
+<th><code>!A</code></th>
 </tr>
 </thead>
 <tbody>
@@ -2943,24 +2944,28 @@
 <td>0</td>
 <td>0</td>
 <td>0</td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td>0</td>
 <td>1</td>
 </tr>
 <tr>
+<td>0</td>
 <td>1</td>
 <td>0</td>
-<td>0</td>
+<td>1</td>
 <td>1</td>
 </tr>
 <tr>
 <td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
 <td>1</td>
 <td>1</td>
 <td>1</td>
+<td>1</td>
+<td>0</td>
 </tr>
 </tbody>
 </table>
@@ -3053,10 +3058,10 @@
 </tr>
 </tbody>
 </table>
-<p>これは主なものの抜粋で，後置の<code>++</code>・--などは表に含めていません．
+<p>これは主なものの抜粋で，後置の<code>++</code>・<code>--</code>などは表に含めていません．
 すべてを暗記して長い式を書くより，条件のまとまりや意図を括弧で示しましょう．</p>
 <p>同じ優先順位の演算子には結合の規則もあります．乗除算は左側からまとまるので，
-<code>12 / 3 * 2</code>は(12 / 3) * 2，つまり8です．12 / (3 * 2)なら2になります．</p>
+<code>12 / 3 * 2</code>は<code>(12 / 3) * 2</code>，つまり8です．<code>12 / (3 * 2)</code>と評価したい場合は括弧が必要です．</p>
 <h3 id="_14">代入は右側からまとまる<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p>代入演算子は<strong>右結合</strong>です．<code>x = y = 3</code>は，<code>(x = y) = 3</code>ではなく，<code>x = (y = 3)</code>と解釈します．代入式の値は代入後の値なので，<code>y</code>へ3を代入した結果の3が<code>x</code>にも代入されます．この書き方を<strong>連鎖代入</strong>と呼びます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> x </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
@@ -3159,15 +3164,15 @@ Cでは0で始まる整数リテラルは8進数として扱われます．</p>
 </code></pre></div>
 <p>これは<strong>固定した8ビット上での表現の説明</strong>です．Cの<code>~</code>演算を<code>char</code>に適用すると整数拡張が行われるため，その式の結果が8ビットだけになるとは限りません．また，表現が2の補数でも，符号付き整数の範囲を超える計算が安全になるわけではありません．</p>
 <p>8ビットの符号付きでは−128〜127，符号なしでは0〜255を表します．ビット列が同じということと，数値が同じということは区別してください．<code>char</code>の符号の有無に依存した説明を避けるため，符号を指定するときは<code>signed char</code>・<code>unsigned char</code>を使います．</p>
-<h3 id="andorxor">ビットごとに<code>AND</code>・<code>OR</code>・<code>XOR</code>を行う<a class="headerlink" href="#andorxor" title="Permanent link">&para;</a></h3>
+<h3 id="andorxor">ビットごとにAND・OR・XORを行う<a class="headerlink" href="#andorxor" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
 <th><code>A</code>のビット</th>
 <th><code>B</code>のビット</th>
-<th><code>AND</code>（<code>&amp;</code>）</th>
-<th><code>OR</code>（<code>&#124;</code>）</th>
-<th><code>XOR</code>（<code>^</code>）</th>
+<th>AND（<code>&amp;</code>）</th>
+<th>OR（<code>&#124;</code>）</th>
+<th>XOR（<code>^</code>）</th>
 </tr>
 </thead>
 <tbody>
@@ -3201,14 +3206,51 @@ Cでは0で始まる整数リテラルは8進数として扱われます．</p>
 </tr>
 </tbody>
 </table>
-<p><code>AND</code>は両方1なら1，<code>OR</code>はどちらかが1なら1，<code>XOR</code>は異なるとき1です．
+<p>ANDは両方1なら1，ORはどちらかが1なら1，XORは異なるとき1です．
 整数全体について，対応する各ビットでこの処理を行います．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>5： 0101        5： 0101        5： 0101
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>3： 0011        3： 0011        3： 0011
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    ----            ----            ----
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a> &amp;  0001         |  0111         ^  0110
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>結果は1          結果は7          結果は6
-</code></pre></div>
+<p>下の図では下位4ビットを示しています．<strong>同じ列の上下のビット</strong>を比較します．緑色のマスは1を表します（上位のビットはすべて0です）．</p>
+<div class="bit-operations">
+  <section class="bit-operation" aria-label="ANDの計算例">
+    <h4>AND <code>&amp;</code></h4>
+    <p>両方が1の桁だけ1</p>
+    <table class="bit-grid">
+      <thead><tr><th scope="col">桁の重み</th><th scope="col">8</th><th scope="col">4</th><th scope="col">2</th><th scope="col">1</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5u</th><td>0</td><td class="bit-one">1</td><td>0</td><td class="bit-one">1</td></tr>
+        <tr><th scope="row">3u</th><td>0</td><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+        <tr class="bit-result"><th scope="row">結果</th><td>0</td><td>0</td><td>0</td><td class="bit-one">1</td></tr>
+      </tbody>
+    </table>
+    <p class="bit-equation"><code>5u &amp; 3u</code> → <code>1u</code></p>
+  </section>
+  <section class="bit-operation" aria-label="ORの計算例">
+    <h4>OR <code>|</code></h4>
+    <p>どちらかが1の桁は1</p>
+    <table class="bit-grid">
+      <thead><tr><th scope="col">桁の重み</th><th scope="col">8</th><th scope="col">4</th><th scope="col">2</th><th scope="col">1</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5u</th><td>0</td><td class="bit-one">1</td><td>0</td><td class="bit-one">1</td></tr>
+        <tr><th scope="row">3u</th><td>0</td><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+        <tr class="bit-result"><th scope="row">結果</th><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+      </tbody>
+    </table>
+    <p class="bit-equation"><code>5u | 3u</code> → <code>7u</code></p>
+  </section>
+  <section class="bit-operation" aria-label="XORの計算例">
+    <h4>XOR <code>^</code></h4>
+    <p>異なるビットの桁だけ1</p>
+    <table class="bit-grid">
+      <thead><tr><th scope="col">桁の重み</th><th scope="col">8</th><th scope="col">4</th><th scope="col">2</th><th scope="col">1</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5u</th><td>0</td><td class="bit-one">1</td><td>0</td><td class="bit-one">1</td></tr>
+        <tr><th scope="row">3u</th><td>0</td><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+        <tr class="bit-result"><th scope="row">結果</th><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td><td>0</td></tr>
+      </tbody>
+    </table>
+    <p class="bit-equation"><code>5u ^ 3u</code> → <code>6u</code></p>
+  </section>
+</div>
+
 <p><code>~</code> はすべてのビットを反転する演算子です．<code>unsigned int</code>の上位ビットも反転するので，<code>~5u</code>を「4ビットの1010，つまり10」と考えてはいけません．
 下位4ビットだけを取り出すなら <code>(~5u) &amp; 0x0Fu</code> とします．</p>
 <h3 id="_16">シフトで位置を指定する<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
@@ -3276,10 +3318,10 @@ Cでは0で始まる整数リテラルは8進数として扱われます．</p>
 </table>
 <p>C17では，<strong>負の符号付き整数の右シフトの結果は処理系定義</strong>です．MSVCでは算術右シフトになりますが，別の処理系でも同じと決めつけてはいけません．負の符号付き整数の左シフトや，符号付きの型で表せない結果になる左シフトは未定義動作です．ビット操作には<code>unsigned int</code>を使うのを基本にします．<code>unsigned char</code>などの小さい型は，演算前に<code>int</code>などへ整数拡張されることにも注意が必要です．</p>
 <p>シフトにも複合代入があります．通常の変数について，<code>flags &lt;&lt;= 1</code>は<code>flags = flags &lt;&lt; 1</code>，<code>flags &gt;&gt;= 1</code>は<code>flags = flags &gt;&gt; 1</code>に対応します．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> flags </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span style="color: #F8F8F2">flags </span><span style="color: #FF4689">&lt;&lt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;  </span><span style="color: #959077">/* 8uになる */</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span style="color: #F8F8F2">flags </span><span style="color: #FF4689">&gt;&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;  </span><span style="color: #959077">/* 2uになる */</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;flags=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> flags </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span style="color: #F8F8F2">flags </span><span style="color: #FF4689">&lt;&lt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">3</span><span style="color: #F8F8F2">;  </span><span style="color: #959077">/* 8uになる */</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span style="color: #F8F8F2">flags </span><span style="color: #FF4689">&gt;&gt;=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;  </span><span style="color: #959077">/* 2uになる */</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;flags=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
 </code></pre></div>
 <p>「処理系定義」は処理系が結果を定める場合，「未定義動作」はCの規則が動作を保証しない場合です．どちらも，たまたま実行した結果だけで他の環境の動作を判断しないでください．</p>
 <h2 id="flags">8．マスクでフラグを操作する<a class="headerlink" href="#flags" title="Permanent link">&para;</a></h2>
@@ -3332,46 +3374,46 @@ Cでは0で始まる整数リテラルは8進数として扱われます．</p>
 <h2 id="example">9．例題を実行して確かめる<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <p><code>operators.c</code>に次の内容を保存し，ビルド・実行してください．
 うるう年の条件は「4で割り切れて100では割り切れない，または400で割り切れる」です．各条件を比較と論理演算で表しています．</p>
-<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">operators.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-1"> 1</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-2"> 2</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-3"> 3</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-4"> 4</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-5"> 5</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-6"> 6</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-7"> 7</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-8"> 8</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-9"> 9</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-10">10</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-11">11</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-12">12</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-13">13</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-14">14</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-15">15</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-16">16</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-16-17">17</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span style="color: #F8F8F2">{</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">, b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;quotient=%d remainder=%d real=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> b, a </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> b, a </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> year </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2000</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> leap </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (year </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;&amp;</span><span style="color: #F8F8F2"> year </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">100</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> year </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">400</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;leap=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, leap);</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> flags </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5u</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span style="color: #F8F8F2">    flags </span><span style="color: #FF4689">|=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&lt;&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;set=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span style="color: #F8F8F2">    flags </span><span style="color: #FF4689">&amp;=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">~</span><span style="color: #F8F8F2">(</span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&lt;&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;clear=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span style="color: #F8F8F2">    flags </span><span style="color: #FF4689">^=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&lt;&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;toggle=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
-<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span style="color: #F8F8F2">}</span>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">operators.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-15-17">17</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">, b </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;quotient=%d remainder=%d real=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, a </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> b, a </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> b, a </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2.0</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> year </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2000</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> leap </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (year </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">4</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&amp;&amp;</span><span style="color: #F8F8F2"> year </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">100</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) </span><span style="color: #FF4689">||</span><span style="color: #F8F8F2"> year </span><span style="color: #FF4689">%</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">400</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;leap=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, leap);</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">unsigned</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> flags </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5u</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span style="color: #F8F8F2">    flags </span><span style="color: #FF4689">|=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&lt;&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;set=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span style="color: #F8F8F2">    flags </span><span style="color: #FF4689">&amp;=</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">~</span><span style="color: #F8F8F2">(</span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&lt;&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;clear=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span style="color: #F8F8F2">    flags </span><span style="color: #FF4689">^=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">1u</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">&lt;&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;toggle=%u</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, flags);</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
 <p><a download="download" href="sample/03/operators.c">サンプルファイルをダウンロード</a></p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>quotient=3 remainder=1 real=3.5
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>leap=1
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>set=7
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>clear=6
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>toggle=2
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>quotient=3 remainder=1 real=3.5
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>leap=1
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>set=7
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>clear=6
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>toggle=2
 </code></pre></div>
 <p>最初の行では整数除算と小数の除算を比較します．<code>leap</code>は条件の結果です．
 最後の3行は，<code>flags</code>への操作を順に行った後の値です．毎回初期値<code>5u</code>へ戻しているわけではありません．</p>
