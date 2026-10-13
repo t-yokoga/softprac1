@@ -2394,7 +2394,7 @@
 </div>
 <details class="tip">
 <summary>ヒント</summary>
-<p>範囲内は2つの比較を<code>&amp;&amp;</code>で，範囲外は2つの比較を||でつなぎます．
+<p>範囲内は2つの比較を<code>&amp;&amp;</code>で，範囲外は2つの比較を<code>||</code>でつなぎます．
 除算を含む条件は，<code>d != 0</code>を<code>&amp;&amp;</code>の左側へ置きます．</p>
 </details>
 <h3 id="_5">条件の境界を試す<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -2465,7 +2465,7 @@
 <p>下位3ビットを書き出すと，001 → 011 → 010 → 110です．
 最初の<code>flags</code>を<code>0u</code>と<code>7u</code>に変え，同じ処理を順に実行してください．</p>
 <p><strong>説明すること</strong>：同じ権限を2回セットしても，<code>OR</code>ならほかのビットへ影響しません．
-加算を代わりに使うとどうなるか，<code>1u + 1u</code>と<code>1u</code> | <code>1u</code>を比較して説明してください．</p>
+加算を代わりに使うとどうなるか，<code>1u + 1u</code>と<code>1u | 1u</code>を比較して説明してください．</p>
 <h2 id="_8">確認問題<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>次の問いに，実行結果や値の追跡表をもとに答えてください．</p>
 <ol>

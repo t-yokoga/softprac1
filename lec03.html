@@ -2699,7 +2699,7 @@
 <td>9</td>
 </tr>
 <tr>
-<td>-</td>
+<td><code>-</code></td>
 <td>減算</td>
 <td><code>7 - 2</code></td>
 <td>5</td>
@@ -2915,7 +2915,7 @@
 <td>両方が真</td>
 </tr>
 <tr>
-<td>||</td>
+<td><code>&#124;&#124;</code></td>
 <td>または（<code>OR</code>）</td>
 <td>少なくとも一方が真</td>
 </tr>
@@ -2926,14 +2926,44 @@
 </tr>
 </tbody>
 </table>
-<p>条件としては<strong>0が偽，0以外が真</strong>です．したがって!0は1，!5は0です．
+<p>条件としては<strong>0が偽，0以外が真</strong>です．したがって<code>!0</code>は1，<code>!5</code>は0です．
 論理演算の結果は0または1へそろえられます．</p>
-<p>| <code>A</code> | <code>B</code> | <code>A &amp;&amp; B</code> | <code>A \</code>|| <code>B</code> |
-| --- | --- | --- | --- |
-| 0 | 0 | 0 | 0 |
-| 0 | 1 | 0 | 1 |
-| 1 | 0 | 0 | 1 |
-| 1 | 1 | 1 | 1 |</p>
+<table>
+<thead>
+<tr>
+<th><code>A</code></th>
+<th><code>B</code></th>
+<th><code>A &amp;&amp; B</code></th>
+<th><code>A &#124;&#124; B</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
 <p>「点数が0以上100以下」は <code>score &gt;= 0 &amp;&amp; score &lt;= 100</code> です．
 「0未満，または100より大きい」は <code>score &lt; 0 || score &gt; 100</code> と書けます．</p>
 <div class="admonition warning">
@@ -2959,7 +2989,7 @@
 <p>この例では<code>close=1</code>です．許容誤差は万能の定数ではなく，扱う値の大きさ，単位，計算の目的に合わせて決めます．大きさが大幅に異なる数を扱う場合には，相対誤差も考える必要があります．</p>
 <p>小数に<code>&lt;</code>や<code>&lt;=</code>を使ってはいけないという意味ではありません．大小や範囲の判定にも使えますが，計算誤差で境界のどちら側になるかが変わり得ることに注意します．個数や点数など，整数で正確に扱えるものを無理に小数へ変える必要もありません．</p>
 <h3 id="_12">短絡評価<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
-<p><code>&amp;&amp;</code>は左側が偽なら，右側を評価しません．||は左側が真なら，右側を評価しません．
+<p><code>&amp;&amp;</code>は左側が偽なら，右側を評価しません．<code>||</code>は左側が真なら，右側を評価しません．
 左側だけで結果が決まるためで，これを<strong>短絡評価</strong>と呼びます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">12</span><span style="color: #F8F8F2">;</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> d </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
@@ -2983,7 +3013,7 @@
 <tbody>
 <tr>
 <td>高い</td>
-<td><code>!</code>，<code>~</code>，前置の<code>++</code>・--，単項の<code>+</code>・-</td>
+<td><code>!</code>，<code>~</code>，前置の<code>++</code>・<code>--</code>，単項の<code>+</code>・<code>-</code></td>
 </tr>
 <tr>
 <td>↓</td>
@@ -2991,11 +3021,11 @@
 </tr>
 <tr>
 <td>↓</td>
-<td><code>+</code>，-</td>
+<td><code>+</code>，<code>-</code></td>
 </tr>
 <tr>
 <td>↓</td>
-<td>&lt;&lt;，&gt;&gt;</td>
+<td><code>&lt;&lt;</code>，<code>&gt;&gt;</code></td>
 </tr>
 <tr>
 <td>↓</td>
@@ -3007,7 +3037,7 @@
 </tr>
 <tr>
 <td>↓</td>
-<td>ビットの<code>&amp;</code>，次に<code>^</code>，次に|</td>
+<td>ビットの<code>&amp;</code>，次に<code>^</code>，次に<code>&#124;</code></td>
 </tr>
 <tr>
 <td>↓</td>
@@ -3015,11 +3045,11 @@
 </tr>
 <tr>
 <td>↓</td>
-<td>||</td>
+<td><code>&#124;&#124;</code></td>
 </tr>
 <tr>
 <td>低い</td>
-<td><code>=</code>，+=などの代入</td>
+<td><code>=</code>，<code>+=</code>などの代入</td>
 </tr>
 </tbody>
 </table>
@@ -3044,7 +3074,7 @@
 <h3 id="_15">優先順位は実行の順番そのものではない<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p>優先順位は「どのような式として読むか」を決める規則です．
 すべてのオペランドを必ず左から順に評価する，という意味ではありません．
-<code>&amp;&amp;</code>や||の短絡評価のように順序が決められたものと，そうでないものを混同しないようにします．</p>
+<code>&amp;&amp;</code>や<code>||</code>の短絡評価のように順序が決められたものと，そうでないものを混同しないようにします．</p>
 <p>とくに変数の更新を含む式では，括弧を付けるだけで安全になるとは限りません．
 <code>(x++) + (++x)</code> も避けるべき式です．<strong>変更の順序を決めたいときは文を分ける</strong>ことを基本にします．</p>
 <h2 id="bits">7．整数をビットの並びとして扱う<a class="headerlink" href="#bits" title="Permanent link">&para;</a></h2>
@@ -3136,7 +3166,7 @@ Cでは0で始まる整数リテラルは8進数として扱われます．</p>
 <th><code>A</code>のビット</th>
 <th><code>B</code>のビット</th>
 <th><code>AND</code>（<code>&amp;</code>）</th>
-<th><code>OR</code>（|）</th>
+<th><code>OR</code>（<code>&#124;</code>）</th>
 <th><code>XOR</code>（<code>^</code>）</th>
 </tr>
 </thead>
@@ -3271,8 +3301,8 @@ Cでは0で始まる整数リテラルは8進数として扱われます．</p>
 </tr>
 <tr>
 <td>1にする</td>
-<td><code>flags \</code></td>
-<td><code>= mask;</code></td>
+<td><code>flags &#124;= mask;</code></td>
+<td><code>OR</code>で対象ビットを立てる</td>
 </tr>
 <tr>
 <td>0にする</td>
@@ -3289,13 +3319,13 @@ Cでは0で始まる整数リテラルは8進数として扱われます．</p>
 <p>例えば<code>flags</code>が<code>5u</code>（0101）のとき，ビット1を1にすると<code>7u</code>（0111）です．
 続けてビット0を0にすると<code>6u</code>（0110），ビット2を反転すると<code>2u</code>（0010）になります．
 ほかのビットを残しながら対象のビットだけ変更できることが，マスクの利点です．</p>
-<p>ビットを1にする操作は加算ではありません．<code>1u</code>へ<code>1u</code>を足すと<code>2u</code>になって隣へ桁上がりしますが，<code>1u</code> | <code>1u</code>は<code>1u</code>のままです．
+<p>ビットを1にする操作は加算ではありません．<code>1u</code>へ<code>1u</code>を足すと<code>2u</code>になって隣へ桁上がりしますが，<code>1u | 1u</code>は<code>1u</code>のままです．
 「すでに1ならそのままにする」という操作には<code>OR</code>を使います．</p>
 <div class="admonition warning">
 <p class="admonition-title">ビット演算と論理演算を区別する</p>
 <p><code>4u &amp; 2u</code>は，0100と0010の<code>AND</code>なので0です．
 <code>4u &amp;&amp; 2u</code>は，どちらも0ではないので1です．
-<code>&amp;</code>や|には短絡評価がありません．0による除算を防ぐ条件の<code>&amp;&amp;</code>を，<code>&amp;</code>へ置き換えないでください．</p>
+<code>&amp;</code>や<code>|</code>には短絡評価がありません．0による除算を防ぐ条件の<code>&amp;&amp;</code>を，<code>&amp;</code>へ置き換えないでください．</p>
 </div>
 <p>また，<code>flags &amp; mask != 0</code> は優先順位によって <code>flags &amp; (mask != 0)</code> と読まれます．
 ビットを取り出してから比較するには，<code>(flags &amp; mask) != 0</code> と括弧を付けます．</p>
