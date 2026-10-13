@@ -104,7 +104,7 @@ printf("%d\n", count);
 | `/` | 除算 | `7 / 2` | 3 |
 | `%` | 剰余 | `7 % 2` | 1 |
 
-`-x` のように1つの値へ付ける-は，符号を反転する演算子です．
+`-x` のように1つの値へ付ける`-`は，符号を反転する演算子です．
 計算結果も型の表現範囲に収まる必要があります．符号付き整数の上限を超える計算などは行いません．
 
 ### 整数同士の割り算
@@ -122,18 +122,19 @@ printf("%d\n", count);
 
 ~~~c
 double result = 7 / 2;
-printf("%.1f\n", result);
+printf("%.1f\n", result); // 3.0
 ~~~
 
 まず右辺が整数で計算されて3になり，その3が`double`へ変換されて保存されます．表示は3.0です．
-小数を含む計算にするには，**割る前に**一方を浮動小数点数にします．
+
+整数と小数の計算結果は小数となります．
 
 ~~~c
 double result = 7 / 2.0;
-printf("%.1f\n", result);
+printf("%.1f\n", result); // 3.5
 ~~~
 
-この表示は3.5です．代入先の型だけでなく，**計算するときのオペランドの型**を見る習慣を付けましょう．
+この表示は3.5です．代入先の型だけでなく，**計算するときのオペランドの型**にも注意しましょう．
 
 ### 剰余を使う
 
@@ -222,7 +223,7 @@ printf("%d %d %d\n", before, after, x);
 | `==` | 等しい | `5 == 5`は1 |
 | `!=` | 等しくない | `5 != 5`は0 |
 
-比較の結果は`int`の0（偽）または1（真）です．その結果を変数へ保存したり，`%d`で表示したりできます．
+比較の結果は`int`型の値である0（偽）または1（真）です．その結果を変数へ保存したり，`%d`で表示したりできます．
 
 ~~~c
 int score = 75;
@@ -240,19 +241,19 @@ printf("pass=%d\n", pass);
 
 | 演算子 | 読み方 | 真になる条件 |
 | --- | --- | --- |
-| `&&` | かつ（`AND`） | 両方が真 |
-| <code>&#124;&#124;</code> | または（`OR`） | 少なくとも一方が真 |
-| `!` | 否定（`NOT`） | 元の条件が偽 |
+| `&&` | かつ（AND） | 両方が真 |
+| <code>&#124;&#124;</code> | または（OR） | 少なくとも一方が真 |
+| `!` | 否定（NOT） | 元の条件が偽 |
 
-条件としては**0が偽，0以外が真**です．したがって`!0`は1，`!5`は0です．
+条件を論理値として評価する場合，**0が偽，0以外が真**です．したがって`!0`は1，`!5`は0です．
 論理演算の結果は0または1へそろえられます．
 
-| `A` | `B` | `A && B` | <code>A &#124;&#124; B</code> |
-| --- | --- | --- | --- |
-| 0 | 0 | 0 | 0 |
-| 0 | 1 | 0 | 1 |
-| 1 | 0 | 0 | 1 |
-| 1 | 1 | 1 | 1 |
+| `A` | `B` | `A && B` | <code>A &#124;&#124; B</code> | `!A` |
+| --- | --- | --- | --- | --- |
+| 0 | 0 | 0 | 0 | 1 |
+| 0 | 1 | 0 | 1 | 1 |
+| 1 | 0 | 0 | 1 | 0 |
+| 1 | 1 | 1 | 1 | 0 |
 
 「点数が0以上100以下」は `score >= 0 && score <= 100` です．
 「0未満，または100より大きい」は `score < 0 || score > 100` と書けます．
@@ -325,11 +326,11 @@ printf("%d\n", large);
 | ↓ | <code>&#124;&#124;</code> |
 | 低い | `=`，`+=`などの代入 |
 
-これは主なものの抜粋で，後置の`++`・--などは表に含めていません．
+これは主なものの抜粋で，後置の`++`・`--`などは表に含めていません．
 すべてを暗記して長い式を書くより，条件のまとまりや意図を括弧で示しましょう．
 
 同じ優先順位の演算子には結合の規則もあります．乗除算は左側からまとまるので，
-`12 / 3 * 2`は(12 / 3) * 2，つまり8です．12 / (3 * 2)なら2になります．
+`12 / 3 * 2`は`(12 / 3) * 2`，つまり8です．`12 / (3 * 2)`と評価したい場合は括弧が必要です．
 
 ### 代入は右側からまとまる
 
@@ -407,25 +408,61 @@ Cでは0で始まる整数リテラルは8進数として扱われます．
 
 8ビットの符号付きでは−128〜127，符号なしでは0〜255を表します．ビット列が同じということと，数値が同じということは区別してください．`char`の符号の有無に依存した説明を避けるため，符号を指定するときは`signed char`・`unsigned char`を使います．
 
-### ビットごとに`AND`・`OR`・`XOR`を行う
+### ビットごとにAND・OR・XORを行う
 
-| `A`のビット | `B`のビット | `AND`（`&`） | `OR`（<code>&#124;</code>） | `XOR`（`^`） |
+| `A`のビット | `B`のビット | AND（`&`） | OR（<code>&#124;</code>） | XOR（`^`） |
 | --- | --- | --- | --- | --- |
 | 0 | 0 | 0 | 0 | 0 |
 | 0 | 1 | 0 | 1 | 1 |
 | 1 | 0 | 0 | 1 | 1 |
 | 1 | 1 | 1 | 1 | 0 |
 
-`AND`は両方1なら1，`OR`はどちらかが1なら1，`XOR`は異なるとき1です．
+ANDは両方1なら1，ORはどちらかが1なら1，XORは異なるとき1です．
 整数全体について，対応する各ビットでこの処理を行います．
 
-~~~text
-5： 0101        5： 0101        5： 0101
-3： 0011        3： 0011        3： 0011
-    ----            ----            ----
- &  0001         |  0111         ^  0110
-結果は1          結果は7          結果は6
-~~~
+下の図では下位4ビットを示しています．**同じ列の上下のビット**を比較します．緑色のマスは1を表します（上位のビットはすべて0です）．
+
+<div class="bit-operations">
+  <section class="bit-operation" aria-label="ANDの計算例">
+    <h4>AND <code>&amp;</code></h4>
+    <p>両方が1の桁だけ1</p>
+    <table class="bit-grid">
+      <thead><tr><th scope="col">桁の重み</th><th scope="col">8</th><th scope="col">4</th><th scope="col">2</th><th scope="col">1</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5u</th><td>0</td><td class="bit-one">1</td><td>0</td><td class="bit-one">1</td></tr>
+        <tr><th scope="row">3u</th><td>0</td><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+        <tr class="bit-result"><th scope="row">結果</th><td>0</td><td>0</td><td>0</td><td class="bit-one">1</td></tr>
+      </tbody>
+    </table>
+    <p class="bit-equation"><code>5u &amp; 3u</code> → <code>1u</code></p>
+  </section>
+  <section class="bit-operation" aria-label="ORの計算例">
+    <h4>OR <code>|</code></h4>
+    <p>どちらかが1の桁は1</p>
+    <table class="bit-grid">
+      <thead><tr><th scope="col">桁の重み</th><th scope="col">8</th><th scope="col">4</th><th scope="col">2</th><th scope="col">1</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5u</th><td>0</td><td class="bit-one">1</td><td>0</td><td class="bit-one">1</td></tr>
+        <tr><th scope="row">3u</th><td>0</td><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+        <tr class="bit-result"><th scope="row">結果</th><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+      </tbody>
+    </table>
+    <p class="bit-equation"><code>5u | 3u</code> → <code>7u</code></p>
+  </section>
+  <section class="bit-operation" aria-label="XORの計算例">
+    <h4>XOR <code>^</code></h4>
+    <p>異なるビットの桁だけ1</p>
+    <table class="bit-grid">
+      <thead><tr><th scope="col">桁の重み</th><th scope="col">8</th><th scope="col">4</th><th scope="col">2</th><th scope="col">1</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">5u</th><td>0</td><td class="bit-one">1</td><td>0</td><td class="bit-one">1</td></tr>
+        <tr><th scope="row">3u</th><td>0</td><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td></tr>
+        <tr class="bit-result"><th scope="row">結果</th><td>0</td><td class="bit-one">1</td><td class="bit-one">1</td><td>0</td></tr>
+      </tbody>
+    </table>
+    <p class="bit-equation"><code>5u ^ 3u</code> → <code>6u</code></p>
+  </section>
+</div>
 
 `~` はすべてのビットを反転する演算子です．`unsigned int`の上位ビットも反転するので，`~5u`を「4ビットの1010，つまり10」と考えてはいけません．
 下位4ビットだけを取り出すなら `(~5u) & 0x0Fu` とします．
