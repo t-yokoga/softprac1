@@ -2823,13 +2823,13 @@
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>5! = 120
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gcd=6
 </code></pre></div>
-<p>階乗は急速に大きくなります．この例では，<code>unsigned long long</code>に結果が収まる<strong>0〜20</strong>に限定します．<code>unsigned</code>だから無限に計算できるわけではありません．関数の引数<code>n</code>もこの範囲という契約です．</p>
+<p>階乗は急速に大きくなります．この例では，<code>unsigned long long</code>に結果が収まる<strong>0〜20</strong>に限定します．<code>unsigned</code>だから無限に計算できるわけではありません．関数の引数<code>n</code>もこの範囲にしてください．</p>
 <p>最大公約数はユークリッドの互除法を使います．<code>b</code>が0なら<code>a</code>を返し，そうでなければ<code>(a, b)</code>を<code>(b, a % b)</code>に変えます．<code>b</code>が正なら余りは<code>b</code>より小さく，0へ近づきます．<strong><code>b</code>が0か調べてから剰余を求める</strong>ので，0による剰余を避けられます．この講義では<code>gcd(0, 0)</code>は数学的な最大公約数の入力対象外とします．</p>
 <h3 id="31">3.1　階乗の型と上限<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>20!は2432902008176640000です．一般的な64ビット<code>unsigned long long</code>の最大値18446744073709551615以下ですが，21!はそれを超えます．C17で<code>unsigned long long</code>が少なくともこの64ビット相当の範囲を持つことを踏まえ，この教材ではより広い型の環境でも0〜20に統一します．</p>
 <p>戻り値だけを広い型にしても，途中を狭い型で計算すれば安全とは限りません．今回の積は<code>factorial</code>の戻り値が<code>unsigned long long</code>なので，<code>n</code>もその型へ変換されて乗算されます．<code>printf</code>は戻り値に<code>%llu</code>，<code>unsigned int</code>の<code>n</code>には<code>%u</code>を使います．</p>
 <p>符号なし整数のあふれは，計算が止まって必ずエラーになるわけではありません．小さな値へ回り込んだ出力を正解として扱わないように，計算前に範囲を検査します．符号付き整数のオーバーフローにも依存しません．</p>
-<p>この例の<code>factorial</code>自身は0〜20を前提とする内部関数です．<code>main</code>の検査を通らない別の呼び出しを追加するなら，その場所でも契約を守ります．外から使うAPIにする場合には，成功・失敗を返す入口と，再帰の本体を分ける方法があります．演習で扱います．</p>
+<p>この例の<code>factorial</code>自身は0〜20を前提とする内部関数です．<code>main</code>の検査を通らない別の呼び出しを追加するなら，その場所でも引数が0〜20の範囲にあることを確認します．外から使うAPIにする場合には，成功・失敗を返す入口と，再帰の本体を分ける方法があります．演習で扱います．</p>
 <h3 id="32">3.2　互除法の変化を追う<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>48と18の最大公約数は，18と12，12と6，6と0の最大公約数と等しくなります．</p>
 <table>
@@ -3193,7 +3193,7 @@
 <td>たどる部分木</td>
 </tr>
 <tr>
-<td>入力の契約</td>
+<td>入力の条件</td>
 <td>0〜20</td>
 <td>非負，両方0でない</td>
 <td>有限，循環なし，有効なノード</td>

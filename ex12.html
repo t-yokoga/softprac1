@@ -1918,11 +1918,11 @@
         <li class="md-nav__item">
   <a href="#3_1" class="md-nav__link">
     <span class="md-ellipsis">
-      発展3 標準ライブラリの契約を確かめる
+      発展3 標準ライブラリの使用条件を確かめる
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="発展3 標準ライブラリの契約を確かめる">
+    <nav class="md-nav" aria-label="発展3 標準ライブラリの使用条件を確かめる">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2415,11 +2415,11 @@
         <li class="md-nav__item">
   <a href="#3_1" class="md-nav__link">
     <span class="md-ellipsis">
-      発展3 標準ライブラリの契約を確かめる
+      発展3 標準ライブラリの使用条件を確かめる
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="発展3 標準ライブラリの契約を確かめる">
+    <nav class="md-nav" aria-label="発展3 標準ライブラリの使用条件を確かめる">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2559,7 +2559,7 @@
 <li>それ以外は<code>a/b</code>を保存し，成功として1を返す．</li>
 <li>この課題では小さな有限値を使い，浮動小数点の範囲を超える計算は対象にしない．</li>
 </ul>
-<p>第8回の「戻り値で成功・失敗を返し，ポインタで結果を返す」を，別ファイルの関数にします．仕様が公開側の契約に当たることも意識してください．</p>
+<p>第8回の「戻り値で成功・失敗を返し，ポインタで結果を返す」を，別ファイルの関数にします．関数を使う側に，引数の条件や戻り値の意味が伝わるようにしてください．</p>
 <details class="tip">
 <summary>ヒント</summary>
 <p>0で割ってから調べるのではなく，計算前に<code>b</code>を検査します．失敗時に<code>out</code>へ書き込まなければ，呼び出し前の値を保てます．宣言・定義・呼び出しの3か所を同時に整えましょう．</p>
@@ -2758,7 +2758,7 @@
 <li>型の宣言・数値の検査・エラー表示は，それぞれどこにあるか．</li>
 <li>固定配列の容量と有効な個数<code>N</code>は同じものか．</li>
 </ul>
-<h2 id="3_1">発展3　標準ライブラリの契約を確かめる<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
+<h2 id="3_1">発展3　標準ライブラリの使用条件を確かめる<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h2>
 <p>次のプログラムを<code>LibraryCheck</code>で動かします．関数名だけでなく，ヘッダ，入力条件，戻り値の意味を表にまとめてから実行してください．コピー先の容量が十分であることも確認します．</p>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">library_check.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-0-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-0-2"> 2</a></span>

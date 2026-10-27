@@ -2552,7 +2552,7 @@
 <p><code>int</code>引数の値を変更しても呼び出し元に影響しなかったのは，値のコピーだったからです．ポインタを渡す場合も<strong>ポインタの値のコピー</strong>ですが，コピーしたポインタが同じ対象を指すので，対象を変更できます．</p>
 <p><code>swap(&amp;x, &amp;y)</code> では，<code>swap</code>内の<code>a</code>が<code>x</code>を，<code>b</code>が<code>y</code>を指します．一時変数を使って <code>*a</code> と <code>*b</code> を交換します．一時変数なしに上書きすると元の値を失います．</p>
 <div class="admonition note">
-<p class="admonition-title">関数の契約</p>
+<p class="admonition-title">関数を使うときの条件</p>
 <p>この回の<code>swap</code>は，<code>a</code>と<code>b</code>が有効な<code>int</code>を指していることを呼び出し側の責任とします．<code>NULL</code>や寿命の終わった変数のアドレスは渡しません．ポインタ引数なら何でも渡せるわけではありません．</p>
 </div>
 <h3 id="swap3"><code>swap</code>の3つの代入<a class="headerlink" href="#swap3" title="Permanent link">&para;</a></h3>

@@ -1162,7 +1162,7 @@
           <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
-      スコープの読解
+      スコープの理解
     </span>
   </a>
   
@@ -1207,16 +1207,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展 単一のmainから関数を切り出す
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展 単一のmainから関数を切り出す">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
-      発展 役割を分ける
+      分割後の役割
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      分割前後を比較する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       確認問題
     </span>
@@ -1225,7 +1249,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       チェックリスト
     </span>
@@ -2251,7 +2275,7 @@
           <li class="md-nav__item">
   <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
-      スコープの読解
+      スコープの理解
     </span>
   </a>
   
@@ -2296,16 +2320,40 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      発展 単一のmainから関数を切り出す
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="発展 単一のmainから関数を切り出す">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
-      発展 役割を分ける
+      分割後の役割
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      分割前後を比較する
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#_13" class="md-nav__link">
+  <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       確認問題
     </span>
@@ -2314,7 +2362,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_14" class="md-nav__link">
+  <a href="#_15" class="md-nav__link">
     <span class="md-ellipsis">
       チェックリスト
     </span>
@@ -2377,7 +2425,7 @@
 <tr>
 <td>発展</td>
 <td>合計と平均の役割分担</td>
-<td>関数の契約と検証</td>
+<td>引数・戻り値と動作の確認</td>
 </tr>
 </tbody>
 </table>
@@ -2392,7 +2440,7 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
 <h2 id="1">課題1　最大の点数<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
-<p><code>Maximum</code> プロジェクトで，配列{72, 85, 60, 93, 80}の最大値を求める関数<code>max_score</code>を作ってください．要素数<code>n</code>は1以上，点数は0〜100とします．</p>
+<p><code>Maximum</code> プロジェクトを作成し，配列{72, 85, 60, 93, 80}の最大値を求める関数<code>max_score</code>を作ってください．ソースコードは<code>maximum.c</code>として保存してください．要素数<code>n</code>は1以上，点数は0〜100とします．</p>
 <details class="tip">
 <summary>ヒント</summary>
 <p>最大値の候補を最初の要素で初期化し，2番目以降と比べます．</p>
@@ -2477,10 +2525,10 @@
 <p>配列の後ろへ要素を増やすだけでは，呼び出しの<code>max_score(a, 5)</code>の5は自動では変わりません．今回は表に合わせて手で変更してください．講義の<code>sizeof</code>による要素数の計算は，配列を宣言した<code>main</code>では可能ですが，<code>max_score</code>の中では同じ方法を使えません．</p>
 <p><strong>説明すること</strong>：<code>i</code>を1から始める理由，戻り値を返す位置，<code>const</code>を付ける意図を説明してください．</p>
 <h2 id="2">課題2　列ごとの合計<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>講義の<code>arrays.c</code>を別の <code>ColumnSum</code> プロジェクトへ入れ，二次元配列の各列の合計を5，7，9の順に表示するよう変更してください．</p>
+<p>新たに<code>ColumnSum</code>プロジェクトを作成して講義の<code>arrays.c</code>をコピーし，二次元配列の各列の合計を表示するよう変更してください．</p>
 <details class="tip">
 <summary>ヒント</summary>
-<p>外側を列，内側を行にします．<code>sum</code>の初期化は列ごとに必要です．</p>
+<p>外側の<code>for</code>ループを列，内側の<code>for</code>ループを行にします．<code>sum</code>の初期化は列ごとに必要です．</p>
 </details>
 <p>すべての要素を0にした場合も確認します．<code>table[row][col]</code>の添字は，ループの外側・内側の順と必ず一致しなければならないのでしょうか．</p>
 <h3 id="_6">訪問順と合計を確認する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
@@ -2522,7 +2570,7 @@
 <h3 id="_7">補足：三次元配列の添字<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p><code>int data[2][3][4] = {0};</code>の総要素数と，最後の要素を表す式を答えてください．最後の要素へ7を代入し，その要素を表示します．各次元の添字の範囲も説明してください．</p>
 <h2 id="3">課題3　値渡しを確認する<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>ValueCopy</code> プロジェクトで，次の結果を予測してから実行してください．</p>
+<p><code>ValueCopy</code> プロジェクトを作成し，次の結果を予測してから実行してください．ソースコードは<code>valuecopy.c</code>として保存してください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">increment</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> x)</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span style="color: #F8F8F2">{</span>
@@ -2569,7 +2617,7 @@
 <h3 id="_8">呼び出しごとに別の局所変数になる<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>元の<code>main</code>へ，最初の呼び出しの後に<code>int z = increment(x);</code>を追加してください．<code>x</code>，<code>y</code>，<code>z</code>の値を予測し，仮引数と呼び出し元の変数を区別して説明してください．</p>
 <p>一方，<code>x = increment(x);</code>を2回続ける場合はどうなるでしょうか．更新が関数の内側の変数だけに起きたのか，呼び出し元への代入でも起きたのかを分けて説明しましょう．</p>
-<h3 id="_9">スコープの読解<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<h3 id="_9">スコープの理解<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>次の2つのブロックを<code>main</code>内に書いた場合，表示を予想してください．それぞれの<code>a</code>は別の変数です．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #F8F8F2">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">123</span><span style="color: #F8F8F2">;</span>
@@ -2582,7 +2630,8 @@
 </code></pre></div>
 <p>この直後に<code>printf</code>で<code>a</code>を表示できるか，2つの宣言を同じブロックへ移せるかも考えてください．関数の仮引数<code>x</code>と<code>main</code>の<code>x</code>が共存できる理由も，範囲から説明してください．</p>
 <h2 id="4">課題4　平均と累乗を関数にする<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p><code>Functions</code> プロジェクトで，次の2つの関数を作成します．引数と戻り値の型，計算してよい値の範囲を先に確認してください．</p>
+<p><code>Functions</code> プロジェクトで，次の2つの関数を作成します．引数と戻り値の型，計算してよい値の範囲を先に確認してください．
+ソースコードは<code>functions.c</code>として保存してください．</p>
 <table>
 <thead>
 <tr>
@@ -2658,10 +2707,105 @@
 <p><strong>説明すること</strong>：<code>result</code>を0で初期化してはいけない理由，<code>return</code>を<code>for</code>の外へ置く理由，プロトタイプ宣言の末尾にセミコロンが必要な理由を説明してください．</p>
 <h3 id="_11">戻り値と表示を分ける<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p><code>average</code>の中で<code>printf</code>だけを実行しても，平均を呼び出し元の計算に使えるわけではありません．<code>float result = average(2.0f, 4.0f);</code>と一度変数に保存してから表示する形へ変更し，同じ表示になることを確認してください．表示を担当する<code>main</code>と，計算を担当する関数の分担が分かりやすくなります．</p>
-<h2 id="_12">発展　役割を分ける<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p>合計を返す<code>sum_array</code>と，平均を計算して表示する<code>main</code>に分けてください．要素数は1〜5，値は0〜100とします．平均では <code>(double)total / n</code> とし，整数除算を避けます．この型変換は次回説明します．</p>
-<p>初期値で<code>total=390 mean=78.0</code>になります．{0}と<code>n=1</code>では<code>total=0 mean=0.0</code>，{100, 100, 100}と<code>n=3</code>では<code>total=300 mean=100.0</code>になることを確認します．合計関数単独では<code>n=0</code>を受け付けても，平均は0で割れないので，この<code>main</code>の<code>n</code>は1以上です．</p>
-<h2 id="_13">確認問題<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h2 id="main">発展　単一のmainから関数を切り出す<a class="headerlink" href="#main" title="Permanent link">&para;</a></h2>
+<p>次のプログラムは，配列の準備・合計・平均・表示をすべて<code>main</code>で行っています．<code>Refactor</code>プロジェクトを作成し，<code>refactor.c</code>として保存してください．まず変更前のプログラムを実行し，表示を記録します．<strong>このコードを出発点とし，表示結果を変えずに処理を複数の関数へ分けてください．</strong></p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> scores[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">72</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">85</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">60</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">93</span><span style="color: #F8F8F2">, </span><span style="color: #AE81FF">80</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">5</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> n; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span style="color: #F8F8F2">        total </span><span style="color: #FF4689">+=</span><span style="color: #F8F8F2"> scores[i];</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> mean </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> n;</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;total=%d mean=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, total, mean);</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span style="color: #F8F8F2">}</span>
+</code></pre></div>
+<h3 id="_12">分割後の役割<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>関数</th>
+<th>引数</th>
+<th>戻り値</th>
+<th>担当する処理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sum_array</code></td>
+<td>配列と要素数</td>
+<td><code>int</code>型の合計</td>
+<td>配列をループで走査して合計する</td>
+</tr>
+<tr>
+<td><code>mean_from_total</code></td>
+<td>合計と要素数</td>
+<td><code>double</code>型の平均</td>
+<td>合計を要素数で割る</td>
+</tr>
+<tr>
+<td><code>main</code></td>
+<td>なし</td>
+<td>終了状態</td>
+<td>配列の準備，関数の呼び出し，結果の表示</td>
+</tr>
+</tbody>
+</table>
+<p>次のプロトタイプ宣言を<code>main</code>より前に置き，2つの関数の定義は<code>main</code>より後に書いてください．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">sum_array</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> a[], </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n);</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">mean_from_total</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total, </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n);</span>
+</code></pre></div>
+<ol>
+<li>合計用の変数の初期化と<code>for</code>を<code>sum_array</code>へ移し，計算結果を返してください．</li>
+<li>平均の計算を<code>mean_from_total</code>へ移し，計算結果を返してください．</li>
+<li><code>main</code>では各関数の戻り値を<code>total</code>と<code>mean</code>に保存し，最後に表示してください．</li>
+</ol>
+<p>計算用の2つの関数では<code>printf</code>を使わず，グローバル変数も使いません．<code>main</code>には合計用のループや平均の除算を残さず，<strong>引数で値を渡し，戻り値で結果を受け取る</strong>構成にします．</p>
+<p>要素数<code>n</code>は1〜5，配列の値は0〜100とし，<code>n</code>と実際の要素数を一致させてください．平均では<code>(double)total / n</code>を使います．これは整数除算を避ける書き方で，型変換の詳細は次回説明します．平均を求めるため，この課題では<code>n=0</code>は扱いません．</p>
+<h3 id="_13">分割前後を比較する<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>次の各入力で分割前と分割後のプログラムを実行し，表示が一致することを確認してください．配列を変更するときは<code>n</code>も変更します．</p>
+<table>
+<thead>
+<tr>
+<th>配列</th>
+<th style="text-align: right;"><code>n</code></th>
+<th style="text-align: right;">合計</th>
+<th style="text-align: right;">平均</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{72, 85, 60, 93, 80}</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">390</td>
+<td style="text-align: right;">78.0</td>
+</tr>
+<tr>
+<td>{0}</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr>
+<td>{100, 100, 100}</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr>
+<td>{1, 2}</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.5</td>
+</tr>
+</tbody>
+</table>
+<p><strong>説明すること</strong>：どの処理をどの関数へ移したか，引数と戻り値で何を受け渡しているか，計算用の関数で表示しない利点を説明してください．</p>
+<h2 id="_14">確認問題<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <ol>
 <li><code>int a[5] = {1, 1};</code>の最後の要素の添字と値は何か．</li>
 <li><code>int table[2][3];</code>に対して<code>table[0][3]</code>を読んではいけないのはなぜか．</li>
@@ -2672,7 +2816,7 @@
 <li><code>void</code>関数の<code>return;</code>と<code>int</code>関数の<code>return 0;</code>は何が違うか．</li>
 <li>関数を<code>main</code>より後ろに定義しても呼び出せるようにするには何が必要か．</li>
 </ol>
-<h2 id="_14">チェックリスト<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h2 id="_15">チェックリスト<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <ul>
 <li>正常な値だけでなく，課題に示された境界の値でも確認した．</li>
 <li>警告を確認し，原因を説明・修正した．</li>

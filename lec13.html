@@ -2014,7 +2014,7 @@
           <li class="md-nav__item">
   <a href="#81" class="md-nav__link">
     <span class="md-ellipsis">
-      8.1 公開する契約
+      8.1 利用者に示す使用条件
     </span>
   </a>
   
@@ -2506,7 +2506,7 @@
           <li class="md-nav__item">
   <a href="#81" class="md-nav__link">
     <span class="md-ellipsis">
-      8.1 公開する契約
+      8.1 利用者に示す使用条件
     </span>
   </a>
   
@@ -3024,7 +3024,7 @@
 <p>本体を先に<code>free</code>してから<code>buffer-&gt;data</code>を読むのは解放後の使用です．また，構造体を代入してもポインタメンバの参照先まではコピーされません．2つの構造体が同じ配列を指す場合，両方が所有者のつもりで解放すると二重解放になります．所有権移動，借用，独立したコピーのどれかを決めます．</p>
 <h2 id="8-vector">8　発展：内部を隠した<code>Vector</code><a class="headerlink" href="#8-vector" title="Permanent link">&para;</a></h2>
 <p>第12回の不完全型の説明を，動く3ファイルのプログラムへつなげます．利用側は<code>Vector</code>のメンバを直接触らず，生成・計算・取得・解放の関数を使います．第12回の<code>Vector</code>とは別のプロジェクトにしてください．</p>
-<h3 id="81">8.1　公開する契約<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<h3 id="81">8.1　利用者に示す使用条件<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
 <div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector.h</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-1"> 1</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-2"> 2</a></span>
 <span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-12-3"> 3</a></span>

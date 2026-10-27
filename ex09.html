@@ -2564,7 +2564,7 @@
 <p><strong>説明すること</strong>：<code>*out = best;</code>を<code>*out = &amp;a[0];</code>に変えたら何が起こるでしょうか．探索で求めた<code>best</code>を使わず，常に先頭要素を返すことになります．コンパイルが通るだけでは，仕様どおりとは限りません．</p>
 <h3 id="_4">失敗時に古い結果を残さない<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p><code>main</code>で<code>answer</code>を最初に<code>&amp;a[1]</code>として，<code>n=0</code>で呼んでください．この関数は先に<code>*out = NULL;</code>を実行するので，以前のアドレスが残らず<code>NULL</code>になります．これはこの関数が採用した仕様です．一般に，失敗した関数が出力先をどう扱うかは，関数ごとに確認する必要があります．</p>
-<p><code>out</code>自体へ<code>NULL</code>を渡す実験はしません．有効なポインタ変数のアドレスを渡す契約と，出力結果として<code>NULL</code>を受け取ることは違います．<code>&amp;answer</code>はポインタ変数の場所，<code>answer</code>は検索結果の場所です．</p>
+<p><code>out</code>自体へ<code>NULL</code>を渡す実験はしません．引数には有効なポインタ変数のアドレスを渡す必要があることと，出力結果として<code>NULL</code>を受け取ることは違います．<code>&amp;answer</code>はポインタ変数の場所，<code>answer</code>は検索結果の場所です．</p>
 <h3 id="_5">値を返す版と，場所を返す版<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p><code>ReturnMaximum</code>という別プロジェクトで比較します．<code>max_value</code>は<code>n&gt;=1</code>だけに対応し，<code>max_pointer</code>は<code>n&lt;=0</code>なら<code>NULL</code>を返します．値を返す版にも無条件に<code>n=0</code>を渡さないでください．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>before=12 12

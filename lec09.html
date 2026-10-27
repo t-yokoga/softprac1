@@ -1449,7 +1449,7 @@
           <li class="md-nav__item">
   <a href="#find_max" class="md-nav__link">
     <span class="md-ellipsis">
-      find_maxの契約と動作
+      find_maxの引数・戻り値と動作
     </span>
   </a>
   
@@ -2245,7 +2245,7 @@
           <li class="md-nav__item">
   <a href="#find_max" class="md-nav__link">
     <span class="md-ellipsis">
-      find_maxの契約と動作
+      find_maxの引数・戻り値と動作
     </span>
   </a>
   
@@ -2673,7 +2673,7 @@
 </code></pre></div>
 <p><code>find_max</code>の<code>out</code>は呼び出し元の<code>answer</code>を指します．<code>*out = best;</code> によって<code>answer</code>が最大要素を指します．戻り値は成功・失敗を表し，<code>n</code>が0以下なら0を返します．<code>out</code>自体には有効なポインタ変数のアドレスを渡す必要があります．最大値が同じ要素は最初のものを選びます．</p>
 <p>返したポインタの対象は呼び出し元の配列です．配列の寿命が終わったあとには使えません．</p>
-<h3 id="find_max"><code>find_max</code>の契約と動作<a class="headerlink" href="#find_max" title="Permanent link">&para;</a></h3>
+<h3 id="find_max"><code>find_max</code>の引数・戻り値と動作<a class="headerlink" href="#find_max" title="Permanent link">&para;</a></h3>
 <p><code>out</code>には，書き込み可能な<code>int *</code>変数のアドレスを必ず渡します．<code>out</code>へ<code>NULL</code>を渡す使い方はこの関数の対象外です．<code>n</code>が正なら，<code>a</code>には少なくとも<code>n</code>個の読み取り可能な要素が必要です．<code>n</code>が0以下なら要素を読まず，<code>*out</code>を<code>NULL</code>にして失敗を返します．戻り値を確認する前に<code>**out</code>や<code>*answer</code>を読んではいけません．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>呼び出し元                         関数内
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>answer [NULL] &lt;-------------------- out [&amp;answer]
