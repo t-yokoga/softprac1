@@ -1132,18 +1132,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
+  <a href="#char" class="md-nav__link">
     <span class="md-ellipsis">
-      1文字は整数としても読める
+      char型変数
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#char" class="md-nav__link">
+  <a href="#char_1" class="md-nav__link">
     <span class="md-ellipsis">
-      終端を持つchar配列
+      文字列は終端を持つchar型配列
     </span>
   </a>
   
@@ -1176,7 +1176,7 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      最初の終端で文字列が終わる
+      最初の終端文字で文字列は終わる
     </span>
   </a>
   
@@ -2213,18 +2213,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
+  <a href="#char" class="md-nav__link">
     <span class="md-ellipsis">
-      1文字は整数としても読める
+      char型変数
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#char" class="md-nav__link">
+  <a href="#char_1" class="md-nav__link">
     <span class="md-ellipsis">
-      終端を持つchar配列
+      文字列は終端を持つchar型配列
     </span>
   </a>
   
@@ -2257,7 +2257,7 @@
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      最初の終端で文字列が終わる
+      最初の終端文字で文字列は終わる
     </span>
   </a>
   
@@ -2474,18 +2474,32 @@
 <h2 id="1">1　文字と文字列<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="environment">前回とのつながりと作業の準備<a class="headerlink" href="#environment" title="Permanent link">&para;</a></h3>
 <p>第5回では，同じ型の値を配列にまとめ，関数へ渡す方法を学びました．今回は<code>char</code>配列を使って文字列を扱います．数値配列との違いは，<strong>値0の終端文字を文字列の終わりの目印にする</strong>ことです．後半では，文字コードや整数・小数の計算にも関係する型変換を整理します．</p>
-<p>作業場所は<code>PL1</code>の下の<code>week06</code>です．Visual Studioで課題ごとに空のプロジェクトを作り，<code>.c</code>ファイルを追加します．<a href="lec01.html#hello">第1回の設定</a>と同じくC17・Cとしてコンパイル・警告レベル4を使います．文字列はソース内の固定値で用意し，キーボード入力は次回扱います．</p>
+<p>作業場所は<code>PL1</code>の下の<code>week06</code>です．<a href="lec01.html#hello">第1回</a>と同じく，<code>Strings</code>プロジェクトを作り，<code>strings.c</code>ファイルを追加し，Cとしてコンパイル，C17，警告レベル4を確認します．文字列はソース内の固定値で用意し，キーボード入力は次回扱います．</p>
 <p>短いコード片は<code>main</code>内に置き，関数定義は<code>main</code>の外へ置きます．<code>printf</code>には<code>stdio.h</code>，文字列ライブラリには<code>string.h</code>をインクルードしてください．今回の例はASCIIの英数字と記号を対象とし，日本語の文字コードは第10回で扱います．</p>
-<h3 id="1_1">1文字は整数としても読める<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<h3 id="char"><code>char</code>型変数<a class="headerlink" href="#char" title="Permanent link">&para;</a></h3>
+<p>文字は<code>char</code>型の変数として扱います．
+内部的には，<code>char</code>型の変数はASCIIの文字コードの値を保持しています．
+ですので，整数として扱うこともできます．</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> ch </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;a&#39;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;character=%c code=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, ch, ch);</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;character=%c code=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, ch, ch); </span><span style="color: #959077">// character=a code=97</span>
 </code></pre></div>
-<p>ASCIIでは<code>character=a code=97</code>と表示されます．<code>%c</code>は対応する文字，<code>%d</code>は整数として表示します．<code>'A'</code>は65，<code>'B'</code>は66で，大文字と小文字は別の値です．文字コードをそのまま数値で書くより，<code>'a'</code>のように文字で書く方が意図を読み取りやすくなります．</p>
+<p>ASCIIでは<code>character=a code=97</code>と表示されます．<code>printf</code>の書式では，<code>%c</code>は文字，<code>%d</code>は対応する文字コードを整数として表示します．
+<code>'a'</code>は97，<code>'b'</code>は98，とアルファベット順に文字コードが割り当てられています．
+<code>'A'</code>は65，<code>'B'</code>は66で，大文字と小文字は別の値です．</p>
+<p>逆に，<code>int</code>型の変数を文字として扱うこともできます．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> code </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">97</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;character=%c code=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, code, code);  </span><span style="color: #959077">// character=a code=97</span>
+</code></pre></div>
+<p>このように，<code>a</code>も97も内部的には同じ値ですが，文字コードをそのまま数値で書くより，<code>'a'</code>のように文字で書く方が意図を読み取りやすくなります．</p>
 <p>ASCIIは0〜127の符号位置を使います．その中には改行などの制御文字もあり，すべてが画面上の記号になるわけではありません．<code>char</code>は授業の環境では8ビットですが，ASCII自体が8ビットすべてを使うわけではありません．</p>
-<h3 id="char">終端を持つ<code>char</code>配列<a class="headerlink" href="#char" title="Permanent link">&para;</a></h3>
-<p><code>'A'</code> は文字定数，<code>"A"</code> は文字列リテラルです．Cの文字列は，<code>char</code>の並びを<strong>終端文字 <code>'\0'</code></strong> で終えたものです．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> word[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
+<h3 id="char_1">文字列は終端を持つ<code>char</code>型配列<a class="headerlink" href="#char_1" title="Permanent link">&para;</a></h3>
+<p>Cの文字列は，<code>char</code>の並びを<strong>終端文字 <code>'\0'</code></strong> で終えた配列です．
+文字列リテラルは<code>"</code>と<code>"</code>で囲んで表します．
+見た目は似ていても，<code>'A'</code> は文字定数，<code>"A"</code> は文字列リテラルです．</p>
+<p><code>cat</code>という文字列は以下のように定義します．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> word[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
 </code></pre></div>
+<p>このとき，配列<code>word</code>の中身は以下のようになっています．</p>
 <table>
 <thead>
 <tr>
@@ -2506,7 +2520,9 @@
 </tr>
 </tbody>
 </table>
-<p>文字列の長さは3，配列の要素数は4です．<code>char word[16] = "cat";</code> とすれば，容量16のうち文字列には4要素を使います．終端までの部分が文字列なので，配列の容量と文字列の長さは違います．</p>
+<p>もとの文字列の長さは3ですが，そこに終端文字が加わるので配列の要素数は4となります．
+配列の要素数を指定して<code>char word[16] = "cat";</code> とすれば，始めの4要素にそれぞれ<code>'c'</code>，<code>'a'</code>，<code>'t'</code>，<code>'\0'</code>が入った長さ16の配列が定義されます．
+終端までの部分が文字列なので，配列の容量と文字列の長さは違います．</p>
 <table>
 <thead>
 <tr>
@@ -2521,81 +2537,83 @@
 </tr>
 <tr>
 <td><code>'0'</code></td>
-<td>数字として見える文字．ASCIIでは値48</td>
+<td>文字<code>0</code>．ASCIIでは値48</td>
 </tr>
 <tr>
 <td><code>'\0'</code></td>
-<td>値0の文字．文字列の終わり</td>
+<td>終端文字．ASCIIでは値0</td>
 </tr>
 <tr>
 <td><code>"0"</code></td>
-<td><code>'0'</code>と<code>'\0'</code>からなる文字列</td>
+<td><code>'0'</code>と<code>'\0'</code>からなる長さ2の<code>char</code>配列</td>
 </tr>
 <tr>
 <td><code>"\0"</code></td>
-<td><code>'\0'</code>が2個の配列．明示した0と自動的に付く終端を含む</td>
+<td><code>'\0'</code>と<code>'\0'</code>からなる長さ2の<code>char</code>配列</td>
 </tr>
 <tr>
 <td><code>""</code></td>
-<td><code>'\0'</code>だけの配列．長さ0の空文字列</td>
+<td><code>'\0'</code>からなる長さ1の配列．空文字列</td>
 </tr>
 </tbody>
 </table>
-<p><code>"\0"</code>は<code>sizeof</code>で2バイト，<code>strlen</code>では0です．最初の要素が終端だからです．<code>'\0'</code>は<strong>ヌル文字</strong>とも呼びます．後で学ぶポインタの<code>NULL</code>とは区別してください．Windowsではバックスラッシュが円記号に見える場合がありますが，ソースのエスケープはバックスラッシュと0で書きます．</p>
+<p><code>"\0"</code>は<code>sizeof</code>で2バイトですが，文字列の長さを求める関数<code>strlen</code>の戻り値は0です．最初の要素が終端だからです．<code>'\0'</code>は<strong>ヌル文字</strong>とも呼びます．後で学ぶポインタの<code>NULL</code>とは区別してください．Windowsではバックスラッシュが円記号に見える場合がありますが，ソースのエスケープはバックスラッシュと0で書きます．</p>
 <h3 id="_2">初期化とメモリ上の並び<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p><code>char word[] = "cat";</code>は，<code>char word[] = {'c', 'a', 't', '\0'};</code>と同じ並びを用意します．要素数を省略すると終端を含めた4になります．<code>char word[6] = "cat";</code>では初期化で残った要素も0になります．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>添字         0       1       2       3       4       5
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>           ┌───────┬───────┬───────┬───────┬───────┬───────┐
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>要素       │ &#39;c&#39;   │ &#39;a&#39;   │ &#39;t&#39;   │ &#39;\0&#39;  │ &#39;\0&#39;  │ &#39;\0&#39;  │
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>ASCII値    │ 99    │ 97    │ 116   │ 0     │ 0     │ 0     │
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>           └───────┴───────┴───────┴───────┴───────┴───────┘
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>文字列       └─── 表示する3文字 ───┘  ↑ 最初の終端
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>配列容量     └──────────────── 6バイト ──────────────────┘
+<p><code>char word[] = "cat";</code>は，<code>char word[] = {'c', 'a', 't', '\0'};</code>と同じものが定義されます．要素数を省略すると終端文字を含めた長さ4の配列になります．<code>char word[6] = "cat";</code>とすると，配列の初期化のルールに従って残った要素は値0，すなわち<code>\0</code>になります．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>添字         0       1       2       3       4       5
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>           ┌───────┬───────┬───────┬───────┬───────┬───────┐
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>要素       │ &#39;c&#39;   │ &#39;a&#39;   │ &#39;t&#39;   │ &#39;\0&#39;  │ &#39;\0&#39;  │ &#39;\0&#39;  │
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>ASCII値    │ 99    │ 97    │ 116   │ 0     │ 0     │ 0     │
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>           └───────┴───────┴───────┴───────┴───────┴───────┘
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>文字列       └─── 表示する3文字 ───┘  ↑ 最初の終端
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>配列容量     └──────────────── 6バイト ──────────────────┘
 </code></pre></div>
 <p>各要素は1バイトで連続します．数値とアドレスを同時に見れば，第5回の配列と同じ仕組みだと確認できます．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> s; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;index=%zu code=%d address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span style="color: #F8F8F2">           i, s[i], (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">s[i]);</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span style="color: #F8F8F2">}</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> s; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;index=%zu code=%d charactor=%c address=%p</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">,</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span style="color: #F8F8F2">           i, s[i], s[i], (</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2"> </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2">)</span><span style="color: #FF4689">&amp;</span><span style="color: #F8F8F2">s[i]);</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p><code>code</code>は99，97，116，0の順です．<code>%c</code>で終端を表示しても目に見える文字にはなりません．アドレスの具体値は環境によりますが，隣接要素は1バイトずつ進みます．</p>
+<p><code>code</code>は99，97，116，0の順に表示されます．<code>%c</code>で終端を表示しても目に見える文字にはなりません．アドレスの具体値は環境によりますが，隣接要素は1バイトずつ進むので，アドレスは1ずつ増えていきます．</p>
 <div class="admonition warning">
-<p class="admonition-title">終端を含めて領域を用意する</p>
-<p><code>cat</code>には最低4要素必要です．<code>char s[3] = "cat";</code>はCでは終端なしの配列になり，<code>%s</code>や<code>strlen</code>で文字列として扱えません．範囲外を読ませて結果を観察するのではなく，配列の要素を紙に書いて不足を確認します．</p>
+<p class="admonition-title">終端文字を含めて領域を用意する</p>
+<p>文字列<code>cat</code>を定義するためには最低でも4つの要素が必要です．<code>char s[3] = "cat";</code>はCでは終端文字のない配列になり，<code>%s</code>や<code>strlen</code>の対象となる文字列として扱えません．</p>
 </div>
 <p><code>char s[3] = "hello";</code>のように文字そのものも収まらない初期化は，Cの制約に違反し診断の対象になります．「余分な文字が都合よく切り捨てられる」と考えてはいけません．終端がない配列を<code>%s</code>へ渡した場合も，隣の変数が表示されるなど特定の結果は保証されません．</p>
 <h2 id="2">2　表示・変更・コピー<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <p><code>printf("%s\n", word);</code> は終端まで表示します．<code>word[0] = 'C';</code> は書き換え可能な配列の要素を変更します．<code>word = "dog";</code> のような配列への代入はできません．</p>
 <p>文字列をコピーするには，終端を含めて1文字ずつ移すか，ライブラリ関数を使います．どちらもコピー先の容量が必要です．読み込んだ文字列を<code>printf</code>の書式そのものにせず，<code>printf("%s", word);</code> のようにデータとして渡します．</p>
-<h3 id="_3">最初の終端で文字列が終わる<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #E6DB74">&#39;a&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;b&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;c&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;d&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;e&#39;</span><span style="color: #F8F8F2">};</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, s);</span>
+<h3 id="_3">最初の終端文字で文字列は終わる<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #E6DB74">&#39;a&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;b&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;c&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;d&#39;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&#39;e&#39;</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, s);</span>
 </code></pre></div>
-<p>表示は<code>abc</code>です．配列は6要素ですが，最初の終端より後の<code>d</code>と<code>e</code>は，この文字列の一部としては読まれません．<code>word[1] = '\0';</code>とすれば<code>word</code>の表示は先頭1文字だけになります．配列そのものの容量が小さくなったわけではありません．</p>
-<p>文字列リテラルも添字で読むことができ，"abcd"[3]は<code>'d'</code>です．ただし文字列リテラル自体を書き換えてはいけません．<code>char word[] = "cat";</code>では，リテラルから別の書き換え可能な配列を初期化しています．ポインタでリテラルを指す場合との違いは第8回で扱います．</p>
+<p>表示は<code>abc</code>です．配列は6要素ですが，最初の終端より後の<code>d</code>と<code>e</code>は，この文字列の一部としては読まれません．<code>word[1] = '\0';</code>とすれば<code>word</code>の表示は先頭1文字だけになります．なお，配列そのものの容量が小さくなるわけではありません．</p>
+<p>文字列リテラルも添字で参照することができ，"abcd"[3]は<code>'d'</code>です．ただし文字列リテラル自体を書き換えることはできません．<code>char word[] = "cat";</code>では，リテラルから別の書き換え可能な配列を初期化しています．ポインタでリテラルを指す場合との違いは第8回で扱います．</p>
 <h3 id="_4">文字列を関数へ渡して走査する<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">count_spaces</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[])</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span style="color: #F8F8F2">{</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; s[i] </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (s[i] </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39; &#39;</span><span style="color: #F8F8F2">) {</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span style="color: #F8F8F2">            </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">count;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span style="color: #F8F8F2">        }</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span style="color: #F8F8F2">    }</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> count;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span style="color: #F8F8F2">}</span>
+<p>以下の関数<code>count_spaces</code>は，文字列の中にあるスペースの数を数えて戻り値として返します．</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">count_spaces</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">const</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> s[])</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; s[i] </span><span style="color: #FF4689">!=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;\0&#39;</span><span style="color: #F8F8F2">; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (s[i] </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39; &#39;</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span style="color: #F8F8F2">            </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">count;</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span style="color: #F8F8F2">        }</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> count;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
-<p>この関数へ<code>"abc def gh"</code>を渡すと2，<code>"ijk lmn opq rst"</code>なら3を返します．<code>' '</code>は半角スペースであり，タブや改行は数えません．<code>const</code>は要素をこの引数から変更しないことを表します．<code>size_t</code>を使う宣言には<code>stddef.h</code>などが必要です．</p>
-<p>数値配列では長さを別に渡しましたが，ここでは終端から終わりが分かります．ただし，<strong>読み取り可能な領域内に終端が存在すること</strong>が前提です．終端があるから配列の容量も分かる，という意味ではありません．関数の配列引数へ<code>sizeof</code>を使っても元の容量は得られません．</p>
+<p>この関数へ<code>"abc def gh"</code>を渡すと2，<code>"ijk lmn opq rst"</code>なら3を返します．<code>' '</code>は半角スペースであり，タブや改行は数えません．<code>const</code>は引数として渡された要素を変更しないことを表します．
+なお，戻り値の型が<code>size_t</code>となっている理由は，引数となる文字列のサイズが非常に大きい（<code>int</code>で収まらない）値になる可能性があるからです．文字列が十分小さければ<code>int</code>型でも問題ありません．</p>
+<p>数値配列では長さを別に渡しましたが，文字列であれば終端から終わりが分かります．ただし，<strong>読み取り可能な領域内に終端が存在すること</strong>が前提です．終端があるから配列の容量も分かる，という意味ではありません．前述のように，関数の配列引数へ<code>sizeof</code>を使っても文字列の長さは得られません．</p>
 <h3 id="_5">書式も文字列だが，データとは分ける<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> format[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span style="color: #F8F8F2">printf(format, n);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> format[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> n </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #F8F8F2">printf(format, n);</span>
 </code></pre></div>
-<p>自分で内容を固定した書式文字列を変数から渡すこともでき，この例は2を表示します．ただし，任意のデータを<code>printf(text);</code>と渡すと，含まれる<code>%</code>が書式として解釈されます．通常は<code>printf("%s", text);</code>と書き，書式と表示したいデータを分離します．</p>
+<p>書式文字列を変数として渡すこともできます．この例は2を表示します．ただし，任意のデータを<code>printf(text);</code>と渡すと，含まれる<code>%</code>が書式として解釈されます．通常は<code>printf("%s", text);</code>と書き，書式と表示したいデータを分離します．</p>
 <h2 id="3">3　文字列ライブラリ<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<p><code>&lt;string.h&gt;</code> をインクルードして使います．</p>
+<p><code>&lt;string.h&gt;</code> をインクルードすれば，文字列を扱う様々な関数を使うことができます．</p>
 <table>
 <thead>
 <tr>
@@ -2663,37 +2681,37 @@
 <p><code>strlen</code>は最初の終端までを調べます．<code>sizeof</code>はその配列全体の大きさです．途中の要素を終端へ書き換えると<code>strlen</code>の結果は変わりますが，<code>sizeof</code>の結果は変わりません．どちらの結果も<code>size_t</code>型なので<code>%zu</code>で表示します．</p>
 <h3 id="strcpystrcat"><code>strcpy</code>と<code>strcat</code>の役割を読む<a class="headerlink" href="#strcpystrcat" title="Permanent link">&para;</a></h3>
 <p>次は標準関数の読み方を知るためのコードです．Visual Studioでは<code>strcpy</code>・<code>strcat</code>に安全性に関する<code>C4996</code>の診断が出ることがあるため，今回の実行課題では後述の容量確認付きループを使います．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> destination[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">];</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span style="color: #F8F8F2">strcpy(destination, </span><span style="color: #E6DB74">&quot;hello&quot;</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> joined[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;hoge&quot;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span style="color: #F8F8F2">strcat(joined, </span><span style="color: #E6DB74">&quot;fuga&quot;</span><span style="color: #F8F8F2">);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> destination[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">];</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #F8F8F2">strcpy(destination, </span><span style="color: #E6DB74">&quot;hello&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> joined[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;hoge&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #F8F8F2">strcat(joined, </span><span style="color: #E6DB74">&quot;fuga&quot;</span><span style="color: #F8F8F2">);</span>
 </code></pre></div>
 <p><code>destination</code>には<code>hello</code>と終端の6バイト，<code>joined</code>には<code>hogefuga</code>と終端の9バイトが入ります．どちらの容量も10のままです．<code>strcpy</code>は先頭から上書きし，<code>strcat</code>は元の文字列の終端位置から追加して，新しい末尾にも終端を書きます．<code>strcat</code>のコピー先は，呼び出す前から終端を持つ文字列でなければなりません．</p>
 <p>これらの関数はコピー先の容量を引数で受け取らず，自動的に配列を大きくもしません．容量不足や領域の重なりを起こしてはいけません．容量を渡せる別の関数を使う場合も，正しい容量と有効な引数を渡す責任は残ります．</p>
 <h3 id="_6">容量を確かめて連結する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> joined[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;hoge&quot;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> suffix[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;fuga&quot;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> used </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(joined);</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> added </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(suffix);</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (added </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> joined </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> used) {</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> added; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span style="color: #F8F8F2">        joined[used </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> suffix[i];</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span style="color: #F8F8F2">    }</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span style="color: #F8F8F2">}</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, joined);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> joined[</span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;hoge&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> suffix[] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;fuga&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> used </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(joined);</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> added </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(suffix);</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (added </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> joined </span><span style="color: #FF4689">-</span><span style="color: #F8F8F2"> used) {</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> added; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span style="color: #F8F8F2">        joined[used </span><span style="color: #FF4689">+</span><span style="color: #F8F8F2"> i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> suffix[i];</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span style="color: #F8F8F2">}</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, joined);</span>
 </code></pre></div>
 <p><code>used</code>は4，<code>added</code>も4です．残り6バイトに，追加する4文字と終端が収まるので<code>hogefuga</code>になります．<code>&lt;= added</code>は終端もコピーするためです．このコードは<code>joined</code>が容量内で終端を持ち，<code>suffix</code>とは別の配列であることを前提にしています．収まらない場合は追加せず，元の文字列を保ちます．</p>
 <h3 id="strcmp"><code>strcmp</code>は最初に違う文字で決まる<a class="headerlink" href="#strcmp" title="Permanent link">&para;</a></h3>
 <p><code>strcmp("abc", "abc")</code>は0，<code>strcmp("abc", "abcd")</code>は負，<code>strcmp("b", "a")</code>は正です．同じ位置の文字を先頭から比較し，最初に異なる位置で順序が決まります．<code>abc</code>と<code>abcd</code>なら，3文字の後の終端と<code>'d'</code>が違うため，短い方が先になります．</p>
 <p>概念的には「同じ文字なら次へ進む，両方が終端なら等しい，異なるならその位置の大小を返す」という処理です．標準の<code>strcmp</code>は比較する文字を<code>unsigned char</code>として解釈します．実装によって差の値を返す場合もありますが，結果がちょうど−1や1，あるいは−100になることには依存しないでください．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> comparison </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strcmp(</span><span style="color: #E6DB74">&quot;abc&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&quot;abcd&quot;</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (comparison </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;before</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (comparison </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;equal</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> {</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;after</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span style="color: #F8F8F2">}</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> comparison </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strcmp(</span><span style="color: #E6DB74">&quot;abc&quot;</span><span style="color: #F8F8F2">, </span><span style="color: #E6DB74">&quot;abcd&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (comparison </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;before</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (comparison </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">) {</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;equal</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span style="color: #F8F8F2">} </span><span style="color: #66D9EF">else</span><span style="color: #F8F8F2"> {</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;after</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div>
 <p>文字列の長さを比較しているわけではなく，<code>"z"</code>は<code>"aaa"</code>より後です．また，大小文字を区別し，言語ごとの辞書の並び順を自動で理解するわけではありません．</p>
 <h2 id="4">4　文字コードと長さ<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
@@ -2702,9 +2720,9 @@
 <p>数字の文字を数値へ変えるときは，先に<code>'0'</code>〜<code>'9'</code>の範囲かを調べます．範囲外の<code>'A'</code>などから<code>'0'</code>を引いても，数字を解釈した結果にはなりません．ASCIIの英大文字を小文字へ変える場合も，<code>'A'</code>〜<code>'Z'</code>だけを選び，<code>'a' - 'A'</code>を加えます．空白，数字，記号をそのまま残すことが重要です．</p>
 <p>ASCII表を調べるなら，印字可能な32〜126を<code>%c</code>と整数値で表示します．0〜31と127は制御用なので，文字として出力する代わりに値や名称で確認しましょう．タブや改行を不用意に出力すると，表の配置自体が変わります．</p>
 <h2 id="5">5　数値の型変換<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> mean </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count;</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span style="color: #66D9EF">double</span><span style="color: #F8F8F2"> mean </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count;</span>
 </code></pre></div>
 <p><code>(double)total</code> は明示的な型変換（キャスト）です．除算の前に変換するため3.5になります．<code>(double)(total / count)</code> は整数除算の後なので3.0です．</p>
 <p>代入や計算でも暗黙の変換が行われます．<code>int n = (int)3.9;</code> は3，<code>(int)-3.9</code> は-3です．変換先の整数型の範囲に収まる場合だけ行います．浮動小数点数から整数への変換は小数部分を失い，大きな整数を<code>float</code>へ変換する場合も精度を失うことがあります．</p>
@@ -2744,15 +2762,15 @@
 <p>最後の2つは3となり，処理系が情報損失について警告することがあります．警告を消すためだけにキャストせず，そもそも整数を受け取る・返す仕様でよいかを考えます．</p>
 <h3 id="_7">通常の算術型変換と整数拡張<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>この回の型の組み合わせでは，<code>int</code>と<code>float</code>なら<code>float</code>，<code>float</code>と<code>double</code>なら<code>double</code>へ型をそろえて計算します．ただし「自動変換なら情報を失わない」とは限りません．大きな整数を<code>float</code>へ移すと，下位の桁を区別できなくなる場合があります．</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> c1 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">, c2 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">100</span><span style="color: #F8F8F2">, c3 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> c1 </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> c2 </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> c3;</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> c1 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">10</span><span style="color: #F8F8F2">, c2 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">100</span><span style="color: #F8F8F2">, c3 </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">20</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> result </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> c1 </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> c2 </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> c3;</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, result);</span>
 </code></pre></div>
 <p>MSVCではこれらの<code>char</code>の全値を<code>int</code>で表せるため，計算前に<code>int</code>へ拡張します．途中の1000も<code>int</code>で計算され，結果は50です．一般には，小さい整数型の全値を<code>int</code>で表せるなら<code>int</code>，表せなければ<code>unsigned int</code>へ拡張する規則です．</p>
 <h3 id="_8">代入先の型が大きくても，計算は先に終わる<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">50000</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> square </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2">)i </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> i;</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%lld</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, square);</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">50000</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> square </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">long</span><span style="color: #F8F8F2">)i </span><span style="color: #FF4689">*</span><span style="color: #F8F8F2"> i;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span style="color: #F8F8F2">printf(</span><span style="color: #E6DB74">&quot;%lld</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, square);</span>
 </code></pre></div>
 <p>この例では先に<code>long long</code>へ変換してから掛けるので2500000000になります．<code>long long square = i * i;</code>では右辺が<code>int</code>同士の演算のままで，32ビット<code>int</code>の範囲を超えます．その危険な形を実行する実験は行いません．MSVCの<code>long</code>は4バイトなので，この例では<code>long</code>ではなく<code>long long</code>を使います．</p>
 <p>10進整数リテラルは接尾辞がなければ<code>int</code>，<code>long</code>，<code>long long</code>の順に表現できる型が選ばれます．MSVCでは5000000000は<code>long</code>にも収まりません．<code>long long n = 5000000000LL;</code>のように意図する型を明示し，<code>%lld</code>で表示します．小さい型に入れて失った値を，<code>printf</code>の書式だけで復元することはできません．書式と実際の引数の型の不一致も避けてください．</p>
@@ -2790,51 +2808,51 @@
 <p><code>int i = -10;</code>，<code>unsigned int u = 10u;</code>として<code>i &lt; u</code>を比較すると，<code>i</code>が<code>unsigned int</code>へ変換されます．32ビット<code>unsigned int</code>では−10が4294967286として扱われ，結果は偽です．この比較は読解例であり，実際のコードでは型と値の範囲を整理してから比較します．</p>
 <p><code>u</code>が<code>INT_MAX</code>以下と確認できる場合に限り，<code>i &lt; (int)u</code>とすれば<code>int</code>同士で比較できます．無条件にキャストすると別の情報損失を生むため，先に範囲を確かめることが必要です．<code>strlen</code>や<code>sizeof</code>の<code>size_t</code>も符号なしなので，負数との比較や，0から1を引く操作には注意してください．</p>
 <h2 id="6_1">6　例：コピー元とコピー先<a class="headerlink" href="#6_1" title="Permanent link">&para;</a></h2>
-<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">strings.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-1"> 1</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-2"> 2</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-3"> 3</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-4"> 4</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-5"> 5</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-6"> 6</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-7"> 7</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-8"> 8</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-9"> 9</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-10">10</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-11">11</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-12">12</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-13">13</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-14">14</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-15">15</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-16">16</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-17">17</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-18">18</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-19">19</a></span>
-<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-13-20">20</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;string.h&gt;</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span style="color: #F8F8F2">{</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> word[</span><span style="color: #AE81FF">16</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> copy[</span><span style="color: #AE81FF">16</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> length </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(word);</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (length </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> copy) {</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> length; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span style="color: #F8F8F2">            copy[i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> word[i];</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span style="color: #F8F8F2">        }</span>
-<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span style="color: #F8F8F2">    }</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span style="color: #F8F8F2">    word[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;C&#39;</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%s %s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, word, copy);</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;length=%zu capacity=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, strlen(word), </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> word);</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;equal=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, strcmp(word, copy) </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">);</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">, count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-13-18" name="__codelineno-13-18"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;mean=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count);</span>
-<a id="__codelineno-13-19" name="__codelineno-13-19"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
-<a id="__codelineno-13-20" name="__codelineno-13-20"></a><span style="color: #F8F8F2">}</span>
+<div class="highlight" style="background: #272822"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">strings.c</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-1"> 1</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-2"> 2</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-3"> 3</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-4"> 4</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-5"> 5</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-6"> 6</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-7"> 7</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-8"> 8</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-9"> 9</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-10">10</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-11">11</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-12">12</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-13">13</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-14">14</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-15">15</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-16">16</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-17">17</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-18">18</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-19">19</a></span>
+<span style="color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px;"><a href="#__codelineno-14-20">20</a></span></pre></div></td><td class="code"><div><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;stdio.h&gt;</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span style="color: #959077">#include</span><span style="color: #F8F8F2"> </span><span style="color: #959077">&lt;string.h&gt;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> </span><span style="color: #A6E22E">main</span><span style="color: #F8F8F2">(</span><span style="color: #66D9EF">void</span><span style="color: #F8F8F2">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span style="color: #F8F8F2">{</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> word[</span><span style="color: #AE81FF">16</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&quot;cat&quot;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">char</span><span style="color: #F8F8F2"> copy[</span><span style="color: #AE81FF">16</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> {</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">};</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> length </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> strlen(word);</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">if</span><span style="color: #F8F8F2"> (length </span><span style="color: #FF4689">&lt;</span><span style="color: #F8F8F2"> </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> copy) {</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span style="color: #F8F8F2">        </span><span style="color: #66D9EF">for</span><span style="color: #F8F8F2"> (</span><span style="color: #66D9EF">size_t</span><span style="color: #F8F8F2"> i </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">; i </span><span style="color: #FF4689">&lt;=</span><span style="color: #F8F8F2"> length; </span><span style="color: #FF4689">++</span><span style="color: #F8F8F2">i) {</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span style="color: #F8F8F2">            copy[i] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> word[i];</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span style="color: #F8F8F2">        }</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span style="color: #F8F8F2">    }</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span style="color: #F8F8F2">    word[</span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">] </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #E6DB74">&#39;C&#39;</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;%s %s</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, word, copy);</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;length=%zu capacity=%zu</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, strlen(word), </span><span style="color: #66D9EF">sizeof</span><span style="color: #F8F8F2"> word);</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;equal=%d</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, strcmp(word, copy) </span><span style="color: #FF4689">==</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">);</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">int</span><span style="color: #F8F8F2"> total </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">7</span><span style="color: #F8F8F2">, count </span><span style="color: #FF4689">=</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">2</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18"></a><span style="color: #F8F8F2">    printf(</span><span style="color: #E6DB74">&quot;mean=%.1f</span><span style="color: #AE81FF">\n</span><span style="color: #E6DB74">&quot;</span><span style="color: #F8F8F2">, (</span><span style="color: #66D9EF">double</span><span style="color: #F8F8F2">)total </span><span style="color: #FF4689">/</span><span style="color: #F8F8F2"> count);</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19"></a><span style="color: #F8F8F2">    </span><span style="color: #66D9EF">return</span><span style="color: #F8F8F2"> </span><span style="color: #AE81FF">0</span><span style="color: #F8F8F2">;</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20"></a><span style="color: #F8F8F2">}</span>
 </code></pre></div></td></tr></table></div>
 <p><a download="download" href="sample/06/strings.c"><code>strings.c</code></a></p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Cat cat
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>length=3 capacity=16
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>equal=0
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>mean=3.5
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%;"><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>Cat cat
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>length=3 capacity=16
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>equal=0
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>mean=3.5
 </code></pre></div>
 <p>コピーのループが <code>i &lt;= length</code> なのは，終端も移すためです．コピー後に<code>word</code>を変更しても，別の配列<code>copy</code>の要素は変わりません．</p>
 <h3 id="_11">実行順を追う<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
